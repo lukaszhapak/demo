@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,35 +8,35 @@ import java.util.Map;
 public class QuestionTransformer {
 
   public String transform(String input) {
-    String[] split = input.split("\n");
+    List<String> split = List.of(input.split("\n"));
     String question = getQuestion(split);
     Map<String, List<String>> answers = getAnswers(split);
     String result = "" + question + "\n" + "    correct:\n";
-    for (String answer: answers.get("correct")){
+    for (String answer : answers.get("correct")) {
       result += answer + "\n";
     }
     result += "    other:\n";
-    for (String answer: answers.get("other")){
+    for (String answer : answers.get("other")) {
       result += answer + "\n";
     }
     result = result.substring(0, result.length() - 1);
     return result;
   }
 
-  private String[] getSolution(String[] input) {
-    String s = input[findIndexOfString(input, "solution:")];
+  private List<String> getSolution(List<String> input) {
+    String s = input.get(findIndexOfString(input, "solution:"));
     s = s.replace("solution: ", "");
     s = s.replace(",", "");
     s = s.trim();
-    return s.split(" ");
+    return List.of(s.split(" "));
   }
 
-  private String getQuestion(String[] input) {
+  private String getQuestion(List<String> input) {
     int from = 0;
     int to = findIndexOfString(input, "answers:");
 
-    String join = String.join("", new ArrayList<>(Arrays.asList(input)
-        .subList(from, to)));
+    List<String> lists = (input).subList(from, to);
+    String join = String.join("", lists);
 
     join = join.replace("query", "question");
     join = addQuotesToQuestion(join);
@@ -53,24 +52,23 @@ public class QuestionTransformer {
     return sb.toString();
   }
 
-  private Map<String, List<String>> getAnswers(String[] input) {
+  private Map<String, List<String>> getAnswers(List<String> input) {
     int from = findIndexOfString(input, "answers:") + 1;
     int to = findIndexOfString(input, "solution:");
 
-    ArrayList<String> answers = new ArrayList<>(Arrays.asList(input)
-        .subList(from, to));
+    List<String> answers = input.subList(from, to);
     answers = addQuotesToAnswers(answers);
-    String[] solution = getSolution(input);
+    List<String> solution = getSolution(input);
     return sortAnswers(answers, solution);
   }
 
-  private Map<String, List<String>> sortAnswers(ArrayList<String> answers, String[] solution) {
+  private Map<String, List<String>> sortAnswers(List<String> answers, List<String> solution) {
     List<String> correct = new ArrayList<>();
     List<String> other = new ArrayList<>();
     for (int i = 0; i < answers.size(); i++) {
       boolean isAnswerCorrect = false;
-      for (int j = 0; j < solution.length; j++) {
-        if (Character.toString(65 + i).equals(solution[j])) {
+      for (int j = 0; j < solution.size(); j++) {
+        if (Character.toString(65 + i).equals(solution.get(j))) {
           correct.add(answers.get(i));
           isAnswerCorrect = true;
           break;
@@ -87,7 +85,7 @@ public class QuestionTransformer {
     return result;
   }
 
-  private ArrayList<String> addQuotesToAnswers(ArrayList<String> answers) {
+  private ArrayList<String> addQuotesToAnswers(List<String> answers) {
     ArrayList<String> result = new ArrayList<>();
     for (String answer : answers) {
       StringBuilder sb = new StringBuilder(answer);
@@ -98,9 +96,9 @@ public class QuestionTransformer {
     return result;
   }
 
-  private int findIndexOfString(String[] input, String wanted) {
-    for (int i = 0; i < input.length; i++) {
-      if (input[i].contains(wanted)) {
+  private int findIndexOfString(List<String> input, String wanted) {
+    for (int i = 0; i < input.size(); i++) {
+      if (input.get(i).contains(wanted)) {
         return i;
       }
     }
