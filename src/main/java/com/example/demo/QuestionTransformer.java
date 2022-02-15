@@ -12,6 +12,12 @@ public class QuestionTransformer {
     String question = getQuestion(split);
     Map<String, List<String>> answers = getAnswers(split);
     String result = "" + question + "\n" + "    correct:\n";
+    result = addAnswers(answers, result);
+    result = result.substring(0, result.length() - 1);
+    return result;
+  }
+
+  private String addAnswers(Map<String, List<String>> answers, String result) {
     for (String answer : answers.get("correct")) {
       result += answer + "\n";
     }
@@ -19,7 +25,6 @@ public class QuestionTransformer {
     for (String answer : answers.get("other")) {
       result += answer + "\n";
     }
-    result = result.substring(0, result.length() - 1);
     return result;
   }
 
@@ -43,7 +48,6 @@ public class QuestionTransformer {
 
     return join;
   }
-
 
   private String addQuotesToQuestion(String input) {
     StringBuilder sb = new StringBuilder(input);
