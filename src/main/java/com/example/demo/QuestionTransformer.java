@@ -7,76 +7,41 @@ import java.util.Map;
 
 public class QuestionTransformer {
 
-  public String transform(String input) {
-    List<String> split = List.of(input.split("\n"));
-    String question = getQuestion(split);
-    Map<String, List<String>> answers = getAnswers(split);
-    String result = "" + question + "\n" + "    correct:\n";
-    result = addAnswers(answers, result);
-    result = result.substring(0, result.length() - 1);
+  public MappedQuestion transform(SourceQuestion sourceQuestion) {
+    MappedQuestion result = new MappedQuestion();
+    result.setQuestion(sourceQuestion.getQuery());
+    Map<String, List<String>> answers = getAnswers(
+        sourceQuestion.getAnswers(),
+        sourceQuestion.getSolution());
+    result.setCorrect(answers.get("correct"));
+    result.setOther(answers.get("other"));
     return result;
   }
 
-  private String addAnswers(Map<String, List<String>> answers, String result) {
-    StringBuilder resultBuilder = new StringBuilder(result);
-    for (String answer : answers.get("correct")) {
-      resultBuilder.append(answer).append("\n");
-    }
-    result = resultBuilder.toString();
-    result += "    other:\n";
-    StringBuilder resultBuilder1 = new StringBuilder(result);
-    for (String answer : answers.get("other")) {
-      resultBuilder1.append(answer).append("\n");
-    }
-    result = resultBuilder1.toString();
-    return result;
+  private Map<String, List<String>> getAnswers(List<String> answers, String solution) {
+    List<String> solutionAsList = getSolutionAsList(solution);
+    return sortAnswers(answers, solutionAsList);
   }
 
-  private List<String> getSolution(List<String> input) {
-    String s = input.get(findIndexOfString(input, "solution:"));
-    s = s.replace("solution: ", "");
-    s = s.replace(",", "");
-    s = s.trim();
-    return List.of(s.split(" "));
-  }
-
-  private String getQuestion(List<String> input) {
-    int from = 0;
-    int to = findIndexOfString(input, "answers:");
-
-    List<String> lists = (input).subList(from, to);
-    String join = String.join("", lists);
-
-    join = join.replace("query", "question");
-    join = addQuotesToQuestion(join);
-
-    return join;
-  }
-
-  private String addQuotesToQuestion(String input) {
-    StringBuilder sb = new StringBuilder(input);
-    sb.insert(input.length(), "\"");
-    sb.insert(10, "\"");
-    return sb.toString();
-  }
-
-  private Map<String, List<String>> getAnswers(List<String> input) {
-    int from = findIndexOfString(input, "answers:") + 1;
-    int to = findIndexOfString(input, "solution:");
-
-    List<String> answers = input.subList(from, to);
-    answers = addQuotesToAnswers(answers);
-    List<String> solution = getSolution(input);
-    return sortAnswers(answers, solution);
+  private List<String> getSolutionAsList(String solution) {
+    String result = solution.replace(",", "");
+    result = result.trim();
+    return List.of(result.split(" "));
   }
 
   private Map<String, List<String>> sortAnswers(List<String> answers, List<String> solution) {
     List<String> correct = new ArrayList<>();
     List<String> other = new ArrayList<>();
+    addAnswersToLists(answers, solution, correct, other);
+    return getAnswersMap(correct, other);
+  }
+
+  private void addAnswersToLists(List<String> answers, List<String> solution, List<String> correct,
+      List<String> other) {
     for (int i = 0; i < answers.size(); i++) {
       boolean isAnswerCorrect = false;
-      for (int j = 0; j < solution.size(); j++) {
-        if (Character.toString(65 + i).equals(solution.get(j))) {
+      for (String it : solution) {
+        if (Character.toString(65 + i).equals(it)) {
           correct.add(answers.get(i));
           isAnswerCorrect = true;
           break;
@@ -86,30 +51,12 @@ public class QuestionTransformer {
         other.add(answers.get(i));
       }
     }
+  }
 
+  private HashMap<String, List<String>> getAnswersMap(List<String> correct, List<String> other) {
     HashMap<String, List<String>> result = new HashMap<>();
     result.put("correct", correct);
     result.put("other", other);
     return result;
-  }
-
-  private ArrayList<String> addQuotesToAnswers(List<String> answers) {
-    ArrayList<String> result = new ArrayList<>();
-    for (String answer : answers) {
-      StringBuilder sb = new StringBuilder(answer);
-      sb.insert(answer.length(), "\"");
-      sb.insert(8, "\"");
-      result.add(sb.toString());
-    }
-    return result;
-  }
-
-  private int findIndexOfString(List<String> input, String wanted) {
-    for (int i = 0; i < input.size(); i++) {
-      if (input.get(i).contains(wanted)) {
-        return i;
-      }
-    }
-    return 0;
   }
 }
