@@ -18,13 +18,17 @@ public class QuestionTransformer {
   }
 
   private String addAnswers(Map<String, List<String>> answers, String result) {
+    StringBuilder resultBuilder = new StringBuilder(result);
     for (String answer : answers.get("correct")) {
-      result += answer + "\n";
+      resultBuilder.append(answer).append("\n");
     }
+    result = resultBuilder.toString();
     result += "    other:\n";
+    StringBuilder resultBuilder1 = new StringBuilder(result);
     for (String answer : answers.get("other")) {
-      result += answer + "\n";
+      resultBuilder1.append(answer).append("\n");
     }
+    result = resultBuilder1.toString();
     return result;
   }
 
