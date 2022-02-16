@@ -11,7 +11,6 @@ public class TransformQuestionTest {
 
   private final QuestionTransformer questionTransformer = new QuestionTransformer();
 
-
 //  @Test
 //  void transform() {
 //    // given
@@ -40,10 +39,11 @@ public class TransformQuestionTest {
 //  }
 
   @Test
-  void tezd(){
+  void tezd() {
     // given
     SourceQuestion sourceQuestion = new SourceQuestion();
-    sourceQuestion.setQuery("Which of these are considered idempotent REST operations? Select all that apply.");
+    sourceQuestion.setQuery(
+        "Which of these are considered idempotent REST operations? Select all that apply.");
     sourceQuestion.setAnswers(List.of(
         "POST",
         "PUT",
@@ -53,7 +53,8 @@ public class TransformQuestionTest {
     sourceQuestion.setSolution("B, C, D");
 
     MappedQuestion expected = new MappedQuestion();
-    expected.setQuestion("Which of these are considered idempotent REST operations? Select all that apply.");
+    expected.setQuestion(
+        "Which of these are considered idempotent REST operations? Select all that apply.");
     expected.setCorrect(List.of(
         "PUT",
         "GET",
@@ -68,9 +69,11 @@ public class TransformQuestionTest {
 
     // then
     assertEquals(expected.getQuestion(), actual.getQuestion());
+    assertEquals(3, actual.getCorrect().size());
     assertEquals(expected.getCorrect().get(0), actual.getCorrect().get(0));
     assertEquals(expected.getCorrect().get(1), actual.getCorrect().get(1));
     assertEquals(expected.getCorrect().get(2), actual.getCorrect().get(2));
+    assertEquals(1, actual.getOther().size());
     assertEquals(expected.getOther().get(0), actual.getOther().get(0));
   }
 }
