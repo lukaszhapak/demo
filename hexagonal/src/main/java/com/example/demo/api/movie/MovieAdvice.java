@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class MovieAdvice {
+class MovieAdvice {
 
   @ExceptionHandler(MovieNotFoundException.class)
   ResponseEntity<String> handleNotFound(Exception exception) {

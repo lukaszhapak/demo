@@ -10,7 +10,7 @@ import com.tngtech.archunit.lang.ArchRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class LayerAccessTest {
+class LayerAccessTest {
 
   @Test
   @DisplayName("classes in api package should not depend on classes from adapters package")

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-public class NamingConventionTest {
+class NamingConventionTest {
 
   @Test
   @DisplayName("controllers should have Endpoint suffix")

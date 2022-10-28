@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
-public class CodingRulesTest {
+class CodingRulesTest {
 
   @Test
   @DisplayName("timed annotation can not be applied on private method")

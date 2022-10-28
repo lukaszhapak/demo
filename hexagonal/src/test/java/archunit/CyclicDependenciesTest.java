@@ -8,7 +8,7 @@ import com.tngtech.archunit.lang.ArchRule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CyclicDependenciesTest {
+class CyclicDependenciesTest {
 
   @Test
   @DisplayName("application should be free of cycles")
