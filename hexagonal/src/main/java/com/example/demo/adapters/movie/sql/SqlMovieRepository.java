@@ -1,8 +1,9 @@
-package com.example.demo.adapters.repository;
+package com.example.demo.adapters.movie.sql;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface MovieRepositoryJpa extends JpaRepository<JpaMovie, Long> {
+interface SqlMovieRepository extends JpaRepository<SqlMovie, Long> {
+
 }

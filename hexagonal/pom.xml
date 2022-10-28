@@ -1,83 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
 	<artifactId>hexagonal</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>hexagonal</name>
-	<description>hexagonal</description>
-	<properties>
-		<java.version>11</java.version>
-	</properties>
-	<dependencies>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>2.1.214</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>4.2.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.tngtech.archunit</groupId>
-			<artifactId>archunit</artifactId>
-			<version>1.0.0</version>
-			<scope>test</scope>
-		</dependency>
-
-
-	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<excludes>
 						<exclude>
-							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+							<groupId>org.projectlombok</groupId>
 						</exclude>
 					</excludes>
 				</configuration>
+				<groupId>org.springframework.boot</groupId>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.gmavenplus</groupId>
 				<artifactId>gmavenplus-plugin</artifactId>
-
-				<version>1.6.1</version>
 				<configuration>
 					<targetBytecode>1.8</targetBytecode>
 					<testSources>
@@ -95,6 +36,7 @@
 						</testSource>
 					</testSources>
 				</configuration>
+
 				<executions>
 					<execution>
 						<goals>
@@ -102,25 +44,83 @@
 						</goals>
 					</execution>
 				</executions>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<version>1.6.1</version>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
 				<dependencies>
 					<dependency>
-						<groupId>org.junit.platform</groupId>
 						<artifactId>junit-platform-surefire-provider</artifactId>
+						<groupId>org.junit.platform</groupId>
 						<version>1.1.0</version>
 					</dependency>
 					<dependency>
-						<groupId>org.junit.jupiter</groupId>
 						<artifactId>junit-jupiter-engine</artifactId>
+						<groupId>org.junit.jupiter</groupId>
 						<version>5.5.2</version>
 					</dependency>
 				</dependencies>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>2.19.1</version>
 			</plugin>
 		</plugins>
 	</build>
+	<dependencies>
+
+		<dependency>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.boot</groupId>
+		</dependency>
+		<dependency>
+			<artifactId>lombok</artifactId>
+			<groupId>org.projectlombok</groupId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<artifactId>h2</artifactId>
+			<groupId>com.h2database</groupId>
+			<version>2.1.214</version>
+		</dependency>
+
+		<dependency>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<artifactId>rest-assured</artifactId>
+			<groupId>io.rest-assured</groupId>
+			<scope>test</scope>
+			<version>4.2.0</version>
+		</dependency>
+		<dependency>
+			<artifactId>archunit</artifactId>
+			<groupId>com.tngtech.archunit</groupId>
+			<scope>test</scope>
+			<version>1.0.0</version>
+		</dependency>
+
+
+	</dependencies>
+	<description>hexagonal</description>
+	<groupId>com.example</groupId>
+	<modelVersion>4.0.0</modelVersion>
+	<name>hexagonal</name>
+	<parent>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<groupId>org.springframework.boot</groupId>
+		<relativePath/>
+		<version>2.6.0</version> <!-- lookup parent from repository -->
+	</parent>
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
+	<version>0.0.1-SNAPSHOT</version>
 
 </project>
