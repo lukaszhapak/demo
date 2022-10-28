@@ -18,4 +18,9 @@ class H2MovieStorage implements MovieStorage {
   public Optional<Movie> findById(Long id) {
 	return h2MovieRepository.findById(id).map(H2Movie::toMovie);
   }
+
+  @Override
+  public Movie create(Movie movie) {
+	return h2MovieRepository.save(H2Movie.of(movie)).toMovie();
+  }
 }

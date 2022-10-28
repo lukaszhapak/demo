@@ -8,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.Repository;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -44,7 +45,7 @@ class NamingConventionTest {
   @DisplayName("repository classes should have Repository suffix")
   void repositoryClassesShouldHaveRepositorySuffix() {
 	ArchRule rule = classes()
-		.that().areAssignableTo(JpaRepository.class)
+		.that().areAssignableTo(Repository.class)
 		.should().haveSimpleNameEndingWith("Repository");
 	rule.check(classesToCheck);
   }

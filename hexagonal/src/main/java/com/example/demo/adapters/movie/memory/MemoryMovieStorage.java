@@ -18,4 +18,9 @@ class MemoryMovieStorage implements MovieStorage {
 	return Optional.ofNullable(map.get(id))
 		.map(MemoryMovie::toMovie);
   }
+
+  @Override
+  public Movie create(Movie movie) {
+	return null;
+  }
 }

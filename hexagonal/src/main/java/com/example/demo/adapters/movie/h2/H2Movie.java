@@ -28,4 +28,12 @@ class H2Movie {
 	movie.setAuthor(author);
 	return movie;
   }
+
+  static H2Movie of(Movie movie) {
+	H2Movie h2Movie = new H2Movie();
+	h2Movie.setId(movie.getId());
+	h2Movie.setTitle(movie.getTitle());
+	h2Movie.setAuthor(movie.getAuthor());
+	return h2Movie;
+  }
 }

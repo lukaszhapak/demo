@@ -19,4 +19,12 @@ class MemoryMovie {
 	movie.setAuthor(author);
 	return movie;
   }
+
+  static MemoryMovie of(Movie movie) {
+	MemoryMovie memoryMovie = new MemoryMovie();
+	memoryMovie.setId(movie.getId());
+	memoryMovie.setTitle(movie.getTitle());
+	memoryMovie.setAuthor(movie.getAuthor());
+	return memoryMovie;
+  }
 }

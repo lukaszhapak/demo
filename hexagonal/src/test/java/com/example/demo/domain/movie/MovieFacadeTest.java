@@ -2,6 +2,7 @@ package com.example.demo.domain.movie;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,8 +12,10 @@ import org.junit.jupiter.api.Test;
 
 class MovieFacadeTest {
 
+  private final MovieCreatedEventSender movieCreatedEventSender = mock(
+	  MovieCreatedEventSender.class);
   private final MovieStorage movieStorage = mock(MovieStorage.class);
-  private final MovieFacade movieFacade = new MovieFacade(movieStorage);
+  private final MovieFacade movieFacade = new MovieFacade(movieStorage, movieCreatedEventSender);
 
   @Test
   @DisplayName("should find movie by id")
@@ -42,6 +45,22 @@ class MovieFacadeTest {
 
 	// then
 	assertThat(thrown).isInstanceOf(MovieNotFoundException.class);
+  }
+
+  @Test
+  @DisplayName("should create movie")
+  void shouldCreateMovie() {
+	// given
+	when(movieStorage.create(any())).thenReturn(getMovie());
+	Movie movie = getMovie();
+
+	// when
+	Movie movieResponse = movieFacade.createMovie(movie);
+
+	// then
+	assertThat(movie.getId()).isEqualTo(movieResponse.getId());
+	assertThat(movie.getTitle()).isEqualTo(movieResponse.getTitle());
+	assertThat(movie.getAuthor()).isEqualTo(movieResponse.getAuthor());
   }
 
   private Movie getMovie() {
