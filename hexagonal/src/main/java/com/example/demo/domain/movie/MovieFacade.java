@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MovieFacade {
 
-  private final MovieRepository movieRepository;
+  private final MovieStorage movieStorage;
 
   public Movie findById(Long id) {
-	return movieRepository.findById(id)
+	return movieStorage.findById(id)
 		.orElseThrow(() -> new MovieNotFoundException(id));
   }
 }

@@ -1,14 +1,14 @@
 package com.example.demo.adapters.movie.sql;
 
 import com.example.demo.domain.movie.Movie;
-import com.example.demo.domain.movie.MovieRepository;
+import com.example.demo.domain.movie.MovieStorage;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-class SqlMovieRepositoryImplementacja implements MovieRepository {
+class SqlMovieStorage implements MovieStorage {
 
   private final SqlMovieRepository sqlMovieRepository;
 

@@ -11,15 +11,15 @@ import org.junit.jupiter.api.Test;
 
 class MovieFacadeTest {
 
-  private final MovieRepository movieRepository = mock(MovieRepository.class);
-  private final MovieFacade movieFacade = new MovieFacade(movieRepository);
+  private final MovieStorage movieStorage = mock(MovieStorage.class);
+  private final MovieFacade movieFacade = new MovieFacade(movieStorage);
 
   @Test
   @DisplayName("should find movie by id")
   void shouldFindMovieById() {
 	// given
 	long id = 100L;
-	when(movieRepository.findById(id)).thenReturn(Optional.of(getMovie()));
+	when(movieStorage.findById(id)).thenReturn(Optional.of(getMovie()));
 
 	// when
 	Movie movie = movieFacade.findById(id);
@@ -35,7 +35,7 @@ class MovieFacadeTest {
   void shouldThrowExceptionWhenMovieWithGivenIdDoesntExist() {
 	// given
 	long notExistingMovieId = 100L;
-	when(movieRepository.findById(notExistingMovieId)).thenReturn(Optional.empty());
+	when(movieStorage.findById(notExistingMovieId)).thenReturn(Optional.empty());
 
 	// when
 	Throwable thrown = catchThrowable(() -> movieFacade.findById(notExistingMovieId));

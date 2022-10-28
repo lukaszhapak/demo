@@ -2,7 +2,7 @@ package com.example.demo.domain.movie;
 
 import java.util.Optional;
 
-public interface MovieRepository {
+public interface MovieStorage {
 
   Optional<Movie> findById(Long id);
 }
