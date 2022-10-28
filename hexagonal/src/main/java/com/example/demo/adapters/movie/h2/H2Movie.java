@@ -1,4 +1,4 @@
-package com.example.demo.adapters.movie.sql;
+package com.example.demo.adapters.movie.h2;
 
 import com.example.demo.domain.movie.Movie;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "MOVIE")
-class SqlMovie {
+class H2Movie {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

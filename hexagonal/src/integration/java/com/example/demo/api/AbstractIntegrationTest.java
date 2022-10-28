@@ -4,10 +4,11 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public
-class AbstractIntegrationTest {
+@ActiveProfiles("test")
+public class AbstractIntegrationTest {
 
   @LocalServerPort
   protected int port;
