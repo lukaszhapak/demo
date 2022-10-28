@@ -2,7 +2,7 @@ package com.example.demo.student;
 
 import java.util.Objects;
 
-public interface StudentControllerTest {
+interface StudentControllerTest {
 
   default boolean studentsAreEqual(Student student1, Student student2) {
 	if (!Objects.equals(student1.getId(), student2.getId())) {

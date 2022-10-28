@@ -1,6 +1,6 @@
 package com.example.demo.student;
 
-public interface StudentRepository{
+interface StudentRepository{
 
   Student getStudentById(Long id);
 
