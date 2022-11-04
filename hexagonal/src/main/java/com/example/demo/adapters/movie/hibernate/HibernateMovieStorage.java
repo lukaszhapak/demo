@@ -1,4 +1,4 @@
-package com.example.demo.adapters.movie.h2;
+package com.example.demo.adapters.movie.hibernate;
 
 import com.example.demo.domain.movie.Movie;
 import com.example.demo.domain.movie.MovieStorage;
@@ -9,18 +9,18 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-@ConditionalOnProperty(prefix = "movie.storage", name = "type", havingValue = "h2")
-class H2MovieStorage implements MovieStorage {
+@ConditionalOnProperty(prefix = "movie.storage", name = "type", havingValue = "hibernate")
+class HibernateMovieStorage implements MovieStorage {
 
-  private final H2MovieRepository h2MovieRepository;
+  private final HibernateMovieRepository hibernateMovieRepository;
 
   @Override
   public Optional<Movie> findById(Long id) {
-	return h2MovieRepository.findById(id).map(H2Movie::toMovie);
+	return hibernateMovieRepository.findById(id).map(HibernateMovie::toMovie);
   }
 
   @Override
   public Movie create(Movie movie) {
-	return h2MovieRepository.save(H2Movie.of(movie)).toMovie();
+	return hibernateMovieRepository.save(HibernateMovie.of(movie)).toMovie();
   }
 }

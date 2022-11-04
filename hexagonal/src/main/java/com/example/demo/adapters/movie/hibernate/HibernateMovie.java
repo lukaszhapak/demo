@@ -1,4 +1,4 @@
-package com.example.demo.adapters.movie.h2;
+package com.example.demo.adapters.movie.hibernate;
 
 import com.example.demo.domain.movie.Movie;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "MOVIE")
-class H2Movie {
+class HibernateMovie {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,11 +29,11 @@ class H2Movie {
 	return movie;
   }
 
-  static H2Movie of(Movie movie) {
-	H2Movie h2Movie = new H2Movie();
-	h2Movie.setId(movie.getId());
-	h2Movie.setTitle(movie.getTitle());
-	h2Movie.setAuthor(movie.getAuthor());
-	return h2Movie;
+  static HibernateMovie of(Movie movie) {
+	HibernateMovie hibernateMovie = new HibernateMovie();
+	hibernateMovie.setId(movie.getId());
+	hibernateMovie.setTitle(movie.getTitle());
+	hibernateMovie.setAuthor(movie.getAuthor());
+	return hibernateMovie;
   }
 }
