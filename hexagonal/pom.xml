@@ -4,84 +4,81 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<artifactId>hexagonal</artifactId>
 	<build>
-<!--		<plugins>-->
-<!--			<plugin>-->
-<!--				<artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<excludes>-->
-<!--						<exclude>-->
-<!--							<artifactId>lombok</artifactId>-->
-<!--							<groupId>org.projectlombok</groupId>-->
-<!--						</exclude>-->
-<!--					</excludes>-->
-<!--				</configuration>-->
-<!--				<groupId>org.springframework.boot</groupId>-->
-<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<artifactId>gmavenplus-plugin</artifactId>-->
-<!--				<configuration>-->
-<!--					<targetBytecode>1.8</targetBytecode>-->
-<!--					<testSources>-->
-<!--						<testSource>-->
-<!--							<directory>${project.basedir}/src/test/java</directory>-->
-<!--							<includes>-->
-<!--								<include>**/*.java</include>-->
-<!--							</includes>-->
-<!--						</testSource>-->
-<!--						<testSource>-->
-<!--							<directory>${project.basedir}/src/integration/java</directory>-->
-<!--							<includes>-->
-<!--								<include>**/*.java</include>-->
-<!--							</includes>-->
-<!--						</testSource>-->
-<!--					</testSources>-->
-<!--				</configuration>-->
+		<plugins>
+			<plugin>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<artifactId>lombok</artifactId>
+							<groupId>org.projectlombok</groupId>
+						</exclude>
+					</excludes>
+				</configuration>
+				<groupId>org.springframework.boot</groupId>
+			</plugin>
+			<plugin>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<configuration>
+					<targetBytecode>1.8</targetBytecode>
+					<testSources>
+						<testSource>
+							<directory>${project.basedir}/src/test/java</directory>
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+						</testSource>
+						<testSource>
+							<directory>${project.basedir}/src/integration/java</directory>
+							<includes>
+								<include>**/*.java</include>
+							</includes>
+						</testSource>
+					</testSources>
+				</configuration>
 
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<goals>-->
-<!--							<goal>compileTests</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--				<groupId>org.codehaus.gmavenplus</groupId>-->
-<!--				<version>1.6.1</version>-->
-<!--			</plugin>-->
-<!--			<plugin>-->
-<!--				<artifactId>maven-surefire-plugin</artifactId>-->
-<!--				<dependencies>-->
-<!--					<dependency>-->
-<!--						<artifactId>junit-platform-surefire-provider</artifactId>-->
-<!--						<groupId>org.junit.platform</groupId>-->
-<!--						<version>1.1.0</version>-->
-<!--					</dependency>-->
-<!--					<dependency>-->
-<!--						<artifactId>junit-jupiter-engine</artifactId>-->
-<!--						<groupId>org.junit.jupiter</groupId>-->
-<!--						<version>5.5.2</version>-->
-<!--					</dependency>-->
-<!--				</dependencies>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<version>2.19.1</version>-->
-<!--			</plugin>-->
-<!--		</plugins>-->
+				<executions>
+					<execution>
+						<goals>
+							<goal>compileTests</goal>
+						</goals>
+					</execution>
+				</executions>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<version>1.6.1</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<dependencies>
+					<dependency>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<groupId>org.junit.platform</groupId>
+						<version>1.1.0</version>
+					</dependency>
+					<dependency>
+						<artifactId>junit-jupiter-engine</artifactId>
+						<groupId>org.junit.jupiter</groupId>
+						<version>5.5.2</version>
+					</dependency>
+				</dependencies>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>2.19.1</version>
+			</plugin>
+		</plugins>
 	</build>
 	<dependencies>
 
 		<dependency>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<groupId>org.springframework.boot</groupId>
-			<version>2.6.0</version>
 		</dependency>
 		<dependency>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<groupId>org.springframework.boot</groupId>
-			<version>2.6.0</version>
 		</dependency>
 		<dependency>
 			<artifactId>lombok</artifactId>
 			<groupId>org.projectlombok</groupId>
-			<version>1.18.0</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -93,7 +90,6 @@
 		<dependency>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<groupId>org.springframework.boot</groupId>
-			<version>2.6.0</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

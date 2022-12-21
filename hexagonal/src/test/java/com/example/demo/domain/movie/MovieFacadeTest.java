@@ -2,14 +2,18 @@ package com.example.demo.domain.movie;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -65,7 +69,7 @@ class MovieFacadeTest {
 
   @ParameterizedTest
   @NullAndEmptySource
-  @ValueSource(strings = {"a", "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+  @MethodSource("stringSource")
   @DisplayName("should not create movie with invalid title")
   void shouldNotCreateMovieWithInvalidTitle(String title) {
 	// given
@@ -81,7 +85,7 @@ class MovieFacadeTest {
 
   @ParameterizedTest
   @NullAndEmptySource
-  @ValueSource(strings = {"a", "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+  @MethodSource("stringSource")
   @DisplayName("should not create movie with invalid author")
   void shouldNotCreateMovieWithInvalidAuthor(String author) {
 	// given
@@ -93,6 +97,13 @@ class MovieFacadeTest {
 
 	// then
 	assertThat(thrown).isInstanceOf(MovieValidationException.class);
+  }
+
+  private static Stream<Arguments> stringSource() {
+	return Stream.of(
+		arguments( "a"),
+		arguments( "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+	);
   }
 
   private Movie getMovie() {
