@@ -1,6 +1,6 @@
 package com.example.demo.api.movie;
 
-import com.example.demo.api.AbstractIntegrationTest;
+import com.example.demo.AbstractIntegrationTest;
 import com.example.demo.domain.movie.Movie;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;

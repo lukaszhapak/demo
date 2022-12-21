@@ -1,4 +1,4 @@
-package com.example.demo.api;
+package com.example.demo;
 
 import io.restassured.response.Response;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -14,7 +14,7 @@ class MovieStatisticsJob {
   private final MovieFacade movieFacade;
 
   @Scheduled(cron = "${movie.statistics.cron}")
-  void run() {
+  void calculateStatistics() {
 	Long count = movieFacade.count();
 	log.debug("Running movie statistics job, there are {} movies", count);
   }

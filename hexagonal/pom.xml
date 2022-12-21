@@ -4,6 +4,27 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<artifactId>hexagonal</artifactId>
 
+	<description>hexagonal</description>
+	<groupId>com.example</groupId>
+	<modelVersion>4.0.0</modelVersion>
+	<name>hexagonal</name>
+	<parent>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<groupId>org.springframework.boot</groupId>
+		<relativePath/>
+		<version>2.6.0</version> <!-- lookup parent from repository -->
+	</parent>
+
+	<properties>
+		<java.version>11</java.version>
+		<spring-boot.version>2.6.0</spring-boot.version>
+		<lombok.version>1.18.24</lombok.version>
+		<h2.version>2.1.214</h2.version>
+		<rest-assured.version>4.2.0</rest-assured.version>
+		<archunit.version>1.0.0</archunit.version>
+	</properties>
+
+	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<plugins>
 			<plugin>
@@ -37,7 +58,6 @@
 						</testSource>
 					</testSources>
 				</configuration>
-
 				<executions>
 					<execution>
 						<goals>
@@ -48,6 +68,7 @@
 				<groupId>org.codehaus.gmavenplus</groupId>
 				<version>1.6.1</version>
 			</plugin>
+
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<dependencies>
@@ -67,8 +88,8 @@
 			</plugin>
 		</plugins>
 	</build>
-	<dependencies>
 
+	<dependencies>
 		<dependency>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<groupId>org.springframework.boot</groupId>
@@ -109,29 +130,6 @@
 			<scope>test</scope>
 			<version>${archunit.version}</version>
 		</dependency>
-
-
 	</dependencies>
-	<description>hexagonal</description>
-	<groupId>com.example</groupId>
-	<modelVersion>4.0.0</modelVersion>
-	<name>hexagonal</name>
-	<parent>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<groupId>org.springframework.boot</groupId>
-		<relativePath/>
-		<version>2.6.0</version> <!-- lookup parent from repository -->
-	</parent>
-
-	<properties>
-		<java.version>11</java.version>
-		<spring-boot.version>2.6.0</spring-boot.version>
-		<lombok.version>1.18.24</lombok.version>
-		<h2.version>2.1.214</h2.version>
-		<rest-assured.version>4.2.0</rest-assured.version>
-		<archunit.version>1.0.0</archunit.version>
-	</properties>
-
-	<version>0.0.1-SNAPSHOT</version>
 
 </project>
