@@ -33,7 +33,7 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 		.get("/api/movie/" + id)
 		.getBody().as(MovieResponse.class);
 
-	//then
+	// then
 	assertThat(movieResponsesAreEqual(movieResponse, getMovieResponse())).isTrue();
   }
 

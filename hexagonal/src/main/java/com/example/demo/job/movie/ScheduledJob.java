@@ -3,9 +3,11 @@ package com.example.demo.job.movie;
 import com.example.demo.domain.movie.MovieFacade;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+@Log4j2
 @Component
 @RequiredArgsConstructor
 class ScheduledJob {
@@ -14,6 +16,6 @@ class ScheduledJob {
 
   @Scheduled(fixedRate = 1000L)
   void run() {
-    System.out.println(LocalDateTime.now());
+	log.debug("running scheduled job timestamp={}", LocalDateTime.now());
   }
 }
