@@ -3,6 +3,7 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<artifactId>hexagonal</artifactId>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -71,38 +72,42 @@
 		<dependency>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<groupId>org.springframework.boot</groupId>
+			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<groupId>org.springframework.boot</groupId>
+			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>lombok</artifactId>
 			<groupId>org.projectlombok</groupId>
 			<optional>true</optional>
+			<version>${lombok.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>h2</artifactId>
 			<groupId>com.h2database</groupId>
-			<version>2.1.214</version>
+			<version>${h2.version}</version>
 		</dependency>
 
 		<dependency>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<groupId>org.springframework.boot</groupId>
 			<scope>test</scope>
+			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>rest-assured</artifactId>
 			<groupId>io.rest-assured</groupId>
 			<scope>test</scope>
-			<version>4.2.0</version>
+			<version>${rest-assured.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>archunit</artifactId>
 			<groupId>com.tngtech.archunit</groupId>
 			<scope>test</scope>
-			<version>1.0.0</version>
+			<version>${archunit.version}</version>
 		</dependency>
 
 
@@ -117,8 +122,14 @@
 		<relativePath/>
 		<version>2.6.0</version> <!-- lookup parent from repository -->
 	</parent>
+
 	<properties>
 		<java.version>11</java.version>
+		<spring-boot.version>2.6.0</spring-boot.version>
+		<lombok.version>1.18.24</lombok.version>
+		<h2.version>2.1.214</h2.version>
+		<rest-assured.version>4.2.0</rest-assured.version>
+		<archunit.version>1.0.0</archunit.version>
 	</properties>
 
 	<version>0.0.1-SNAPSHOT</version>
