@@ -14,7 +14,7 @@ class ScheduledJob {
 
   private final MovieFacade movieFacade;
 
-  @Scheduled(fixedRate = 1000L)
+  @Scheduled(fixedRate = 1000000L)
   void run() {
 	log.debug("running scheduled job timestamp={}", LocalDateTime.now());
   }
