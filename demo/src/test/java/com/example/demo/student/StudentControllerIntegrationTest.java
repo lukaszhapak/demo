@@ -28,7 +28,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest implement
 		.getBody().as(Student.class);
 
 	//then
-	assertThat(studentsAreEqual(student, getStudent())).isTrue();
+	assertThat(student).usingRecursiveComparison().isEqualTo(getStudent());
   }
 
   @Test
@@ -50,7 +50,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest implement
 		.getBody().as(Student.class);
 
 	// then
-	assertThat(studentsAreEqual(student, response)).isTrue();
+	assertThat(student).usingRecursiveComparison().isEqualTo(response);
   }
 
   @Test
@@ -74,7 +74,6 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest implement
 
 	// then
   }
-
 
   @Test
   @DisplayName("should throw exception when student is too young")

@@ -24,7 +24,7 @@ class StudentControllerUnitTest implements StudentControllerTest {
 	Student student = studentController.getStudentById(id);
 
 	// then
-	assertThat(studentsAreEqual(student, getStudent())).isTrue();
+	assertThat(student).usingRecursiveComparison().isEqualTo(getStudent());
   }
 
   @Test
@@ -37,7 +37,7 @@ class StudentControllerUnitTest implements StudentControllerTest {
 	Student response = studentController.saveStudent(student);
 
 	// then
-	assertThat(studentsAreEqual(student, response)).isTrue();
+	assertThat(student).usingRecursiveComparison().isEqualTo(response);
   }
 
   @Test

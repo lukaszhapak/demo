@@ -1,12 +1,12 @@
 package com.example.demo.student;
 
+import static io.restassured.RestAssured.given;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.example.demo.AbstractIntegrationTest;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static io.restassured.RestAssured.given;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest implements
 	StudentControllerTest {
@@ -28,7 +28,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest implement
 		.getBody().as(Student.class);
 
 	//then
-	assertThat(studentsAreEqual(student, getStudent())).isTrue();
+	assertThat(student).usingRecursiveComparison().isEqualTo(getStudent());
   }
 
   @Test
@@ -50,7 +50,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest implement
 		.getBody().as(Student.class);
 
 	// then
-	assertThat(studentsAreEqual(student, response)).isTrue();
+	assertThat(student).usingRecursiveComparison().isEqualTo(response);
   }
 
   @Test

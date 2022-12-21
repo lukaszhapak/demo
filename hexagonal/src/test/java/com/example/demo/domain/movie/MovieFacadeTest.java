@@ -28,9 +28,7 @@ class MovieFacadeTest {
 	Movie movie = movieFacade.findById(id);
 
 	// then
-	assertThat(movie.getId()).isEqualTo(getMovie().getId());
-	assertThat(movie.getTitle()).isEqualTo(getMovie().getTitle());
-	assertThat(movie.getAuthor()).isEqualTo(getMovie().getAuthor());
+	assertThat(movie).usingRecursiveComparison().isEqualTo(getMovie());
   }
 
   @Test
@@ -58,9 +56,7 @@ class MovieFacadeTest {
 	Movie movieResponse = movieFacade.createMovie(movie);
 
 	// then
-	assertThat(movie.getId()).isEqualTo(movieResponse.getId());
-	assertThat(movie.getTitle()).isEqualTo(movieResponse.getTitle());
-	assertThat(movie.getAuthor()).isEqualTo(movieResponse.getAuthor());
+	assertThat(movie).usingRecursiveComparison().isEqualTo(movieResponse);
   }
 
   private Movie getMovie() {
