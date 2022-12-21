@@ -1,15 +1,15 @@
 package com.example.demo.adapters.movie.hibernate;
 
 import com.example.demo.domain.movie.Movie;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Getter
 @Setter
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Table(name = "MOVIE")
 @NoArgsConstructor
 @AllArgsConstructor
-public class HibernateMovie {
+class HibernateMovie {
 
   @Id
   @GeneratedValue

@@ -1,22 +1,20 @@
 package com.example.demo.api.movie;
 
-import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.*;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import com.example.demo.adapters.movie.hibernate.HibernateMovie;
 import com.example.demo.api.AbstractIntegrationTest;
 import com.example.demo.domain.movie.Movie;
-import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity.HeadersBuilder;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcOperations;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 
+  public static final String URL = "/api/movie/";
   @Autowired
   private JdbcOperations jdbc;
 
@@ -24,38 +22,32 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should get movie by id")
   void shouldGetSMovieById() {
 	// given
-	jdbc.execute(
-		"insert into movie (id, title, author) values (100, 'smierc w wenecji', 'andrzej');");
-	long id = 100L;
+	jdbc.execute("insert into movie (id, title, author) values (1000000, 'smierc w wenecji', 'andrzej');");
+	long id = 1000000L;
 
 	// when
-	MovieResponse movieResponse = given()
-		.log().all()
-		.port(port)
-		.expect()
-		.statusCode(200)
-		.when()
-		.get("/api/movie/" + id)
-		.getBody().as(MovieResponse.class);
+	Response response = getHttpCall(URL + id);
 
 	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+	MovieResponse movieResponse = response.getBody().as(MovieResponse.class);
 	assertThat(movieResponse).usingRecursiveComparison().isEqualTo(getMovieResponse());
+
+    // clean up
+    jdbc.execute("delete from movie");
   }
 
   @Test
   @DisplayName("should get 404 when movie not found")
   void shouldGet404WhenMovieNotFound() {
 	// given
-	long id = 100L;
+	long id = 1000000L;
 
 	// when
-	given()
-		.log().all()
-		.port(port)
-		.expect()
-		.statusCode(404)
-		.when()
-		.get("/api/movie/" + id);
+	Response response = getHttpCall(URL + id);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
   }
 
   @Test
@@ -65,38 +57,32 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	MovieRequest movieRequest = getMovieRequest();
 
 	// when
-	MovieResponse movieResponse = given()
-		.port(port)
-		.body(movieRequest)
-		.contentType(JSON)
-		.log().all()
-		.when()
-		.log().all()
-		.post("/api/movie")
-		.getBody().as(MovieResponse.class);
+	Response response = postHttpCall(movieRequest, URL);
 
 	// then
-	Movie movieEntity = jdbc.queryForObject("select * from movie where id = 1",
-		new BeanPropertyRowMapper<>(Movie.class));
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
+	MovieResponse movieResponse = response.getBody().as(MovieResponse.class);
 	assertThat(movieRequest).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(movieResponse);
 	assertThat(movieResponse.getId()).isNotNull();
 
+	Movie movieEntity = jdbc.queryForObject("select * from movie where id = 1", new BeanPropertyRowMapper<>(Movie.class));
 	assertThat(movieRequest).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(movieEntity);
 	assertThat(movieEntity.getId()).isNotNull();
 
+	// clean up
 	jdbc.execute("delete from movie");
   }
 
-  MovieResponse getMovieResponse() {
+  private MovieResponse getMovieResponse() {
 	MovieResponse movieResponse = new MovieResponse();
-	movieResponse.setId(100L);
+	movieResponse.setId(1000000L);
 	movieResponse.setTitle("smierc w wenecji");
 	movieResponse.setAuthor("andrzej");
 	return movieResponse;
   }
 
-  MovieRequest getMovieRequest() {
+  private MovieRequest getMovieRequest() {
 	MovieRequest movieRequest = new MovieRequest();
 	movieRequest.setTitle("smierc w wenecji");
 	movieRequest.setAuthor("andrzej");
