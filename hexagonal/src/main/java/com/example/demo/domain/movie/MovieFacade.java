@@ -9,6 +9,7 @@ public class MovieFacade {
 
   private final MovieStorage movieStorage;
   private final MovieCreatedEventSender movieCreatedEventSender;
+  private final MovieValidator movieValidator;
 
   public Movie createMovie(Movie movie) {
 	log.debug("create movie Movie={}", movie);
