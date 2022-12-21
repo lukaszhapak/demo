@@ -8,19 +8,24 @@ import lombok.extern.log4j.Log4j2;
 public class MovieFacade {
 
   private final MovieStorage movieStorage;
-  private final MovieCreatedEventSender movieCreatedEventSender;
+  private final MovieCreatedEventPublisher movieCreatedEventPublisher;
   private final MovieValidator movieValidator;
 
   public Movie createMovie(Movie movie) {
-	log.debug("create movie Movie={}", movie);
+	log.debug("Create movie Movie={}", movie);
+	movieValidator.validate(movie);
 	Movie response = movieStorage.create(movie);
-	movieCreatedEventSender.send(MovieCreatedEvent.of(movie));
+	movieCreatedEventPublisher.send(MovieCreatedEvent.of(response));
 	return response;
   }
 
   public Movie findById(Long id) {
-	log.debug("find movie by id={}", id);
+	log.debug("Find movie by id={}", id);
 	return movieStorage.findById(id)
 		.orElseThrow(() -> new MovieNotFoundException(id));
+  }
+
+  public Long count(){
+	return movieStorage.count();
   }
 }

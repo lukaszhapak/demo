@@ -23,4 +23,9 @@ class HibernateMovieStorage implements MovieStorage {
   public Movie create(Movie movie) {
 	return hibernateMovieRepository.save(HibernateMovie.of(movie)).toMovie();
   }
+
+  @Override
+  public Long count() {
+	return hibernateMovieRepository.count();
+  }
 }

@@ -15,8 +15,6 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "MOVIE")
-@NoArgsConstructor
-@AllArgsConstructor
 class HibernateMovie {
 
   @Id

@@ -1,6 +1,6 @@
 package com.example.demo.domain.movie;
 
-public interface MovieCreatedEventSender {
+public interface MovieCreatedEventPublisher {
 
   void send(MovieCreatedEvent event);
 }

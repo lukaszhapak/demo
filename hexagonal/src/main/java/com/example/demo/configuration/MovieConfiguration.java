@@ -1,6 +1,6 @@
 package com.example.demo.configuration;
 
-import com.example.demo.domain.movie.MovieCreatedEventSender;
+import com.example.demo.domain.movie.MovieCreatedEventPublisher;
 import com.example.demo.domain.movie.MovieFacade;
 import com.example.demo.domain.movie.MovieStorage;
 import com.example.demo.domain.movie.MovieValidator;
@@ -12,9 +12,9 @@ class MovieConfiguration {
 
   @Bean
   MovieFacade movieFacade(final MovieStorage movieStorage,
-	  final MovieCreatedEventSender movieCreatedEventSender,
+	  final MovieCreatedEventPublisher movieCreatedEventPublisher,
 	  final MovieValidator movieValidator) {
-	return new MovieFacade(movieStorage, movieCreatedEventSender, movieValidator);
+	return new MovieFacade(movieStorage, movieCreatedEventPublisher, movieValidator);
   }
 
   @Bean

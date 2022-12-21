@@ -9,14 +9,17 @@ import static org.mockito.Mockito.when;
 import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class MovieFacadeTest {
 
-  private final MovieCreatedEventSender movieCreatedEventSender = mock(
-	  MovieCreatedEventSender.class);
+  private final MovieCreatedEventPublisher movieCreatedEventPublisher = mock(
+	  MovieCreatedEventPublisher.class);
   private final MovieStorage movieStorage = mock(MovieStorage.class);
   private final MovieValidator movieValidator = new MovieValidator();
-  private final MovieFacade movieFacade = new MovieFacade(movieStorage, movieCreatedEventSender, movieValidator);
+  private final MovieFacade movieFacade = new MovieFacade(movieStorage, movieCreatedEventPublisher, movieValidator);
 
   @Test
   @DisplayName("should find movie by id")
@@ -58,6 +61,38 @@ class MovieFacadeTest {
 
 	// then
 	assertThat(movie).usingRecursiveComparison().isEqualTo(movieResponse);
+  }
+
+  @ParameterizedTest
+  @NullAndEmptySource
+  @ValueSource(strings = {"a", "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+  @DisplayName("should not create movie with invalid title")
+  void shouldNotCreateMovieWithInvalidTitle(String title) {
+	// given
+	Movie movie = getMovie();
+	movie.setTitle(title);
+
+	// when
+	Throwable thrown = catchThrowable(() -> movieFacade.createMovie(movie));
+
+	// then
+	assertThat(thrown).isInstanceOf(MovieValidationException.class);
+  }
+
+  @ParameterizedTest
+  @NullAndEmptySource
+  @ValueSource(strings = {"a", "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+  @DisplayName("should not create movie with invalid author")
+  void shouldNotCreateMovieWithInvalidAuthor(String author) {
+	// given
+	Movie movie = getMovie();
+	movie.setAuthor(author);
+
+	// when
+	Throwable thrown = catchThrowable(() -> movieFacade.createMovie(movie));
+
+	// then
+	assertThat(thrown).isInstanceOf(MovieValidationException.class);
   }
 
   private Movie getMovie() {

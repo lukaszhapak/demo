@@ -1,7 +1,6 @@
 package com.example.demo.job.movie;
 
 import com.example.demo.domain.movie.MovieFacade;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -10,12 +9,13 @@ import org.springframework.stereotype.Component;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-class ScheduledJob {
+class MovieStatisticsJob {
 
   private final MovieFacade movieFacade;
 
-  @Scheduled(fixedRate = 1000000L)
+  @Scheduled(cron = "${movie.statistics.cron}")
   void run() {
-	log.debug("running scheduled job timestamp={}", LocalDateTime.now());
+	Long count = movieFacade.count();
+	log.debug("Running movie statistics job, there are {} movies", count);
   }
 }

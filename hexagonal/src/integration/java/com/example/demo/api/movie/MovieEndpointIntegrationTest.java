@@ -74,6 +74,21 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	jdbc.execute("delete from movie");
   }
 
+  @Test
+  @DisplayName("should not create movie with invalid fields")
+  void shouldNotCreateMovieWithInvalidFields() {
+	// given
+	MovieRequest movieRequest = getMovieRequest();
+	movieRequest.setTitle("t");
+	movieRequest.setAuthor("a");
+
+	// when
+	Response response = postHttpCall(movieRequest, URL);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+  }
+
   private MovieResponse getMovieResponse() {
 	MovieResponse movieResponse = new MovieResponse();
 	movieResponse.setId(1000000L);

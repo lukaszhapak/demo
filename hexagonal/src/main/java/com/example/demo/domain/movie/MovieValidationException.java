@@ -2,7 +2,7 @@ package com.example.demo.domain.movie;
 
 public class MovieValidationException extends RuntimeException {
 
-  public MovieValidationException() {
-	super("Invalid Movie");
+  public MovieValidationException(String message) {
+	super(message);
   }
 }

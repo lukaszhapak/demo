@@ -2,9 +2,11 @@ package com.example.demo.domain.movie;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class MovieCreatedEvent {
 
   private Long id;

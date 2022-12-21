@@ -8,4 +8,6 @@ interface HibernateMovieRepository extends Repository<HibernateMovie, Long> {
   Optional<HibernateMovie> findById(Long id);
 
   HibernateMovie save(HibernateMovie hibernateMovie);
+
+  Long count();
 }
