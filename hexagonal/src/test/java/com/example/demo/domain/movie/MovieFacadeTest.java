@@ -15,7 +15,8 @@ class MovieFacadeTest {
   private final MovieCreatedEventSender movieCreatedEventSender = mock(
 	  MovieCreatedEventSender.class);
   private final MovieStorage movieStorage = mock(MovieStorage.class);
-  private final MovieFacade movieFacade = new MovieFacade(movieStorage, movieCreatedEventSender);
+  private final MovieValidator movieValidator = new MovieValidator();
+  private final MovieFacade movieFacade = new MovieFacade(movieStorage, movieCreatedEventSender, movieValidator);
 
   @Test
   @DisplayName("should find movie by id")

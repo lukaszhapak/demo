@@ -1,4 +1,7 @@
 package com.example.demo.domain.movie;
 
-class MovieValidator {
+public class MovieValidator {
+
+  public void validate(Movie movie) {
+  }
 }
