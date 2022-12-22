@@ -1,30 +1,26 @@
 package com.example.hexagonal.api.movie;
 
+import static com.example.hexagonal.domain.movie.MovieCategory.COMEDY;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.example.hexagonal.AbstractIntegrationTest;
 import com.example.hexagonal.domain.movie.Movie;
-import com.example.hexagonal.domain.movie.MovieCategory;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcOperations;
-
-import static com.example.hexagonal.domain.movie.MovieCategory.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 
   public static final String URL = "/api/movie/";
-  @Autowired
-  private JdbcOperations jdbc;
 
   @Test
   @DisplayName("should get movie by id")
   void shouldGetSMovieById() {
 	// given
-	jdbc.execute("insert into movie (id, title, author, category) values (1000000, 'smierc w wenecji', 'andrzej', 'COMEDY');");
+	jdbc.execute(
+		"insert into movie (id, title, author, category) values (1000000, 'smierc w wenecji', 'andrzej', 'COMEDY');");
 	long id = 1000000L;
 
 	// when
@@ -33,10 +29,12 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 	MovieResponse movieResponse = response.getBody().as(MovieResponse.class);
-	assertThat(movieResponse).usingRecursiveComparison().isEqualTo(getMovieResponse());
+	assertThat(movieResponse.getId()).isEqualTo(id);
+	assertThat(movieResponse).usingRecursiveComparison().ignoringExpectedNullFields()
+		.isEqualTo(getMovieRequest());
 
-    // clean up
-    jdbc.execute("delete from movie");
+	// clean up
+	jdbc.execute("delete from movie");
   }
 
   @Test
@@ -65,11 +63,14 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
 	MovieResponse movieResponse = response.getBody().as(MovieResponse.class);
-	assertThat(movieRequest).usingRecursiveComparison().ignoringActualNullFields().isEqualTo(movieResponse);
+	assertThat(movieRequest).usingRecursiveComparison().ignoringActualNullFields()
+		.isEqualTo(movieResponse);
 	assertThat(movieResponse.getId()).isNotNull();
 
-	Movie movieEntity = jdbc.queryForObject("select * from movie where id = 1", new BeanPropertyRowMapper<>(Movie.class));
-	assertThat(movieRequest).usingRecursiveComparison().ignoringActualNullFields().isEqualTo(movieEntity);
+	Movie movieEntity = jdbc.queryForObject("select * from movie where id = 1",
+		new BeanPropertyRowMapper<>(Movie.class));
+	assertThat(movieRequest).usingRecursiveComparison().ignoringActualNullFields()
+		.isEqualTo(movieEntity);
 	assertThat(movieEntity.getId()).isNotNull();
 
 	// clean up
@@ -89,15 +90,6 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
-  }
-
-  private MovieResponse getMovieResponse() {
-	MovieResponse movieResponse = new MovieResponse();
-	movieResponse.setId(1000000L);
-	movieResponse.setTitle("smierc w wenecji");
-	movieResponse.setAuthor("andrzej");
-	movieResponse.setCategory(COMEDY);
-	return movieResponse;
   }
 
   private MovieRequest getMovieRequest() {

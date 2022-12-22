@@ -1,5 +1,6 @@
 package com.example.hexagonal.domain.movie;
 
+import static com.example.hexagonal.domain.movie.MovieCategory.COMEDY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -22,7 +23,8 @@ class MovieFacadeTest {
 	  MovieCreatedEventPublisher.class);
   private final MovieStorage movieStorage = mock(MovieStorage.class);
   private final MovieValidator movieValidator = new MovieValidator();
-  private final MovieFacade movieFacade = new MovieFacade(movieStorage, movieCreatedEventPublisher, movieValidator);
+  private final MovieFacade movieFacade = new MovieFacade(movieStorage, movieCreatedEventPublisher,
+	  movieValidator);
 
   @Test
   @DisplayName("should find movie by id")
@@ -98,18 +100,33 @@ class MovieFacadeTest {
 	assertThat(thrown).isInstanceOf(MovieValidationException.class);
   }
 
+  @Test
+  @DisplayName("should not create movie with null category")
+  void shouldNotCreateMovieWithNullCategory() {
+	// given
+	Movie movie = getMovie();
+	movie.setCategory(null);
+
+	// when
+	Throwable thrown = catchThrowable(() -> movieFacade.createMovie(movie));
+
+	// then
+	assertThat(thrown).isInstanceOf(MovieValidationException.class);
+  }
+
   private static Stream<Arguments> stringSource() {
 	return Stream.of(
-		arguments( "a"),
-		arguments( "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+		arguments("a"),
+		arguments("more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
 	);
   }
 
   private Movie getMovie() {
-	Movie movie = new Movie();
-	movie.setId(100L);
-	movie.setTitle("smierc w wenecji");
-	movie.setAuthor("andrzej");
-	return movie;
+	return new Movie(
+		100L,
+		"smierc w wenecji",
+		"andrzej",
+		COMEDY
+	);
   }
 }

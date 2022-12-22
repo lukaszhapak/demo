@@ -10,7 +10,6 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 class MovieResponse {
