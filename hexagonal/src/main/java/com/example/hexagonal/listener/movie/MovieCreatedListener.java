@@ -11,6 +11,6 @@ class MovieCreatedListener {
 
   @EventListener
   public void handleMovieCreated(MovieCreatedEvent event) {
-	log.debug("Got MovieCreatedEvent={}", event);
+	log.trace("Got MovieCreatedEvent={}", event);
   }
 }

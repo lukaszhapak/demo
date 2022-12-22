@@ -20,7 +20,7 @@ public class MovieFacade {
   }
 
   public Movie findById(Long id) {
-	log.debug("Find movie by id={}", id);
+	log.trace("Find movie by id={}", id);
 	return movieStorage.findById(id)
 		.orElseThrow(() -> new MovieNotFoundException(id));
   }

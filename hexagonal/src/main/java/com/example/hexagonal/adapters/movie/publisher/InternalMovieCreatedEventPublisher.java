@@ -17,7 +17,7 @@ class InternalMovieCreatedEventPublisher implements MovieCreatedEventPublisher {
 
   @Override
   public void send(MovieCreatedEvent event) {
-	log.debug("Publishing MovieCreatedEvent={}", event);
+	log.trace("Publishing MovieCreatedEvent={}", event);
 	applicationEventPublisher.publishEvent(event);
   }
 }
