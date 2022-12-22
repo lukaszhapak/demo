@@ -11,6 +11,7 @@ class ArchUnitTest {
   static final String ADAPTERS_PACKAGE = APP_PACKAGE + ".adapters..";
   static final String DOMAIN_PACKAGE = APP_PACKAGE + ".domain..";
   static final String CONFIGURATION_PACKAGE = APP_PACKAGE + ".configuration..";
+  static final String JOB_PACKAGE = APP_PACKAGE + ".job..";
   static final String SPRING_PACKAGE = "org.springframework..";
 
   public static final JavaClasses classesToCheck = new ClassFileImporter()

@@ -1,22 +1,30 @@
 package com.example.hexagonal.api.movie;
 
 import com.example.hexagonal.domain.movie.Movie;
+import com.example.hexagonal.domain.movie.MovieCategory;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 class MovieRequest {
 
   private String title;
   private String author;
+  private MovieCategory category;
 
   Movie toDomain() {
-	Movie movie = new Movie();
-	movie.setTitle(title);
-	movie.setAuthor(author);
-	return movie;
+	return new Movie(
+		null,
+		title,
+		author,
+		category
+	);
   }
 }

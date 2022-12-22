@@ -17,6 +17,6 @@ class RecursiveComparisonTest {
 	studentDTO.setName("John");
 	studentDTO.setAge(22);
 
-	assertThat(student).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(studentDTO);
+	assertThat(student).usingRecursiveComparison().ignoringActualNullFields().isEqualTo(studentDTO);
   }
 }

@@ -5,6 +5,7 @@ public class MovieValidator {
   public void validate(Movie movie) {
 	validateTitle(movie.getTitle());
 	validateAuthor(movie.getAuthor());
+	validateCategory(movie.getCategory());
   }
 
   private void validateTitle(String title) {
@@ -28,6 +29,12 @@ public class MovieValidator {
 	}
 	if (author.length() > 64) {
 	  throw new MovieValidationException("author length cannot be more than 64 characters");
+	}
+  }
+
+  private void validateCategory(MovieCategory category){
+	if (category == null) {
+	  throw new MovieValidationException("category cannot be null");
 	}
   }
 }

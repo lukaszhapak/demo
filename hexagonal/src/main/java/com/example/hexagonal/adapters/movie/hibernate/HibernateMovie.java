@@ -1,18 +1,25 @@
 package com.example.hexagonal.adapters.movie.hibernate;
 
-import com.example.hexagonal.domain.movie.Movie;
-import lombok.Getter;
-import lombok.Setter;
+import static javax.persistence.EnumType.STRING;
 
+import com.example.hexagonal.domain.movie.Movie;
+import com.example.hexagonal.domain.movie.MovieCategory;
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "MOVIE")
+@NoArgsConstructor
+@AllArgsConstructor
 class HibernateMovie {
 
   @Id
@@ -20,20 +27,24 @@ class HibernateMovie {
   private Long id;
   private String title;
   private String author;
+  @Enumerated(STRING)
+  private MovieCategory category;
 
   Movie toMovie() {
-	Movie movie = new Movie();
-	movie.setId(id);
-	movie.setTitle(title);
-	movie.setAuthor(author);
-	return movie;
+	return new Movie(
+		id,
+		title,
+		author,
+		category
+	);
   }
 
   static HibernateMovie of(Movie movie) {
-	HibernateMovie hibernateMovie = new HibernateMovie();
-	hibernateMovie.setId(movie.getId());
-	hibernateMovie.setTitle(movie.getTitle());
-	hibernateMovie.setAuthor(movie.getAuthor());
-	return hibernateMovie;
+	return new HibernateMovie(
+		movie.getId(),
+		movie.getTitle(),
+		movie.getAuthor(),
+		movie.getCategory()
+	);
   }
 }
