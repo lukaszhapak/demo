@@ -6,7 +6,7 @@ import com.tngtech.archunit.core.importer.ImportOption;
 
 class ArchUnitTest {
 
-  static final String APP_PACKAGE = "com.example.demo";
+  static final String APP_PACKAGE = "com.example.hexagonal";
   static final String API_PACKAGE = APP_PACKAGE + ".api..";
   static final String ADAPTERS_PACKAGE = APP_PACKAGE + ".adapters..";
   static final String DOMAIN_PACKAGE = APP_PACKAGE + ".domain..";
