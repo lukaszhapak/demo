@@ -20,6 +20,7 @@ class MovieAdvice {
 
   @ExceptionHandler(MovieValidationException.class)
   ResponseEntity<String> handleValidation(Exception exception) {
+	log.error(exception.getMessage());
 	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
   }
 }

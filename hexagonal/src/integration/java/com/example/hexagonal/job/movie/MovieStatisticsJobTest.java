@@ -25,6 +25,7 @@ class MovieStatisticsJobTest extends AbstractIntegrationTest {
 	movieStatisticsJob.calculateStatistics();
 
 	// then
+	// TODO
 
 	// clean up
 	jdbc.execute("delete from movie");

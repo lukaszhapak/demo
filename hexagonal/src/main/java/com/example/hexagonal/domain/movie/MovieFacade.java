@@ -1,6 +1,5 @@
 package com.example.hexagonal.domain.movie;
 
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
