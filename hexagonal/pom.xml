@@ -22,11 +22,17 @@
 		<h2.version>2.1.214</h2.version>
 		<rest-assured.version>4.2.0</rest-assured.version>
 		<archunit.version>1.0.0</archunit.version>
+		<junit-platform-surefire-provider.version>1.1.0</junit-platform-surefire-provider.version>
+		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
+		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<gmavenplus-plugin.version>1.6.1</gmavenplus-plugin.version>
+		<gmavenplus-plugin.targetBytecode>1.8</gmavenplus-plugin.targetBytecode>
 	</properties>
 
 	<version>0.0.1-SNAPSHOT</version>
 	<build>
 		<plugins>
+
 			<plugin>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
@@ -42,7 +48,7 @@
 			<plugin>
 				<artifactId>gmavenplus-plugin</artifactId>
 				<configuration>
-					<targetBytecode>1.8</targetBytecode>
+					<targetBytecode>${gmavenplus-plugin.targetBytecode}</targetBytecode>
 					<testSources>
 						<testSource>
 							<directory>${project.basedir}/src/test/java</directory>
@@ -66,7 +72,7 @@
 					</execution>
 				</executions>
 				<groupId>org.codehaus.gmavenplus</groupId>
-				<version>1.6.1</version>
+				<version>${gmavenplus-plugin.version}</version>
 			</plugin>
 
 			<plugin>
@@ -75,16 +81,16 @@
 					<dependency>
 						<artifactId>junit-platform-surefire-provider</artifactId>
 						<groupId>org.junit.platform</groupId>
-						<version>1.1.0</version>
+						<version>${junit-platform-surefire-provider.version}</version>
 					</dependency>
 					<dependency>
 						<artifactId>junit-jupiter-engine</artifactId>
 						<groupId>org.junit.jupiter</groupId>
-						<version>5.5.2</version>
+						<version>${junit-jupiter-engine.version}</version>
 					</dependency>
 				</dependencies>
 				<groupId>org.apache.maven.plugins</groupId>
-				<version>2.19.1</version>
+				<version>${maven-surefire-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
