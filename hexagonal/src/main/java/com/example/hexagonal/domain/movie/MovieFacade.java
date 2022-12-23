@@ -1,5 +1,6 @@
 package com.example.hexagonal.domain.movie;
 
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -25,7 +26,7 @@ public class MovieFacade {
 		.orElseThrow(() -> new MovieNotFoundException(id));
   }
 
-  public Long count(){
+  public Long count() {
 	return movieStorage.count();
   }
 }
