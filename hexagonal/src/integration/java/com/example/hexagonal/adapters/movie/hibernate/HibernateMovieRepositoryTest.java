@@ -18,6 +18,9 @@ class HibernateMovieRepositoryTest extends AbstractIntegrationTest {
     jdbc.execute(
         "insert into movie (id, title, author, category) values (1000000, 'smierc w wenecji', 'andrzej', 'COMEDY');");
 	List<MovieDTO> all = hibernateMovieRepository.findAll();
+
+    // clean up
+    jdbc.execute("delete from movie");
   }
 
 }

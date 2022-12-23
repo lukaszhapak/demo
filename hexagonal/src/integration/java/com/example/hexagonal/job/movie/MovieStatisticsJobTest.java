@@ -18,12 +18,16 @@ class MovieStatisticsJobTest extends AbstractIntegrationTest {
   @DisplayName("should calculate statistics")
   void shouldCalculateStatistics() {
 	// given
-	jdbc.execute("insert into movie (id, title, author) values (1000000, 'smierc w wenecji', 'andrzej');");
+	jdbc.execute(
+		"insert into movie (id, title, author, category) values (1000000, 'smierc w wenecji', 'andrzej', 'COMEDY');");
 
 	// when
 	movieStatisticsJob.calculateStatistics();
 
 	// then
+
+	// clean up
+	jdbc.execute("delete from movie");
   }
 
 }

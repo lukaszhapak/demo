@@ -26,7 +26,6 @@ public class AbstractIntegrationTest {
 		.port(port)
 		.log().all()
 		.when()
-		.log().all()
 		.get(url);
   }
 
@@ -37,7 +36,6 @@ public class AbstractIntegrationTest {
 		.contentType(JSON)
 		.log().all()
 		.when()
-		.log().all()
 		.post(url);
   }
 
