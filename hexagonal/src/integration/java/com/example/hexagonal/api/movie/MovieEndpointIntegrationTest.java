@@ -66,8 +66,7 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	assertThat(movieRequest).usingRecursiveComparison().isEqualTo(movieResponse);
 	assertThat(movieResponse.getId()).isNotNull();
 
-	Movie movieEntity = jdbc.queryForObject("select * from movie where id = 1",
-		new BeanPropertyRowMapper<>(Movie.class));
+	Movie movieEntity = fetchMovieEntity();
 	assertThat(movieRequest).usingRecursiveComparison().ignoringActualNullFields()
 		.isEqualTo(movieEntity);
 	assertThat(movieEntity.getId()).isNotNull();
@@ -97,5 +96,10 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	movieRequest.setAuthor("andrzej");
 	movieRequest.setCategory(COMEDY);
 	return movieRequest;
+  }
+
+  private Movie fetchMovieEntity() {
+	return jdbc.queryForObject("select * from movie where id = 1",
+		new BeanPropertyRowMapper<>(Movie.class));
   }
 }
