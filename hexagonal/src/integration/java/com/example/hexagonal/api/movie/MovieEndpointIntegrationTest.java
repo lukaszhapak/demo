@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.example.hexagonal.AbstractIntegrationTest;
 import com.example.hexagonal.domain.movie.Movie;
 import io.restassured.response.Response;
+import java.util.List;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -66,10 +67,11 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	assertThat(movieRequest).usingRecursiveComparison().isEqualTo(movieResponse);
 	assertThat(movieResponse.getId()).isNotNull();
 
-	Movie movieEntity = fetchMovieEntity();
+	List<Movie> movieEntities = fetchMovieEntities();
+	assertThat(movieEntities.size()).isEqualTo(1);
 	assertThat(movieRequest).usingRecursiveComparison().ignoringActualNullFields()
-		.isEqualTo(movieEntity);
-	assertThat(movieEntity.getId()).isNotNull();
+		.isEqualTo(movieEntities.get(0));
+	assertThat(movieEntities.get(0).getId()).isNotNull();
 
 	// clean up
 	jdbc.execute("delete from movie");
@@ -98,8 +100,8 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	return movieRequest;
   }
 
-  private Movie fetchMovieEntity() {
-	return jdbc.queryForObject("select * from movie where id = 1",
+  private List<Movie> fetchMovieEntities() {
+	return jdbc.query("select * from movie",
 		new BeanPropertyRowMapper<>(Movie.class));
   }
 }
