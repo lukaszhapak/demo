@@ -63,8 +63,7 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
 	MovieResponse movieResponse = response.getBody().as(MovieResponse.class);
-	assertThat(movieRequest).usingRecursiveComparison().ignoringActualNullFields()
-		.isEqualTo(movieResponse);
+	assertThat(movieRequest).usingRecursiveComparison().isEqualTo(movieResponse);
 	assertThat(movieResponse.getId()).isNotNull();
 
 	Movie movieEntity = jdbc.queryForObject("select * from movie where id = 1",
