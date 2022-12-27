@@ -21,7 +21,7 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
   void shouldGetSMovieById() {
 	// given
 	jdbc.execute(
-		"insert into movie (id, title, author, category) values (1000000, 'smierc w wenecji', 'andrzej', 'COMEDY');");
+		"INSERT INTO MOVIE (ID, TITLE, AUTHOR, CATEGORY) VALUES (1000000, 'smierc w wenecji', 'andrzej', 'COMEDY');");
 	long id = 1000000L;
 
 	// when
@@ -35,7 +35,7 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 		.isEqualTo(getMovieRequest());
 
 	// clean up
-	jdbc.execute("delete from movie");
+	jdbc.execute("DELETE FROM MOVIE");
   }
 
   @Test
@@ -74,7 +74,7 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	assertThat(movieEntities.get(0).getId()).isNotNull();
 
 	// clean up
-	jdbc.execute("delete from movie");
+	jdbc.execute("DELETE FROM MOVIE");
   }
 
   @Test
@@ -101,7 +101,7 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
   }
 
   private List<Movie> fetchMovieEntities() {
-	return jdbc.query("select * from movie",
+	return jdbc.query("SELECT * FROM MOVIE",
 		new BeanPropertyRowMapper<>(Movie.class));
   }
 }
