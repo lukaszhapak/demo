@@ -3,36 +3,24 @@ package com.example.hexagonal.domain.movie;
 public class MovieValidator {
 
   public void validate(Movie movie) {
-	validateTitle(movie.getTitle());
-	validateAuthor(movie.getAuthor());
+	validateString(movie.getTitle(), 2, 64, "Title");
+	validateString(movie.getAuthor(), 2, 64, "Author");
 	validateCategory(movie.getCategory());
   }
 
-  private void validateTitle(String title) {
-	if (title == null) {
-	  throw new MovieValidationException("title cannot be null");
+  private void validateString(String string, Integer min, Integer max, String name) {
+	if (string == null) {
+	  throw new MovieValidationException(name + " cannot be null");
 	}
-	if (title.length() < 2) {
-	  throw new MovieValidationException("title length cannot be less than 2 characters");
+	if (string.length() < min) {
+	  throw new MovieValidationException(name + " length cannot be less than 2 characters");
 	}
-	if (title.length() > 64) {
-	  throw new MovieValidationException("title length cannot be more than 64 characters");
-	}
-  }
-
-  private void validateAuthor(String author) {
-	if (author == null) {
-	  throw new MovieValidationException("author cannot be null");
-	}
-	if (author.length() < 2) {
-	  throw new MovieValidationException("author length cannot be less than 2 characters");
-	}
-	if (author.length() > 64) {
-	  throw new MovieValidationException("author length cannot be more than 64 characters");
+	if (string.length() > max) {
+	  throw new MovieValidationException(name + " length cannot be more than 64 characters");
 	}
   }
 
-  private void validateCategory(MovieCategory category){
+  private void validateCategory(MovieCategory category) {
 	if (category == null) {
 	  throw new MovieValidationException("category cannot be null");
 	}
