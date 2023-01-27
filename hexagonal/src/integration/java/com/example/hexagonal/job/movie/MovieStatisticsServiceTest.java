@@ -30,7 +30,6 @@ class MovieStatisticsServiceTest extends AbstractIntegrationTest {
 	assertThat(count).isEqualTo(1L);
 
 	// clean up
-	jdbc.execute("delete from movie");
+	jdbc.execute("DELETE FROM MOVIE");
   }
-
 }

@@ -99,9 +99,4 @@ class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 	movieRequest.setCategory(COMEDY);
 	return movieRequest;
   }
-
-  private List<Movie> fetchMovieEntities() {
-	return jdbc.query("SELECT * FROM MOVIE",
-		new BeanPropertyRowMapper<>(Movie.class));
-  }
 }

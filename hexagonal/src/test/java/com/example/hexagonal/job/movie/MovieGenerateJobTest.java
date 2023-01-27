@@ -7,19 +7,19 @@ import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class MovieStatisticsJobTest {
+class MovieGenerateJobTest {
 
-  private final MovieStatisticsService movieStatisticsService = mock(MovieStatisticsService.class);
-  private final MovieStatisticsJob movieStatisticsJob = new MovieStatisticsJob(
-	  movieStatisticsService);
+  private final MovieGenerateService movieGenerateService = mock(MovieGenerateService.class);
+  private final MovieGenerateJob movieGenerateJob = new MovieGenerateJob(
+	  movieGenerateService);
 
   @Test
   @DisplayName("should invoke movie statistics service")
   void shouldInvokeMovieStatisticsService() {
 	// when
-	movieStatisticsJob.calculateStatistics();
+	movieGenerateJob.generateMovie();
 
 	// then
-	verify(movieStatisticsService, times(1)).count();
+	verify(movieGenerateService, times(1)).generateMovie();
   }
 }

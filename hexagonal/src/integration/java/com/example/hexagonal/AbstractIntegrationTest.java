@@ -4,10 +4,13 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
+import com.example.hexagonal.domain.movie.Movie;
 import io.restassured.response.Response;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -37,6 +40,11 @@ public class AbstractIntegrationTest {
 		.log().all()
 		.when()
 		.post(url);
+  }
+
+  protected List<Movie> fetchMovieEntities() {
+	return jdbc.query("SELECT * FROM MOVIE",
+		new BeanPropertyRowMapper<>(Movie.class));
   }
 
 }
