@@ -46,5 +46,4 @@ public class AbstractIntegrationTest {
 	return jdbc.query("SELECT * FROM MOVIE",
 		new BeanPropertyRowMapper<>(Movie.class));
   }
-
 }

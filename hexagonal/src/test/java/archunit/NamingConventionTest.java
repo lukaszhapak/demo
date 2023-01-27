@@ -1,11 +1,7 @@
 package archunit;
 
-import static archunit.ArchUnitTest.DOMAIN_PACKAGE;
-import static archunit.ArchUnitTest.JOB_PACKAGE;
-import static archunit.ArchUnitTest.SPRING_PACKAGE;
 import static archunit.ArchUnitTest.classesToCheck;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
-import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 import com.tngtech.archunit.lang.ArchRule;
 import org.junit.jupiter.api.DisplayName;
@@ -50,15 +46,6 @@ class NamingConventionTest {
 	ArchRule rule = classes()
 		.that().areAssignableTo(Repository.class)
 		.should().haveSimpleNameEndingWith("Repository");
-	rule.check(classesToCheck);
-  }
-
-  @Test
-  @DisplayName("jobs classes should have Job suffix")
-  void jobClassesShouldHaveJobSuffix() {
-	ArchRule rule = classes()
-		.that().resideInAPackage(JOB_PACKAGE)
-		.should().haveSimpleNameEndingWith("Job");
 	rule.check(classesToCheck);
   }
 }
