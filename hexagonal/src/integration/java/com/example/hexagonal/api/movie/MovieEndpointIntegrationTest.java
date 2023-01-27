@@ -10,7 +10,6 @@ import java.util.List;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 class MovieEndpointIntegrationTest extends AbstractIntegrationTest {
 
