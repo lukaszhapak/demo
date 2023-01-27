@@ -15,6 +15,7 @@ public class MovieFacade {
 	log.debug("Create movie Movie={}", movie);
 	movieValidator.validate(movie);
 	Movie response = movieStorage.create(movie);
+	log.trace("Movie created Movie={}", response);
 	movieCreatedEventPublisher.send(MovieCreatedEvent.of(response));
 	return response;
   }
