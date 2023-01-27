@@ -18,7 +18,7 @@ class MovieGenerateJob {
   private final Random random = new Random();
 
   @Scheduled(cron = "${movie.generate.cron}")
-  void calculateStatistics() {
+  void generateMovie() {
 	Movie movie = getMovie();
 	log.trace("Generating Movie={}", movie);
 	movieFacade.createMovie(movie);
