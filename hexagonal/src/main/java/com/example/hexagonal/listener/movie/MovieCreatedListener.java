@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(
 	value="listener.movie.created.enabled",
 	havingValue = "true")
-class MovieCreatedListener {
+public class MovieCreatedListener {
 
   @EventListener
   public void handleMovieCreated(MovieCreatedEvent event) {

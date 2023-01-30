@@ -5,10 +5,12 @@ import static io.restassured.http.ContentType.JSON;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import com.example.hexagonal.domain.movie.Movie;
+import com.example.hexagonal.listener.movie.MovieCreatedListener;
 import io.restassured.response.Response;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -17,6 +19,9 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ActiveProfiles("test")
 public class AbstractIntegrationTest {
+
+  @MockBean
+  protected MovieCreatedListener movieCreatedListener;
 
   @Autowired
   protected JdbcOperations jdbc;

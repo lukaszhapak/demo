@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -66,6 +68,7 @@ class MovieFacadeTest {
 
 	// then
 	assertThat(movie).usingRecursiveComparison().isEqualTo(movieResponse);
+	verify(movieCreatedEventPublisher, times(1)).send(any(MovieCreatedEvent.class));
   }
 
   @ParameterizedTest
