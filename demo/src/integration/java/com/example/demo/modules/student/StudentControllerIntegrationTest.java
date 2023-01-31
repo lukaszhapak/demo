@@ -36,6 +36,19 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   }
 
   @Test
+  @DisplayName("should get not found status when student do not exists")
+  void shouldGetNotFoundStatusWhenStudentDoNotExists() {
+	// given
+	long id = 1000000L;
+
+	// when
+	Response response = getHttpCall(URL + id);
+
+	//then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+  }
+
+  @Test
   @DisplayName("should save student")
   void shouldSaveStudent() {
 	// given
