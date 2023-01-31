@@ -6,31 +6,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.AbstractIntegrationTest;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
+  public static final String URL = "/api/student/";
+
   @Test
   @Disabled
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	Long id = 100L;
+	long id = 100L;
 
 	// when
-	Student student = given()
-		.log().all()
-		.port(port)
-		.expect()
-		.statusCode(200)
-		.when()
-		.get("/api/student/" + id)
-		.getBody().as(Student.class);
+	Student response = getHttpCall(URL + id).as(Student.class);
 
 	//then
-	assertThat(student).usingRecursiveComparison().isEqualTo(getStudent());
+	assertThat(response).usingRecursiveComparison().isEqualTo(getStudent());
   }
 
   @Test
@@ -40,16 +37,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	Student student = getStudent();
 
 	// when
-	Student response = given()
-		.log().all()
-		.port(port)
-		.body(student)
-		.contentType(ContentType.JSON)
-		.expect()
-		.statusCode(200)
-		.when()
-		.post("/api/student/")
-		.getBody().as(Student.class);
+	Student response = postHttpCall(student, URL).as(Student.class);
 
 	// then
 	assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(student);
@@ -63,18 +51,10 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	student.setAge(122);
 
 	// when
-	String response = given()
-		.log().all()
-		.port(port)
-		.body(student)
-		.contentType(ContentType.JSON)
-		.expect()
-		.statusCode(400)
-		.when()
-		.post("/api/student/")
-		.getBody().asString();
+	Response response = postHttpCall(student, URL);
 
 	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
   }
 
   @Test
@@ -85,15 +65,9 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	student.setAge(12);
 
 	// when
-	String response = given()
-		.log().all()
-		.port(port)
-		.body(student)
-		.contentType(ContentType.JSON)
-		.expect()
-		.statusCode(400)
-		.when()
-		.post("/api/student/")
-		.getBody().asString();
+	Response response = postHttpCall(student, URL);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
   }
 }
