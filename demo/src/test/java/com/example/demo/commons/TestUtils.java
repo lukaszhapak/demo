@@ -5,10 +5,10 @@ import com.example.demo.student.Student;
 public abstract class TestUtils {
 
   public static Student getStudent() {
-	Student student = new Student();
-	student.setId(1L);
-	student.setName("John");
-	student.setAge(22);
-	return student;
+	Student studentEntity = new Student();
+	studentEntity.setId(1L);
+	studentEntity.setName("John");
+	studentEntity.setAge(22);
+	return studentEntity;
   }
 }

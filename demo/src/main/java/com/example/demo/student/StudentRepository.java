@@ -3,11 +3,11 @@ package com.example.demo.student;
 import java.util.Optional;
 import org.springframework.data.repository.Repository;
 
-public interface StudentRepository extends Repository<Student, Long> {
+public interface StudentRepository extends Repository<StudentEntity, Long> {
 
-  Optional<Student> findStudentById(Long id);
+  Optional<StudentEntity> findStudentById(Long id);
 
-  Student save(Student student);
+  StudentEntity save(StudentEntity studentEntity);
 
   Long count();
 }

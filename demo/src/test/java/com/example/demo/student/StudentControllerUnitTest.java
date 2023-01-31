@@ -22,10 +22,10 @@ class StudentControllerUnitTest {
 	Long id = 10000L;
 
 	// when
-	Student student = studentController.getStudentById(id);
+	Student response = studentController.getStudentById(id);
 
 	// then
-	assertThat(student).usingRecursiveComparison().isEqualTo(getStudent());
+	assertThat(response).usingRecursiveComparison().isEqualTo(getStudent());
   }
 
   @Test

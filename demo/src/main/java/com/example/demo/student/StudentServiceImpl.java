@@ -12,12 +12,13 @@ class StudentServiceImpl implements StudentService {
 
   @Override
   public Student getStudentById(Long id) {
-	return studentRepository.findStudentById(id).orElseThrow(RuntimeException::new);
+	return Student.of(studentRepository.findStudentById(id).orElseThrow(RuntimeException::new));
   }
 
   @Override
   public Student saveStudent(Student student) {
 	studentValidator.validate(student);
-	return studentRepository.save(student);
+	StudentEntity studentEntity = StudentEntity.of(student);
+	return Student.of(studentRepository.save(studentEntity));
   }
 }

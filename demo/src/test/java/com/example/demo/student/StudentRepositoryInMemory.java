@@ -5,20 +5,21 @@ import static com.example.demo.commons.TestUtils.getStudent;
 import com.example.demo.commons.AbstractRepositoryInMemory;
 import java.util.Optional;
 
-class StudentRepositoryInMemory extends AbstractRepositoryInMemory<Student> implements StudentRepository{
+class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity> implements
+	StudentRepository {
 
   public StudentRepositoryInMemory() {
-	map.put(10000L, getStudent());
+	map.put(10000L, StudentEntity.of(getStudent()));
   }
 
   @Override
-  public Optional<Student> findStudentById(Long id) {
+  public Optional<StudentEntity> findStudentById(Long id) {
 	return super.findById(id);
   }
 
   @Override
-  public Student save(Student student) {
-	return super.save(student);
+  public StudentEntity save(StudentEntity studentEntity) {
+	return super.save(studentEntity);
   }
 
   @Override

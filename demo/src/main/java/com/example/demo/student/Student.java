@@ -1,15 +1,21 @@
 package com.example.demo.student;
 
-import com.example.demo.commons.AbstractEntity;
-import javax.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-public class Student extends AbstractEntity {
+public class Student {
 
+  private Long id;
   private String name;
   private Integer age;
+
+  public static Student of(StudentEntity studentEntity) {
+	Student student = new Student();
+	student.setId(studentEntity.getId());
+	student.setName(studentEntity.getName());
+	student.setAge(studentEntity.getAge());
+  	return student;
+  }
 }

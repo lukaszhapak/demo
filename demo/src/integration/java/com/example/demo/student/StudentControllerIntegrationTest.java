@@ -22,7 +22,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	long id = 100L;
 
 	// when
-	Student response = getHttpCall(URL + id).as(Student.class);
+	StudentEntity response = getHttpCall(URL + id).as(StudentEntity.class);
 
 	//then
 	assertThat(response).usingRecursiveComparison().isEqualTo(getStudent());
@@ -35,10 +35,11 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	Student student = getStudent();
 
 	// when
-	Student response = postHttpCall(student, URL).as(Student.class);
+	StudentEntity response = postHttpCall(student, URL).as(StudentEntity.class);
 
 	// then
-	assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(student);
+	assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(
+		student);
   }
 
   @Test
