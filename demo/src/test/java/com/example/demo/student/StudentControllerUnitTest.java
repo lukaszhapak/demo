@@ -52,7 +52,7 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(RuntimeException.class);
+	assertThat(thrown).isInstanceOf(StudentValidationException.class);
   }
 
   @Test
@@ -66,6 +66,34 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(RuntimeException.class);
+	assertThat(thrown).isInstanceOf(StudentValidationException.class);
+  }
+
+  @Test
+  @DisplayName("should throw exception when student name is too short")
+  void shouldThrowExceptionWhenStudentNameIsTooShort() {
+	// given
+	Student student = getStudent();
+	student.setName("a");
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+
+	// then
+	assertThat(thrown).isInstanceOf(StudentValidationException.class);
+  }
+
+  @Test
+  @DisplayName("should throw exception when student name is too long")
+  void shouldThrowExceptionWhenStudentNameIsTooLong() {
+	// given
+	Student student = getStudent();
+	student.setName("65characterslongnameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+
+	// then
+	assertThat(thrown).isInstanceOf(StudentValidationException.class);
   }
 }
