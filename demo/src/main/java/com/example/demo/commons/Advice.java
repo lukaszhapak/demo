@@ -1,4 +1,4 @@
-package com.example.demo.student;
+package com.example.demo.commons;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Log4j2
 @RestControllerAdvice
-class StudentAdvice {
+class Advice {
 
   @ExceptionHandler(NotFoundException.class)
   ResponseEntity<String> handleNotFound(Exception exception) {
