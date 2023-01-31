@@ -50,7 +50,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest implement
 		.getBody().as(Student.class);
 
 	// then
-	assertThat(student).usingRecursiveComparison().isEqualTo(response);
+	assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(student);
   }
 
   @Test

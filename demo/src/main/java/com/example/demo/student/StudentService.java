@@ -11,11 +11,11 @@ class StudentService {
   private final StudentValidator studentValidator;
 
   Student getStudentById (Long id) {
-    return studentRepository.getStudentById(id);
+    return studentRepository.findStudentById(id);
   }
 
   public Student saveStudent(Student student) {
     studentValidator.validate(student);
-    return studentRepository.saveStudent(student);
+    return studentRepository.save(student);
   }
 }

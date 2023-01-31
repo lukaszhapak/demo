@@ -1,10 +1,12 @@
 package com.example.demo.student;
 
-public interface StudentRepository{
+import org.springframework.data.repository.Repository;
 
-  Student getStudentById(Long id);
+public interface StudentRepository extends Repository<Student, Long> {
 
-  Student saveStudent(Student student);
+  Student findStudentById(Long id);
+
+  Student save(Student student);
 
   Long count();
 }
