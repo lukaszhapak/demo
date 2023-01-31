@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StudentControllerUnitTest {
@@ -64,9 +65,10 @@ class StudentControllerUnitTest {
   }
 
   @ParameterizedTest
+  @NullSource
   @ValueSource(ints = {1, 3, 5, -3, 15, 19, 101, Integer.MAX_VALUE})
   @DisplayName("should throw exception when student age is invalid")
-  void shouldThrowExceptionWhenStudentAgeIsInvalid(int age) {
+  void shouldThrowExceptionWhenStudentAgeIsInvalid(Integer age) {
 	// given
 	Student student = getStudent();
 	student.setAge(age);

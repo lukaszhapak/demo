@@ -1,14 +1,16 @@
 package com.example.demo.commons;
 
 import com.example.demo.modules.student.Student;
+import java.util.List;
 
 public abstract class TestUtils {
 
   public static Student getStudent() {
-	Student studentEntity = new Student();
-	studentEntity.setId(1L);
-	studentEntity.setName("John");
-	studentEntity.setAge(22);
-	return studentEntity;
+	Student student = new Student();
+	student.setId(1L);
+	student.setName("John");
+	student.setAge(22);
+	student.setGrades(List.of(2, 5, 4, 3, 3));
+	return student;
   }
 }
