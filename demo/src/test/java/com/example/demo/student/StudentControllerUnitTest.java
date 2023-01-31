@@ -3,9 +3,16 @@ package com.example.demo.student;
 import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class StudentControllerUnitTest {
 
@@ -56,12 +63,13 @@ class StudentControllerUnitTest {
 	assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
-  @Test
-  @DisplayName("should throw exception when student is too young")
-  void shouldThrowExceptionWhenStudentIsTooYoung() {
+  @ParameterizedTest
+  @ValueSource(ints = {1, 3, 5, -3, 15, 19, 101, Integer.MAX_VALUE})
+  @DisplayName("should throw exception when student age is invalid")
+  void shouldThrowExceptionWhenStudentAgeIsInvalid(int age) {
 	// given
 	Student student = getStudent();
-	student.setAge(12);
+	student.setAge(age);
 
 	// when
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
@@ -70,12 +78,14 @@ class StudentControllerUnitTest {
 	assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
-  @Test
-  @DisplayName("should throw exception when student name is too short")
-  void shouldThrowExceptionWhenStudentNameIsTooShort() {
+  @ParameterizedTest
+  @NullAndEmptySource
+  @MethodSource("stringSource")
+  @DisplayName("should throw exception when student name is invalid")
+  void shouldThrowExceptionWhenStudentNameIsInvalid(String name) {
 	// given
 	Student student = getStudent();
-	student.setName("a");
+	student.setName(name);
 
 	// when
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
@@ -84,17 +94,10 @@ class StudentControllerUnitTest {
 	assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
-  @Test
-  @DisplayName("should throw exception when student name is too long")
-  void shouldThrowExceptionWhenStudentNameIsTooLong() {
-	// given
-	Student student = getStudent();
-	student.setName("65characterslongnameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-
-	// when
-	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
-
-	// then
-	assertThat(thrown).isInstanceOf(RuntimeException.class);
+  private static Stream<Arguments> stringSource() {
+	return Stream.of(
+		arguments("a"),
+		arguments("more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+	);
   }
 }
