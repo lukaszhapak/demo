@@ -1,7 +1,5 @@
-package com.example.demo.commons;
+package com.example.demo.exception;
 
-import com.example.demo.exception.NotFoundException;
-import com.example.demo.exception.ValidationException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
