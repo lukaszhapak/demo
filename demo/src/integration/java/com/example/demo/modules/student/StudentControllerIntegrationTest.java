@@ -4,6 +4,8 @@ import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,11 +22,14 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	long id = 1000000L;
 
 	// when
-	StudentEntity response = getHttpCall(URL + id).as(StudentEntity.class);
+	Response response = getHttpCall(URL + id);
+	Student studentResponse = response.as(Student.class);
 
 	//then
-	assertThat(response.getId()).isEqualTo(id);
-	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(getStudent());
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+	assertThat(studentResponse.getId()).isEqualTo(id);
+	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id")
+		.isEqualTo(getStudent());
 
 	// clean up
 	jdbc.execute("DELETE FROM STUDENT");
@@ -37,11 +42,13 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	Student student = getStudent();
 
 	// when
-	StudentEntity response = postHttpCall(student, URL).as(StudentEntity.class);
+	Response response = postHttpCall(student, URL);
+	Student studentResponse = response.as(Student.class);
 
 	// then
-	assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(
-		student);
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+	assertThat(studentResponse.getId()).isNotNull();
+	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
 
 	// clean up
 	jdbc.execute("DELETE FROM STUDENT");
