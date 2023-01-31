@@ -1,8 +1,9 @@
 package com.example.demo.student;
 
-import static com.example.demo.student.StudentTestUtils.getStudent;
+import static com.example.demo.TestUtils.getStudent;
 
 import com.example.demo.AbstractRepositoryInMemory;
+import java.util.Optional;
 
 class StudentRepositoryInMemory extends AbstractRepositoryInMemory<Student> implements StudentRepository{
 
@@ -11,8 +12,8 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<Student> impl
   }
 
   @Override
-  public Student findStudentById(Long id) {
-	return findById(id);
+  public Optional<Student> findStudentById(Long id) {
+	return super.findById(id);
   }
 
   @Override

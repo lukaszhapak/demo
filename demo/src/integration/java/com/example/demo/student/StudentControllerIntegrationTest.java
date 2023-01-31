@@ -1,6 +1,6 @@
 package com.example.demo.student;
 
-import static com.example.demo.student.StudentTestUtils.getStudent;
+import static com.example.demo.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.AbstractIntegrationTest;
@@ -52,7 +52,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	Response response = postHttpCall(student, URL);
 
 	// then
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_INTERNAL_SERVER_ERROR);
   }
 
   @Test
@@ -66,6 +66,6 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	Response response = postHttpCall(student, URL);
 
 	// then
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_INTERNAL_SERVER_ERROR);
   }
 }

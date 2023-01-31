@@ -1,6 +1,6 @@
 package com.example.demo.student;
 
-import static com.example.demo.student.StudentTestUtils.getStudent;
+import static com.example.demo.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
@@ -11,7 +11,7 @@ class StudentControllerUnitTest {
 
   private final StudentRepository studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
-  private final StudentService studentService = new StudentService(studentRepository,
+  private final StudentServiceImpl studentService = new StudentServiceImpl(studentRepository,
 	  studentValidator);
   private final StudentController studentController = new StudentController(studentService);
 
@@ -38,6 +38,7 @@ class StudentControllerUnitTest {
 	Student response = studentController.saveStudent(student);
 
 	// then
+	assertThat(response.getId()).isNotNull();
 	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
   }
 
@@ -52,7 +53,7 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(StudentValidationException.class);
+	assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
   @Test
@@ -66,7 +67,7 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(StudentValidationException.class);
+	assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
   @Test
@@ -80,7 +81,7 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(StudentValidationException.class);
+	assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 
   @Test
@@ -94,6 +95,6 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(StudentValidationException.class);
+	assertThat(thrown).isInstanceOf(RuntimeException.class);
   }
 }

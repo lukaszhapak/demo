@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.commons.AbstractEntity;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import org.springframework.data.repository.Repository;
 
 public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> implements
@@ -17,8 +18,8 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
 	return entity;
   }
 
-  protected T findById(Long id) {
-	return map.get(id);
+  protected Optional<T> findById(Long id) {
+	return Optional.ofNullable(map.get(id));
   }
 
   protected Long count() {
