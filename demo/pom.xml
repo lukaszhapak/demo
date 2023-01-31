@@ -16,7 +16,7 @@
 	<description>demo</description>
 	<properties>
 		<java.version>11</java.version>
-		<spring-boot.version>2.6.0</spring-boot.version>
+		<spring-boot.version>2.6.6</spring-boot.version>
 		<lombok.version>1.18.24</lombok.version>
 		<h2.version>2.1.214</h2.version>
 		<rest-assured.version>4.2.0</rest-assured.version>
