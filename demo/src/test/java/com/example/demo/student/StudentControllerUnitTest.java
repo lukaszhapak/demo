@@ -1,6 +1,6 @@
 package com.example.demo.student;
 
-import static com.example.demo.TestUtils.getStudent;
+import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 

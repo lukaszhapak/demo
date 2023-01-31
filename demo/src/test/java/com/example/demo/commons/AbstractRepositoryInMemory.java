@@ -1,6 +1,5 @@
-package com.example.demo;
+package com.example.demo.commons;
 
-import com.example.demo.commons.AbstractEntity;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;

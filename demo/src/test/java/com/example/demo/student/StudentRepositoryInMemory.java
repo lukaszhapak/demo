@@ -1,8 +1,8 @@
 package com.example.demo.student;
 
-import static com.example.demo.TestUtils.getStudent;
+import static com.example.demo.commons.TestUtils.getStudent;
 
-import com.example.demo.AbstractRepositoryInMemory;
+import com.example.demo.commons.AbstractRepositoryInMemory;
 import java.util.Optional;
 
 class StudentRepositoryInMemory extends AbstractRepositoryInMemory<Student> implements StudentRepository{

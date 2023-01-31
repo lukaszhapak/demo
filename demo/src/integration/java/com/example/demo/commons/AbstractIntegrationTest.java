@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.commons;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;

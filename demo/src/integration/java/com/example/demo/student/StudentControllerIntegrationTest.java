@@ -1,9 +1,9 @@
 package com.example.demo.student;
 
-import static com.example.demo.TestUtils.getStudent;
+import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractIntegrationTest;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Disabled;
