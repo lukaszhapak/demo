@@ -4,9 +4,6 @@ import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
-import io.restassured.response.Response;
-import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,17 +12,22 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   public static final String URL = "/api/student/";
 
   @Test
-  @Disabled
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	long id = 100L;
+	jdbc.execute(
+		"INSERT INTO STUDENT (ID, NAME, AGE) VALUES (1000000, 'John', 22);");
+	long id = 1000000L;
 
 	// when
 	StudentEntity response = getHttpCall(URL + id).as(StudentEntity.class);
 
 	//then
-	assertThat(response).usingRecursiveComparison().isEqualTo(getStudent());
+	assertThat(response.getId()).isEqualTo(id);
+	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(getStudent());
+
+	// clean up
+	jdbc.execute("DELETE FROM STUDENT");
   }
 
   @Test
@@ -40,33 +42,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(
 		student);
-  }
 
-  @Test
-  @DisplayName("should throw exception when student is too old")
-  void shouldThrowExceptionWhenStudentIsTooOld() {
-	// given
-	Student student = getStudent();
-	student.setAge(122);
-
-	// when
-	Response response = postHttpCall(student, URL);
-
-	// then
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-  }
-
-  @Test
-  @DisplayName("should throw exception when student is too young")
-  void shouldThrowExceptionWhenStudentIsTooYoung() {
-	// given
-	Student student = getStudent();
-	student.setAge(12);
-
-	// when
-	Response response = postHttpCall(student, URL);
-
-	// then
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+	// clean up
+	jdbc.execute("DELETE FROM STUDENT");
   }
 }

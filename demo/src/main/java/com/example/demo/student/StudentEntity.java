@@ -2,13 +2,15 @@ package com.example.demo.student;
 
 import com.example.demo.commons.AbstractEntity;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public class StudentEntity extends AbstractEntity {
+@Table(name = "STUDENT")
+class StudentEntity extends AbstractEntity {
 
   private String name;
   private Integer age;
