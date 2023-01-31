@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StudentControllerUnitTest {
@@ -80,7 +81,7 @@ class StudentControllerUnitTest {
 
   @ParameterizedTest
   @NullAndEmptySource
-  @MethodSource("stringSource")
+  @ValueSource(strings = {"a", "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
   @DisplayName("should throw exception when student name is invalid")
   void shouldThrowExceptionWhenStudentNameIsInvalid(String name) {
 	// given
@@ -92,12 +93,5 @@ class StudentControllerUnitTest {
 
 	// then
 	assertThat(thrown).isInstanceOf(RuntimeException.class);
-  }
-
-  private static Stream<Arguments> stringSource() {
-	return Stream.of(
-		arguments("a"),
-		arguments("more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-	);
   }
 }
