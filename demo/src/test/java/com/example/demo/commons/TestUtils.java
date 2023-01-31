@@ -1,6 +1,6 @@
 package com.example.demo.commons;
 
-import com.example.demo.student.Student;
+import com.example.demo.modules.student.Student;
 
 public abstract class TestUtils {
 

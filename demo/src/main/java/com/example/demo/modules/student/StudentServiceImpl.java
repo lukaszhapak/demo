@@ -1,4 +1,4 @@
-package com.example.demo.student;
+package com.example.demo.modules.student;
 
 import com.example.demo.exception.NotFoundException;
 import java.text.MessageFormat;

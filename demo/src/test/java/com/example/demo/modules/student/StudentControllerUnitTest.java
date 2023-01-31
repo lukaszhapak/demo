@@ -1,4 +1,4 @@
-package com.example.demo.student;
+package com.example.demo.modules.student;
 
 import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;

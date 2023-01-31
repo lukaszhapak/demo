@@ -1,7 +1,6 @@
-package com.example.demo.student;
+package com.example.demo.modules.student;
 
 import com.example.demo.commons.AbstractValidator;
-import java.text.MessageFormat;
 import org.springframework.stereotype.Component;
 
 @Component
