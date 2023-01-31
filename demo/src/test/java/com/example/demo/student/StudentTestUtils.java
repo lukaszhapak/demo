@@ -1,8 +1,8 @@
 package com.example.demo.student;
 
-public interface StudentControllerTest {
+abstract class StudentTestUtils {
 
-  default Student getStudent() {
+  static Student getStudent() {
 	Student student = new Student();
 	student.setId(1L);
 	student.setName("John");

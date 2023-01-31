@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 class StudentValidationException extends RuntimeException{
 
-  public StudentValidationException(String message) {
+  StudentValidationException(String message) {
 	super(message);
   }
 }

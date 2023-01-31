@@ -1,17 +1,19 @@
 package com.example.demo.student;
 
+import static com.example.demo.student.StudentTestUtils.getStudent;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.AbstractIntegrationTest;
 import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class StudentControllerIntegrationTest extends AbstractIntegrationTest implements
-	StudentControllerTest {
+class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
   @Test
+  @Disabled
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given

@@ -10,12 +10,12 @@ class StudentService {
   private final StudentRepository studentRepository;
   private final StudentValidator studentValidator;
 
-  Student getStudentById (Long id) {
-    return studentRepository.findStudentById(id);
+  Student getStudentById(Long id) {
+	return studentRepository.findStudentById(id);
   }
 
-  public Student saveStudent(Student student) {
-    studentValidator.validate(student);
-    return studentRepository.save(student);
+  Student saveStudent(Student student) {
+	studentValidator.validate(student);
+	return studentRepository.save(student);
   }
 }

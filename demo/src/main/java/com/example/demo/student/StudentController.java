@@ -14,12 +14,12 @@ class StudentController {
   private final StudentService studentService;
 
   @GetMapping("/api/student/{id}")
-  public Student getStudentById(@PathVariable Long id) {
+  Student getStudentById(@PathVariable Long id) {
 	return studentService.getStudentById(id);
   }
 
   @PostMapping("/api/student")
-  public Student saveStudent(@RequestBody Student student) {
+  Student saveStudent(@RequestBody Student student) {
 	return studentService.saveStudent(student);
   }
 }
