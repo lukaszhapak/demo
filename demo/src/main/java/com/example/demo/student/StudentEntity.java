@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-class StudentEntity extends AbstractEntity {
+public class StudentEntity extends AbstractEntity {
 
   private String name;
   private Integer age;
