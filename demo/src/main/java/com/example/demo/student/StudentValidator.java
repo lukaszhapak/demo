@@ -1,22 +1,14 @@
 package com.example.demo.student;
 
+import com.example.demo.commons.AbstractValidator;
+import java.text.MessageFormat;
 import org.springframework.stereotype.Component;
 
 @Component
-class StudentValidator {
+class StudentValidator extends AbstractValidator {
 
   void validate(Student student) {
-	if (student.getAge() > 100) {
-	  throw new RuntimeException("Student too old");
-	}
-	if (student.getAge() < 20) {
-	  throw new RuntimeException("Student too young");
-	}
-	if (student.getName().length() > 64) {
-	  throw new RuntimeException("Name too long");
-	}
-	if (student.getName().length() < 2) {
-	  throw new RuntimeException("Name too short");
-	}
+	validateInteger(student.getAge(), 20, 100, "age");
+	validateString(student.getName(), 2, 64, "Name");
   }
 }

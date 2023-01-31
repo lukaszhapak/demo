@@ -4,6 +4,8 @@ import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
+import com.example.demo.exception.NotFoundException;
+import com.example.demo.exception.ValidationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -11,6 +13,9 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class StudentControllerUnitTest {
+
+  private static final long NON_EXISTING_STUDENT_ID = 30000L;
+  private static final long EXISTING_STUDENT_ID = 10000L;
 
   private final StudentRepository studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
@@ -22,13 +27,26 @@ class StudentControllerUnitTest {
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	Long id = 10000L;
+	Long id = EXISTING_STUDENT_ID;
 
 	// when
 	Student response = studentController.getStudentById(id);
 
 	// then
 	assertThat(response).usingRecursiveComparison().isEqualTo(getStudent());
+  }
+
+  @Test
+  @DisplayName("should throw exception when student is not found")
+  void shouldThrowExceptionWhenStudentIsNotFound() {
+	// given
+	Long id = NON_EXISTING_STUDENT_ID;
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.getStudentById(id));
+
+	// then
+	assertThat(thrown).isInstanceOf(NotFoundException.class);
   }
 
   @Test
@@ -45,20 +63,6 @@ class StudentControllerUnitTest {
 	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
   }
 
-  @Test
-  @DisplayName("should throw exception when student is too old")
-  void shouldThrowExceptionWhenStudentIsTooOld() {
-	// given
-	Student student = getStudent();
-	student.setAge(122);
-
-	// when
-	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
-
-	// then
-	assertThat(thrown).isInstanceOf(RuntimeException.class);
-  }
-
   @ParameterizedTest
   @ValueSource(ints = {1, 3, 5, -3, 15, 19, 101, Integer.MAX_VALUE})
   @DisplayName("should throw exception when student age is invalid")
@@ -71,7 +75,7 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(RuntimeException.class);
+	assertThat(thrown).isInstanceOf(ValidationException.class);
   }
 
   @ParameterizedTest
@@ -87,6 +91,6 @@ class StudentControllerUnitTest {
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(RuntimeException.class);
+	assertThat(thrown).isInstanceOf(ValidationException.class);
   }
 }

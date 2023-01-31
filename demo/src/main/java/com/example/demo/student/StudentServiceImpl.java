@@ -1,5 +1,7 @@
 package com.example.demo.student;
 
+import com.example.demo.exception.NotFoundException;
+import java.text.MessageFormat;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,9 @@ class StudentServiceImpl implements StudentService {
   @Override
   public Student getStudentById(Long id) {
 	log.trace("Get student with Id={}", id);
-	return Student.of(studentRepository.findStudentById(id).orElseThrow(RuntimeException::new));
+	return Student.of(studentRepository.findStudentById(id)
+		.orElseThrow(() -> new NotFoundException(
+			MessageFormat.format("Student with id:{0} not found", id))));
   }
 
   @Override
