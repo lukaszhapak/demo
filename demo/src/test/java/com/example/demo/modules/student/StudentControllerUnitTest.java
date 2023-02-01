@@ -100,6 +100,40 @@ class StudentControllerUnitTest {
 	assertThat(thrown).isInstanceOf(ValidationException.class);
   }
 
+  @ParameterizedTest
+  @NullSource
+  @ValueSource(ints = {1, 3, 5, -3, 15, 19, 101, Integer.MAX_VALUE})
+  @DisplayName("should throw exception when student age is invalid during update")
+  void shouldThrowExceptionWhenStudentAgeIsInvalidDuringUpdate(Integer age) {
+	// given
+	Long id = UPDATE_STUDENT_ID;
+	Student student = getStudent();
+	student.setAge(age);
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.updateStudent(id, student));
+
+	// then
+	assertThat(thrown).isInstanceOf(ValidationException.class);
+  }
+
+  @ParameterizedTest
+  @NullAndEmptySource
+  @ValueSource(strings = {"a", "more than 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+  @DisplayName("should throw exception when student name is invalid during update")
+  void shouldThrowExceptionWhenStudentNameIsInvalidDuringUpdate(String name) {
+	// given
+	Long id = UPDATE_STUDENT_ID;
+	Student student = getStudent();
+	student.setName(name);
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.updateStudent(id, student));
+
+	// then
+	assertThat(thrown).isInstanceOf(ValidationException.class);
+  }
+
   @Test
   @DisplayName("should delete by id")
   void shouldDeleteById() {

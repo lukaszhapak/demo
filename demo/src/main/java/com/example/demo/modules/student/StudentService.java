@@ -45,6 +45,7 @@ class StudentService {
 
   public Student updateStudent(Long id, Student student) {
 	log.debug("Update student with Id={}", id);
+	studentValidator.validate(student);
 	checkIfExistsById(id);
 	StudentEntity studentEntity = StudentEntity.of(student);
 	studentEntity.setId(id);
