@@ -60,15 +60,15 @@ public class AbstractIntegrationTest<T> {
 		.put(url);
   }
 
-  protected List<T> fetchEntities(Long id, String tableName, Class clazz) {
+  protected List<T> fetchEntities(Long id, String tableName, Class<T> clazz) {
 	return fetchEntities(id, tableName, "=", clazz);
   }
 
-  protected List<T> fetchEntities(String tableName, Class clazz) {
+  protected List<T> fetchEntities(String tableName, Class<T> clazz) {
 	return fetchEntities(100000L, tableName, "<", clazz);
   }
 
-  private List<T> fetchEntities(Long id, String tableName, String operator, Class clazz) {
+  private List<T> fetchEntities(Long id, String tableName, String operator, Class<T> clazz) {
 	return jdbc.query(
 		MessageFormat.format("SELECT * FROM {0} WHERE ID {1} :id", tableName, operator),
 		new MapSqlParameterSource()
