@@ -25,8 +25,8 @@
 		<rest-assured.version>4.2.0</rest-assured.version>
 		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
-		<pitest-maven.version>1.4.9</pitest-maven.version>
-		<pitest-junit5-plugin.version>0.15</pitest-junit5-plugin.version>
+		<pitest-maven.version>1.11.0</pitest-maven.version>
+		<pitest-junit5-plugin.version>1.1.2</pitest-junit5-plugin.version>
 	</properties>
 
 	<dependencies>
