@@ -105,6 +105,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+	List<Student> studentEntities = fetchStudentEntities();
+	assertThat(studentEntities.size()).isEqualTo(0);
   }
 
   @Test
