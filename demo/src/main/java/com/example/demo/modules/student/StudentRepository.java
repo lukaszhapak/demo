@@ -12,4 +12,6 @@ interface StudentRepository extends Repository<StudentEntity, Long> {
   Long count();
 
   Long deleteAllById(Long id);
+
+  boolean existsById(Long id);
 }

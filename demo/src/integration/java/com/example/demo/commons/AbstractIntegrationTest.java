@@ -45,4 +45,14 @@ public class AbstractIntegrationTest {
 		.when()
 		.delete(url);
   }
+
+  protected Response putHttpCall(Object body, String url) {
+	return given()
+		.port(port)
+		.body(body)
+		.contentType(JSON)
+		.log().all()
+		.when()
+		.put(url);
+  }
 }

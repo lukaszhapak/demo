@@ -128,4 +128,51 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
   }
+
+  @Test
+  @DisplayName("should update student")
+  void shouldUpdateStudent() {
+	// given
+	jdbc.execute(
+		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000002, 'John', 22, '2,5,4,3,3');");
+	long id = 1000002L;
+	Student student = getStudent();
+	student.setName("Jim");
+	student.setId(id);
+
+	// when
+	Response response = putHttpCall(student, URL + id);
+	Student studentResponse = response.as(Student.class);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+
+	assertThat(studentResponse.getId()).isEqualTo(id);
+	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
+
+	List<StudentEntity> studentEntities = fetchStudentEntities();
+	assertThat(studentEntities.size()).isEqualTo(1);
+	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("grades")
+		.isEqualTo(student);
+	assertThat(studentEntities.get(0).getGrades()).isEqualTo(
+		collectionAsString(student.getGrades()));
+
+	// clean up
+	jdbc.execute("DELETE FROM STUDENT");
+  }
+
+  @Test
+  @DisplayName("should throw not found exception when update student is not exists")
+  void shouldThrowNotFoundExceptionWhenDeleteUpdateIsNotExists() {
+	// given
+	long id = 1000001L;
+	Student student = getStudent();
+
+	// when
+	Response response = putHttpCall(student, URL + id);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+  }
+
 }

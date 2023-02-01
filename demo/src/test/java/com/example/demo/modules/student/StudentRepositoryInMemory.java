@@ -37,4 +37,9 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 	  return 0L;
 	}
   }
+
+  @Override
+  public boolean existsById(Long id) {
+	return false;
+  }
 }

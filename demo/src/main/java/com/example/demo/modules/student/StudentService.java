@@ -30,13 +30,29 @@ class StudentService {
 	return studentRepository.save(studentEntity).toDomain();
   }
 
-  public Long calculateStatistics() {
+  public Long count() {
 	log.trace("Get students count");
 	return studentRepository.count();
   }
 
   public void deleteStudentById(Long id) {
+	log.debug("Delete student with Id={}", id);
 	if (studentRepository.deleteAllById(id) == 0) {
+	  throw new NotFoundException(
+		  MessageFormat.format("Student with id:{0} not found", id));
+	}
+  }
+
+  public Student updateStudent(Long id, Student student) {
+	log.debug("Update student with Id={}", id);
+	checkIfExistsById(id);
+	StudentEntity studentEntity = StudentEntity.of(student);
+	studentEntity.setId(id);
+	return studentRepository.save(studentEntity).toDomain();
+  }
+
+  private void checkIfExistsById(Long id) {
+	if (!studentRepository.existsById(id)) {
 	  throw new NotFoundException(
 		  MessageFormat.format("Student with id:{0} not found", id));
 	}

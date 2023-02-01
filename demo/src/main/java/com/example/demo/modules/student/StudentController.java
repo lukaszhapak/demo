@@ -25,7 +25,7 @@ class StudentController implements StudentEndpoint {
 
   @Override
   public Student updateStudent(Long id, Student student) {
-	return null;
+	return studentService.updateStudent(id, student);
   }
 
   @Override
