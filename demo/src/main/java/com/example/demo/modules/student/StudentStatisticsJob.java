@@ -20,5 +20,6 @@ class StudentStatisticsJob {
   void calculateStatistics() {
 	log.trace("Running student statistics job");
 	Long studentsCount = studentService.count();
+	log.trace("There are {} students", studentsCount);
   }
 }
