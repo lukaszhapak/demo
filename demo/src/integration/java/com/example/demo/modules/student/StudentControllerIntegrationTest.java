@@ -8,7 +8,6 @@ import com.example.demo.commons.JdbcTestHelper;
 import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.util.List;
-import java.util.Optional;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -134,8 +133,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
-	Long studentCount = jdbcTestHelper.count("STUDENT");
-	assertThat(studentCount).isEqualTo(0L);
+	boolean existsById = jdbcTestHelper.existsById(id, "STUDENT");
+	assertThat(existsById).isFalse();
   }
 
   @Test

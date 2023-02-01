@@ -22,7 +22,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Sql(value = "classpath:clean-data.sql", executionPhase = AFTER_TEST_METHOD)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class AbstractIntegrationTest {
+public abstract class AbstractIntegrationTest {
 
   @Container
   public static TestPostgresContainer postgres = TestPostgresContainer.getContainer();

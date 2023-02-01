@@ -15,24 +15,21 @@ public class JdbcTestHelper<T> {
   public List<T> fetchEntities(String tableName, Class<T> clazz) {
 	return jdbc.query(
 		MessageFormat.format("SELECT * FROM {0} WHERE ID < :id", tableName),
-		new MapSqlParameterSource()
-			.addValue("id", 100000L),
+		new MapSqlParameterSource().addValue("id", 100000L),
 		new BeanPropertyRowMapper<T>(clazz));
   }
 
   public T fetchEntity(Long id, String tableName, Class<T> clazz) {
 	return jdbc.queryForObject(
 		MessageFormat.format("SELECT * FROM {0} WHERE ID = :id", tableName),
-		new MapSqlParameterSource()
-			.addValue("id", id),
+		new MapSqlParameterSource().addValue("id", id),
 		new BeanPropertyRowMapper<T>(clazz));
   }
 
-  public Long count(String tableName) {
+  public Boolean existsById(Long id, String tableName) {
 	return jdbc.queryForObject(
-		MessageFormat.format("SELECT COUNT(*) FROM {0} WHERE ID < :id", tableName),
-		new MapSqlParameterSource()
-			.addValue("id", 100000L),
-		Long.class);
+		MessageFormat.format("SELECT EXISTS(SELECT 1 FROM {0} WHERE ID= :id)", tableName),
+		new MapSqlParameterSource().addValue("id", id),
+		Boolean.class);
   }
 }
