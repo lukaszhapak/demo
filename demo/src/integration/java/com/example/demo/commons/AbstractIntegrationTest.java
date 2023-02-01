@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class AbstractIntegrationTest {
 
   @Autowired
-  protected JdbcOperations jdbc;
+  protected NamedParameterJdbcOperations jdbc;
 
   @LocalServerPort
   protected int port;

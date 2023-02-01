@@ -8,21 +8,30 @@ import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.util.List;
 import org.apache.http.HttpStatus;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
   public static final String URL = "/api/student/";
 
+  @AfterEach
+  void tearDown() {
+	// clean up
+	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
+  }
+
   @Test
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	jdbc.execute(
-		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000000, 'John', 22, '2,5,4,3,3');");
-	long id = 1000000L;
+	jdbc.update(
+		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000001, 'John', 22, '2,5,4,3,3');",
+		new MapSqlParameterSource());
+	long id = 1000001L;
 
 	// when
 	Response response = getHttpCall(URL + id);
@@ -35,14 +44,14 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 		.isEqualTo(getStudent());
 
 	// clean up
-	jdbc.execute("DELETE FROM STUDENT");
+	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
   }
 
   @Test
   @DisplayName("should get not found status when student do not exists")
   void shouldGetNotFoundStatusWhenStudentDoNotExists() {
 	// given
-	long id = 1000000L;
+	long id = 3000000L;
 
 	// when
 	Response response = getHttpCall(URL + id);
@@ -73,7 +82,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 		.isEqualTo(student);
 
 	// clean up
-	jdbc.execute("DELETE FROM STUDENT");
+	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
   }
 
   @Test
@@ -95,17 +104,18 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should delete by id")
   void shouldDeleteById() {
 	// given
-	jdbc.execute(
-		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000001, 'John', 22, '2,5,4,3,3');");
-	long id = 1000001L;
+	jdbc.update(
+		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000002, 'John', 22, '2,5,4,3,3');",
+		new MapSqlParameterSource());
+	long id = 1000002L;
 
 	// when
 	Response response = deleteHttpCall(URL + id);
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-	Long studentsCount = jdbc.queryForObject("SELECT COUNT(*) FROM STUDENT;", Long.class);
-	assertThat(studentsCount).isEqualTo(0L);
+	List<Student> studentEntities = fetchStudentEntities(1000002L);
+	assertThat(studentEntities.size()).isEqualTo(0L);
   }
 
   @Test
@@ -125,9 +135,10 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should update student")
   void shouldUpdateStudent() {
 	// given
-	jdbc.execute(
-		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000002, 'John', 22, '2,5,4,3,3');");
-	long id = 1000002L;
+	jdbc.update(
+		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000003, 'John', 22, '2,5,4,3,3');",
+		new MapSqlParameterSource());
+	long id = 1000003L;
 	Student student = getStudent();
 	student.setName("Jim");
 	student.setId(id);
@@ -142,19 +153,19 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isEqualTo(id);
 	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
 
-	List<Student> studentEntities = fetchStudentEntities();
+	List<Student> studentEntities = fetchStudentEntities(1000003L);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().isEqualTo(student);
 
 	// clean up
-	jdbc.execute("DELETE FROM STUDENT");
+	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
   }
 
   @Test
   @DisplayName("should throw not found exception when update student is not exists")
   void shouldThrowNotFoundExceptionWhenDeleteUpdateIsNotExists() {
 	// given
-	long id = 1000001L;
+	long id = 3000000L;
 	Student student = getStudent();
 
 	// when
@@ -165,7 +176,14 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   }
 
   private List<Student> fetchStudentEntities() {
-	return jdbc.query("SELECT * FROM STUDENT",
+	return jdbc.query("SELECT * FROM STUDENT WHERE ID < :id",
+		new MapSqlParameterSource().addValue("id", 1000000),
+		new BeanPropertyRowMapper<>(Student.class));
+  }
+
+  private List<Student> fetchStudentEntities(Long id) {
+	return jdbc.query("SELECT * FROM STUDENT WHERE ID = :id",
+		new MapSqlParameterSource().addValue("id", id),
 		new BeanPropertyRowMapper<>(Student.class));
   }
 }
