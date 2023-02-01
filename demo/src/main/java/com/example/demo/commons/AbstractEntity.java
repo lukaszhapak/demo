@@ -1,5 +1,7 @@
 package com.example.demo.commons;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -12,6 +14,6 @@ import lombok.Setter;
 public abstract class AbstractEntity {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = IDENTITY)
   private Long id;
 }

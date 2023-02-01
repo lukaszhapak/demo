@@ -9,12 +9,9 @@ import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.util.List;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
@@ -30,18 +27,6 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @BeforeEach
   void setUp() {
 	jdbcTestHelper = new JdbcTestHelper<>(jdbc);
-	jdbc.update(
-		"INSERT INTO STUDENT(ID, NAME, AGE, GRADES) VALUES "
-			+ "(1000001, 'John', 22, '2,5,4,3,3'),"
-			+ "(1000002, 'John', 22, '2,5,4,3,3'),"
-			+ "(1000003, 'John', 22, '2,5,4,3,3');",
-		new MapSqlParameterSource());
-  }
-
-  @AfterEach
-  void tearDown() {
-	// clean up
-	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
   }
 
   @Test

@@ -19,6 +19,9 @@
 		<spring-boot.version>2.6.6</spring-boot.version>
 		<lombok.version>1.18.24</lombok.version>
 		<h2.version>2.1.214</h2.version>
+		<flyway.version>8.2.0</flyway.version>
+		<postgresql.version>42.2.23</postgresql.version>
+
 		<rest-assured.version>4.2.0</rest-assured.version>
 		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
 	</properties>
@@ -44,6 +47,17 @@
 			<artifactId>h2</artifactId>
 			<groupId>com.h2database</groupId>
 			<version>${h2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flyway.version}</version>
 		</dependency>
 
 		<dependency>
