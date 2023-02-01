@@ -4,19 +4,23 @@ import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.JdbcTestHelper;
 import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.util.List;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
-class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> {
+class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
   private final String URL = "/api/student/";
+
+  private static JdbcTestHelper<Student> jdbcTestHelper;
 
   private static final long NON_EXISTING_STUDENT_ID = 3000000L;
   private static final long GET_STUDENT_ID = 1000001L;
@@ -25,6 +29,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> 
 
   @BeforeEach
   void setUp() {
+	jdbcTestHelper = new JdbcTestHelper<>(jdbc);
 	jdbc.update(
 		"INSERT INTO STUDENT(ID, NAME, AGE, GRADES) VALUES "
 			+ "(1000001, 'John', 22, '2,5,4,3,3'),"
@@ -85,7 +90,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> 
 	assertThat(studentResponse.getId()).isNotNull();
 	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
 
-	List<Student> studentEntities = fetchEntities("STUDENT", Student.class);
+	List<Student> studentEntities = jdbcTestHelper.fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
 		.isEqualTo(student);
@@ -108,7 +113,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> 
 	assertThat(studentResponse.getId()).isNotNull();
 	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
 
-	List<Student> studentEntities = fetchEntities("STUDENT", Student.class);
+	List<Student> studentEntities = jdbcTestHelper.fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
 		.isEqualTo(student);
@@ -127,7 +132,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> 
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
-	List<Student> studentEntities = fetchEntities("STUDENT", Student.class);
+	List<Student> studentEntities = jdbcTestHelper.fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(0);
   }
 
@@ -143,7 +148,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
-	List<Student> studentEntities = fetchEntities(id, "STUDENT", Student.class);
+	List<Student> studentEntities = jdbcTestHelper.fetchEntities(id, "STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(0L);
   }
 
@@ -179,7 +184,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> 
 	assertThat(studentResponse.getId()).isEqualTo(id);
 	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
 
-	List<Student> studentEntities = fetchEntities(id, "STUDENT", Student.class);
+	List<Student> studentEntities = jdbcTestHelper.fetchEntities(id, "STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().isEqualTo(student);
   }
