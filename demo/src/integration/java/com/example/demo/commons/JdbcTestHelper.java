@@ -12,19 +12,27 @@ public class JdbcTestHelper<T> {
 
   private final NamedParameterJdbcOperations jdbc;
 
-  public List<T> fetchEntities(Long id, String tableName, Class<T> clazz) {
-	return fetchEntities(id, tableName, "=", clazz);
-  }
-
   public List<T> fetchEntities(String tableName, Class<T> clazz) {
-	return fetchEntities(100000L, tableName, "<", clazz);
+	return jdbc.query(
+		MessageFormat.format("SELECT * FROM {0} WHERE ID < :id", tableName),
+		new MapSqlParameterSource()
+			.addValue("id", 100000L),
+		new BeanPropertyRowMapper<T>(clazz));
   }
 
-  private List<T> fetchEntities(Long id, String tableName, String operator, Class<T> clazz) {
-	return jdbc.query(
-		MessageFormat.format("SELECT * FROM {0} WHERE ID {1} :id", tableName, operator),
+  public T fetchEntity(Long id, String tableName, Class<T> clazz) {
+	return jdbc.queryForObject(
+		MessageFormat.format("SELECT * FROM {0} WHERE ID = :id", tableName),
 		new MapSqlParameterSource()
 			.addValue("id", id),
 		new BeanPropertyRowMapper<T>(clazz));
+  }
+
+  public Long count(String tableName) {
+	return jdbc.queryForObject(
+		MessageFormat.format("SELECT COUNT(*) FROM {0} WHERE ID < :id", tableName),
+		new MapSqlParameterSource()
+			.addValue("id", 100000L),
+		Long.class);
   }
 }

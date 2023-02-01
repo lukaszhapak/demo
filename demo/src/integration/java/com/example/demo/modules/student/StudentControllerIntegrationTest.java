@@ -8,6 +8,7 @@ import com.example.demo.commons.JdbcTestHelper;
 import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.util.List;
+import java.util.Optional;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -133,8 +134,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
-	List<Student> studentEntities = jdbcTestHelper.fetchEntities(id, "STUDENT", Student.class);
-	assertThat(studentEntities.size()).isEqualTo(0L);
+	Long studentCount = jdbcTestHelper.count("STUDENT");
+	assertThat(studentCount).isEqualTo(0L);
   }
 
   @Test
@@ -169,9 +170,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isEqualTo(id);
 	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
 
-	List<Student> studentEntities = jdbcTestHelper.fetchEntities(id, "STUDENT", Student.class);
-	assertThat(studentEntities.size()).isEqualTo(1);
-	assertThat(studentEntities.get(0)).usingRecursiveComparison().isEqualTo(student);
+	Student studentEntity = jdbcTestHelper.fetchEntity(id, "STUDENT", Student.class);
+	assertThat(studentEntity).usingRecursiveComparison().isEqualTo(student);
   }
 
   @Test
