@@ -12,10 +12,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
-class StudentControllerIntegrationTest extends AbstractIntegrationTest {
+class StudentControllerIntegrationTest extends AbstractIntegrationTest<Student> {
 
   private final String URL = "/api/student/";
 
@@ -86,7 +85,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isNotNull();
 	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
 
-	List<Student> studentEntities = fetchStudentEntities();
+	List<Student> studentEntities = fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
 		.isEqualTo(student);
@@ -109,7 +108,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isNotNull();
 	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
 
-	List<Student> studentEntities = fetchStudentEntities();
+	List<Student> studentEntities = fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
 		.isEqualTo(student);
@@ -128,7 +127,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
-	List<Student> studentEntities = fetchStudentEntities();
+	List<Student> studentEntities = fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(0);
   }
 
@@ -143,7 +142,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-	List<Student> studentEntities = fetchStudentEntities(id);
+
+	List<Student> studentEntities = fetchEntities(id, "STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(0L);
   }
 
@@ -179,7 +179,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isEqualTo(id);
 	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
 
-	List<Student> studentEntities = fetchStudentEntities(id);
+	List<Student> studentEntities = fetchEntities(id, "STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().isEqualTo(student);
   }
@@ -212,17 +212,5 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
-  }
-
-  private List<Student> fetchStudentEntities() {
-	return jdbc.query("SELECT * FROM STUDENT WHERE ID < :id",
-		new MapSqlParameterSource().addValue("id", 1000000),
-		new BeanPropertyRowMapper<>(Student.class));
-  }
-
-  private List<Student> fetchStudentEntities(Long id) {
-	return jdbc.query("SELECT * FROM STUDENT WHERE ID = :id",
-		new MapSqlParameterSource().addValue("id", id),
-		new BeanPropertyRowMapper<>(Student.class));
   }
 }
