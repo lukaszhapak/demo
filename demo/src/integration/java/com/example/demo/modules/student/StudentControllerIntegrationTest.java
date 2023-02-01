@@ -175,6 +175,22 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
   }
 
+  @Test
+  @DisplayName("should throw not found exception when update student is invalid")
+  void shouldThrowNotFoundExceptionWhenDeleteUpdateIsInvalid() {
+	// given
+	long id = UPDATE_STUDENT_ID;
+	Student student = getStudent();
+	student.setAge(2);
+	student.setName("2");
+
+	// when
+	Response response = putHttpCall(student, URL + id);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+  }
+
   private List<Student> fetchStudentEntities() {
 	return jdbc.query("SELECT * FROM STUDENT WHERE ID < :id",
 		new MapSqlParameterSource().addValue("id", 1000000),
