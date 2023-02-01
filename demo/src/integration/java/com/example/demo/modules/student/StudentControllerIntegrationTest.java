@@ -79,11 +79,6 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	jdbc.execute("DELETE FROM STUDENT");
   }
 
-  protected List<StudentEntity> fetchStudentEntities() {
-	return jdbc.query("SELECT * FROM STUDENT",
-		new BeanPropertyRowMapper<>(StudentEntity.class));
-  }
-
   @Test
   @DisplayName("should throw exception when student is invalid")
   void shouldThrowExceptionWhenStudentIsInvalid() {
@@ -175,4 +170,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
   }
 
+  private List<StudentEntity> fetchStudentEntities() {
+	return jdbc.query("SELECT * FROM STUDENT",
+		new BeanPropertyRowMapper<>(StudentEntity.class));
+  }
 }
