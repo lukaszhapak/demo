@@ -8,6 +8,7 @@ import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
 import com.example.demo.modules.student.api.Student;
 import com.example.demo.modules.student.api.StudentEndpoint;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -68,6 +69,21 @@ class StudentControllerUnitTest {
 	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
   }
 
+  @Test
+  @DisplayName("should save student without grades")
+  void shouldSaveStudentWithoutGrades() {
+	// given
+	Student student = getStudent();
+	student.setGrades(null);
+
+	// when
+	Student response = studentController.saveStudent(student);
+
+	// then
+	assertThat(response.getId()).isNotNull();
+	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
+  }
+
   @ParameterizedTest
   @NullSource
   @ValueSource(ints = {1, 3, 5, -3, 15, 19, 101, Integer.MAX_VALUE})
@@ -92,6 +108,21 @@ class StudentControllerUnitTest {
 	// given
 	Student student = getStudent();
 	student.setName(name);
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+
+	// then
+	assertThat(thrown).isInstanceOf(ValidationException.class);
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = {0, 1, -3, 15, 19, 101, Integer.MAX_VALUE})
+  @DisplayName("should throw exception when student grade is invalid")
+  void shouldThrowExceptionWhenStudentGradeIsInvalid(Integer grade) {
+	// given
+	Student student = getStudent();
+	student.setGrades(List.of(2, 5, grade));
 
 	// when
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));

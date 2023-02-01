@@ -93,6 +93,29 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   }
 
   @Test
+  @DisplayName("should save student without grades")
+  void shouldSaveStudentWithoutGrades() {
+	// given
+	Student student = getStudent();
+	student.setGrades(null);
+
+	// when
+	Response response = postHttpCall(student, URL);
+	Student studentResponse = response.as(Student.class);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+
+	assertThat(studentResponse.getId()).isNotNull();
+	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
+
+	List<Student> studentEntities = fetchStudentEntities();
+	assertThat(studentEntities.size()).isEqualTo(1);
+	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
+		.isEqualTo(student);
+  }
+
+  @Test
   @DisplayName("should throw exception when student is invalid")
   void shouldThrowExceptionWhenStudentIsInvalid() {
 	// given
