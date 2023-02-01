@@ -1,6 +1,5 @@
 package com.example.demo.modules.student;
 
-import static com.example.demo.commons.HelperClass.collectionAsString;
 import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,12 +67,10 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isNotNull();
 	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
 
-	List<StudentEntity> studentEntities = fetchStudentEntities();
+	List<Student> studentEntities = fetchStudentEntities();
 	assertThat(studentEntities.size()).isEqualTo(1);
-	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("grades", "id")
+	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
 		.isEqualTo(student);
-	assertThat(studentEntities.get(0).getGrades()).isEqualTo(
-		collectionAsString(student.getGrades()));
 
 	// clean up
 	jdbc.execute("DELETE FROM STUDENT");
@@ -145,12 +142,9 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isEqualTo(id);
 	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
 
-	List<StudentEntity> studentEntities = fetchStudentEntities();
+	List<Student> studentEntities = fetchStudentEntities();
 	assertThat(studentEntities.size()).isEqualTo(1);
-	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("grades")
-		.isEqualTo(student);
-	assertThat(studentEntities.get(0).getGrades()).isEqualTo(
-		collectionAsString(student.getGrades()));
+	assertThat(studentEntities.get(0)).usingRecursiveComparison().isEqualTo(student);
 
 	// clean up
 	jdbc.execute("DELETE FROM STUDENT");
@@ -170,8 +164,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
   }
 
-  private List<StudentEntity> fetchStudentEntities() {
+  private List<Student> fetchStudentEntities() {
 	return jdbc.query("SELECT * FROM STUDENT",
-		new BeanPropertyRowMapper<>(StudentEntity.class));
+		new BeanPropertyRowMapper<>(Student.class));
   }
 }
