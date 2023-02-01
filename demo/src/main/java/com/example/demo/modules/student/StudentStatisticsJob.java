@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 	havingValue = "true")
 class StudentStatisticsJob {
 
-  private final StudentPersistenceService studentPersistenceService;
+  private final StudentService studentService;
 
   @Scheduled(cron = "${job.student.statistics.cron}")
   void calculateStatistics() {
 	log.trace("Running student statistics job");
-	Long studentsCount = studentPersistenceService.calculateStatistics();
+	Long studentsCount = studentService.calculateStatistics();
   }
 }

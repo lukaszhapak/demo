@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Log4j2
 @Service
 @RequiredArgsConstructor
-class StudentPersistenceService {
+class StudentService {
 
   private final StudentRepository studentRepository;
   private final StudentValidator studentValidator;

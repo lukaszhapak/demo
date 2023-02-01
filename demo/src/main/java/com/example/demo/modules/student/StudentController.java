@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 class StudentController implements StudentEndpoint {
 
-  private final StudentPersistenceService studentService;
+  private final StudentService studentService;
 
   @Override
   public Student getStudentById(@PathVariable Long id) {

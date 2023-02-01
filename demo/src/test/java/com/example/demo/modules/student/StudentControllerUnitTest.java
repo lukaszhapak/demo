@@ -22,7 +22,7 @@ class StudentControllerUnitTest {
 
   private final StudentRepository studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
-  private final StudentPersistenceService studentService = new StudentPersistenceService(studentRepository,
+  private final StudentService studentService = new StudentService(studentRepository,
 	  studentValidator);
   private final StudentEndpoint studentController = new StudentController(studentService);
 
