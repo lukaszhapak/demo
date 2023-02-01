@@ -16,7 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(value = "classpath:clean-data.sql", executionPhase = AFTER_TEST_METHOD)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class AbstractIntegrationTest {
+public class AbstractIntegrationTest extends TestContainer{
 
   @Autowired
   protected NamedParameterJdbcOperations jdbc;
