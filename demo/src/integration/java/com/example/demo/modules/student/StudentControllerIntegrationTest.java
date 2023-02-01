@@ -2,20 +2,14 @@ package com.example.demo.modules.student;
 
 import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.HelperClass;
-import com.example.demo.exception.ValidationException;
 import io.restassured.response.Response;
 import java.util.List;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
-import org.junit.jupiter.params.provider.NullSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
