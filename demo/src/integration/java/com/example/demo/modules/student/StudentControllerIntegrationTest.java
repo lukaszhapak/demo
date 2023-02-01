@@ -1,10 +1,10 @@
 package com.example.demo.modules.student;
 
+import static com.example.demo.commons.HelperClass.collectionAsString;
 import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
-import com.example.demo.commons.HelperClass;
 import io.restassured.response.Response;
 import java.util.List;
 import org.apache.http.HttpStatus;
@@ -63,14 +63,16 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+
 	assertThat(studentResponse.getId()).isNotNull();
 	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
+
 	List<StudentEntity> studentEntities = fetchStudentEntities();
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("grades")
 		.isEqualTo(student);
 	assertThat(studentEntities.get(0).getGrades()).isEqualTo(
-		HelperClass.collectionAsString(student.getGrades()));
+		collectionAsString(student.getGrades()));
 
 	// clean up
 	jdbc.execute("DELETE FROM STUDENT");

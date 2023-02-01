@@ -1,11 +1,9 @@
 package com.example.demo;
 
+import com.example.demo.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class ContextTest {
+class ContextTest extends AbstractIntegrationTest {
 
   @Test
   void contextLoads() {
