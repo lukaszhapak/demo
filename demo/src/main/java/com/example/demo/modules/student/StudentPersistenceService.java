@@ -27,4 +27,9 @@ class StudentPersistenceService {
 	StudentEntity studentEntity = StudentEntity.of(student);
 	return studentRepository.save(studentEntity).toDomain();
   }
+
+  public Long calculateStatistics() {
+	log.trace("Get students count");
+	return studentRepository.count();
+  }
 }
