@@ -5,6 +5,7 @@ import static com.example.demo.commons.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.util.List;
 import org.apache.http.HttpStatus;

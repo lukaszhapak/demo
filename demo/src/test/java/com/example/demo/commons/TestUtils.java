@@ -1,6 +1,6 @@
 package com.example.demo.commons;
 
-import com.example.demo.modules.student.Student;
+import com.example.demo.modules.student.api.Student;
 import java.util.List;
 
 public abstract class TestUtils {

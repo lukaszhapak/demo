@@ -6,6 +6,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
+import com.example.demo.modules.student.api.Student;
+import com.example.demo.modules.student.api.StudentEndpoint;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -20,9 +22,9 @@ class StudentControllerUnitTest {
 
   private final StudentRepository studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
-  private final StudentServiceImpl studentService = new StudentServiceImpl(studentRepository,
+  private final StudentPersistenceService studentService = new StudentPersistenceService(studentRepository,
 	  studentValidator);
-  private final StudentController studentController = new StudentController(studentService);
+  private final StudentEndpoint studentController = new StudentController(studentService);
 
   @Test
   @DisplayName("should get student by id")

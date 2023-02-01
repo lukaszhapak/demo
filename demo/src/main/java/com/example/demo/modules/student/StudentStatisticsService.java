@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class StudentStatisticsService {
 
-  private final StudentService studentService;
+  private final StudentRepository studentRepository;
 
   public Long calculateStatistics() {
-    return 0L;
+    log.trace("Get students count");
+    return studentRepository.count();
   }
 }

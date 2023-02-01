@@ -1,6 +1,7 @@
 package com.example.demo.modules.student;
 
 import com.example.demo.commons.AbstractValidator;
+import com.example.demo.modules.student.api.Student;
 import org.springframework.stereotype.Component;
 
 @Component
