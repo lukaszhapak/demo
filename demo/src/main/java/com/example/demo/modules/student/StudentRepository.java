@@ -10,4 +10,6 @@ interface StudentRepository extends Repository<StudentEntity, Long> {
   StudentEntity save(StudentEntity studentEntity);
 
   Long count();
+
+  Long deleteAllById(Long id);
 }

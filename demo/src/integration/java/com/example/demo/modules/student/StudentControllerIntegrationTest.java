@@ -99,4 +99,33 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
   }
 
+  @Test
+  @DisplayName("should delete by id")
+  void shouldDeleteById() {
+	// given
+	jdbc.execute(
+		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000001, 'John', 22, '2,5,4,3,3');");
+	long id = 1000001L;
+
+	// when
+	Response response = deleteHttpCall(URL + id);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
+	Long studentsCount = jdbc.queryForObject("SELECT COUNT(*) FROM STUDENT;", Long.class);
+	assertThat(studentsCount).isEqualTo(0L);
+  }
+
+  @Test
+  @DisplayName("should throw not found exception when delete student is not exists")
+  void shouldThrowNotFoundExceptionWhenDeleteStudentIsNotExists() {
+	// given
+	long id = 1000001L;
+
+	// when
+	Response response = deleteHttpCall(URL + id);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+  }
 }

@@ -36,4 +36,13 @@ public class AbstractIntegrationTest {
 		.when()
 		.post(url);
   }
+
+  protected Response deleteHttpCall(String url) {
+	return given()
+		.port(port)
+		.contentType(JSON)
+		.log().all()
+		.when()
+		.delete(url);
+  }
 }

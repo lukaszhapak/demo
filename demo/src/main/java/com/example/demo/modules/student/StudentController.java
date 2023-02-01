@@ -22,4 +22,14 @@ class StudentController implements StudentEndpoint {
   public Student saveStudent(@RequestBody Student student) {
 	return studentService.saveStudent(student);
   }
+
+  @Override
+  public Student updateStudent(Long id, Student student) {
+	return null;
+  }
+
+  @Override
+  public void deleteStudent(Long id) {
+	studentService.deleteStudentById(id);
+  }
 }

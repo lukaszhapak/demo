@@ -19,6 +19,7 @@ class StudentControllerUnitTest {
 
   private static final long NON_EXISTING_STUDENT_ID = 30000L;
   private static final long EXISTING_STUDENT_ID = 10000L;
+  private static final long DELETE_STUDENT_ID = 10001L;
 
   private final StudentRepository studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
@@ -96,5 +97,31 @@ class StudentControllerUnitTest {
 
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class);
+  }
+
+  @Test
+  @DisplayName("should delete by id")
+  void shouldDeleteById() {
+	// given
+	Long id = DELETE_STUDENT_ID;
+
+	// when
+	studentController.deleteStudent(id);
+
+	// then
+	//	no exception
+  }
+
+  @Test
+  @DisplayName("should throw not found exception when delete student is not exists")
+  void shouldThrowNotFoundExceptionWhenDeleteStudentIsNotExists() {
+	// given
+	Long id = NON_EXISTING_STUDENT_ID;
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.deleteStudent(id));
+
+	// then
+	assertThat(thrown).isInstanceOf(NotFoundException.class);
   }
 }

@@ -6,9 +6,11 @@ import java.text.MessageFormat;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Log4j2
 @Service
+@Transactional
 @RequiredArgsConstructor
 class StudentService {
 
@@ -31,5 +33,13 @@ class StudentService {
   public Long calculateStatistics() {
 	log.trace("Get students count");
 	return studentRepository.count();
+  }
+
+  public void deleteStudentById(Long id) {
+	Long deleted = studentRepository.deleteAllById(id);
+	if (deleted == 0) {
+	  throw new NotFoundException(
+		  MessageFormat.format("Student with id:{0} not found", id));
+	}
   }
 }
