@@ -25,7 +25,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 public class AbstractIntegrationTest {
 
   @Container
-  public static TestPostgresContainer postgres = TestPostgresContainer.getInstance();
+  public static TestPostgresContainer postgres = TestPostgresContainer.getContainer();
 
   @Autowired
   protected NamedParameterJdbcOperations jdbc;

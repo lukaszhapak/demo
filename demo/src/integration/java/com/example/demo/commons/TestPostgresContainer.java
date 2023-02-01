@@ -4,16 +4,13 @@ import org.testcontainers.containers.PostgreSQLContainer;
 
 public class TestPostgresContainer extends PostgreSQLContainer {
 
-  private static TestPostgresContainer container;
+  private static final TestPostgresContainer container = new TestPostgresContainer("postgres:13.2");
 
   TestPostgresContainer(String postgresDockerImageName) {
 	super(postgresDockerImageName);
   }
 
-  public static TestPostgresContainer getInstance() {
-	if (container == null) {
-	  container = new TestPostgresContainer("postgres:13.2");
-	}
+  public static TestPostgresContainer getContainer() {
 	return container;
   }
 
