@@ -7,7 +7,6 @@ public abstract class TestUtils {
 
   public static Student getStudent() {
 	Student student = new Student();
-	student.setId(1L);
 	student.setName("John");
 	student.setAge(22);
 	student.setGrades(List.of(2, 5, 4, 3, 3));

@@ -11,6 +11,7 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
   public StudentRepositoryInMemory() {
 	map.put(10000L, StudentEntity.of(getStudent()));
 	map.put(10001L, StudentEntity.of(getStudent()));
+	map.put(10002L, StudentEntity.of(getStudent()));
   }
 
   @Override
@@ -30,16 +31,11 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 
   @Override
   public Long deleteAllById(Long id) {
-	if (map.containsKey(id)) {
-	  map.remove(id);
-	  return 1L;
-	} else {
-	  return 0L;
-	}
+	return super.deleteAllById(id);
   }
 
   @Override
   public boolean existsById(Long id) {
-	return false;
+	return super.existsById(id);
   }
 }

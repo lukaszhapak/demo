@@ -66,11 +66,11 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
 	assertThat(studentResponse.getId()).isNotNull();
-	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
+	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
 
 	List<StudentEntity> studentEntities = fetchStudentEntities();
 	assertThat(studentEntities.size()).isEqualTo(1);
-	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("grades")
+	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("grades", "id")
 		.isEqualTo(student);
 	assertThat(studentEntities.get(0).getGrades()).isEqualTo(
 		collectionAsString(student.getGrades()));

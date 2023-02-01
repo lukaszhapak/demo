@@ -12,8 +12,10 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
   private Long id = 0L;
 
   protected T save(T entity) {
-	setId(entity);
-	map.put(id, entity);
+	if (entity.getId() == null || !existsById(entity.getId())) {
+	  setId(entity);
+	}
+	map.put(entity.getId(), entity);
 	return entity;
   }
 
@@ -25,7 +27,20 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
 	return (long) map.size();
   }
 
-  protected void setId(T entity) {
+  protected Long deleteAllById(Long id) {
+	if (map.containsKey(id)) {
+	  map.remove(id);
+	  return 1L;
+	} else {
+	  return 0L;
+	}
+  }
+
+  protected boolean existsById(Long id) {
+	return map.containsKey(id);
+  }
+
+  private void setId(T entity) {
 	entity.setId(++id);
   }
 }

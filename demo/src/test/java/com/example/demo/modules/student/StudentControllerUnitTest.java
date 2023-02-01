@@ -20,6 +20,7 @@ class StudentControllerUnitTest {
   private static final long NON_EXISTING_STUDENT_ID = 30000L;
   private static final long EXISTING_STUDENT_ID = 10000L;
   private static final long DELETE_STUDENT_ID = 10001L;
+  private static final long UPDATE_STUDENT_ID = 10002L;
 
   private final StudentRepository studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
@@ -109,7 +110,8 @@ class StudentControllerUnitTest {
 	studentController.deleteStudent(id);
 
 	// then
-	//	no exception
+	Throwable thrown = catchThrowable(() -> studentController.getStudentById(id));
+	assertThat(thrown).isInstanceOf(NotFoundException.class);
   }
 
   @Test
@@ -124,4 +126,35 @@ class StudentControllerUnitTest {
 	// then
 	assertThat(thrown).isInstanceOf(NotFoundException.class);
   }
+
+  @Test
+  @DisplayName("should update student")
+  void shouldUpdateStudent() {
+	// given
+	Long id = UPDATE_STUDENT_ID;
+	Student student = getStudent();
+	student.setName("Jim");
+	student.setId(id);
+
+	// when
+	Student response = studentController.updateStudent(id, student);
+
+	// then
+	assertThat(response).usingRecursiveComparison().isEqualTo(student);
+  }
+
+  @Test
+  @DisplayName("should throw not found exception when update student is not exists")
+  void shouldThrowNotFoundExceptionWhenDeleteUpdateIsNotExists() {
+	// given
+	Long id = NON_EXISTING_STUDENT_ID;
+	Student student = getStudent();
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.updateStudent(id, student));
+
+	// then
+	assertThat(thrown).isInstanceOf(NotFoundException.class);
+  }
+
 }
