@@ -18,8 +18,8 @@ class StudentStatisticsJob {
 
   @Scheduled(cron = "${job.student.statistics.cron}")
   void calculateStatistics() {
-	log.trace("Running student statistics job");
+	log.debug("Running student statistics job");
 	Long studentsCount = studentService.count();
-	log.trace("There are {} students", studentsCount);
+	log.debug("There are {} students", studentsCount);
   }
 }

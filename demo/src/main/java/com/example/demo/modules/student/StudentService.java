@@ -18,7 +18,7 @@ class StudentService {
   private final StudentValidator studentValidator;
 
   public Student getStudentById(Long id) {
-	log.trace("Get student with Id={}", id);
+	log.debug("Get student with Id={}", id);
 	return studentRepository.findStudentById(id).orElseThrow(() -> new NotFoundException(
 		MessageFormat.format("Student with id:{0} not found", id))).toDomain();
   }
@@ -31,7 +31,7 @@ class StudentService {
   }
 
   public Long count() {
-	log.trace("Get students count");
+	log.debug("Get students count");
 	return studentRepository.count();
   }
 
@@ -44,7 +44,7 @@ class StudentService {
   }
 
   public Student updateStudent(Long id, Student student) {
-	log.debug("Update student with Id={}", id);
+	log.debug("Update student with Id={}, student={}", id, student);
 	studentValidator.validate(student);
 	existsById(id);
 	StudentEntity studentEntity = StudentEntity.of(student);
