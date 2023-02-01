@@ -46,13 +46,13 @@ class StudentService {
   public Student updateStudent(Long id, Student student) {
 	log.debug("Update student with Id={}", id);
 	studentValidator.validate(student);
-	checkIfExistsById(id);
+	existsById(id);
 	StudentEntity studentEntity = StudentEntity.of(student);
 	studentEntity.setId(id);
 	return studentRepository.save(studentEntity).toDomain();
   }
 
-  private void checkIfExistsById(Long id) {
+  private void existsById(Long id) {
 	if (!studentRepository.existsById(id)) {
 	  throw new NotFoundException(
 		  MessageFormat.format("Student with id:{0} not found", id));
