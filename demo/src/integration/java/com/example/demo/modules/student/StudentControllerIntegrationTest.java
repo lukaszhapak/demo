@@ -9,6 +9,7 @@ import io.restassured.response.Response;
 import java.util.List;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -16,7 +17,22 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
-  public static final String URL = "/api/student/";
+  private final String URL = "/api/student/";
+
+  private static final long NON_EXISTING_STUDENT_ID = 3000000L;
+  private static final long GET_STUDENT_ID = 1000001L;
+  private static final long DELETE_STUDENT_ID = 1000002L;
+  private static final long UPDATE_STUDENT_ID = 1000003L;
+
+  @BeforeEach
+  void setUp() {
+	jdbc.update(
+		"INSERT INTO STUDENT(ID, NAME, AGE, GRADES) VALUES "
+			+ "(1000001, 'John', 22, '2,5,4,3,3'),"
+			+ "(1000002, 'John', 22, '2,5,4,3,3'),"
+			+ "(1000003, 'John', 22, '2,5,4,3,3');",
+		new MapSqlParameterSource());
+  }
 
   @AfterEach
   void tearDown() {
@@ -28,10 +44,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	jdbc.update(
-		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000001, 'John', 22, '2,5,4,3,3');",
-		new MapSqlParameterSource());
-	long id = 1000001L;
+	Long id = GET_STUDENT_ID;
 
 	// when
 	Response response = getHttpCall(URL + id);
@@ -42,16 +55,13 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isEqualTo(id);
 	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id")
 		.isEqualTo(getStudent());
-
-	// clean up
-	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
   }
 
   @Test
   @DisplayName("should get not found status when student do not exists")
   void shouldGetNotFoundStatusWhenStudentDoNotExists() {
 	// given
-	long id = 3000000L;
+	Long id = NON_EXISTING_STUDENT_ID;
 
 	// when
 	Response response = getHttpCall(URL + id);
@@ -80,9 +90,6 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
 		.isEqualTo(student);
-
-	// clean up
-	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
   }
 
   @Test
@@ -104,17 +111,14 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should delete by id")
   void shouldDeleteById() {
 	// given
-	jdbc.update(
-		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000002, 'John', 22, '2,5,4,3,3');",
-		new MapSqlParameterSource());
-	long id = 1000002L;
+	Long id = DELETE_STUDENT_ID;
 
 	// when
 	Response response = deleteHttpCall(URL + id);
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-	List<Student> studentEntities = fetchStudentEntities(1000002L);
+	List<Student> studentEntities = fetchStudentEntities(id);
 	assertThat(studentEntities.size()).isEqualTo(0L);
   }
 
@@ -122,7 +126,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should throw not found exception when delete student is not exists")
   void shouldThrowNotFoundExceptionWhenDeleteStudentIsNotExists() {
 	// given
-	long id = 1000001L;
+	long id = NON_EXISTING_STUDENT_ID;
 
 	// when
 	Response response = deleteHttpCall(URL + id);
@@ -135,10 +139,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should update student")
   void shouldUpdateStudent() {
 	// given
-	jdbc.update(
-		"INSERT INTO STUDENT (ID, NAME, AGE, GRADES) VALUES (1000003, 'John', 22, '2,5,4,3,3');",
-		new MapSqlParameterSource());
-	long id = 1000003L;
+	long id = UPDATE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName("Jim");
 	student.setId(id);
@@ -153,19 +154,16 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isEqualTo(id);
 	assertThat(studentResponse).usingRecursiveComparison().isEqualTo(student);
 
-	List<Student> studentEntities = fetchStudentEntities(1000003L);
+	List<Student> studentEntities = fetchStudentEntities(id);
 	assertThat(studentEntities.size()).isEqualTo(1);
 	assertThat(studentEntities.get(0)).usingRecursiveComparison().isEqualTo(student);
-
-	// clean up
-	jdbc.update("DELETE FROM STUDENT", new MapSqlParameterSource());
   }
 
   @Test
   @DisplayName("should throw not found exception when update student is not exists")
   void shouldThrowNotFoundExceptionWhenDeleteUpdateIsNotExists() {
 	// given
-	long id = 3000000L;
+	long id = NON_EXISTING_STUDENT_ID;
 	Student student = getStudent();
 
 	// when

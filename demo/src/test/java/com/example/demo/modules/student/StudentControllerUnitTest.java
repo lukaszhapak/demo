@@ -18,9 +18,9 @@ import org.junit.jupiter.params.provider.ValueSource;
 class StudentControllerUnitTest {
 
   private static final long NON_EXISTING_STUDENT_ID = 30000L;
-  private static final long EXISTING_STUDENT_ID = 10000L;
-  private static final long DELETE_STUDENT_ID = 10001L;
-  private static final long UPDATE_STUDENT_ID = 10002L;
+  private static final long GET_STUDENT_ID = 1000001L;
+  private static final long DELETE_STUDENT_ID = 1000002L;
+  private static final long UPDATE_STUDENT_ID = 1000003L;
 
   private final StudentRepository studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
@@ -32,7 +32,7 @@ class StudentControllerUnitTest {
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	Long id = EXISTING_STUDENT_ID;
+	Long id = GET_STUDENT_ID;
 
 	// when
 	Student response = studentController.getStudentById(id);

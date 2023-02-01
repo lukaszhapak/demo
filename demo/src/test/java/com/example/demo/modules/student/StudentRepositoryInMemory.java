@@ -9,9 +9,9 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 	StudentRepository {
 
   public StudentRepositoryInMemory() {
-	map.put(10000L, StudentEntity.of(getStudent()));
-	map.put(10001L, StudentEntity.of(getStudent()));
-	map.put(10002L, StudentEntity.of(getStudent()));
+	map.put(1000001L, StudentEntity.of(getStudent()));
+	map.put(1000002L, StudentEntity.of(getStudent()));
+	map.put(1000003L, StudentEntity.of(getStudent()));
   }
 
   @Override
