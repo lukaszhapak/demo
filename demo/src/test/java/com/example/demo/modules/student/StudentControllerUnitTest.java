@@ -54,12 +54,13 @@ class StudentControllerUnitTest {
 	// then
 	assertThat(thrown).isInstanceOf(NotFoundException.class);
   }
-
-  @Test
+  @ParameterizedTest
+  @ValueSource(strings = {"aa", "John", "asdw", "exactly 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
   @DisplayName("should save student")
-  void shouldSaveStudent() {
+  void shouldSaveStudent(String name) {
 	// given
 	Student student = getStudent();
+	student.setName(name);
 
 	// when
 	Student response = studentController.saveStudent(student);
@@ -199,12 +200,12 @@ class StudentControllerUnitTest {
 	Long id = UPDATE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName("Jim");
-	student.setId(id);
 
 	// when
 	Student response = studentController.updateStudent(id, student);
 
 	// then
+	student.setId(id);
 	assertThat(response).usingRecursiveComparison().isEqualTo(student);
   }
 

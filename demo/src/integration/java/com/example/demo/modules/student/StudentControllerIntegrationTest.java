@@ -157,13 +157,13 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	long id = UPDATE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName("Jim");
-	student.setId(id);
 
 	// when
 	Response response = putHttpCall(student, URL + id);
 	Student studentResponse = response.as(Student.class);
 
 	// then
+	student.setId(id);
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
 	assertThat(studentResponse.getId()).isEqualTo(id);
