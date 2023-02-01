@@ -36,8 +36,7 @@ class StudentService {
   }
 
   public void deleteStudentById(Long id) {
-	Long deleted = studentRepository.deleteAllById(id);
-	if (deleted == 0) {
+	if (studentRepository.deleteAllById(id) == 0) {
 	  throw new NotFoundException(
 		  MessageFormat.format("Student with id:{0} not found", id));
 	}
