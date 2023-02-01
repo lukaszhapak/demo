@@ -16,9 +16,9 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-class StudentControllerUnitTest {
+class StudentControllerTest {
 
-  private static final long NON_EXISTING_STUDENT_ID = 30000L;
+  private static final long NON_EXISTING_STUDENT_ID = 3000000L;
   private static final long GET_STUDENT_ID = 1000001L;
   private static final long DELETE_STUDENT_ID = 1000002L;
   private static final long UPDATE_STUDENT_ID = 1000003L;
@@ -54,8 +54,10 @@ class StudentControllerUnitTest {
 	// then
 	assertThat(thrown).isInstanceOf(NotFoundException.class);
   }
+
   @ParameterizedTest
-  @ValueSource(strings = {"aa", "John", "asdw", "exactly 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+  @ValueSource(strings = {"aa", "John", "asdw", "asdwadawasdsadzxc",
+	  "exactly 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
   @DisplayName("should save student")
   void shouldSaveStudent(String name) {
 	// given
