@@ -1,16 +1,8 @@
 package com.example.demo.commons;
 
-import lombok.extern.slf4j.Slf4j;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.util.Optional;
-import java.util.Properties;
-
-@Slf4j
-public class TestPostgresContainer extends PostgreSQLContainer<TestPostgresContainer> {
-
-  private static final String DEFAULT_IMAGE_VERSION = "postgres:13.2";
-  private static final String CONFIG_IMAGE_PROPERTY_NAME = "postgres.test.docker.image.name";
+public class TestPostgresContainer extends PostgreSQLContainer {
 
   private static TestPostgresContainer container;
 
@@ -19,17 +11,8 @@ public class TestPostgresContainer extends PostgreSQLContainer<TestPostgresConta
   }
 
   public static TestPostgresContainer getInstance() {
-	String postgresDockerImageName = DEFAULT_IMAGE_VERSION;
-
-	try {
-	  Properties props = new Properties();
-	  props.load(TestPostgresContainer.class.getResourceAsStream("/application.properties"));
-	  postgresDockerImageName = Optional.ofNullable(props.getProperty(CONFIG_IMAGE_PROPERTY_NAME)).orElseThrow();
-	} catch (Exception e) {
-	}
-
 	if (container == null) {
-	  container = new TestPostgresContainer(postgresDockerImageName);
+	  container = new TestPostgresContainer("postgres:13.2");
 	}
 	return container;
   }
@@ -44,7 +27,5 @@ public class TestPostgresContainer extends PostgreSQLContainer<TestPostgresConta
 
   @Override
   public void stop() {
-	//do nothing, JVM handles shut down
   }
-
 }
