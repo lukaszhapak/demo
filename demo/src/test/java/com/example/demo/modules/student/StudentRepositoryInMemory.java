@@ -1,6 +1,6 @@
 package com.example.demo.modules.student;
 
-import static com.example.demo.commons.TestUtils.getStudent;
+import static com.example.demo.commons.helper.TestUtils.getStudent;
 
 import com.example.demo.commons.AbstractRepositoryInMemory;
 import java.util.Optional;

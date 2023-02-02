@@ -3,7 +3,7 @@ package com.example.demo.commons;
 import java.text.MessageFormat;
 import java.util.Map;
 
-public class AbstractValidator {
+public abstract class AbstractValidator {
 
   protected Map<String, String> invalidFields;
 

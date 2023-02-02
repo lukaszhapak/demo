@@ -1,7 +1,7 @@
 package com.example.demo.modules.student;
 
-import static com.example.demo.commons.HelperClass.collectionAsString;
-import static com.example.demo.commons.HelperClass.stringAsCollection;
+import static com.example.demo.commons.helper.MappingHelper.collectionAsString;
+import static com.example.demo.commons.helper.MappingHelper.stringAsCollection;
 
 import com.example.demo.commons.AbstractEntity;
 import com.example.demo.modules.student.api.Student;

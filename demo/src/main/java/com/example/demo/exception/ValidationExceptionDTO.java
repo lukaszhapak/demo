@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class InvalidFields {
+public class ValidationExceptionDTO {
 
  private final String message;
  private final Map<String, String> invalidFields;

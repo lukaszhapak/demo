@@ -1,14 +1,14 @@
-package com.example.demo.commons;
+package com.example.demo.commons.helper;
 
-import static com.example.demo.commons.HelperClass.collectionAsString;
-import static com.example.demo.commons.HelperClass.stringAsCollection;
+import static com.example.demo.commons.helper.MappingHelper.collectionAsString;
+import static com.example.demo.commons.helper.MappingHelper.stringAsCollection;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class HelperClassTest {
+class MappingHelperTest {
 
   @Test
   @DisplayName("should convert collection to string")

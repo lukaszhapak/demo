@@ -1,11 +1,11 @@
 package com.example.demo.modules.student;
 
-import static com.example.demo.commons.TestUtils.getStudent;
+import static com.example.demo.commons.helper.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.JdbcTestHelper;
-import com.example.demo.exception.InvalidFields;
+import com.example.demo.exception.ValidationExceptionDTO;
 import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.text.MessageFormat;
@@ -98,9 +98,9 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
-	InvalidFields invalidFields = response.getBody().as(InvalidFields.class);
-	assertThat(invalidFields.getMessage()).isEqualTo("Student is invalid");
-	assertThat(invalidFields.getInvalidFields()).hasSize(2).containsKeys("Name", "Age");
+	ValidationExceptionDTO validationExceptionDTO = response.getBody().as(ValidationExceptionDTO.class);
+	assertThat(validationExceptionDTO.getMessage()).isEqualTo("Student is invalid");
+	assertThat(validationExceptionDTO.getInvalidFields()).hasSize(2).containsKeys("Name", "Age");
 
 	List<Student> studentEntities = jdbcTestHelper.fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(0);

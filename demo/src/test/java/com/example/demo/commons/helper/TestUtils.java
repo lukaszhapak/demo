@@ -1,11 +1,11 @@
-package com.example.demo.commons;
+package com.example.demo.commons.helper;
 
 import com.example.demo.modules.student.api.Student;
 import java.util.List;
 
-public abstract class TestUtils {
+public interface TestUtils {
 
-  public static Student getStudent() {
+  static Student getStudent() {
 	Student student = new Student();
 	student.setName("John");
 	student.setAge(22);

@@ -1,13 +1,13 @@
-package com.example.demo.commons;
+package com.example.demo.commons.helper;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HelperClass {
+public interface MappingHelper {
 
-  public static String collectionAsString(List<Integer> collection) {
+  static String collectionAsString(List<Integer> collection) {
 	if (collection == null) {
 	  return null;
 	} else if (collection.isEmpty()) {
@@ -19,7 +19,7 @@ public class HelperClass {
 	}
   }
 
-  public static List<Integer> stringAsCollection(String string) {
+  static List<Integer> stringAsCollection(String string) {
 	if (string == null) {
 	  return null;
 	} else if (string.equals("")) {

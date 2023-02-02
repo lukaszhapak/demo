@@ -1,4 +1,4 @@
-package com.example.demo.commons;
+package com.example.demo.commons.config;
 
 import javax.sql.DataSource;
 import net.javacrumbs.shedlock.core.LockProvider;
