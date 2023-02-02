@@ -3,7 +3,10 @@ package com.example.demo.modules.student;
 import static com.example.demo.commons.helper.TestUtils.getStudent;
 
 import com.example.demo.commons.AbstractRepositoryInMemory;
+import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 
 class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity> implements
 	StudentRepository {
@@ -38,4 +41,16 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
   public boolean existsById(Long id) {
 	return super.existsById(id);
   }
+
+  @Override
+  public List<String> getStudentGrades(Specification<StudentEntity> specification) {
+	return null;
+  }
+
+
+  @Override
+  public List<StudentEntity> findAll(Specification<StudentEntity> specification) {
+	return null;
+  }
+
 }

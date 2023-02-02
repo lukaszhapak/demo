@@ -3,8 +3,10 @@ package com.example.demo.modules.student;
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.modules.student.api.Student;
 import java.text.MessageFormat;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,6 +52,19 @@ class StudentService {
 	StudentEntity studentEntity = StudentEntity.of(student);
 	studentEntity.setId(id);
 	return studentRepository.save(studentEntity).toDomain();
+  }
+
+  public List<Student> findAll(StudentSearchCriteria studentSearchCriteria) {
+	List<StudentEntity> all = studentRepository.findAll(
+		new StudentSearchSpecification(studentSearchCriteria));
+	return null;
+  }
+
+  public Student getGrades(StudentSearchCriteria studentSearchCriteria){
+	List<String> studentGrades = studentRepository.getStudentGrades(
+		new StudentSearchSpecification(studentSearchCriteria));
+
+	return null;
   }
 
   private void existsById(Long id) {
