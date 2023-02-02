@@ -8,6 +8,7 @@ import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
 import com.example.demo.modules.student.api.Student;
 import com.example.demo.modules.student.api.StudentEndpoint;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -87,6 +88,37 @@ class StudentControllerTest {
 	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
   }
 
+  @Test
+  @DisplayName("should save student with empty grades list")
+  void shouldSaveStudentWithEmptyGradesList() {
+	// given
+	Student student = getStudent();
+	student.setGrades(Collections.emptyList());
+
+	// when
+	Student response = studentController.saveStudent(student);
+
+	// then
+	assertThat(response.getId()).isNotNull();
+	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
+  }
+
+  @Test
+  @DisplayName("should throw exception when student fields are invalid")
+  void shouldThrowExceptionWhenStudentFieldsAreInvalid() {
+	// given
+	Student student = getStudent();
+	student.setName("A");
+	student.setAge(18);
+	student.setGrades(List.of(1, 1, 7, 88, -2));
+
+	// when
+	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+
+	// then
+	assertThat(thrown).isInstanceOf(ValidationException.class);
+  }
+
   @ParameterizedTest
   @NullSource
   @ValueSource(ints = {1, 3, 5, -3, 15, 19, 101, Integer.MAX_VALUE})
@@ -125,7 +157,7 @@ class StudentControllerTest {
   void shouldThrowExceptionWhenStudentGradeIsInvalid(Integer grade) {
 	// given
 	Student student = getStudent();
-	student.setGrades(List.of(2, 5, grade));
+	student.setGrades(List.of(4, grade, 2, 5, grade));
 
 	// when
 	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));

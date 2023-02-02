@@ -14,7 +14,8 @@ class Advice {
   }
 
   @ExceptionHandler(ValidationException.class)
-  ResponseEntity<String> handleValidation(Exception exception) {
-	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
+  ResponseEntity<InvalidFields> handleValidation(ValidationException exception) {
+	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+		new InvalidFields(exception.getMessage(), exception.getInvalidFields()));
   }
 }

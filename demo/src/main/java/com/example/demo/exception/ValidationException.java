@@ -1,12 +1,19 @@
 package com.example.demo.exception;
 
+import java.text.MessageFormat;
+import java.util.Map;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
+@Getter
 public class ValidationException extends RuntimeException {
 
-  public ValidationException(String message) {
+  private final Map<String, String> invalidFields;
+
+  public ValidationException(String message, Map<String, String> invalidFields) {
 	super(message);
-	log.error(message);
+	this.invalidFields = invalidFields;
+	log.error(MessageFormat.format("{0} invalid fields = {1}", message, invalidFields));
   }
 }
