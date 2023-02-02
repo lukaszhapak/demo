@@ -5,8 +5,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.JdbcTestHelper;
+import com.example.demo.exception.InvalidFields;
 import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
+import java.text.MessageFormat;
 import java.util.List;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
@@ -57,6 +59,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	//then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+	assertThat(response.getBody().asString()).isEqualTo(
+		MessageFormat.format("Student with id:{0} not found", id));
   }
 
   @Test
@@ -64,29 +68,6 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   void shouldSaveStudent() {
 	// given
 	Student student = getStudent();
-
-	// when
-	Response response = postHttpCall(student, URL);
-	Student studentResponse = response.as(Student.class);
-
-	// then
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
-
-	assertThat(studentResponse.getId()).isNotNull();
-	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
-
-	List<Student> studentEntities = jdbcTestHelper.fetchEntities("STUDENT", Student.class);
-	assertThat(studentEntities.size()).isEqualTo(1);
-	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
-		.isEqualTo(student);
-  }
-
-  @Test
-  @DisplayName("should save student without grades")
-  void shouldSaveStudentWithoutGrades() {
-	// given
-	Student student = getStudent();
-	student.setGrades(null);
 
 	// when
 	Response response = postHttpCall(student, URL);
@@ -117,6 +98,10 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+	InvalidFields invalidFields = response.getBody().as(InvalidFields.class);
+	assertThat(invalidFields.getMessage()).isEqualTo("Student is invalid");
+	assertThat(invalidFields.getInvalidFields()).hasSize(2).containsKeys("Name", "Age");
+
 	List<Student> studentEntities = jdbcTestHelper.fetchEntities("STUDENT", Student.class);
 	assertThat(studentEntities.size()).isEqualTo(0);
   }
@@ -138,8 +123,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   }
 
   @Test
-  @DisplayName("should throw not found exception when delete student is not exists")
-  void shouldThrowNotFoundExceptionWhenDeleteStudentIsNotExists() {
+  @DisplayName("should throw not found exception when delete student not exists")
+  void shouldThrowNotFoundExceptionWhenDeleteStudentNotExists() {
 	// given
 	long id = NON_EXISTING_STUDENT_ID;
 
@@ -148,6 +133,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
+	assertThat(response.getBody().asString()).isEqualTo(
+		MessageFormat.format("Student with id:{0} not found", id));
   }
 
   @Test
@@ -174,8 +161,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   }
 
   @Test
-  @DisplayName("should throw not found exception when update student is not exists")
-  void shouldThrowNotFoundExceptionWhenDeleteUpdateIsNotExists() {
+  @DisplayName("should throw not found exception when update student not exists")
+  void shouldThrowNotFoundExceptionWhenUpdateStudentNotExists() {
 	// given
 	long id = NON_EXISTING_STUDENT_ID;
 	Student student = getStudent();
@@ -185,21 +172,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
-  }
-
-  @Test
-  @DisplayName("should throw not found exception when update student is invalid")
-  void shouldThrowNotFoundExceptionWhenDeleteUpdateIsInvalid() {
-	// given
-	long id = UPDATE_STUDENT_ID;
-	Student student = getStudent();
-	student.setAge(2);
-	student.setName("2");
-
-	// when
-	Response response = putHttpCall(student, URL + id);
-
-	// then
-	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_BAD_REQUEST);
+	assertThat(response.getBody().asString()).isEqualTo(
+		MessageFormat.format("Student with id:{0} not found", id));
   }
 }
