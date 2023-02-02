@@ -113,10 +113,11 @@ class StudentControllerTest {
 	student.setGrades(List.of(1, 1, 7, 88, -2));
 
 	// when
-	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class);
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
+	assertThat(thrown.getInvalidFields()).hasSize(3).containsKeys("Name", "Age", "Grade");
   }
 
   @ParameterizedTest
@@ -129,10 +130,11 @@ class StudentControllerTest {
 	student.setAge(age);
 
 	// when
-	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class);
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
+	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Age");
   }
 
   @ParameterizedTest
@@ -145,10 +147,11 @@ class StudentControllerTest {
 	student.setName(name);
 
 	// when
-	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class);
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
+	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Name");
   }
 
   @ParameterizedTest
@@ -160,10 +163,11 @@ class StudentControllerTest {
 	student.setGrades(List.of(4, grade, 2, 5, grade));
 
 	// when
-	Throwable thrown = catchThrowable(() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class);
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
+	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Grade");
   }
 
   @ParameterizedTest
@@ -177,7 +181,7 @@ class StudentControllerTest {
 	student.setAge(age);
 
 	// when
-	Throwable thrown = catchThrowable(() -> studentController.updateStudent(id, student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.updateStudent(id, student));
 
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class);

@@ -11,11 +11,11 @@ class StudentValidator extends AbstractValidator {
 
   void validate(Student student) {
 	invalidFields = new HashMap<>();
-	validateInteger(student.getAge(), 20, 100, "age");
+	validateInteger(student.getAge(), 20, 100, "Age");
 	validateString(student.getName(), 2, 64, "Name");
 	if (student.getGrades() != null && !student.getGrades().isEmpty()) {
 	  for (Integer grade : student.getGrades()) {
-		validateInteger(grade, 2, 5, "grade");
+		validateInteger(grade, 2, 5, "Grade");
 	  }
 	}
 	if (invalidFields.size() > 0) {
