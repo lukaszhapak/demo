@@ -2,6 +2,7 @@ package com.example.demo.modules.student;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.javacrumbs.shedlock.spring.annotation.SchedulerLock;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ class StudentStatisticsJob {
   private final StudentService studentService;
 
   @Scheduled(cron = "${job.student.statistics.cron}")
+  @SchedulerLock(name = "CalculateStatistics", lockAtLeastFor = "10S")
   void calculateStatistics() {
 	log.debug("Running student statistics job");
 	Long studentsCount = studentService.count();
