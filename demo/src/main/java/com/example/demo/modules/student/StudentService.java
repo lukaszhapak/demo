@@ -1,12 +1,14 @@
 package com.example.demo.modules.student;
 
+import static com.example.demo.commons.helper.PageRequestHelper.getPageRequest;
+
 import com.example.demo.exception.NotFoundException;
-import com.example.demo.modules.student.api.Student;
 import java.text.MessageFormat;
-import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -54,17 +56,13 @@ class StudentService {
 	return studentRepository.save(studentEntity).toDomain();
   }
 
-  public List<Student> findAll(StudentSearchCriteria studentSearchCriteria) {
-	List<StudentEntity> all = studentRepository.findAll(
-		new StudentSearchSpecification(studentSearchCriteria));
-	return null;
-  }
-
-  public Student getGrades(StudentSearchCriteria studentSearchCriteria){
-	List<String> studentGrades = studentRepository.getStudentGrades(
-		new StudentSearchSpecification(studentSearchCriteria));
-
-	return null;
+  public Page<Student> findAll(StudentSearchSpecification studentSearchSpecification) {
+	return new PageImpl<>(studentRepository.findAll(
+			studentSearchSpecification,
+			getPageRequest(studentSearchSpecification.getPage(),
+				studentSearchSpecification.getSize(), studentSearchSpecification.getSortBy(),
+				studentSearchSpecification.getSortAscending())).stream()
+		.map(StudentEntity::toDomain).collect(Collectors.toList()));
   }
 
   private void existsById(Long id) {

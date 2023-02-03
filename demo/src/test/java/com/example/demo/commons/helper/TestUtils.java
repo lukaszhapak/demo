@@ -1,6 +1,6 @@
 package com.example.demo.commons.helper;
 
-import com.example.demo.modules.student.api.Student;
+import com.example.demo.modules.student.Student;
 import java.util.List;
 
 public interface TestUtils {

@@ -6,8 +6,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
-import com.example.demo.modules.student.api.Student;
-import com.example.demo.modules.student.api.StudentEndpoint;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +26,7 @@ class StudentControllerTest {
   private final StudentValidator studentValidator = new StudentValidator();
   private final StudentService studentService = new StudentService(studentRepository,
 	  studentValidator);
-  private final StudentEndpoint studentController = new StudentController(studentService);
+  private final StudentController studentController = new StudentController(studentService);
 
   @Test
   @DisplayName("should get student by id")

@@ -7,38 +7,42 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.data.jpa.domain.Specification;
 
+@Getter
 @AllArgsConstructor
 class StudentSearchSpecification implements Specification<StudentEntity> {
 
-  private StudentSearchCriteria searchCriteria;
+  private Integer page;
+  private Integer size;
+  private String sortBy;
+  private Boolean sortAscending;
+
+  private Integer id;
+  private Integer minAge;
+  private Integer maxAge;
+  private String name;
 
   @Override
   public Predicate toPredicate(Root<StudentEntity> root, CriteriaQuery<?> query,
 	  CriteriaBuilder criteriaBuilder) {
 	List<Predicate> predicates = new LinkedList<>();
 
-	if (searchCriteria.getId() != null) {
-	  predicates.add(criteriaBuilder.equal(root.get("id"), searchCriteria.getId()));
+	if (id != null) {
+	  predicates.add(criteriaBuilder.equal(root.get("id"), id));
 	}
-	if (searchCriteria.getName() != null) {
-	  predicates.add(criteriaBuilder.like(root.get("name"), searchCriteria.getName()));
+	if (name != null) {
+	  predicates.add(criteriaBuilder.like(root.get("name"), name));
 	}
-	if (searchCriteria.getMinAge() != null) {
+	if (minAge != null) {
 	  predicates.add(
-		  criteriaBuilder.greaterThanOrEqualTo(root.get("age"), searchCriteria.getMinAge()));
+		  criteriaBuilder.greaterThanOrEqualTo(root.get("age"), minAge));
 	}
-	if (searchCriteria.getMaxAge() != null) {
+	if (maxAge != null) {
 	  predicates.add(
-		  criteriaBuilder.lessThanOrEqualTo(root.get("age"), searchCriteria.getMaxAge()));
+		  criteriaBuilder.lessThanOrEqualTo(root.get("age"), maxAge));
 	}
-	CriteriaQuery<?> grades = query
-		.where(predicates.toArray(new Predicate[predicates.size()]))
-		.select(root.get("grades"));
-
-//	return grades.getRestriction();
 	return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
-//	return 	query.select(root.get("grades")).where(predicates.toArray(new Predicate[predicates.size()])).getGroupRestriction();
   }
 }

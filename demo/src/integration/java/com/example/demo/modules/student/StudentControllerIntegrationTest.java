@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.JdbcTestHelper;
 import com.example.demo.exception.ValidationExceptionDTO;
-import com.example.demo.modules.student.api.Student;
 import io.restassured.response.Response;
 import java.text.MessageFormat;
 import java.util.List;

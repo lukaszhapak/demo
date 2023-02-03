@@ -5,6 +5,7 @@ import static com.example.demo.commons.helper.TestUtils.getStudent;
 import com.example.demo.commons.AbstractRepositoryInMemory;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -43,14 +44,8 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
   }
 
   @Override
-  public List<String> getStudentGrades(Specification<StudentEntity> specification) {
+  public Page<StudentEntity> findAll(Specification<StudentEntity> specification,
+	  Pageable pageable) {
 	return null;
   }
-
-
-  @Override
-  public List<StudentEntity> findAll(Specification<StudentEntity> specification) {
-	return null;
-  }
-
 }

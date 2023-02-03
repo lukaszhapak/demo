@@ -2,7 +2,6 @@ package com.example.demo.modules.student;
 
 import com.example.demo.commons.AbstractValidator;
 import com.example.demo.exception.ValidationException;
-import com.example.demo.modules.student.api.Student;
 import java.util.HashMap;
 import org.springframework.stereotype.Component;
 

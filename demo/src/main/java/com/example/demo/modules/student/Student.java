@@ -1,4 +1,4 @@
-package com.example.demo.modules.student.api;
+package com.example.demo.modules.student;
 
 import java.util.List;
 import lombok.Getter;
