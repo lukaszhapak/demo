@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.JdbcTestHelper;
+import com.example.demo.commons.helper.TestStorageHelper;
 import com.example.demo.exception.ValidationExceptionDTO;
 import io.restassured.response.Response;
 import java.text.MessageFormat;
@@ -18,7 +19,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
   private final String URL = "/api/student/";
 
-  private static JdbcTestHelper<Student> jdbcTestHelper;
+  private static TestStorageHelper<Student> jdbcTestHelper;
 
   private static final long NON_EXISTING_STUDENT_ID = 3000000L;
   private static final long GET_STUDENT_ID = 1000001L;

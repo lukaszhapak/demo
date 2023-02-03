@@ -29,19 +29,17 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 	StudentEntity studentEntity = StudentEntity.of(getStudent());
 	studentEntity.setGrades("4,2,5,3,3");
 	studentEntity.setId(1000001L);
-	list.add(studentEntity);
 	StudentEntity studentEntity2 = StudentEntity.of(getStudent());
 	studentEntity2.setGrades("2,3,4,2");
 	studentEntity2.setId(1000002L);
-	list.add(studentEntity2);
 	StudentEntity studentEntity3 = StudentEntity.of(getStudent());
 	studentEntity3.setGrades("4,3,5");
 	studentEntity3.setId(1000003L);
-	list.add(studentEntity3);
+	super.insertData(List.of(studentEntity, studentEntity2, studentEntity3));
   }
 
   public void cleanData() {
-	list.clear();
+	super.cleanData();
   }
 
   @Override

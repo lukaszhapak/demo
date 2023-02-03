@@ -1,5 +1,6 @@
 package com.example.demo.commons;
 
+import com.example.demo.commons.helper.TestStorageHelper;
 import java.text.MessageFormat;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -8,9 +9,19 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 
 @RequiredArgsConstructor
-public class JdbcTestHelper<T> {
+public class JdbcTestHelper<T> implements TestStorageHelper<T> {
 
   private final NamedParameterJdbcOperations jdbc;
+
+  @Override
+  public void insertData(List<T> data) {
+	// got sql scripts for that
+  }
+
+  @Override
+  public void cleanData() {
+	// got sql scripts for that
+  }
 
   public List<T> fetchEntities(String tableName, Class<T> clazz) {
 	return jdbc.query(

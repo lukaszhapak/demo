@@ -39,11 +39,11 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
   }
 
   protected Long deleteAllById(Long id) {
-	Optional<T> student = list.stream()
+	Optional<T> entity = list.stream()
 		.filter(x -> Objects.equals(x.getId(), id))
 		.findFirst();
-	if (student.isPresent()) {
-	  list.remove(student.get());
+	if (entity.isPresent()) {
+	  list.remove(entity.get());
 	  return 1L;
 	} else {
 	  return 0L;
@@ -51,10 +51,10 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
   }
 
   protected boolean existsById(Long id) {
-	Optional<T> student = list.stream()
+	Optional<T> entity = list.stream()
 		.filter(x -> Objects.equals(x.getId(), id))
 		.findFirst();
-	return student.isPresent();
+	return entity.isPresent();
   }
 
   private void setId(T entity) {
