@@ -20,26 +20,32 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 
   public void insertSampleData() {
 	Student student = getStudent();
-	map.put(1000001L, StudentEntity.of(student));
-	map.put(1000002L, StudentEntity.of(student));
-	map.put(1000003L, StudentEntity.of(student));
+	student.setId(1_000_001L);
+	Student student2 = getStudent();
+	student2.setId(1000002L);
+	Student student3 = getStudent();
+	student3.setId(1000003L);
+
+	super.insertData(List.of(StudentEntity.of(student),
+		StudentEntity.of(student2),
+		StudentEntity.of(student3)));
   }
 
   public void insertStatisticsData() {
 	Student student = getStudent();
-	student.setGrades(List.of(4,2,5,3,3));
+	student.setGrades(List.of(4, 2, 5, 3, 3));
 	student.setId(1000001L);
-	map.put(1000001L, StudentEntity.of(student));
-	student.setGrades(List.of(2,3,4,2));
+	list.add(StudentEntity.of(student));
+	student.setGrades(List.of(2, 3, 4, 2));
 	student.setId(1000002L);
-	map.put(1000002L, StudentEntity.of(student));
-	student.setGrades(List.of(4,3,5));
+	list.add(StudentEntity.of(student));
+	student.setGrades(List.of(4, 3, 5));
 	student.setId(1000003L);
-	map.put(1000003L, StudentEntity.of(student));
+	list.add( StudentEntity.of(student));
   }
 
   public void cleanData() {
-	map.clear();
+	list.clear();
   }
 
   @Override
@@ -70,7 +76,7 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 
   @Override
   public List<StudentStatisticsDTO> getStudentStatistics() {
-	return map.values().stream()
+	return list.stream()
 		.map(student -> new StudentStatisticsDTO(student.getId(), student.getGrades()))
 		.collect(Collectors.toList());
   }
