@@ -137,6 +137,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	long id = UPDATE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName("Jim");
+	student.setAge(41);
+	student.setGrades(List.of(5, 5, 5, 5, 5));
 
 	// when
 	Response response = putHttpCall(student, URL + id);

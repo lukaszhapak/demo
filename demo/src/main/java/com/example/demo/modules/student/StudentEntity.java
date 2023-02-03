@@ -19,6 +19,12 @@ class StudentEntity extends AbstractEntity {
   private Integer age;
   private String grades;
 
+  void updateFields(Student student) {
+	name = student.getName();
+	age = student.getAge();
+	grades = collectionAsString(student.getGrades());
+  }
+
   static StudentEntity of(Student student) {
 	StudentEntity studentEntity = new StudentEntity();
 	studentEntity.setName(student.getName());

@@ -251,6 +251,8 @@ class StudentControllerTest {
 	Long id = SAMPLE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName("Jim");
+	student.setAge(41);
+	student.setGrades(List.of(5, 5, 5, 5, 5));
 
 	// when
 	Student response = studentController.updateStudent(id, student);

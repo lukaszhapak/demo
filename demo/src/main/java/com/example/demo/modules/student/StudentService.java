@@ -2,6 +2,7 @@ package com.example.demo.modules.student;
 
 import static com.example.demo.commons.helper.PageRequestHelper.getPageRequest;
 
+import com.example.demo.commons.helper.MappingHelper;
 import com.example.demo.exception.NotFoundException;
 import java.text.MessageFormat;
 import java.util.stream.Collectors;
@@ -45,10 +46,10 @@ class StudentService {
   public Student updateStudent(Long id, Student student) {
 	log.debug("Update student with Id={}, student={}", id, student);
 	studentValidator.validate(student);
-	existsById(id);
-	StudentEntity studentEntity = StudentEntity.of(student);
-	studentEntity.setId(id);
-	return studentRepository.save(studentEntity).toDomain();
+	StudentEntity updateStudent = studentRepository.findStudentById(id).orElseThrow(() -> new NotFoundException(
+		MessageFormat.format("Student with id:{0} not found", id)));
+	updateStudent.updateFields(student);
+	return updateStudent.toDomain();
   }
 
   public Page<Student> findAll(StudentSearchSpecification studentSearchSpecification) {
@@ -57,11 +58,5 @@ class StudentService {
 		.stream()
 		.map(StudentEntity::toDomain)
 		.collect(Collectors.toList()));
-  }
-
-  private void existsById(Long id) {
-	if (!studentRepository.existsById(id)) {
-	  throw new NotFoundException(MessageFormat.format("Student with id:{0} not found", id));
-	}
   }
 }
