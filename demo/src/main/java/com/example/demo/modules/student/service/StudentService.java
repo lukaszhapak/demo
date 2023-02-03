@@ -1,9 +1,12 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.service;
 
 import static com.example.demo.commons.helper.PageRequestHelper.getPageRequest;
 
-import com.example.demo.commons.helper.MappingHelper;
 import com.example.demo.exception.NotFoundException;
+import com.example.demo.modules.student.domain.Student;
+import com.example.demo.modules.student.domain.StudentSearchSpecification;
+import com.example.demo.modules.student.repository.StudentEntity;
+import com.example.demo.modules.student.repository.StudentRepository;
 import java.text.MessageFormat;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-class StudentService {
+public class StudentService {
 
   private final StudentRepository studentRepository;
   private final StudentValidator studentValidator;

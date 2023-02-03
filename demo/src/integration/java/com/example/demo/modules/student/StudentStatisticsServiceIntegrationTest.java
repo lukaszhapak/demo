@@ -7,6 +7,8 @@ import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TES
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.modules.student.domain.Student;
+import com.example.demo.modules.student.statistics.StudentStatisticsService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

@@ -1,5 +1,8 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.controller;
 
+import com.example.demo.modules.student.domain.Student;
+import com.example.demo.modules.student.domain.StudentSearchSpecification;
+import com.example.demo.modules.student.service.StudentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-class StudentController {
+public class StudentController {
 
   private final StudentService studentService;
 

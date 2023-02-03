@@ -6,6 +6,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import com.example.demo.modules.student.domain.Student;
+import com.example.demo.modules.student.service.StudentService;
+import com.example.demo.modules.student.service.StudentValidator;
+import com.example.demo.modules.student.statistics.StudentStatisticsJob;
+import com.example.demo.modules.student.statistics.StudentStatisticsReportGenerator;
+import com.example.demo.modules.student.statistics.StudentStatisticsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

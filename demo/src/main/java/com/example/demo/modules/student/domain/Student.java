@@ -1,4 +1,4 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.domain;
 
 import java.util.List;
 import lombok.Getter;

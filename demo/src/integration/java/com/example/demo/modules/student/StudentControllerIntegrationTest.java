@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.JdbcTestHelper;
 import com.example.demo.exception.ValidationExceptionDTO;
+import com.example.demo.modules.student.domain.Student;
 import io.restassured.response.Response;
 import java.text.MessageFormat;
 import java.util.List;
@@ -13,8 +14,6 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 

@@ -1,9 +1,9 @@
-package com.example.demo.modules.student;
-
-import static com.example.demo.commons.helper.MappingHelper.collectionAsString;
-import static com.example.demo.commons.helper.MappingHelper.stringAsCollection;
+package com.example.demo.modules.student.repository;
 
 import com.example.demo.commons.AbstractEntity;
+import com.example.demo.modules.student.domain.Student;
+import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -13,32 +13,33 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "STUDENT")
-class StudentEntity extends AbstractEntity {
+public class StudentEntity extends AbstractEntity {
 
   private String name;
   private Integer age;
-  private String grades;
+  @ElementCollection
+  private List<Integer> grades;
 
-  void updateFields(Student student) {
+  public void updateFields(Student student) {
 	name = student.getName();
 	age = student.getAge();
-	grades = collectionAsString(student.getGrades());
+	grades = student.getGrades();
   }
 
-  static StudentEntity of(Student student) {
+  public static StudentEntity of(Student student) {
 	StudentEntity studentEntity = new StudentEntity();
 	studentEntity.setName(student.getName());
 	studentEntity.setAge(student.getAge());
-	studentEntity.setGrades(collectionAsString(student.getGrades()));
+	studentEntity.setGrades(student.getGrades());
 	return studentEntity;
   }
 
-  Student toDomain() {
+  public Student toDomain() {
 	Student student = new Student();
 	student.setId(getId());
 	student.setName(getName());
 	student.setAge(getAge());
-	student.setGrades(stringAsCollection(getGrades()));
+	student.setGrades(getGrades());
 	return student;
   }
 }

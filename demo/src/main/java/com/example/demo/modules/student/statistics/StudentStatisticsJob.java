@@ -1,4 +1,4 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.statistics;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(
 	value = "job.student.statistics.enabled",
 	havingValue = "true")
-class StudentStatisticsJob {
+public class StudentStatisticsJob {
 
   private final StudentStatisticsService studentStatisticsService;
 
   @Scheduled(cron = "${job.student.statistics.cron}")
   @SchedulerLock(name = "CalculateStatistics", lockAtLeastFor = "10S")
-  void calculateStatistics() {
+  public void calculateStatistics() {
 	log.debug("Running student statistics job");
 	studentStatisticsService.calculateStatistics();
   }

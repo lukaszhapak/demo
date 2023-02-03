@@ -3,6 +3,9 @@ package com.example.demo.modules.student;
 import static com.example.demo.commons.helper.TestUtils.getStudent;
 
 import com.example.demo.commons.helper.AbstractRepositoryInMemory;
+import com.example.demo.modules.student.repository.StudentEntity;
+import com.example.demo.modules.student.repository.StudentRepository;
+import com.example.demo.modules.student.statistics.StudentStatisticsDTO;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,19 +23,19 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 
   public void insertStatisticsData() {
 	StudentEntity studentEntity = StudentEntity.of(getStudent());
-	studentEntity.setGrades("4,2,5,3,3");
+	studentEntity.setGrades(List.of(4, 2, 5, 3, 3));
 	studentEntity.setId(1000001L);
 	StudentEntity studentEntity2 = StudentEntity.of(getStudent());
-	studentEntity2.setGrades("2,3,4,2");
+	studentEntity2.setGrades(List.of(2, 3, 4, 2));
 	studentEntity2.setId(1000002L);
 	StudentEntity studentEntity3 = StudentEntity.of(getStudent());
-	studentEntity3.setGrades("4,3,5");
+	studentEntity3.setGrades(List.of(4, 3, 5));
 	studentEntity3.setId(1000003L);
 	StudentEntity studentEntity4 = StudentEntity.of(getStudent());
 	studentEntity4.setGrades(null);
 	studentEntity4.setId(1000004L);
 	StudentEntity studentEntity5 = StudentEntity.of(getStudent());
-	studentEntity5.setGrades("");
+	studentEntity5.setGrades(List.of());
 	studentEntity5.setId(1000005L);
 	super.insertData(List.of(studentEntity, studentEntity2, studentEntity3, studentEntity4, studentEntity5));
   }

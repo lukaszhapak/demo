@@ -1,11 +1,12 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.service;
 
 import com.example.demo.commons.AbstractValidator;
+import com.example.demo.modules.student.domain.Student;
 import java.util.HashMap;
 import org.springframework.stereotype.Component;
 
 @Component
-class StudentValidator extends AbstractValidator {
+public class StudentValidator extends AbstractValidator {
 
   void validate(Student student) {
 	invalidFields = new HashMap<>();

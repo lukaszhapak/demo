@@ -1,5 +1,6 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.statistics;
 
+import com.example.demo.modules.student.domain.Student;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 

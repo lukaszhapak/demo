@@ -1,5 +1,6 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.domain;
 
+import com.example.demo.modules.student.repository.StudentEntity;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,7 +13,7 @@ import org.springframework.data.jpa.domain.Specification;
 
 @Getter
 @AllArgsConstructor
-class StudentSearchSpecification implements Specification<StudentEntity> {
+public class StudentSearchSpecification implements Specification<StudentEntity> {
 
   private Integer page;
   private Integer size;

@@ -1,5 +1,8 @@
-package com.example.demo.modules.student;
+package com.example.demo.modules.student.statistics;
 
+import com.example.demo.modules.student.domain.Student;
+import com.example.demo.modules.student.repository.StudentRepository;
+import com.example.demo.modules.student.service.StudentService;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Comparator;
@@ -14,13 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-class StudentStatisticsService {
+public class StudentStatisticsService {
 
   private final StudentRepository studentRepository;
   private final StudentService studentService;
   private final StudentStatisticsReportGenerator studentStatisticsReportGenerator;
 
-  void calculateStatistics() {
+  public void calculateStatistics() {
 	log.debug("Calculating statistics");
 	List<StudentStatisticsDTO> studentStatistics = getStudentStatistics();
 	List<Integer> allGrades = getAllGrades(studentStatistics);

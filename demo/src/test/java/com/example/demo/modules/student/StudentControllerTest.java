@@ -10,6 +10,10 @@ import static org.mockito.Mockito.verify;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
+import com.example.demo.modules.student.controller.StudentController;
+import com.example.demo.modules.student.domain.Student;
+import com.example.demo.modules.student.service.StudentService;
+import com.example.demo.modules.student.service.StudentValidator;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
