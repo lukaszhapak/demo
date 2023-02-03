@@ -2,6 +2,7 @@ package com.example.demo.modules.student;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,17 @@ class StudentStatisticsService {
   void calculateStatistics() {
 	log.debug("Calculating statistics");
 	List<StudentStatisticsDTO> studentStatistics = getStudentStatistics();
+	StudentStatisticsDTO bestStudent = getBestStudent(studentStatistics);
 	List<Integer> allGrades = getAllGrades(studentStatistics);
 	Double average = calculateAverage(allGrades);
-	studentStatisticsReportGenerator.generateReport(studentStatistics.size(), allGrades.size(), average);
+	studentStatisticsReportGenerator.generateReport(bestStudent.getId(), studentStatistics.size(),
+		allGrades.size(), average);
+  }
+
+  private StudentStatisticsDTO getBestStudent(List<StudentStatisticsDTO> studentStatistics) {
+	return studentStatistics.stream()
+		.max(Comparator.comparing(student -> calculateAverage(student.getGrades())))
+		.orElse(null);
   }
 
   private List<Integer> getAllGrades(List<StudentStatisticsDTO> studentStatistics) {

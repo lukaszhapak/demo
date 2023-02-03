@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class StudentStatisticsReportGenerator {
 
-  public void generateReport(Integer studentsCount, Integer gradesCount, Double average) {
+  public void generateReport(Long bestStudentId, Integer studentsCount, Integer gradesCount,
+	  Double average) {
 	log.debug("There are {} - students in total, {} - grades and the average is equal to {}",
 		studentsCount, gradesCount, average);
   }

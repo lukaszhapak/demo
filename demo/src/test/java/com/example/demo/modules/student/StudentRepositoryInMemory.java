@@ -28,10 +28,13 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
   public void insertStatisticsData() {
 	Student student = getStudent();
 	student.setGrades(List.of(4,2,5,3,3));
+	student.setId(1000001L);
 	map.put(1000001L, StudentEntity.of(student));
 	student.setGrades(List.of(2,3,4,2));
+	student.setId(1000002L);
 	map.put(1000002L, StudentEntity.of(student));
 	student.setGrades(List.of(4,3,5));
+	student.setId(1000003L);
 	map.put(1000003L, StudentEntity.of(student));
   }
 
