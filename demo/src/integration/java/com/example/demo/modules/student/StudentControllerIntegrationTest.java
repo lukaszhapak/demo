@@ -13,6 +13,8 @@ import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
@@ -21,9 +23,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   private static JdbcTestHelper<Student> jdbcTestHelper;
 
   private static final long NON_EXISTING_STUDENT_ID = 3000000L;
-  private static final long GET_STUDENT_ID = 1000001L;
-  private static final long DELETE_STUDENT_ID = 1000002L;
-  private static final long UPDATE_STUDENT_ID = 1000003L;
+  private static final long SAMPLE_STUDENT_ID = 1000001L;
 
   @BeforeEach
   void setUp() {
@@ -34,7 +34,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	Long id = GET_STUDENT_ID;
+	Long id = SAMPLE_STUDENT_ID;
 
 	// when
 	Response response = getHttpCall(URL + id);
@@ -105,7 +105,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should delete by id")
   void shouldDeleteById() {
 	// given
-	Long id = DELETE_STUDENT_ID;
+	Long id = SAMPLE_STUDENT_ID;
 
 	// when
 	Response response = deleteHttpCall(URL + id);
@@ -134,7 +134,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
   @DisplayName("should update student")
   void shouldUpdateStudent() {
 	// given
-	long id = UPDATE_STUDENT_ID;
+	long id = SAMPLE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName("Jim");
 	student.setAge(41);
@@ -168,5 +168,17 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
 	assertThat(response.getBody().asString()).isEqualTo(MessageFormat.format("Student with id:{0} not found", id));
+  }
+
+  @Test
+  @DisplayName("should get page")
+  void shouldGetPage() {
+	// given
+
+	// when
+	Response response = getHttpCall(URL);
+
+	// then
+	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
   }
 }
