@@ -58,8 +58,7 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
   }
 
   @Override
-  public Page<StudentEntity> findAll(Specification<StudentEntity> specification,
-	  Pageable pageable) {
+  public Page<StudentEntity> findAll(Specification<StudentEntity> specification, Pageable pageable) {
 	return null;
   }
 
