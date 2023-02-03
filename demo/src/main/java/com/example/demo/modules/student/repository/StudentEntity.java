@@ -1,9 +1,10 @@
 package com.example.demo.modules.student.repository;
 
+import static com.example.demo.commons.helper.MappingHelper.collectionAsString;
+import static com.example.demo.commons.helper.MappingHelper.stringAsCollection;
+
 import com.example.demo.commons.AbstractEntity;
 import com.example.demo.modules.student.domain.Student;
-import java.util.List;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -17,20 +18,19 @@ public class StudentEntity extends AbstractEntity {
 
   private String name;
   private Integer age;
-  @ElementCollection
-  private List<Integer> grades;
+  private String grades;
 
   public void updateFields(Student student) {
 	name = student.getName();
 	age = student.getAge();
-	grades = student.getGrades();
+	grades = collectionAsString(student.getGrades());
   }
 
   public static StudentEntity of(Student student) {
 	StudentEntity studentEntity = new StudentEntity();
 	studentEntity.setName(student.getName());
 	studentEntity.setAge(student.getAge());
-	studentEntity.setGrades(student.getGrades());
+	studentEntity.setGrades(collectionAsString(student.getGrades()));
 	return studentEntity;
   }
 
@@ -39,7 +39,7 @@ public class StudentEntity extends AbstractEntity {
 	student.setId(getId());
 	student.setName(getName());
 	student.setAge(getAge());
-	student.setGrades(getGrades());
+	student.setGrades(stringAsCollection(getGrades()));
 	return student;
   }
 }
