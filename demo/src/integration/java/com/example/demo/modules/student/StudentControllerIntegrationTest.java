@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.JdbcTestHelper;
-import com.example.demo.commons.helper.TestStorageHelper;
 import com.example.demo.exception.ValidationExceptionDTO;
 import io.restassured.response.Response;
 import java.text.MessageFormat;
@@ -19,7 +18,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
   private final String URL = "/api/student/";
 
-  private static TestStorageHelper<Student> jdbcTestHelper;
+  private static JdbcTestHelper<Student> jdbcTestHelper;
 
   private static final long NON_EXISTING_STUDENT_ID = 3000000L;
   private static final long GET_STUDENT_ID = 1000001L;
@@ -44,8 +43,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	//then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 	assertThat(studentResponse.getId()).isEqualTo(id);
-	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id")
-		.isEqualTo(getStudent());
+	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(getStudent());
   }
 
   @Test
@@ -59,8 +57,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	//then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
-	assertThat(response.getBody().asString()).isEqualTo(
-		MessageFormat.format("Student with id:{0} not found", id));
+	assertThat(response.getBody().asString()).isEqualTo(MessageFormat.format("Student with id:{0} not found", id));
   }
 
   @Test
@@ -79,10 +76,8 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	assertThat(studentResponse.getId()).isNotNull();
 	assertThat(studentResponse).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
 
-	List<Student> studentEntities = jdbcTestHelper.fetchEntities("STUDENT", Student.class);
-	assertThat(studentEntities.size()).isEqualTo(1);
-	assertThat(studentEntities.get(0)).usingRecursiveComparison().ignoringFields("id")
-		.isEqualTo(student);
+	Student studentEntity = jdbcTestHelper.fetchEntity(studentResponse.getId(), "STUDENT", Student.class);
+	assertThat(studentEntity).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
   }
 
   @Test
@@ -118,8 +113,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_OK);
 
-	boolean existsById = jdbcTestHelper.existsById(id, "STUDENT");
-	assertThat(existsById).isFalse();
+	assertThat(jdbcTestHelper.existsById(id, "STUDENT")).isFalse();
   }
 
   @Test
@@ -133,8 +127,7 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
-	assertThat(response.getBody().asString()).isEqualTo(
-		MessageFormat.format("Student with id:{0} not found", id));
+	assertThat(response.getBody().asString()).isEqualTo(MessageFormat.format("Student with id:{0} not found", id));
   }
 
   @Test
@@ -172,7 +165,6 @@ class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.getStatusCode()).isEqualTo(HttpStatus.SC_NOT_FOUND);
-	assertThat(response.getBody().asString()).isEqualTo(
-		MessageFormat.format("Student with id:{0} not found", id));
+	assertThat(response.getBody().asString()).isEqualTo(MessageFormat.format("Student with id:{0} not found", id));
   }
 }

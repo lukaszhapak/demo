@@ -22,10 +22,7 @@ class StudentControllerTest {
   private static final long SAMPLE_STUDENT_ID = 1000001L;
 
   private final StudentRepositoryInMemory studentRepository = new StudentRepositoryInMemory();
-  private final StudentValidator studentValidator = new StudentValidator();
-  private final StudentService studentService = new StudentService(studentRepository,
-	  studentValidator);
-  private final StudentController studentController = new StudentController(studentService);
+  private final StudentController studentController = new StudentController(new StudentService(studentRepository, new StudentValidator()));
 
   @BeforeEach
   void setUp() {
@@ -89,6 +86,9 @@ class StudentControllerTest {
 	// then
 	assertThat(response.getId()).isNotNull();
 	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
+
+	Student studentEntity = studentRepository.getById(response.getId()).toDomain();
+	assertThat(studentEntity).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
   }
 
   @Test
@@ -104,6 +104,9 @@ class StudentControllerTest {
 	// then
 	assertThat(response.getId()).isNotNull();
 	assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
+
+	Student studentEntity = studentRepository.getById(response.getId()).toDomain();
+	assertThat(studentEntity).usingRecursiveComparison().ignoringFields("id").isEqualTo(student);
   }
 
   @Test
@@ -116,12 +119,10 @@ class StudentControllerTest {
 	student.setGrades(List.of(1, 1, 7, 88, -2));
 
 	// when
-	ValidationException thrown = (ValidationException) catchThrowable(
-		() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class)
-		.hasMessageContaining("Student is invalid");
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
 	assertThat(thrown.getInvalidFields()).hasSize(3).containsKeys("Name", "Age", "Grade");
   }
 
@@ -135,12 +136,10 @@ class StudentControllerTest {
 	student.setAge(age);
 
 	// when
-	ValidationException thrown = (ValidationException) catchThrowable(
-		() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class)
-		.hasMessageContaining("Student is invalid");
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
 	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Age");
   }
 
@@ -154,12 +153,10 @@ class StudentControllerTest {
 	student.setName(name);
 
 	// when
-	ValidationException thrown = (ValidationException) catchThrowable(
-		() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class)
-		.hasMessageContaining("Student is invalid");
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
 	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Name");
   }
 
@@ -172,8 +169,7 @@ class StudentControllerTest {
 	student.setGrades(List.of(4, grade, 2, 5, grade));
 
 	// when
-	ValidationException thrown = (ValidationException) catchThrowable(
-		() -> studentController.saveStudent(student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class)
@@ -192,8 +188,7 @@ class StudentControllerTest {
 	student.setAge(age);
 
 	// when
-	ValidationException thrown = (ValidationException) catchThrowable(
-		() -> studentController.updateStudent(id, student));
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.updateStudent(id, student));
 
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class);
@@ -226,8 +221,7 @@ class StudentControllerTest {
 	studentController.deleteStudent(id);
 
 	// then
-	Throwable thrown = catchThrowable(() -> studentController.getStudentById(id));
-	assertThat(thrown).isInstanceOf(NotFoundException.class);
+	assertThat(studentRepository.existsById(SAMPLE_STUDENT_ID)).isFalse();
   }
 
   @Test
@@ -257,6 +251,9 @@ class StudentControllerTest {
 	// then
 	student.setId(id);
 	assertThat(response).usingRecursiveComparison().isEqualTo(student);
+
+	Student studentEntity = studentRepository.getById(id).toDomain();
+	assertThat(studentEntity).usingRecursiveComparison().isEqualTo(student);
   }
 
   @Test

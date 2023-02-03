@@ -2,7 +2,7 @@ package com.example.demo.modules.student;
 
 import static com.example.demo.commons.helper.TestUtils.getStudent;
 
-import com.example.demo.commons.AbstractRepositoryInMemory;
+import com.example.demo.commons.helper.AbstractRepositoryInMemory;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,18 +10,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 
-class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity> implements
-	StudentRepository {
-
-  public StudentRepositoryInMemory() {
-	cleanData();
-	insertSampleData();
-  }
+class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity> implements StudentRepository {
 
   public void insertSampleData() {
 	StudentEntity studentEntity = StudentEntity.of(getStudent());
 	studentEntity.setId(1_000_001L);
-
 	super.insertData(List.of(studentEntity));
   }
 
@@ -36,10 +29,6 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
 	studentEntity3.setGrades("4,3,5");
 	studentEntity3.setId(1000003L);
 	super.insertData(List.of(studentEntity, studentEntity2, studentEntity3));
-  }
-
-  public void cleanData() {
-	super.cleanData();
   }
 
   @Override

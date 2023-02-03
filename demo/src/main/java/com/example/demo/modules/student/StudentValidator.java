@@ -1,7 +1,6 @@
 package com.example.demo.modules.student;
 
 import com.example.demo.commons.AbstractValidator;
-import com.example.demo.exception.ValidationException;
 import java.util.HashMap;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +16,6 @@ class StudentValidator extends AbstractValidator {
 		validateInteger(grade, 2, 5, "Grade");
 	  }
 	}
-	if (invalidFields.size() > 0) {
-	  throw new ValidationException("Student is invalid", invalidFields);
-	}
+	throwException("Student");
   }
 }

@@ -25,8 +25,7 @@ class StudentStatisticsService {
 	StudentStatisticsDTO bestStudent = getBestStudent(studentStatistics);
 	List<Integer> allGrades = getAllGrades(studentStatistics);
 	Double average = calculateAverage(allGrades);
-	studentStatisticsReportGenerator.generateReport(bestStudent.getId(), studentStatistics.size(),
-		allGrades.size(), average);
+	studentStatisticsReportGenerator.generateReport(bestStudent.getId(), studentStatistics.size(), allGrades.size(), average);
   }
 
   private StudentStatisticsDTO getBestStudent(List<StudentStatisticsDTO> studentStatistics) {

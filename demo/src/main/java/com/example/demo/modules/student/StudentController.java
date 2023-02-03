@@ -46,7 +46,6 @@ class StudentController {
 	  @RequestParam(required = false) Integer minAge,
 	  @RequestParam(required = false) Integer maxAge,
 	  @RequestParam(required = false) String name) {
-	return studentService.findAll(
-		new StudentSearchSpecification(page - 1, size, sortBy, sortAscending, id, minAge, maxAge, name));
+	return studentService.findAll(new StudentSearchSpecification(page - 1, size, sortBy, sortAscending, id, minAge, maxAge, name));
   }
 }

@@ -22,7 +22,8 @@ public interface PageRequestHelper {
   private static Sort getSort(String property, Boolean ascOrder) {
 	String sortBy = Optional.ofNullable(property).orElse(defaultProperty);
 	Sort.Direction direction = Optional.ofNullable(ascOrder).filter(asc -> !asc)
-		.map(asc -> Sort.Direction.DESC).orElse(Sort.Direction.ASC);
+		.map(asc -> Sort.Direction.DESC)
+		.orElse(Sort.Direction.ASC);
 	return Sort.by(direction, sortBy);
   }
 

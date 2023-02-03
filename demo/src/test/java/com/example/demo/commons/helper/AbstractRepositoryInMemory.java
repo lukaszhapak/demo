@@ -1,13 +1,13 @@
-package com.example.demo.commons;
+package com.example.demo.commons.helper;
 
+import com.example.demo.commons.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import org.springframework.data.repository.Repository;
 
-public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> implements
-	Repository<T, Long> {
+public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> implements Repository<T, Long> {
 
   protected List<T> list = new ArrayList<>();
   private Long id = 0L;
@@ -20,9 +20,16 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
 	list.clear();
   }
 
+  public T getById(Long id){
+	return findById(id).get();
+  }
+
   protected T save(T entity) {
 	if (entity.getId() == null || !existsById(entity.getId())) {
 	  setId(entity);
+	}
+	if (existsById(entity.getId())) {
+	  deleteAllById(entity.getId());
 	}
 	list.add(entity);
 	return entity;

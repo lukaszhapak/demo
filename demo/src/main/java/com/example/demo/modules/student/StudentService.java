@@ -52,18 +52,16 @@ class StudentService {
   }
 
   public Page<Student> findAll(StudentSearchSpecification studentSearchSpecification) {
-	return new PageImpl<>(studentRepository.findAll(
-			studentSearchSpecification,
-			getPageRequest(studentSearchSpecification.getPage(),
-				studentSearchSpecification.getSize(), studentSearchSpecification.getSortBy(),
-				studentSearchSpecification.getSortAscending())).stream()
-		.map(StudentEntity::toDomain).collect(Collectors.toList()));
+	return new PageImpl<>(studentRepository.findAll(studentSearchSpecification, getPageRequest(studentSearchSpecification.getPage(),
+			studentSearchSpecification.getSize(), studentSearchSpecification.getSortBy(), studentSearchSpecification.getSortAscending()))
+		.stream()
+		.map(StudentEntity::toDomain)
+		.collect(Collectors.toList()));
   }
 
   private void existsById(Long id) {
 	if (!studentRepository.existsById(id)) {
-	  throw new NotFoundException(
-		  MessageFormat.format("Student with id:{0} not found", id));
+	  throw new NotFoundException(MessageFormat.format("Student with id:{0} not found", id));
 	}
   }
 }

@@ -12,20 +12,15 @@ import org.mockito.ArgumentCaptor;
 
 class StudentStatisticsJobTest {
 
-  private final ArgumentCaptor<Long> bestStudentIdCaptor = ArgumentCaptor.forClass(
-	  Long.class);
-  private final ArgumentCaptor<Integer> studentsCountCaptor = ArgumentCaptor.forClass(
-	  Integer.class);
+  private final ArgumentCaptor<Long> bestStudentIdCaptor = ArgumentCaptor.forClass(Long.class);
+  private final ArgumentCaptor<Integer> studentsCountCaptor = ArgumentCaptor.forClass(Integer.class);
   private final ArgumentCaptor<Integer> gradesCountCaptor = ArgumentCaptor.forClass(Integer.class);
   private final ArgumentCaptor<Double> averageCaptor = ArgumentCaptor.forClass(Double.class);
 
   private final StudentRepositoryInMemory studentRepository = new StudentRepositoryInMemory();
-  private final StudentStatisticsReportGenerator studentStatisticsReportGenerator = mock(
-	  StudentStatisticsReportGenerator.class);
-  private final StudentStatisticsService studentStatisticsService = new StudentStatisticsService(
-	  studentRepository, studentStatisticsReportGenerator);
+  private final StudentStatisticsReportGenerator studentStatisticsReportGenerator = mock(StudentStatisticsReportGenerator.class);
   private final StudentStatisticsJob studentStatisticsJob = new StudentStatisticsJob(
-	  studentStatisticsService);
+	  new StudentStatisticsService(studentRepository, studentStatisticsReportGenerator));
 
   @BeforeEach
   void setUp() {
@@ -47,7 +42,8 @@ class StudentStatisticsJobTest {
 
 	// then
 	verify(studentStatisticsReportGenerator, times(1)).generateReport(
-		bestStudentIdCaptor.capture(), studentsCountCaptor.capture(), gradesCountCaptor.capture(), averageCaptor.capture());
+		bestStudentIdCaptor.capture(), studentsCountCaptor.capture(), gradesCountCaptor.capture(),
+		averageCaptor.capture());
 	assertThat(bestStudentIdCaptor.getValue()).isEqualTo(expectedBestStudentId);
 	assertThat(studentsCountCaptor.getValue()).isEqualTo(expectedStudentsCount);
 	assertThat(gradesCountCaptor.getValue()).isEqualTo(expectedGradesCount);

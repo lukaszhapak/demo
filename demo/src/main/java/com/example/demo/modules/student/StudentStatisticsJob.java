@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @ConditionalOnProperty(
-	value="job.student.statistics.enabled",
+	value = "job.student.statistics.enabled",
 	havingValue = "true")
 class StudentStatisticsJob {
 

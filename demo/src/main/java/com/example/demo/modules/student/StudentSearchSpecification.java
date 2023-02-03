@@ -25,8 +25,7 @@ class StudentSearchSpecification implements Specification<StudentEntity> {
   private String name;
 
   @Override
-  public Predicate toPredicate(Root<StudentEntity> root, CriteriaQuery<?> query,
-	  CriteriaBuilder criteriaBuilder) {
+  public Predicate toPredicate(Root<StudentEntity> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 	List<Predicate> predicates = new LinkedList<>();
 
 	if (id != null) {
