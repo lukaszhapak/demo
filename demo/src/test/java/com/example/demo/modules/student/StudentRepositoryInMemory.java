@@ -19,29 +19,25 @@ class StudentRepositoryInMemory extends AbstractRepositoryInMemory<StudentEntity
   }
 
   public void insertSampleData() {
-	Student student = getStudent();
-	student.setId(1_000_001L);
-	Student student2 = getStudent();
-	student2.setId(1000002L);
-	Student student3 = getStudent();
-	student3.setId(1000003L);
+	StudentEntity studentEntity = StudentEntity.of(getStudent());
+	studentEntity.setId(1_000_001L);
 
-	super.insertData(List.of(StudentEntity.of(student),
-		StudentEntity.of(student2),
-		StudentEntity.of(student3)));
+	super.insertData(List.of(studentEntity));
   }
 
   public void insertStatisticsData() {
-	Student student = getStudent();
-	student.setGrades(List.of(4, 2, 5, 3, 3));
-	student.setId(1000001L);
-	list.add(StudentEntity.of(student));
-	student.setGrades(List.of(2, 3, 4, 2));
-	student.setId(1000002L);
-	list.add(StudentEntity.of(student));
-	student.setGrades(List.of(4, 3, 5));
-	student.setId(1000003L);
-	list.add( StudentEntity.of(student));
+	StudentEntity studentEntity = StudentEntity.of(getStudent());
+	studentEntity.setGrades("4,2,5,3,3");
+	studentEntity.setId(1000001L);
+	list.add(studentEntity);
+	StudentEntity studentEntity2 = StudentEntity.of(getStudent());
+	studentEntity2.setGrades("2,3,4,2");
+	studentEntity2.setId(1000002L);
+	list.add(studentEntity2);
+	StudentEntity studentEntity3 = StudentEntity.of(getStudent());
+	studentEntity3.setGrades("4,3,5");
+	studentEntity3.setId(1000003L);
+	list.add(studentEntity3);
   }
 
   public void cleanData() {

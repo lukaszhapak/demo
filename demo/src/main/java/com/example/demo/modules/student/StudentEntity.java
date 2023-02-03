@@ -21,7 +21,6 @@ class StudentEntity extends AbstractEntity {
 
   static StudentEntity of(Student student) {
 	StudentEntity studentEntity = new StudentEntity();
-	studentEntity.setId(student.getId());
 	studentEntity.setName(student.getName());
 	studentEntity.setAge(student.getAge());
 	studentEntity.setGrades(collectionAsString(student.getGrades()));
