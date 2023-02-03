@@ -12,7 +12,7 @@ import org.mockito.ArgumentCaptor;
 
 class StudentStatisticsJobTest {
 
-  private final ArgumentCaptor<Long> bestStudentIdCaptor = ArgumentCaptor.forClass(Long.class);
+  private final ArgumentCaptor<Student> bestStudentCaptor = ArgumentCaptor.forClass(Student.class);
   private final ArgumentCaptor<Integer> studentsCountCaptor = ArgumentCaptor.forClass(Integer.class);
   private final ArgumentCaptor<Integer> gradesCountCaptor = ArgumentCaptor.forClass(Integer.class);
   private final ArgumentCaptor<Double> averageCaptor = ArgumentCaptor.forClass(Double.class);
@@ -20,7 +20,7 @@ class StudentStatisticsJobTest {
   private final StudentRepositoryInMemory studentRepository = new StudentRepositoryInMemory();
   private final StudentStatisticsReportGenerator studentStatisticsReportGenerator = mock(StudentStatisticsReportGenerator.class);
   private final StudentStatisticsJob studentStatisticsJob = new StudentStatisticsJob(
-	  new StudentStatisticsService(studentRepository, studentStatisticsReportGenerator));
+	  new StudentStatisticsService(studentRepository, new StudentService(studentRepository, new StudentValidator()), studentStatisticsReportGenerator));
 
   @BeforeEach
   void setUp() {
@@ -41,11 +41,23 @@ class StudentStatisticsJobTest {
 	studentStatisticsJob.calculateStatistics();
 
 	// then
-	verify(studentStatisticsReportGenerator, times(1)).generateReport(bestStudentIdCaptor.capture(),
+	verify(studentStatisticsReportGenerator, times(1)).generateReport(bestStudentCaptor.capture(),
 		studentsCountCaptor.capture(), gradesCountCaptor.capture(), averageCaptor.capture());
-	assertThat(bestStudentIdCaptor.getValue()).isEqualTo(expectedBestStudentId);
+	assertThat(bestStudentCaptor.getValue().getId()).isEqualTo(expectedBestStudentId);
 	assertThat(studentsCountCaptor.getValue()).isEqualTo(expectedStudentsCount);
 	assertThat(gradesCountCaptor.getValue()).isEqualTo(expectedGradesCount);
 	assertThat(averageCaptor.getValue()).isEqualTo(expectedAverage);
+  }
+
+  @Test
+  @DisplayName("should not fail on calculating statistics with no students")
+  void shouldNotFailOnCalculatingStatisticsWithNoStudents() {
+	// given
+	studentRepository.cleanData();
+
+	// when
+	studentStatisticsJob.calculateStatistics();
+
+	// then
   }
 }

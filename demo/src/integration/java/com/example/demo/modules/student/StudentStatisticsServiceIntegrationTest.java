@@ -17,10 +17,8 @@ import org.springframework.test.context.jdbc.Sql;
 @Sql(value = "classpath:clean-data.sql", executionPhase = AFTER_TEST_METHOD)
 class StudentStatisticsServiceIntegrationTest extends AbstractIntegrationTest {
 
-  private final ArgumentCaptor<Long> bestStudentIdCaptor = ArgumentCaptor.forClass(
-      Long.class);
-  private final ArgumentCaptor<Integer> studentsCountCaptor = ArgumentCaptor.forClass(
-      Integer.class);
+  private final ArgumentCaptor<Student> bestStudentCaptor = ArgumentCaptor.forClass(Student.class);
+  private final ArgumentCaptor<Integer> studentsCountCaptor = ArgumentCaptor.forClass(Integer.class);
   private final ArgumentCaptor<Integer> gradesCountCaptor = ArgumentCaptor.forClass(Integer.class);
   private final ArgumentCaptor<Double> averageCaptor = ArgumentCaptor.forClass(Double.class);
 
@@ -41,8 +39,8 @@ class StudentStatisticsServiceIntegrationTest extends AbstractIntegrationTest {
 
     // then
     verify(studentStatisticsReportGenerator, times(1)).generateReport(
-        bestStudentIdCaptor.capture(), studentsCountCaptor.capture(), gradesCountCaptor.capture(), averageCaptor.capture());
-    assertThat(bestStudentIdCaptor.getValue()).isEqualTo(expectedBestStudentId);
+        bestStudentCaptor.capture(), studentsCountCaptor.capture(), gradesCountCaptor.capture(), averageCaptor.capture());
+    assertThat(bestStudentCaptor.getValue().getId()).isEqualTo(expectedBestStudentId);
     assertThat(studentsCountCaptor.getValue()).isEqualTo(expectedStudentsCount);
     assertThat(gradesCountCaptor.getValue()).isEqualTo(expectedGradesCount);
     assertThat(averageCaptor.getValue()).isEqualTo(expectedAverage);

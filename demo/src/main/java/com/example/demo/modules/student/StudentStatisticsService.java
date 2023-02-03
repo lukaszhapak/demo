@@ -17,15 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 class StudentStatisticsService {
 
   private final StudentRepository studentRepository;
+  private final StudentService studentService;
   private final StudentStatisticsReportGenerator studentStatisticsReportGenerator;
 
   void calculateStatistics() {
 	log.debug("Calculating statistics");
 	List<StudentStatisticsDTO> studentStatistics = getStudentStatistics();
-	StudentStatisticsDTO bestStudent = getBestStudent(studentStatistics);
+	Long bestStudentId = getBestStudent(studentStatistics).getId();
+	Student bestStudent = studentService.getStudentById(bestStudentId);
 	List<Integer> allGrades = getAllGrades(studentStatistics);
 	Double average = calculateAverage(allGrades);
-	studentStatisticsReportGenerator.generateReport(bestStudent.getId(), studentStatistics.size(), allGrades.size(), average);
+	studentStatisticsReportGenerator.generateReport(bestStudent, studentStatistics.size(), allGrades.size(), average);
   }
 
   private StudentStatisticsDTO getBestStudent(List<StudentStatisticsDTO> studentStatistics) {
