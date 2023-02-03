@@ -8,6 +8,7 @@ import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
 import java.util.Collections;
 import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,21 +19,25 @@ import org.junit.jupiter.params.provider.ValueSource;
 class StudentControllerTest {
 
   private static final long NON_EXISTING_STUDENT_ID = 3000000L;
-  private static final long GET_STUDENT_ID = 1000001L;
-  private static final long DELETE_STUDENT_ID = 1000002L;
-  private static final long UPDATE_STUDENT_ID = 1000003L;
+  private static final long SAMPLE_STUDENT_ID = 1000001L;
 
-  private final StudentRepository studentRepository = new StudentRepositoryInMemory();
+  private final StudentRepositoryInMemory studentRepository = new StudentRepositoryInMemory();
   private final StudentValidator studentValidator = new StudentValidator();
   private final StudentService studentService = new StudentService(studentRepository,
 	  studentValidator);
   private final StudentController studentController = new StudentController(studentService);
 
+  @BeforeEach
+  void setUp() {
+	studentRepository.cleanData();
+	studentRepository.insertSampleData();
+  }
+
   @Test
   @DisplayName("should get student by id")
   void shouldGetStudentById() {
 	// given
-	Long id = GET_STUDENT_ID;
+	Long id = SAMPLE_STUDENT_ID;
 
 	// when
 	Student response = studentController.getStudentById(id);
@@ -182,7 +187,7 @@ class StudentControllerTest {
   @DisplayName("should throw exception when student age is invalid during update")
   void shouldThrowExceptionWhenStudentAgeIsInvalidDuringUpdate(Integer age) {
 	// given
-	Long id = UPDATE_STUDENT_ID;
+	Long id = SAMPLE_STUDENT_ID;
 	Student student = getStudent();
 	student.setAge(age);
 
@@ -200,7 +205,7 @@ class StudentControllerTest {
   @DisplayName("should throw exception when student name is invalid during update")
   void shouldThrowExceptionWhenStudentNameIsInvalidDuringUpdate(String name) {
 	// given
-	Long id = UPDATE_STUDENT_ID;
+	Long id = SAMPLE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName(name);
 
@@ -215,7 +220,7 @@ class StudentControllerTest {
   @DisplayName("should delete by id")
   void shouldDeleteById() {
 	// given
-	Long id = DELETE_STUDENT_ID;
+	Long id = SAMPLE_STUDENT_ID;
 
 	// when
 	studentController.deleteStudent(id);
@@ -242,7 +247,7 @@ class StudentControllerTest {
   @DisplayName("should update student")
   void shouldUpdateStudent() {
 	// given
-	Long id = UPDATE_STUDENT_ID;
+	Long id = SAMPLE_STUDENT_ID;
 	Student student = getStudent();
 	student.setName("Jim");
 

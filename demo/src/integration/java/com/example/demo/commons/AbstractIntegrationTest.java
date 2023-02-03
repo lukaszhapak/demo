@@ -6,11 +6,13 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
+import com.example.demo.modules.student.StudentStatisticsReportGenerator;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.test.context.jdbc.Sql;
@@ -27,11 +29,14 @@ public abstract class AbstractIntegrationTest {
   @Container
   public static TestPostgresContainer postgres = TestPostgresContainer.getContainer();
 
+  @LocalServerPort
+  protected int port;
+
   @Autowired
   protected NamedParameterJdbcOperations jdbc;
 
-  @LocalServerPort
-  protected int port;
+  @MockBean
+  protected StudentStatisticsReportGenerator studentStatisticsReportGenerator;
 
   protected Response getHttpCall(String url) {
 	return given()

@@ -34,11 +34,6 @@ class StudentService {
 	return studentRepository.save(studentEntity).toDomain();
   }
 
-  public Long count() {
-	log.debug("Get students count");
-	return studentRepository.count();
-  }
-
   public void deleteStudentById(Long id) {
 	log.debug("Delete student with Id={}", id);
 	if (studentRepository.deleteAllById(id) == 0) {

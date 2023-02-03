@@ -15,13 +15,12 @@ import org.springframework.stereotype.Component;
 	havingValue = "true")
 class StudentStatisticsJob {
 
-  private final StudentService studentService;
+  private final StudentStatisticsService studentStatisticsService;
 
   @Scheduled(cron = "${job.student.statistics.cron}")
   @SchedulerLock(name = "CalculateStatistics", lockAtLeastFor = "10S")
   void calculateStatistics() {
 	log.debug("Running student statistics job");
-	Long studentsCount = studentService.count();
-	log.debug("There are {} students", studentsCount);
+	studentStatisticsService.calculateStatistics();
   }
 }
