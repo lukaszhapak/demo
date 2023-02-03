@@ -23,34 +23,40 @@ class StudentStatisticsService {
   void calculateStatistics() {
 	log.debug("Calculating statistics");
 	List<StudentStatisticsDTO> studentStatistics = getStudentStatistics();
-	Long bestStudentId = getBestStudent(studentStatistics).getId();
-	Student bestStudent = studentService.getStudentById(bestStudentId);
 	List<Integer> allGrades = getAllGrades(studentStatistics);
-	Double average = calculateAverage(allGrades);
-	studentStatisticsReportGenerator.generateReport(bestStudent, studentStatistics.size(), allGrades.size(), average);
+	if (allGrades.size() > 0) {
+	  Double average = calculateAverage(allGrades);
+	  Student bestStudent = studentService.getStudentById(getBestStudent(studentStatistics).getId());
+	  studentStatisticsReportGenerator.generateReport(bestStudent, studentStatistics.size(), allGrades.size(), average);
+	}
+  }
+
+  private List<StudentStatisticsDTO> getStudentStatistics() {
+	return studentRepository.getStudentStatistics();
   }
 
   private StudentStatisticsDTO getBestStudent(List<StudentStatisticsDTO> studentStatistics) {
 	return studentStatistics.stream()
+		.filter(student -> student.getGrades() != null && student.getGrades().size() > 0)
 		.max(Comparator.comparing(student -> calculateAverage(student.getGrades())))
-		.orElse(null);
+		.get();
   }
 
   private List<Integer> getAllGrades(List<StudentStatisticsDTO> studentStatistics) {
 	return studentStatistics.stream()
+		.filter(student -> student.getGrades() != null && student.getGrades().size() > 0)
 		.map(StudentStatisticsDTO::getGrades)
 		.flatMap(List::stream)
 		.collect(Collectors.toList());
   }
 
   private Double calculateAverage(List<Integer> grades) {
-	double average = (double) grades.stream()
-		.reduce(0, Integer::sum) / grades.size();
-	BigDecimal bigDecimalAverage = new BigDecimal(average).setScale(2, RoundingMode.HALF_UP);
-	return bigDecimalAverage.doubleValue();
-  }
-
-  private List<StudentStatisticsDTO> getStudentStatistics() {
-	return studentRepository.getStudentStatistics();
+	if (grades != null && grades.size() > 0) {
+	  double average = (double) grades.stream()
+		  .reduce(0, Integer::sum) / grades.size();
+	  BigDecimal bigDecimalAverage = new BigDecimal(average).setScale(2, RoundingMode.HALF_UP);
+	  return bigDecimalAverage.doubleValue();
+	}
+	return null;
   }
 }

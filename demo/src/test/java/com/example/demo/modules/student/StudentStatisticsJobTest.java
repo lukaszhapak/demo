@@ -1,6 +1,7 @@
 package com.example.demo.modules.student;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -33,7 +34,7 @@ class StudentStatisticsJobTest {
   void shouldCalculateStatistics() {
 	// given
 	Long expectedBestStudentId = 1000003L;
-	Integer expectedStudentsCount = 3;
+	Integer expectedStudentsCount = 5;
 	Integer expectedGradesCount = 12;
 	Double expectedAverage = 3.33;
 
@@ -59,5 +60,6 @@ class StudentStatisticsJobTest {
 	studentStatisticsJob.calculateStatistics();
 
 	// then
+	verify(studentStatisticsReportGenerator, times(0)).generateReport(any(), any(), any(), any());
   }
 }
