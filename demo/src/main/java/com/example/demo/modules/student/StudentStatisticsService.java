@@ -29,6 +29,7 @@ class StudentStatisticsService {
 	  Student bestStudent = studentService.getStudentById(getBestStudent(studentStatistics).getId());
 	  studentStatisticsReportGenerator.generateReport(bestStudent, studentStatistics.size(), allGrades.size(), average);
 	}
+	log.debug("There are no grades at all");
   }
 
   private List<StudentStatisticsDTO> getStudentStatistics() {
@@ -38,8 +39,7 @@ class StudentStatisticsService {
   private StudentStatisticsDTO getBestStudent(List<StudentStatisticsDTO> studentStatistics) {
 	return studentStatistics.stream()
 		.filter(student -> student.getGrades() != null && student.getGrades().size() > 0)
-		.max(Comparator.comparing(student -> calculateAverage(student.getGrades())))
-		.get();
+		.max(Comparator.comparing(student -> calculateAverage(student.getGrades()))).get();
   }
 
   private List<Integer> getAllGrades(List<StudentStatisticsDTO> studentStatistics) {
