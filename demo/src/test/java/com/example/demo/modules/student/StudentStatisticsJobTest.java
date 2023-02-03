@@ -41,9 +41,8 @@ class StudentStatisticsJobTest {
 	studentStatisticsJob.calculateStatistics();
 
 	// then
-	verify(studentStatisticsReportGenerator, times(1)).generateReport(
-		bestStudentIdCaptor.capture(), studentsCountCaptor.capture(), gradesCountCaptor.capture(),
-		averageCaptor.capture());
+	verify(studentStatisticsReportGenerator, times(1)).generateReport(bestStudentIdCaptor.capture(),
+		studentsCountCaptor.capture(), gradesCountCaptor.capture(), averageCaptor.capture());
 	assertThat(bestStudentIdCaptor.getValue()).isEqualTo(expectedBestStudentId);
 	assertThat(studentsCountCaptor.getValue()).isEqualTo(expectedStudentsCount);
 	assertThat(gradesCountCaptor.getValue()).isEqualTo(expectedGradesCount);

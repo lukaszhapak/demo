@@ -3,6 +3,10 @@ package com.example.demo.modules.student;
 import static com.example.demo.commons.helper.TestUtils.getStudent;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import com.example.demo.exception.NotFoundException;
 import com.example.demo.exception.ValidationException;
@@ -21,7 +25,7 @@ class StudentControllerTest {
   private static final long NON_EXISTING_STUDENT_ID = 3000000L;
   private static final long SAMPLE_STUDENT_ID = 1000001L;
 
-  private final StudentRepositoryInMemory studentRepository = new StudentRepositoryInMemory();
+  private final StudentRepositoryInMemory studentRepository = spy(StudentRepositoryInMemory.class);
   private final StudentController studentController = new StudentController(new StudentService(studentRepository, new StudentValidator()));
 
   @BeforeEach
@@ -57,8 +61,7 @@ class StudentControllerTest {
   }
 
   @ParameterizedTest
-  @ValueSource(strings = {"aa", "John", "asdw", "asdwadawasdsadzxc",
-	  "exactly 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
+  @ValueSource(strings = {"aa", "John", "asdw", "asdwadawasdsadzxc", "exactly 64 characters aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"})
   @DisplayName("should save student")
   void shouldSaveStudent(String name) {
 	// given
@@ -124,6 +127,7 @@ class StudentControllerTest {
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
 	assertThat(thrown.getInvalidFields()).hasSize(3).containsKeys("Name", "Age", "Grade");
+	verify(studentRepository, times(0)).save(any());
   }
 
   @ParameterizedTest
@@ -141,6 +145,7 @@ class StudentControllerTest {
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
 	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Age");
+	verify(studentRepository, times(0)).save(any());
   }
 
   @ParameterizedTest
@@ -158,6 +163,7 @@ class StudentControllerTest {
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
 	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Name");
+	verify(studentRepository, times(0)).save(any());
   }
 
   @ParameterizedTest
@@ -172,9 +178,9 @@ class StudentControllerTest {
 	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.saveStudent(student));
 
 	// then
-	assertThat(thrown).isInstanceOf(ValidationException.class)
-		.hasMessageContaining("Student is invalid");
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
 	assertThat(thrown.getInvalidFields()).hasSize(1).containsKey("Grade");
+	verify(studentRepository, times(0)).save(any());
   }
 
   @ParameterizedTest
@@ -209,6 +215,7 @@ class StudentControllerTest {
 
 	// then
 	assertThat(thrown).isInstanceOf(ValidationException.class);
+	verify(studentRepository, times(0)).save(any());
   }
 
   @Test
@@ -221,7 +228,7 @@ class StudentControllerTest {
 	studentController.deleteStudent(id);
 
 	// then
-	assertThat(studentRepository.existsById(SAMPLE_STUDENT_ID)).isFalse();
+	assertThat(studentRepository.existsById(id)).isFalse();
   }
 
   @Test
@@ -268,6 +275,26 @@ class StudentControllerTest {
 
 	// then
 	assertThat(thrown).isInstanceOf(NotFoundException.class);
+  }
+
+  @Test
+  @DisplayName("should throw exception when update student is invalid")
+  void shouldThrowExceptionWhenUpdateStudentIsInvalid() {
+	// given
+	Long id = SAMPLE_STUDENT_ID;
+	Student student = getStudent();
+	student.setId(id);
+	student.setName("A");
+	student.setAge(18);
+	student.setGrades(List.of(1, 1, 7, 88, -2));
+
+	// when
+	ValidationException thrown = (ValidationException) catchThrowable(() -> studentController.updateStudent(id, student));
+
+	// then
+	assertThat(thrown).isInstanceOf(ValidationException.class).hasMessageContaining("Student is invalid");
+	assertThat(thrown.getInvalidFields()).hasSize(3).containsKeys("Name", "Age", "Grade");
+	verify(studentRepository, times(0)).save(any());
   }
 
 }
