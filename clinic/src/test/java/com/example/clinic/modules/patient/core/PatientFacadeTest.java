@@ -17,8 +17,8 @@ public class PatientFacadeTest {
 
   private final PatientFacade patientFacade = new ClinicConfiguration().patientFacade(new PatientRepositoryInMemory());
 
-  @DisplayName("save tests")
   @Nested
+  @DisplayName("save tests")
   class SaveTests {
 
 	@Test
@@ -39,8 +39,8 @@ public class PatientFacadeTest {
 	}
   }
 
-  @DisplayName("get tests")
   @Nested
+  @DisplayName("get tests")
   class GetTests {
 
 	@Test
@@ -58,8 +58,8 @@ public class PatientFacadeTest {
 	}
   }
 
-  @DisplayName("update tests")
   @Nested
+  @DisplayName("update tests")
   class UpdateTests {
 
 	@Test
@@ -84,8 +84,8 @@ public class PatientFacadeTest {
 	}
   }
 
-  @DisplayName("delete tests")
   @Nested
+  @DisplayName("delete tests")
   class DeleteTests {
 
 	@Test
