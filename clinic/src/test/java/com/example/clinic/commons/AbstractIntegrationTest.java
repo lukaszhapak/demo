@@ -5,6 +5,7 @@ import static io.restassured.http.ContentType.JSON;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
+import com.example.clinic.ClinicApplication;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +19,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(value = "classpath:clean-data.sql", executionPhase = AFTER_TEST_METHOD)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = {ClinicApplication.class}, webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AbstractIntegrationTest {
 
   @Container

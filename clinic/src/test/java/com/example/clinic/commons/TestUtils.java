@@ -10,7 +10,7 @@ public interface TestUtils {
   static PatientDTO getPatientDTO() {
 	PatientDTO patientDTO = new PatientDTO();
 	patientDTO.setFirstName("John");
-	patientDTO.setLastname("Doe");
+	patientDTO.setLastName("Doe");
 	patientDTO.setPesel("98654273941");
 	patientDTO.setPatientGender(PatientGender.MALE);
 	patientDTO.setBirthDate(LocalDate.of(1998, 2, 15));

@@ -12,7 +12,7 @@ public class PatientDTO {
 
   private Long id;
   private String firstName;
-  private String lastname;
+  private String lastName;
   private String pesel;
   private PatientGender patientGender;
   private LocalDate birthDate;
@@ -21,7 +21,7 @@ public class PatientDTO {
   public Patient toDomain() {
 	Patient patient = new Patient();
 	patient.setFirstName(firstName);
-	patient.setLastname(lastname);
+	patient.setLastName(lastName);
 	patient.setPesel(pesel);
 	patient.setPatientGender(patientGender);
 	patient.setBirthDate(birthDate);
@@ -33,7 +33,7 @@ public class PatientDTO {
 	PatientDTO patientDTO = new PatientDTO();
 	patientDTO.setId(patient.getId());
 	patientDTO.setFirstName(patient.getFirstName());
-	patientDTO.setLastname(patient.getLastname());
+	patientDTO.setLastName(patient.getLastName());
 	patientDTO.setPesel(patient.getPesel());
 	patientDTO.setPatientGender(patient.getPatientGender());
 	patientDTO.setBirthDate(patient.getBirthDate());

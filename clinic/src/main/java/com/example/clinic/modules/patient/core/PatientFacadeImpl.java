@@ -5,7 +5,9 @@ import com.example.clinic.modules.patient.domain.Patient;
 import com.example.clinic.modules.patient.repository.PatientRepository;
 import java.text.MessageFormat;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @RequiredArgsConstructor
 public class PatientFacadeImpl implements PatientFacade {
 

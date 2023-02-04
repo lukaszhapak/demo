@@ -70,7 +70,7 @@ public class PatientFacadeTest {
 	  Patient request = getPatient();
 	  request.setId(patient.getId());
 	  request.setFirstName("Jimmy");
-	  request.setLastname("Newman");
+	  request.setLastName("Newman");
 	  request.setPhoneNumber("789641615");
 
 	  // when
