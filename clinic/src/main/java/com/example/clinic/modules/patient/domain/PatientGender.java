@@ -1,5 +1,5 @@
 package com.example.clinic.modules.patient.domain;
 
-public enum Sex {
+public enum PatientGender {
   MALE, FEMALE
 }

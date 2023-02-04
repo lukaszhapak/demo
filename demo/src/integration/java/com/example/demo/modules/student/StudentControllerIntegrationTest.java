@@ -11,23 +11,20 @@ import io.restassured.response.Response;
 import java.text.MessageFormat;
 import java.util.List;
 import org.apache.http.HttpStatus;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 class StudentControllerIntegrationTest extends AbstractIntegrationTest {
 
   private final String URL = "/api/student/";
 
-  private static JdbcTestHelper<Student> jdbcTestHelper;
+  @Autowired
+  private JdbcTestHelper<Student> jdbcTestHelper;
 
   private static final long NON_EXISTING_STUDENT_ID = 3000000L;
   private static final long SAMPLE_STUDENT_ID = 1000001L;
 
-  @BeforeEach
-  void setUp() {
-	jdbcTestHelper = new JdbcTestHelper<>(jdbc);
-  }
 
   @Test
   @DisplayName("should get student by id")

@@ -1,8 +1,8 @@
-package com.example.clinic.commons.helper;
+package com.example.clinic.commons;
 
 import com.example.clinic.modules.patient.controller.PatientDTO;
 import com.example.clinic.modules.patient.domain.Patient;
-import com.example.clinic.modules.patient.domain.Sex;
+import com.example.clinic.modules.patient.domain.PatientGender;
 import java.time.LocalDate;
 
 public interface TestUtils {
@@ -12,16 +12,15 @@ public interface TestUtils {
 	patientDTO.setFirstName("John");
 	patientDTO.setLastname("Doe");
 	patientDTO.setPesel("98654273941");
-	patientDTO.setSex(Sex.MALE);
+	patientDTO.setPatientGender(PatientGender.MALE);
 	patientDTO.setBirthDate(LocalDate.of(1998, 2, 15));
 	patientDTO.setPhoneNumber("987468231");
 	return patientDTO;
   }
 
-  static Patient getPatient(Long id) {
+  static Patient getPatient() {
 	PatientDTO patientDTO = getPatientDTO();
 	Patient patient = patientDTO.toDomain();
-	patient.setId(id);
 	return patient;
   }
 }

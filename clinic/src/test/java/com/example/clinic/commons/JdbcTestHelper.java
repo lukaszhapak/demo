@@ -2,19 +2,21 @@ package com.example.clinic.commons;
 
 import java.text.MessageFormat;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
+@Component
 public class JdbcTestHelper<T> {
 
-  private final NamedParameterJdbcOperations jdbc;
+  @Autowired
+  private NamedParameterJdbcOperations jdbc;
 
-  public List<T> fetchEntities(String tableName, Class<T> clazz) {
+  public List<T> fetchEntities(String tableName, String operator, Class<T> clazz) {
 	return jdbc.query(
-		MessageFormat.format("SELECT * FROM {0} WHERE ID < :id", tableName),
+		MessageFormat.format("SELECT * FROM {0} WHERE ID {1} :id", tableName, operator),
 		new MapSqlParameterSource().addValue("id", 100000L),
 		new BeanPropertyRowMapper<T>(clazz));
   }

@@ -1,4 +1,4 @@
-package com.example.clinic.commons.config;
+package com.example.clinic.config;
 
 import javax.sql.DataSource;
 import net.javacrumbs.shedlock.core.LockProvider;

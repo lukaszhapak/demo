@@ -1,4 +1,4 @@
-package com.example.clinic.exception;
+package com.example.clinic.commons.exception;
 
 import java.text.MessageFormat;
 import java.util.Map;

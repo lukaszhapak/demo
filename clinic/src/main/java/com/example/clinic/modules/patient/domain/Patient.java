@@ -12,7 +12,7 @@ public class Patient extends AbstractEntity {
   private String firstName;
   private String lastname;
   private String pesel;
-  private Sex sex;
+  private PatientGender patientGender;
   private LocalDate birthDate;
   private String phoneNumber;
 
@@ -20,7 +20,7 @@ public class Patient extends AbstractEntity {
 	firstName = patient.getFirstName();
 	lastname = patient.getLastname();
 	pesel = patient.getPesel();
-	sex = patient.getSex();
+	patientGender = patient.getPatientGender();
 	birthDate = patient.getBirthDate();
 	phoneNumber = patient.getPhoneNumber();
   }

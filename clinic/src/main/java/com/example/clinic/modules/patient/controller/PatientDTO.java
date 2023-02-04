@@ -1,7 +1,7 @@
 package com.example.clinic.modules.patient.controller;
 
 import com.example.clinic.modules.patient.domain.Patient;
-import com.example.clinic.modules.patient.domain.Sex;
+import com.example.clinic.modules.patient.domain.PatientGender;
 import java.time.LocalDate;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +14,7 @@ public class PatientDTO {
   private String firstName;
   private String lastname;
   private String pesel;
-  private Sex sex;
+  private PatientGender patientGender;
   private LocalDate birthDate;
   private String phoneNumber;
 
@@ -23,7 +23,7 @@ public class PatientDTO {
 	patient.setFirstName(firstName);
 	patient.setLastname(lastname);
 	patient.setPesel(pesel);
-	patient.setSex(sex);
+	patient.setPatientGender(patientGender);
 	patient.setBirthDate(birthDate);
 	patient.setPhoneNumber(phoneNumber);
 	return patient;
@@ -35,7 +35,7 @@ public class PatientDTO {
 	patientDTO.setFirstName(patient.getFirstName());
 	patientDTO.setLastname(patient.getLastname());
 	patientDTO.setPesel(patient.getPesel());
-	patientDTO.setSex(patient.getSex());
+	patientDTO.setPatientGender(patient.getPatientGender());
 	patientDTO.setBirthDate(patient.getBirthDate());
 	patientDTO.setPhoneNumber(patient.getPhoneNumber());
 	return patientDTO;

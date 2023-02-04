@@ -25,26 +25,26 @@ class StudentStatisticsServiceIntegrationTest extends AbstractIntegrationTest {
   private final ArgumentCaptor<Double> averageCaptor = ArgumentCaptor.forClass(Double.class);
 
   @Autowired
-
   private StudentStatisticsService studentStatisticsService;
+
   @Test
   @DisplayName("should calculate statistics")
   void shouldCalculateStatistics() {
-    // given
-    Long expectedBestStudentId = 1000003L;
-    Integer expectedStudentsCount = 3;
-    Integer expectedGradesCount = 12;
-    Double expectedAverage = 3.33;
+	// given
+	Long expectedBestStudentId = 1000003L;
+	Integer expectedStudentsCount = 3;
+	Integer expectedGradesCount = 12;
+	Double expectedAverage = 3.33;
 
-    // when
-    studentStatisticsService.calculateStatistics();
+	// when
+	studentStatisticsService.calculateStatistics();
 
-    // then
-    verify(studentStatisticsReportGenerator, times(1)).generateReport(
-        bestStudentCaptor.capture(), studentsCountCaptor.capture(), gradesCountCaptor.capture(), averageCaptor.capture());
-    assertThat(bestStudentCaptor.getValue().getId()).isEqualTo(expectedBestStudentId);
-    assertThat(studentsCountCaptor.getValue()).isEqualTo(expectedStudentsCount);
-    assertThat(gradesCountCaptor.getValue()).isEqualTo(expectedGradesCount);
-    assertThat(averageCaptor.getValue()).isEqualTo(expectedAverage);
+	// then
+	verify(studentStatisticsReportGenerator, times(1)).generateReport(
+		bestStudentCaptor.capture(), studentsCountCaptor.capture(), gradesCountCaptor.capture(), averageCaptor.capture());
+	assertThat(bestStudentCaptor.getValue().getId()).isEqualTo(expectedBestStudentId);
+	assertThat(studentsCountCaptor.getValue()).isEqualTo(expectedStudentsCount);
+	assertThat(gradesCountCaptor.getValue()).isEqualTo(expectedGradesCount);
+	assertThat(averageCaptor.getValue()).isEqualTo(expectedAverage);
   }
 }

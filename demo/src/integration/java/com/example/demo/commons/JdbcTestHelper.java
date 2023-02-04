@@ -2,15 +2,17 @@ package com.example.demo.commons;
 
 import java.text.MessageFormat;
 import java.util.List;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
+import org.springframework.stereotype.Component;
 
-@RequiredArgsConstructor
+@Component
 public class JdbcTestHelper<T> {
 
-  private final NamedParameterJdbcOperations jdbc;
+  @Autowired
+  private NamedParameterJdbcOperations jdbc;
 
   public List<T> fetchEntities(String tableName, Class<T> clazz) {
 	return jdbc.query(

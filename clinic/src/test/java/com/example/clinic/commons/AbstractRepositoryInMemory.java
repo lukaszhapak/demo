@@ -1,6 +1,5 @@
-package com.example.clinic.commons.helper;
+package com.example.clinic.commons;
 
-import com.example.clinic.commons.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,13 +21,6 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
 
   public T getById(Long id) {
 	return findById(id).get();
-  }
-
-  public boolean existsById(Long id) {
-	Optional<T> entity = list.stream()
-		.filter(x -> Objects.equals(x.getId(), id))
-		.findFirst();
-	return entity.isPresent();
   }
 
   protected T save(T entity) {
@@ -62,6 +54,13 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
 	} else {
 	  return 0L;
 	}
+  }
+
+  protected boolean existsById(Long id) {
+	Optional<T> entity = list.stream()
+		.filter(x -> Objects.equals(x.getId(), id))
+		.findFirst();
+	return entity.isPresent();
   }
 
   private void setId(T entity) {

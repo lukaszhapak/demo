@@ -1,4 +1,4 @@
-package com.example.clinic.exception;
+package com.example.clinic.commons.exception;
 
 import lombok.extern.log4j.Log4j2;
 

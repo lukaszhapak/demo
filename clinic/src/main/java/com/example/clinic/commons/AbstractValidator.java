@@ -1,6 +1,6 @@
 package com.example.clinic.commons;
 
-import com.example.clinic.exception.ValidationException;
+import com.example.clinic.commons.exception.ValidationException;
 import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;

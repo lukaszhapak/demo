@@ -22,7 +22,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @Testcontainers
 @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(value = "classpath:clean-data.sql", executionPhase = AFTER_TEST_METHOD)
-@AutoConfigureTestDatabase(replace = Replace.NONE)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AbstractIntegrationTest {
 
