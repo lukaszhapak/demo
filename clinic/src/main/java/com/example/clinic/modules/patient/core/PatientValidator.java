@@ -7,7 +7,12 @@ import java.util.HashMap;
 public class PatientValidator extends AbstractValidator {
 
   public void validate(Patient patient) {
-    invalidFields = new HashMap<>();
-    throwException("Patient");
+	invalidFields = new HashMap<>();
+
+	throwException("Patient");
+  }
+
+  private void validateFirstName(String firstName) {
+
   }
 }

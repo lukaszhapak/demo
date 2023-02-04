@@ -8,7 +8,6 @@ import com.example.clinic.commons.exception.NotFoundException;
 import com.example.clinic.config.ClinicConfiguration;
 import com.example.clinic.modules.patient.domain.Patient;
 import com.example.clinic.modules.patient.repository.PatientRepositoryInMemory;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,13 +15,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Patient facade test")
 public class PatientFacadeTest {
 
-  private final PatientRepositoryInMemory patientRepository = new PatientRepositoryInMemory();
-  private final PatientFacade patientFacade = new ClinicConfiguration().patientFacade(patientRepository);
-
-  @BeforeEach
-  void setUp() {
-	patientRepository.cleanData();
-  }
+  private final PatientFacade patientFacade = new ClinicConfiguration().patientFacade(new PatientRepositoryInMemory());
 
   @DisplayName("save tests")
   @Nested
@@ -41,7 +34,7 @@ public class PatientFacadeTest {
 	  assertThat(response.getId()).isNotNull();
 	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
-	  Patient patient = patientRepository.getById(response.getId());
+	  Patient patient = patientFacade.findById(response.getId());
 	  assertThat(patient).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
   }
@@ -61,7 +54,7 @@ public class PatientFacadeTest {
 
 	  // then
 	  assertThat(response.getId()).isEqualTo(patient.getId());
-	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(getPatient());
+	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(patient);
 	}
   }
 
@@ -86,7 +79,7 @@ public class PatientFacadeTest {
 	  // then
 	  assertThat(response).usingRecursiveComparison().isEqualTo(request);
 
-	  Patient patientInDb = patientRepository.getById(response.getId());
+	  Patient patientInDb = patientFacade.findById(response.getId());
 	  assertThat(patientInDb).usingRecursiveComparison().isEqualTo(request);
 	}
   }

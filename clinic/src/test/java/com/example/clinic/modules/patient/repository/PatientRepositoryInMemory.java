@@ -6,10 +6,6 @@ import java.util.Optional;
 
 public class PatientRepositoryInMemory extends AbstractRepositoryInMemory<Patient> implements PatientRepository {
 
-  public void cleanData() {
-	super.cleanData();
-  }
-
   @Override
   public Optional<Patient> findById(Long id) {
 	return super.findById(id);

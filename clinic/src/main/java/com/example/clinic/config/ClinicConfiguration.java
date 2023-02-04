@@ -15,5 +15,4 @@ public class ClinicConfiguration {
     PatientValidator patientValidator = new PatientValidator();
     return new PatientFacadeImpl(patientRepository, patientValidator);
   }
-
 }

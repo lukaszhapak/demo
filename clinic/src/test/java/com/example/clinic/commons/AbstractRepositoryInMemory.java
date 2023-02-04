@@ -11,18 +11,6 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
   protected List<T> list = new ArrayList<>();
   private Long id = 0L;
 
-  public void insertData(List<T> data) {
-	list.addAll(data);
-  }
-
-  public void cleanData() {
-	list.clear();
-  }
-
-  public T getById(Long id) {
-	return findById(id).get();
-  }
-
   protected T save(T entity) {
 	if (entity.getId() == null || !existsById(entity.getId())) {
 	  setId(entity);
@@ -38,10 +26,6 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
 	return list.stream()
 		.filter(x -> Objects.equals(x.getId(), id))
 		.findFirst();
-  }
-
-  protected Long count() {
-	return (long) list.size();
   }
 
   protected Long deleteAllById(Long id) {
