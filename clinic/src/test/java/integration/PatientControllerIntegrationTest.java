@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.clinic.commons.AbstractIntegrationTest;
 import com.example.clinic.commons.JdbcTestHelper;
-import com.example.clinic.modules.patient.controller.PatientDTO;
+import com.example.clinic.modules.patient.domain.PatientDTO;
 import com.example.clinic.modules.patient.domain.Patient;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;

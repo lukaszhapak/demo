@@ -1,6 +1,7 @@
 package com.example.clinic.modules.patient.controller;
 
-import com.example.clinic.modules.patient.core.PatientFacade;
+import com.example.clinic.modules.patient.domain.PatientDTO;
+import com.example.clinic.modules.patient.core.PatientFacadeImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,21 +15,21 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PatientController {
 
-  private final PatientFacade patientFacade;
+  private final PatientFacadeImpl patientFacade;
 
   @GetMapping("/clinic/api/patient/{id}")
   PatientDTO findById(@PathVariable Long id) {
-	return PatientDTO.of(patientFacade.findById(id));
+	return patientFacade.findById(id);
   }
 
   @PostMapping("/clinic/api/patient")
   PatientDTO save(@RequestBody PatientDTO patientDTO) {
-	return PatientDTO.of(patientFacade.save(patientDTO.toDomain()));
+	return patientFacade.save(patientDTO);
   }
 
   @PutMapping("/clinic/api/patient/{id}")
   PatientDTO update(@PathVariable Long id, @RequestBody PatientDTO patientDTO) {
-	return PatientDTO.of(patientFacade.update(id, patientDTO.toDomain()));
+	return patientFacade.update(id, patientDTO);
   }
 
   @DeleteMapping("/clinic/api/patient/{id}")

@@ -2,6 +2,7 @@ package com.example.clinic.modules.patient.core;
 
 import com.example.clinic.commons.exception.NotFoundException;
 import com.example.clinic.modules.patient.domain.Patient;
+import com.example.clinic.modules.patient.domain.PatientDTO;
 import com.example.clinic.modules.patient.repository.PatientRepository;
 import java.text.MessageFormat;
 import lombok.RequiredArgsConstructor;
@@ -9,33 +10,31 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @RequiredArgsConstructor
-public class PatientFacadeImpl implements PatientFacade {
+public class PatientFacadeImpl {
 
   private final PatientRepository patientRepository;
   private final PatientValidator patientValidator;
 
-  @Override
-  public Patient findById(Long id) {
-	return getPatient(id);
+  public PatientDTO findById(Long id) {
+	return getPatient(id).toDTO();
   }
 
-  @Override
-  public Patient save(Patient patient) {
-	patientValidator.validate(patient);
-	return patientRepository.save(patient);
+  public PatientDTO save(PatientDTO patientDTO) {
+	patientValidator.validate(patientDTO);
+	Patient patient = Patient.of(patientDTO);
+	return patientRepository.save(patient).toDTO();
   }
 
-  @Override
-  public Patient update(Long id, Patient patient) {
+  public PatientDTO update(Long id, PatientDTO patientDTO) {
+	patientValidator.validate(patientDTO);
 	Patient toUpdate = getPatient(id);
-	toUpdate.update(patient);
-	return toUpdate;
+	toUpdate.update(patientDTO);
+	return toUpdate.toDTO();
   }
 
-  @Override
   public void deleteById(Long id) {
 	if (patientRepository.deleteAllById(id) == 0) {
-	  throw new NotFoundException(MessageFormat.format("Patient with id={} not found", id));
+	  throw new NotFoundException(MessageFormat.format("Patient with id={0} not found", id));
 	}
   }
 

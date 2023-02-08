@@ -1,12 +1,12 @@
 package com.example.clinic.modules.patient.core;
 
 import com.example.clinic.commons.AbstractValidator;
-import com.example.clinic.modules.patient.domain.Patient;
+import com.example.clinic.modules.patient.domain.PatientDTO;
 import java.util.HashMap;
 
 public class PatientValidator extends AbstractValidator {
 
-  public void validate(Patient patient) {
+  public void validate(PatientDTO patientDTO) {
 	invalidFields = new HashMap<>();
 
 	throwException("Patient");
