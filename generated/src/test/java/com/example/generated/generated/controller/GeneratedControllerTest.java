@@ -25,6 +25,31 @@ class GeneratedControllerTest {
   @Autowired
   protected NamedParameterJdbcOperations jdbc;
 
+  @Test
+  @DisplayName("test all")
+  void testAll() {
+	Generated generated = getGenerated();
+	generated.setId(1L);
+
+	postHttpCall(generated, URL);
+
+	Generated generatedResponse = getHttpCall(URL + 1).as(Generated.class);
+
+	assertThat(generated).usingRecursiveComparison().isEqualTo(generatedResponse);
+
+	generated.setName("Jimmy");
+
+	putHttpCall(generated, URL);
+
+	generatedResponse = getHttpCall(URL + 1).as(Generated.class);
+	assertThat(generated).usingRecursiveComparison().isEqualTo(generatedResponse);
+
+	deleteHttpCall(URL + 1);
+
+	Response deleteResponse =  getHttpCall(URL + 1);
+	assertThat(deleteResponse.asString()).isEqualTo("");
+  }
+
   protected Response getHttpCall(String url) {
 	return given()
 		.port(port)
@@ -60,32 +85,6 @@ class GeneratedControllerTest {
 		.log().all()
 		.when()
 		.put(url);
-  }
-
-
-  @Test
-  @DisplayName("test all")
-  void testAll() {
-	Generated generated = getGenerated();
-	generated.setId(1L);
-
-	postHttpCall(generated, URL);
-
-	Generated generatedResponse = getHttpCall(URL + 1).as(Generated.class);
-
-	assertThat(generated).usingRecursiveComparison().isEqualTo(generatedResponse);
-
-	generated.setName("Jimmy");
-
-	putHttpCall(generated, URL);
-
-	generatedResponse = getHttpCall(URL + 1).as(Generated.class);
-	assertThat(generated).usingRecursiveComparison().isEqualTo(generatedResponse);
-
-	deleteHttpCall(URL + 1);
-
-	Response deleteResponse =  getHttpCall(URL + 1);
-	assertThat(deleteResponse.asString()).isEqualTo("");
   }
 
   private Generated getGenerated() {
