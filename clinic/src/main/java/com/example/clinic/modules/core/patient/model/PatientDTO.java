@@ -1,7 +1,5 @@
-package com.example.clinic.modules.patient.domain;
+package com.example.clinic.modules.core.patient.model;
 
-import com.example.clinic.modules.patient.domain.Patient;
-import com.example.clinic.modules.patient.domain.PatientGender;
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

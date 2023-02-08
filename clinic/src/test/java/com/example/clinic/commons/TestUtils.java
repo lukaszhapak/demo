@@ -1,8 +1,8 @@
 package com.example.clinic.commons;
 
-import com.example.clinic.modules.patient.domain.PatientDTO;
-import com.example.clinic.modules.patient.domain.Patient;
-import com.example.clinic.modules.patient.domain.PatientGender;
+import com.example.clinic.modules.core.patient.model.PatientDTO;
+import com.example.clinic.modules.core.patient.model.Patient;
+import com.example.clinic.modules.core.patient.model.PatientGender;
 import java.time.LocalDate;
 
 public interface TestUtils {

@@ -1,4 +1,4 @@
-package com.example.clinic.modules.patient.domain;
+package com.example.clinic.modules.core.patient.model;
 
 import static javax.persistence.EnumType.STRING;
 

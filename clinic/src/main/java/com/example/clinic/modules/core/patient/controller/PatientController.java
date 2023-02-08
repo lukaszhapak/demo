@@ -1,7 +1,7 @@
-package com.example.clinic.modules.patient.controller;
+package com.example.clinic.modules.core.patient.controller;
 
-import com.example.clinic.modules.patient.domain.PatientDTO;
-import com.example.clinic.modules.patient.core.PatientFacade;
+import com.example.clinic.modules.core.patient.model.PatientDTO;
+import com.example.clinic.modules.core.patient.service.PatientFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

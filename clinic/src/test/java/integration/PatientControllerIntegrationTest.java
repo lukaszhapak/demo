@@ -6,8 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.clinic.commons.AbstractIntegrationTest;
 import com.example.clinic.commons.JdbcTestHelper;
-import com.example.clinic.modules.patient.domain.PatientDTO;
-import com.example.clinic.modules.patient.domain.Patient;
+import com.example.clinic.modules.core.patient.model.PatientDTO;
+import com.example.clinic.modules.core.patient.model.Patient;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -104,8 +104,8 @@ public class PatientControllerIntegrationTest extends AbstractIntegrationTest {
   class DeleteTests {
 
 	@Test
-	@DisplayName("should delete student")
-	void shouldDeleteStudent() {
+	@DisplayName("should delete patient")
+	void shouldDeletePatient() {
 	  // given
 	  Long id = EXISTING_PATIENT_ID;
 

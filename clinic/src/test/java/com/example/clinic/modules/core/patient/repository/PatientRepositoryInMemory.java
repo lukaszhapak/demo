@@ -1,7 +1,8 @@
-package com.example.clinic.modules.patient.repository;
+package com.example.clinic.modules.core.patient.repository;
 
 import com.example.clinic.commons.AbstractRepositoryInMemory;
-import com.example.clinic.modules.patient.domain.Patient;
+import com.example.clinic.modules.core.patient.model.Patient;
+import com.example.clinic.modules.core.patient.repository.PatientRepository;
 import java.util.Optional;
 
 public class PatientRepositoryInMemory extends AbstractRepositoryInMemory<Patient> implements PatientRepository {

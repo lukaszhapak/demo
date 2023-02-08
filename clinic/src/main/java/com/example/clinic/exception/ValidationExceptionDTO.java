@@ -1,4 +1,4 @@
-package com.example.clinic.commons.exception;
+package com.example.clinic.exception;
 
 import java.util.Map;
 import lombok.Getter;

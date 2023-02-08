@@ -1,6 +1,6 @@
-package com.example.clinic.modules.patient.repository;
+package com.example.clinic.modules.core.patient.repository;
 
-import com.example.clinic.modules.patient.domain.Patient;
+import com.example.clinic.modules.core.patient.model.Patient;
 import java.util.Optional;
 import org.springframework.data.repository.Repository;
 

@@ -1,7 +1,7 @@
-package com.example.clinic.modules.patient.core;
+package com.example.clinic.modules.core.patient.service;
 
 import com.example.clinic.commons.AbstractValidator;
-import com.example.clinic.modules.patient.domain.PatientDTO;
+import com.example.clinic.modules.core.patient.model.PatientDTO;
 import java.util.HashMap;
 
 public class PatientValidator extends AbstractValidator {

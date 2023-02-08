@@ -1,8 +1,8 @@
 package com.example.clinic.config;
 
-import com.example.clinic.modules.patient.core.PatientFacade;
-import com.example.clinic.modules.patient.core.PatientValidator;
-import com.example.clinic.modules.patient.repository.PatientRepository;
+import com.example.clinic.modules.core.patient.service.PatientFacade;
+import com.example.clinic.modules.core.patient.service.PatientValidator;
+import com.example.clinic.modules.core.patient.repository.PatientRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
