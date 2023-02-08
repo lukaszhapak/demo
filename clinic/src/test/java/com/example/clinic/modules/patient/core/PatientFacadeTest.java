@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 @DisplayName("Patient facade test")
 public class PatientFacadeTest {
 
-  private final PatientFacadeImpl patientFacade = new ClinicConfiguration().patientFacade(new PatientRepositoryInMemory());
+  private final PatientFacade patientFacade = new ClinicConfiguration().patientFacade(new PatientRepositoryInMemory());
 
   @Nested
   @DisplayName("save tests")
@@ -66,15 +66,15 @@ public class PatientFacadeTest {
 	@DisplayName("should update patient")
 	void shouldUpdatePatient() {
 	  // given
-	  PatientDTO patientDTO = patientFacade.save(getPatientDTO());
+	  PatientDTO patient = patientFacade.save(getPatientDTO());
 	  PatientDTO request = getPatientDTO();
-	  request.setId(patientDTO.getId());
+	  request.setId(patient.getId());
 	  request.setFirstName("Jimmy");
 	  request.setLastName("Newman");
 	  request.setPhoneNumber("789641615");
 
 	  // when
-	  PatientDTO response = patientFacade.update(patientDTO.getId(), request);
+	  PatientDTO response = patientFacade.update(patient.getId(), request);
 
 	  // then
 	  assertThat(response).usingRecursiveComparison().isEqualTo(request);

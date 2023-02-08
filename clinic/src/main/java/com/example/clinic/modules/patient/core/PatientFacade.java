@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @RequiredArgsConstructor
-public class PatientFacadeImpl {
+public class PatientFacade {
 
   private final PatientRepository patientRepository;
   private final PatientValidator patientValidator;
