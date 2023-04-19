@@ -89,8 +89,8 @@ public class PatientFacadeTest {
   class DeleteTests {
 
 	@Test
-	@DisplayName("should delete student")
-	void shouldDeleteStudent() {
+	@DisplayName("should delete patient")
+	void shouldDeletePatient() {
 	  // given
 	  PatientDTO patient = patientFacade.save(getPatientDTO());
 
