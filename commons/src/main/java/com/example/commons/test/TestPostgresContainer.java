@@ -1,4 +1,4 @@
-package com.example.clinic.commons;
+package com.example.commons.test;
 
 import org.testcontainers.containers.PostgreSQLContainer;
 

@@ -1,4 +1,4 @@
-package com.example.clinic.commons;
+package com.example.commons.commons;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

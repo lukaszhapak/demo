@@ -2,7 +2,7 @@ package com.example.clinic.modules.core.patient.model;
 
 import static javax.persistence.EnumType.STRING;
 
-import com.example.clinic.commons.AbstractEntity;
+import com.example.commons.commons.AbstractEntity;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;

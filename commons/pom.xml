@@ -10,10 +10,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>clinic</artifactId>
+	<artifactId>commons</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>clinic</name>
-	<description>clinic</description>
+	<name>commons</name>
+	<description>commons</description>
 	<properties>
 		<java.version>11</java.version>
 		<spring-boot.version>2.6.6</spring-boot.version>
@@ -52,12 +52,6 @@
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>commons</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.flywaydb</groupId>
@@ -83,32 +77,27 @@
 		<dependency>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<groupId>org.springframework.boot</groupId>
-			<scope>test</scope>
 			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<artifactId>rest-assured</artifactId>
 			<groupId>io.rest-assured</groupId>
-			<scope>test</scope>
 			<version>${rest-assured.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>testcontainers</artifactId>
 			<version>${testcontainers.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<version>${testcontainers.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${testcontainers.version}</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

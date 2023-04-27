@@ -1,5 +1,6 @@
-package com.example.clinic.commons;
+package com.example.commons.test;
 
+import com.example.commons.commons.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

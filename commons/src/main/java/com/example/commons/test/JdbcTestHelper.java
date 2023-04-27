@@ -1,4 +1,4 @@
-package com.example.clinic.commons;
+package com.example.commons.test;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class JdbcTestHelper<T> {

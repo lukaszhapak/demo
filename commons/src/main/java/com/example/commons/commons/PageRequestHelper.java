@@ -1,4 +1,4 @@
-package com.example.clinic.commons;
+package com.example.commons.commons;
 
 import java.util.Optional;
 import org.springframework.data.domain.PageRequest;

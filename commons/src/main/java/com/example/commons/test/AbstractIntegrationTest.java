@@ -1,27 +1,22 @@
-package com.example.clinic.commons;
+package com.example.commons.test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
-import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
-import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 
-import com.example.clinic.ClinicApplication;
-import com.example.clinic.modules.core.patient.model.Patient;
-import com.example.commons.test.TestPostgresContainer;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
-@Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
-@Sql(value = "classpath:clean-data.sql", executionPhase = AFTER_TEST_METHOD)
-@SpringBootTest(classes = {ClinicApplication.class}, webEnvironment = RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public abstract class AbstractIntegrationTest {
 
   @Container
@@ -34,7 +29,7 @@ public abstract class AbstractIntegrationTest {
   protected NamedParameterJdbcOperations jdbc;
 
   protected Response getHttpCall(String url) {
-	return given()
+	return RestAssured.given()
 		.port(port)
 		.log().all()
 		.when()
@@ -42,29 +37,29 @@ public abstract class AbstractIntegrationTest {
   }
 
   protected Response postHttpCall(Object body, String url) {
-	return given()
+	return RestAssured.given()
 		.port(port)
 		.body(body)
-		.contentType(JSON)
+		.contentType(ContentType.JSON)
 		.log().all()
 		.when()
 		.post(url);
   }
 
   protected Response deleteHttpCall(String url) {
-	return given()
+	return RestAssured.given()
 		.port(port)
-		.contentType(JSON)
+		.contentType(ContentType.JSON)
 		.log().all()
 		.when()
 		.delete(url);
   }
 
   protected Response putHttpCall(Object body, String url) {
-	return given()
+	return RestAssured.given()
 		.port(port)
 		.body(body)
-		.contentType(JSON)
+		.contentType(ContentType.JSON)
 		.log().all()
 		.when()
 		.put(url);

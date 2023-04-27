@@ -6,8 +6,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.clinic.commons.AbstractIntegrationTest;
 import com.example.clinic.commons.JdbcTestHelper;
-import com.example.clinic.modules.core.patient.model.PatientDTO;
 import com.example.clinic.modules.core.patient.model.Patient;
+import com.example.clinic.modules.core.patient.model.PatientDTO;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -20,7 +20,7 @@ public class PatientControllerIntegrationTest extends AbstractIntegrationTest {
   private final String URL = "/clinic/api/patient/";
 
   @Autowired
-  private JdbcTestHelper<Patient> jdbcTestHelper;
+  protected JdbcTestHelper<Patient> jdbcTestHelper;
 
   @Nested
   @DisplayName("save tests")
