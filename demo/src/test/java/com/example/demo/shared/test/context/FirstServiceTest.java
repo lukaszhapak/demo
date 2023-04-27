@@ -6,7 +6,6 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,10 +28,10 @@ class FirstServiceTest {
 	// given
 
 	// when
-    firstService.operation();
+	firstService.operation();
 
 	// then
-    verify(messageSender, Mockito.times(1)).SendMessage(any());
+	verify(messageSender, Mockito.times(1)).SendMessage(any());
   }
 
 }
