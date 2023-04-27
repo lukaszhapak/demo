@@ -4,7 +4,7 @@ import static com.example.clinic.commons.TestUtils.getPatient;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.clinic.commons.AbstractIntegrationTest;
+import com.example.clinic.commons.ClinicAbstractIntegrationTest;
 import com.example.clinic.commons.JdbcTestHelper;
 import com.example.clinic.modules.core.patient.model.Patient;
 import com.example.clinic.modules.core.patient.model.PatientDTO;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PatientControllerIntegrationTest extends AbstractIntegrationTest {
+public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationTest {
 
   public static final long EXISTING_PATIENT_ID = 1000001L;
   private final String URL = "/clinic/api/patient/";
@@ -34,7 +34,7 @@ public class PatientControllerIntegrationTest extends AbstractIntegrationTest {
 	  request.setPesel("93745637618");
 
 	  // when
-	  Response response = postHttpCall(request, URL);
+	  Response response = postHttpCall(request, URL, port);
 	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
 
 	  // then
@@ -59,7 +59,7 @@ public class PatientControllerIntegrationTest extends AbstractIntegrationTest {
 	  Patient patient = getPatient();
 
 	  // when
-	  Response response = getHttpCall(URL + "1000001");
+	  Response response = getHttpCall(URL + "1000001", port);
 	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
 
 	  // then
@@ -85,7 +85,7 @@ public class PatientControllerIntegrationTest extends AbstractIntegrationTest {
 	  request.setPhoneNumber("789641615");
 
 	  // when
-	  Response response = putHttpCall(request, URL + "1000001");
+	  Response response = putHttpCall(request, URL + "1000001", port);
 	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
 
 	  // then
@@ -110,7 +110,7 @@ public class PatientControllerIntegrationTest extends AbstractIntegrationTest {
 	  Long id = EXISTING_PATIENT_ID;
 
 	  // when
-	  Response response = deleteHttpCall(URL + id);
+	  Response response = deleteHttpCall(URL + id, port);
 
 	  // then
 	  assertThat(response.statusCode()).isEqualTo(SC_OK);
