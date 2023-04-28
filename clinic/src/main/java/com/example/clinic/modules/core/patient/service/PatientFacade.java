@@ -1,9 +1,9 @@
 package com.example.clinic.modules.core.patient.service;
 
-import com.example.clinic.exception.NotFoundException;
 import com.example.clinic.modules.core.patient.model.Patient;
 import com.example.clinic.modules.core.patient.model.PatientDTO;
 import com.example.clinic.modules.core.patient.repository.PatientRepository;
+import com.example.commons.exception.NotFoundException;
 import java.text.MessageFormat;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;

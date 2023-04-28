@@ -4,10 +4,10 @@ import static com.example.clinic.commons.TestUtils.getPatientDTO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
-import com.example.clinic.exception.NotFoundException;
 import com.example.clinic.config.ClinicConfiguration;
 import com.example.clinic.modules.core.patient.model.PatientDTO;
 import com.example.clinic.modules.core.patient.repository.PatientRepositoryInMemory;
+import com.example.commons.exception.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
