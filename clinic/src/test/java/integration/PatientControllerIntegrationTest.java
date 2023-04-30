@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationTest {
 
   public static final long EXISTING_PATIENT_ID = 1000001L;
-  private final String URL = "/clinic/api/patient/";
+  private final String URL = "/api/patient/";
 
   @Autowired
   protected JdbcTestHelper<Patient> jdbcTestHelper;

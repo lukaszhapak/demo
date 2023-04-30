@@ -17,22 +17,22 @@ public class PatientController {
 
   private final PatientFacade patientFacade;
 
-  @GetMapping("/clinic/api/patient/{id}")
+  @GetMapping("/api/patient/{id}")
   PatientDTO findById(@PathVariable Long id) {
 	return patientFacade.findById(id);
   }
 
-  @PostMapping("/clinic/api/patient")
+  @PostMapping("/api/patient")
   PatientDTO save(@RequestBody PatientDTO patientDTO) {
 	return patientFacade.save(patientDTO);
   }
 
-  @PutMapping("/clinic/api/patient/{id}")
+  @PutMapping("/api/patient/{id}")
   PatientDTO update(@PathVariable Long id, @RequestBody PatientDTO patientDTO) {
 	return patientFacade.update(id, patientDTO);
   }
 
-  @DeleteMapping("/clinic/api/patient/{id}")
+  @DeleteMapping("/api/patient/{id}")
   void delete(@PathVariable Long id) {
 	patientFacade.deleteById(id);
   }
