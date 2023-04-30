@@ -8,9 +8,12 @@ import com.example.clinic.config.ClinicConfiguration;
 import com.example.clinic.modules.core.patient.model.PatientDTO;
 import com.example.clinic.modules.core.patient.repository.PatientRepositoryInMemory;
 import com.example.commons.exception.NotFoundException;
+import com.example.commons.exception.ValidationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 @DisplayName("Patient facade test")
 public class PatientFacadeTest {
@@ -36,6 +39,94 @@ public class PatientFacadeTest {
 
 	  PatientDTO patientInDb = patientFacade.findById(response.getId());
 	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	}
+
+	@Test
+	@DisplayName("should not save patient with invalid fields")
+	void shouldNotSavePatientWithInvalidFields() {
+	  // given
+	  PatientDTO request = getPatientDTO();
+	  request.setFirstName("J");
+	  request.setLastName("N");
+	  request.setPesel("3");
+	  request.setPhoneNumber("7896416");
+	  String[] expectedInvalidFields = {"firstName", "lastName", "pesel", "phoneNumber"};
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(ValidationException.class);
+	  assertThat(thrown.getInvalidFields()).hasSize(4)
+		  .containsKeys(expectedInvalidFields);
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"a", "0", "this string has more than 64 characters--------------------------"})
+	@DisplayName("should not save patient with invalid first name")
+	void shouldNotSavePatientWithInvalidFirstName(String firstName) {
+	  // given
+	  PatientDTO request = getPatientDTO();
+	  request.setFirstName(firstName);
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(ValidationException.class);
+	  assertThat(thrown.getInvalidFields()).hasSize(1)
+		  .containsKeys("firstName");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"a", "0", "this string has more than 64 characters--------------------------"})
+	@DisplayName("should not save patient with invalid last name")
+	void shouldNotSavePatientWithInvalidLastName(String lastName) {
+	  // given
+	  PatientDTO request = getPatientDTO();
+	  request.setLastName(lastName);
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(ValidationException.class);
+	  assertThat(thrown.getInvalidFields()).hasSize(1)
+		  .containsKeys("lastName");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"1", "5char", "10-chars--", "12-chars----", "20-characters-------"})
+	@DisplayName("should not save patient with invalid pesel")
+	void shouldNotSavePatientWithInvalidPesel(String pesel) {
+	  // given
+	  PatientDTO request = getPatientDTO();
+	  request.setPesel(pesel);
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(ValidationException.class);
+	  assertThat(thrown.getInvalidFields()).hasSize(1)
+		  .containsKeys("pesel");
+	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"1", "5char","8--chars", "10-chars--", "12-chars----", "20-characters-------"})
+	@DisplayName("should not save patient with invalid phone number")
+	void shouldNotSavePatientWithInvalidPhoneNumber(String phoneNumber) {
+	  // given
+	  PatientDTO request = getPatientDTO();
+	  request.setPhoneNumber(phoneNumber);
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(ValidationException.class);
+	  assertThat(thrown.getInvalidFields()).hasSize(1)
+		  .containsKeys("phoneNumber");
 	}
   }
 
