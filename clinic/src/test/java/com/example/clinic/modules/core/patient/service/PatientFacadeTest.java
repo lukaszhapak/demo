@@ -53,8 +53,7 @@ public class PatientFacadeTest {
 	  PatientDTO response = patientFacade.findById(patient.getId());
 
 	  // then
-	  assertThat(response.getId()).isEqualTo(patient.getId());
-	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(patient);
+	  assertThat(response).usingRecursiveComparison().isEqualTo(patient);
 	}
   }
 
