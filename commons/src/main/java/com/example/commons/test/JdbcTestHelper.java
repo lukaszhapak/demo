@@ -2,17 +2,15 @@ package com.example.commons.test;
 
 import java.text.MessageFormat;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
-import org.springframework.stereotype.Component;
 
-@Component
+@RequiredArgsConstructor
 public class JdbcTestHelper<T> {
 
-  @Autowired
-  private NamedParameterJdbcOperations jdbc;
+  private final NamedParameterJdbcOperations jdbc;
 
   public List<T> fetchEntities(String tableName, String operator, Long id, Class<T> clazz) {
 	return jdbc.query(MessageFormat.format("SELECT * FROM {0} WHERE ID {1} :id", tableName, operator),

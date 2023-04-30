@@ -5,9 +5,9 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.clinic.commons.ClinicAbstractIntegrationTest;
-import com.example.clinic.commons.JdbcTestHelper;
 import com.example.clinic.modules.core.patient.model.Patient;
 import com.example.clinic.modules.core.patient.model.PatientDTO;
+import com.example.commons.test.JdbcTestHelper;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

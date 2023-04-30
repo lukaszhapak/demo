@@ -11,7 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 @Sql(value = "classpath:data.sql", executionPhase = BEFORE_TEST_METHOD)
 @Sql(value = "classpath:clean-data.sql", executionPhase = AFTER_TEST_METHOD)
-@SpringBootTest(classes = {ClinicApplication.class}, webEnvironment = RANDOM_PORT)
+@SpringBootTest(classes = {ClinicApplication.class, ClinicTestConfig.class}, webEnvironment = RANDOM_PORT)
 public abstract class ClinicAbstractIntegrationTest extends AbstractTestContainerIntegrationTest {
 
 }
