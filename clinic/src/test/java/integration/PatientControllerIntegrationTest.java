@@ -16,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationTest {
 
-  public static final long EXISTING_PATIENT_ID = 1000001L;
+  public static final long GET_PATIENT_ID = 1000001L;
+  public static final long UPDATE_PATIENT_ID = 1000002L;
+  public static final long DELETE_PATIENT_ID = 1000003L;
   private final String URL = "/api/patient/";
 
   @Autowired
@@ -59,7 +61,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  Patient patient = getPatient();
 
 	  // when
-	  Response response = getHttpCall(URL + "1000001", port);
+	  Response response = getHttpCall(URL + GET_PATIENT_ID, port);
 	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
 
 	  // then
@@ -79,13 +81,14 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	void shouldUpdatePatient() {
 	  // given
 	  Patient request = getPatient();
-	  request.setId(EXISTING_PATIENT_ID);
+	  request.setId(UPDATE_PATIENT_ID);
 	  request.setFirstName("Jimmy");
 	  request.setLastName("Newman");
+	  request.setPesel("98654222942");
 	  request.setPhoneNumber("789641615");
 
 	  // when
-	  Response response = putHttpCall(request, URL + "1000001", port);
+	  Response response = putHttpCall(request, URL + request.getId(), port);
 	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
 
 	  // then
@@ -107,7 +110,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	@DisplayName("should delete patient")
 	void shouldDeletePatient() {
 	  // given
-	  Long id = EXISTING_PATIENT_ID;
+	  Long id = DELETE_PATIENT_ID;
 
 	  // when
 	  Response response = deleteHttpCall(URL + id, port);
