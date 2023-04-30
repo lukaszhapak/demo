@@ -180,19 +180,19 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 
 	  assertThat(jdbcTestHelper.existsById("PATIENT", id)).isFalse();
 	}
-  }
 
-  @Test
-  @DisplayName("should not delete non existing patient")
-  void shouldNotDeleteNonExistingPatient() {
-	// given
-	Long id = NON_EXISTING_PATIENT_ID;
+	@Test
+	@DisplayName("should not delete non existing patient")
+	void shouldNotDeleteNonExistingPatient() {
+	  // given
+	  Long id = NON_EXISTING_PATIENT_ID;
 
-	// when
-	Response response = deleteHttpCall(URL + id, port);
+	  // when
+	  Response response = deleteHttpCall(URL + id, port);
 
-	// then
-	assertThat(response.statusCode()).isEqualTo(SC_NOT_FOUND);
+	  // then
+	  assertThat(response.statusCode()).isEqualTo(SC_NOT_FOUND);
 
+	}
   }
 }
