@@ -16,7 +16,7 @@ public interface TestUtils {
 		.firstName("John")
 		.lastName("Doe")
 		.pesel("98654273941")
-		.patientGender(PatientGender.MALE)
+		.gender(PatientGender.MALE)
 		.birthDate(LocalDate.of(1998, 2, 15))
 		.phoneNumber("987468231")
 		.build();

@@ -1,11 +1,15 @@
 package com.example.clinic.modules.core.patient.model;
 
+import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.EnumType.STRING;
 
+import com.example.clinic.modules.core.visit.model.Visit;
 import com.example.commons.commons.AbstractEntity;
 import java.time.LocalDate;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,15 +28,17 @@ public class Patient extends AbstractEntity {
   private String lastName;
   private String pesel;
   @Enumerated(value = STRING)
-  private PatientGender patientGender;
+  private PatientGender gender;
   private LocalDate birthDate;
   private String phoneNumber;
+  @OneToMany(mappedBy = "patient", cascade = REMOVE)
+  private List<Visit> visits;
 
   public void update(PatientDTO patientDTO) {
 	firstName = patientDTO.getFirstName();
 	lastName = patientDTO.getLastName();
 	pesel = patientDTO.getPesel();
-	patientGender = patientDTO.getPatientGender();
+	gender = patientDTO.getGender();
 	birthDate = patientDTO.getBirthDate();
 	phoneNumber = patientDTO.getPhoneNumber();
   }
@@ -43,7 +49,7 @@ public class Patient extends AbstractEntity {
 		.firstName(firstName)
 		.lastName(lastName)
 		.pesel(pesel)
-		.patientGender(patientGender)
+		.gender(gender)
 		.birthDate(birthDate)
 		.phoneNumber(phoneNumber)
 		.build();
@@ -54,7 +60,7 @@ public class Patient extends AbstractEntity {
 		.firstName(patientDTO.getFirstName())
 		.lastName(patientDTO.getLastName())
 		.pesel(patientDTO.getPesel())
-		.patientGender(patientDTO.getPatientGender())
+		.gender(patientDTO.getGender())
 		.birthDate(patientDTO.getBirthDate())
 		.phoneNumber(patientDTO.getPhoneNumber())
 		.build();
