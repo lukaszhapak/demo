@@ -17,7 +17,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 
 public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationTest {
 
@@ -122,14 +121,13 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	void shouldUpdatePatient() {
 	  // given
 	  Patient request = getPatient();
-	  request.setId(UPDATE_PATIENT_ID);
 	  request.setFirstName("Jimmy");
 	  request.setLastName("Newman");
 	  request.setPesel("98654222942");
 	  request.setPhoneNumber("789641615");
 
 	  // when
-	  Response response = putHttpCall(request, URL + request.getId(), port);
+	  Response response = putHttpCall(request, URL + UPDATE_PATIENT_ID, port);
 	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
 
 	  // then
@@ -140,6 +138,27 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 
 	  Patient patient = jdbcTestHelper.fetchEntity("Patient", responseAsPatient.getId(), Patient.class);
 	  assertThat(patient).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	}
+
+	@Test
+	@DisplayName("should not update patient with invalid fields")
+	void shouldNotupdatePatientWithInvalidFields() {
+	  // given
+	  PatientDTO request = getPatientDTO();
+	  request.setFirstName("J");
+	  request.setLastName("N");
+	  request.setPesel("3");
+	  request.setPhoneNumber("7896416");
+	  String[] expectedInvalidFields = {"firstName", "lastName", "pesel", "phoneNumber"};
+
+	  // when
+	  Response response = putHttpCall(request, URL + UPDATE_PATIENT_ID, port);
+	  ValidationExceptionDTO responseAsException = response.as(ValidationExceptionDTO.class);
+
+	  // then
+	  assertThat(response.statusCode()).isEqualTo(SC_BAD_REQUEST);
+	  assertThat(responseAsException.getInvalidFields()).hasSize(4)
+		  .containsKeys(expectedInvalidFields);
 	}
   }
 
