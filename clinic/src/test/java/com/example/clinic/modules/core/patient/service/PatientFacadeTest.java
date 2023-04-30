@@ -155,6 +155,7 @@ public class PatientFacadeTest {
 	  // given
 	  Long id = NON_EXISTING_PATIENT_ID;
 
+	  // when
 	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
 
 	  // then
@@ -170,22 +171,56 @@ public class PatientFacadeTest {
 	@DisplayName("should update patient")
 	void shouldUpdatePatient() {
 	  // given
-	  PatientDTO patient = patientFacade.save(getPatientDTO());
+	  Long id = patientFacade.save(getPatientDTO()).getId();
 	  PatientDTO request = getPatientDTO();
-	  request.setId(patient.getId());
 	  request.setFirstName("Jimmy");
 	  request.setLastName("Newman");
 	  request.setPhoneNumber("789641615");
 
 	  // when
-	  PatientDTO response = patientFacade.update(patient.getId(), request);
+	  PatientDTO response = patientFacade.update(id, request);
 
 	  // then
-	  assertThat(response).usingRecursiveComparison().isEqualTo(request);
+	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
 	  PatientDTO patientInDb = patientFacade.findById(response.getId());
-	  assertThat(patientInDb).usingRecursiveComparison().isEqualTo(request);
+	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
+
+	@Test
+	@DisplayName("should not update not existing patient")
+	void shouldNotUpdateNotExistingPatient() {
+	  // given
+	  Long id = NON_EXISTING_PATIENT_ID;
+	  PatientDTO request = getPatientDTO();
+
+	  Throwable thrown = catchThrowable(() -> patientFacade.update(id, request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	}
+
+	@Test
+	@DisplayName("should not update patient with invalid fields")
+	void shouldNotUpdatePatientWithInvalidFields() {
+	  // given
+	  Long id = patientFacade.save(getPatientDTO()).getId();
+	  PatientDTO request = getPatientDTO();
+	  request.setFirstName("J");
+	  request.setLastName("N");
+	  request.setPesel("3");
+	  request.setPhoneNumber("7896416");
+	  String[] expectedInvalidFields = {"firstName", "lastName", "pesel", "phoneNumber"};
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.update(id, request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(ValidationException.class);
+	  assertThat(thrown.getInvalidFields()).hasSize(4)
+		  .containsKeys(expectedInvalidFields);
+	}
+
   }
 
   @Nested
@@ -212,6 +247,7 @@ public class PatientFacadeTest {
 	  // given
 	  Long id = NON_EXISTING_PATIENT_ID;
 
+	  // when
 	  Throwable thrown = catchThrowable(() -> patientFacade.deleteById(id));
 
 	  // then
