@@ -20,6 +20,8 @@ public class PatientFacadeTest {
 
   private final PatientFacade patientFacade = new ClinicConfiguration().patientFacade(new PatientRepositoryInMemory());
 
+  private static final long NON_EXISTING_PATIENT_ID = 9999999L;
+
   @Nested
   @DisplayName("save tests")
   class SaveTests {
@@ -113,7 +115,7 @@ public class PatientFacadeTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = {"1", "5char","8--chars", "10-chars--", "12-chars----", "20-characters-------"})
+	@ValueSource(strings = {"1", "5char", "8--chars", "10-chars--", "12-chars----", "20-characters-------"})
 	@DisplayName("should not save patient with invalid phone number")
 	void shouldNotSavePatientWithInvalidPhoneNumber(String phoneNumber) {
 	  // given
@@ -145,6 +147,18 @@ public class PatientFacadeTest {
 
 	  // then
 	  assertThat(response).usingRecursiveComparison().isEqualTo(patient);
+	}
+
+	@Test
+	@DisplayName("should not get non existing patient")
+	void shouldNotGetNonExistingPatient() {
+	  // given
+	  Long id = NON_EXISTING_PATIENT_ID;
+
+	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(NotFoundException.class);
 	}
   }
 
@@ -189,6 +203,18 @@ public class PatientFacadeTest {
 
 	  // then
 	  Throwable thrown = catchThrowable(() -> patientFacade.findById(patient.getId()));
+	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	}
+
+	@Test
+	@DisplayName("should not delete non existing patient")
+	void shouldNotDeleteNonExistingPatient() {
+	  // given
+	  Long id = NON_EXISTING_PATIENT_ID;
+
+	  Throwable thrown = catchThrowable(() -> patientFacade.deleteById(id));
+
+	  // then
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);
 	}
   }
