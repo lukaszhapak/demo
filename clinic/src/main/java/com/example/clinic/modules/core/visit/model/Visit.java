@@ -24,6 +24,8 @@ public class Visit extends AbstractEntity {
   private LocalDateTime visitDate;
   @Enumerated(EnumType.STRING)
   private VisitPaymentStatus paymentStatus;
+  @Enumerated(EnumType.STRING)
+  private VisitStatus status;
   private boolean reminderSent;
   @ManyToOne
   private Patient patient;
@@ -33,6 +35,7 @@ public class Visit extends AbstractEntity {
 		.id(getId())
 		.visitDate(visitDate)
 		.paymentStatus(paymentStatus)
+		.status(status)
 		.reminderSent(reminderSent)
 		.patient(patient.toDTO())
 		.build();
@@ -42,8 +45,8 @@ public class Visit extends AbstractEntity {
 	return Visit.builder()
 		.visitDate(visitDTO.getVisitDate())
 		.paymentStatus(visitDTO.getPaymentStatus())
+		.status(visitDTO.getStatus())
 		.reminderSent(visitDTO.isReminderSent())
-		.patient(Patient.of(visitDTO.getPatient()))
 		.build();
   }
 }
