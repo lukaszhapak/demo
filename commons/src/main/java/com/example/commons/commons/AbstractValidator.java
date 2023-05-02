@@ -2,6 +2,7 @@ package com.example.commons.commons;
 
 import com.example.commons.exception.ValidationException;
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,14 @@ public abstract class AbstractValidator {
 	  invalidFields.put(name, "cannot be null");
 	} else if (string.length() < min || string.length() > max) {
 	  invalidFields.put(name, MessageFormat.format("length cannot be less than {0} characters and more than {1} characters", min, max));
+	}
+  }
+
+  protected void validateFutureDate(LocalDateTime date, String name) {
+	if (date == null) {
+	  invalidFields.put(name, "cannot be null");
+	} else if (date.isBefore(LocalDateTime.now())) {
+	  invalidFields.put(name, "date have to be from future");
 	}
   }
 

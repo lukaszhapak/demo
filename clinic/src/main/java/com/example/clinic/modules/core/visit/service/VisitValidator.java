@@ -6,7 +6,7 @@ import com.example.commons.commons.AbstractValidator;
 public class VisitValidator extends AbstractValidator {
 
   public void validate(VisitDTO visitDTO) {
+	validateFutureDate(visitDTO.getVisitDate(), "visitDate");
 	throwException("Visit");
   }
-
 }
