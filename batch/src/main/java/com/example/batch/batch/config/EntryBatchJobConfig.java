@@ -1,12 +1,12 @@
 package com.example.batch.batch.config;
 
+import com.example.batch.batch.listener.EntryJobExecutionListener;
 import com.example.batch.batch.policy.CustomSkipPolicy;
 import com.example.batch.batch.processor.EntryInitProcessor;
-import com.example.batch.batch.listener.EntryJobExecutionListener;
-import com.example.batch.batch.tasklet.EntryPostProcessingTasklet;
-import com.example.batch.batch.tasklet.EntryPreProcessingTasklet;
 import com.example.batch.batch.processor.EntryProcessor;
 import com.example.batch.batch.reader.EntryReader;
+import com.example.batch.batch.tasklet.EntryPostProcessingTasklet;
+import com.example.batch.batch.tasklet.EntryPreProcessingTasklet;
 import com.example.batch.batch.writer.EntryWriter;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
@@ -18,7 +18,6 @@ import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepScope;
@@ -51,11 +50,12 @@ public class EntryBatchJobConfig {
 	String query = "SELECT entry FROM Entry as entry where entry.originator = :originator order by entry.id ASC";
 	Map<String, Object> params = Map.of("originator", originator);
 	EntryReader itemReader = new EntryReader();
-	itemReader.setPageSize(10);
+	itemReader.setPageSize(20);
 	itemReader.setQueryString(query);
 	itemReader.setParameterValues(params);
 	itemReader.setEntityManagerFactory(entityManagerFactory);
 	itemReader.setSaveState(false);
+	itemReader.setTransacted(false);
 	return itemReader;
   }
 
@@ -112,7 +112,7 @@ public class EntryBatchJobConfig {
 	compositeItemProcessor.setDelegates(Arrays.asList(entryInitProcessor, entryProcessor));
 
 	return stepBuilderFactory.get("entryProcessingStep")
-		.<Entry, Entry>chunk(8)
+		.<Entry, Entry>chunk(12)
 		.reader(entryReader)
 		.processor(compositeItemProcessor)
 		.writer(entryWriter)
