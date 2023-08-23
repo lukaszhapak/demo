@@ -10,9 +10,9 @@ import io.restassured.response.Response;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MockEntryResource {
+public class EntryResourceClient {
 
-  public Entry someBusinessLogic(Entry entry) {
+  public Entry processEntry(Entry entry) {
 	Response response = postHttpCall(entry.toDTO(), "http://localhost:8081/batch-resource/api/entry/process", 8081);
 	ProcessResponseDTO processResponseDTO = response.as(ProcessResponseDTO.class);
 	if (processResponseDTO.getResponse().equals("SystemProcessingException")) {

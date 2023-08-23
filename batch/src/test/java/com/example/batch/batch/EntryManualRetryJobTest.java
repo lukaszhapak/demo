@@ -24,8 +24,8 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
 
   @BeforeEach
   void setUp() {
-	reset(mockEntryResource);
-	when(mockEntryResource.someBusinessLogic(any())).thenAnswer(invocation -> mockSomeBusinessLogic(invocation.getArgument(0)));
+	reset(entryResourceClient);
+	when(entryResourceClient.processEntry(any())).thenAnswer(invocation -> processEntry(invocation.getArgument(0)));
   }
 
   @Test
@@ -47,7 +47,7 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
 	entryRepository.deleteById(id);
   }
 
-  protected Entry mockSomeBusinessLogic(Entry entry) {
+  protected Entry processEntry(Entry entry) {
 	return entry;
   }
 }

@@ -28,8 +28,8 @@ public class EntryAutomaticRetryJobTest extends AbstractIntegrationTest {
 
   @BeforeEach
   void setUp() {
-	reset(mockEntryResource);
-	when(mockEntryResource.someBusinessLogic(any())).thenAnswer(invocation -> mockSomeBusinessLogic(invocation.getArgument(0)));
+	reset(entryResourceClient);
+	when(entryResourceClient.processEntry(any())).thenAnswer(invocation -> processEntry(invocation.getArgument(0)));
   }
 
   @Test
@@ -54,7 +54,7 @@ public class EntryAutomaticRetryJobTest extends AbstractIntegrationTest {
 	entryRepository.deleteAllById(ids);
   }
 
-  private Entry mockSomeBusinessLogic(Entry entry) {
+  private Entry processEntry(Entry entry) {
 	if (entry.getId() % 2 == 0) {
 	  throw new SystemProcessingException();
 	}

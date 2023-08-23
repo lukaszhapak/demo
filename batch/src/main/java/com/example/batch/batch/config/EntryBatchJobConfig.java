@@ -10,7 +10,7 @@ import com.example.batch.batch.tasklet.EntryPreProcessingTasklet;
 import com.example.batch.batch.writer.EntryWriter;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
-import com.example.batch.resource.MockEntryResource;
+import com.example.batch.resource.EntryResourceClient;
 import java.util.Arrays;
 import java.util.Map;
 import javax.persistence.EntityManagerFactory;
@@ -67,8 +67,8 @@ public class EntryBatchJobConfig {
 
   @Bean
   @StepScope
-  public EntryProcessor entryProcessor(final MockEntryResource mockEntryResource) {
-	return new EntryProcessor(mockEntryResource);
+  public EntryProcessor entryProcessor(final EntryResourceClient entryResourceClient) {
+	return new EntryProcessor(entryResourceClient);
   }
 
   @Bean

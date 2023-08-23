@@ -8,7 +8,7 @@ import static com.example.batch.core.model.EntryStatus.FAILED;
 import com.example.batch.batch.exception.BusinessProcessingException;
 import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
-import com.example.batch.resource.MockEntryResource;
+import com.example.batch.resource.EntryResourceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
@@ -17,13 +17,13 @@ import org.springframework.batch.item.ItemProcessor;
 @RequiredArgsConstructor
 public class EntryProcessor implements ItemProcessor<Entry, Entry> {
 
-  private final MockEntryResource mockEntryResource;
+  private final EntryResourceClient entryResourceClient;
 
   @Override
   public Entry process(Entry entry) {
 	log.debug("Processing Entry={}", entry);
 	try {
-	  entry = mockEntryResource.someBusinessLogic(entry);
+	  entry = entryResourceClient.processEntry(entry);
 	  entry.setStatus(COMPLETED);
 	  entry.setErrorType(null);
 	  entry.setErrorCode(null);

@@ -1,6 +1,6 @@
 package com.example.batch.config;
 
-import com.example.batch.resource.MockEntryResource;
+import com.example.batch.resource.EntryResourceClient;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -11,8 +11,8 @@ import org.springframework.core.task.TaskExecutor;
 public class TestConfig {
 
   @Bean
-  public MockEntryResource mockEntryResource() {
-	return Mockito.mock(MockEntryResource.class);
+  public EntryResourceClient entryResourceClient() {
+	return Mockito.mock(EntryResourceClient.class);
   }
 
   @Bean

@@ -8,7 +8,7 @@ import com.example.batch.core.model.Entry;
 import com.example.batch.core.model.EntryErrorType;
 import com.example.batch.core.model.EntryStatus;
 import com.example.batch.core.repository.EntryRepository;
-import com.example.batch.resource.MockEntryResource;
+import com.example.batch.resource.EntryResourceClient;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -28,7 +28,7 @@ public abstract class AbstractIntegrationTest {
   protected EntryRepository entryRepository;
 
   @Autowired
-  protected MockEntryResource mockEntryResource;
+  protected EntryResourceClient entryResourceClient;
 
   protected Entry createEntry(EntryStatus status) {
 	Entry entry = new Entry();

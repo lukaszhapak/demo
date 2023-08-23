@@ -5,7 +5,7 @@ import com.example.batch.batch.reader.EntryReader;
 import com.example.batch.batch.writer.EntryWriter;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
-import com.example.batch.resource.MockEntryResource;
+import com.example.batch.resource.EntryResourceClient;
 import javax.persistence.EntityManagerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -31,8 +31,8 @@ public class BasicEntryBatchJobConfig {
 
   @Bean
   @StepScope
-  public EntryProcessor entryProcessor(MockEntryResource mockEntryResource) {
-	return new EntryProcessor(mockEntryResource);
+  public EntryProcessor entryProcessor(EntryResourceClient entryResourceClient) {
+	return new EntryProcessor(entryResourceClient);
   }
 
   @Bean
