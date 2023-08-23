@@ -1,5 +1,8 @@
 package com.example.batch.batch;
 
+import static com.example.batch.core.model.EntryStatus.COMPLETED;
+import static com.example.batch.core.model.EntryStatus.FAILED;
+import static com.example.batch.core.model.EntryStatus.REGISTERED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
@@ -9,7 +12,6 @@ import com.example.AbstractIntegrationTest;
 import com.example.batch.batch.exception.ProcessingException;
 import com.example.batch.batch.starter.EntryBatchJobStarter;
 import com.example.batch.core.model.Entry;
-import com.example.batch.core.model.EntryStatus;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -35,8 +37,8 @@ public class EntryJobTest extends AbstractIntegrationTest {
   @DisplayName("should start batch job and process entries")
   void shouldStartBatchJobAndProcessEntries() {
 	// given
-	List<Long> ids = Stream.of(entryRepository.save(createEntry(EntryStatus.REGISTERED)), entryRepository.save(createEntry(EntryStatus.REGISTERED)), entryRepository.save(createEntry(
-			EntryStatus.REGISTERED)), entryRepository.save(createEntry(EntryStatus.REGISTERED)))
+	List<Long> ids = Stream.of(entryRepository.save(createEntry(REGISTERED)), entryRepository.save(createEntry(REGISTERED)), entryRepository.save(createEntry(REGISTERED)),
+			entryRepository.save(createEntry(REGISTERED)))
 		.map(Entry::getId).collect(Collectors.toList());
 
 	// when
@@ -45,8 +47,8 @@ public class EntryJobTest extends AbstractIntegrationTest {
 	// then
 	List<Entry> processedEntries = entryRepository.findAllById(ids);
 
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 != 0)).allMatch(entry -> entry.getStatus() == EntryStatus.COMPLETED);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 == 0)).allMatch(entry -> entry.getStatus() == EntryStatus.FAILED);
+	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 != 0)).allMatch(entry -> entry.getStatus() == COMPLETED);
+	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 == 0)).allMatch(entry -> entry.getStatus() == FAILED);
 
 	// clean up
 	entryRepository.deleteAllById(ids);
