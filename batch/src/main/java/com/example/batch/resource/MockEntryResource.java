@@ -1,33 +1,34 @@
 package com.example.batch.resource;
 
+import com.example.batch.api.dto.ProcessResponseDTO;
 import com.example.batch.batch.exception.BusinessProcessingException;
 import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
-import java.util.Random;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.springframework.stereotype.Component;
 
 @Component
 public class MockEntryResource {
 
-  private final Random random = new Random();
-
   public Entry someBusinessLogic(Entry entry) {
-	sleep();
-	int random = this.random.nextInt(10);
-	if (random == 1) {
+	Response response = postHttpCall(entry.toDTO(), "http://localhost:8081/batch-resource/api/entry/process", 8081);
+	ProcessResponseDTO processResponseDTO = response.as(ProcessResponseDTO.class);
+	if (processResponseDTO.getResponse().equals("SystemProcessingException")) {
 	  throw new SystemProcessingException();
-	}
-	if (entry.getData().equals("invalid")) {
+	} else if (processResponseDTO.getResponse().equals("BusinessProcessingException")) {
 	  throw new BusinessProcessingException();
 	}
 	return entry;
   }
 
-  private void sleep() {
-	try {
-	  Thread.sleep(10);
-	} catch (InterruptedException e) {
-	  throw new RuntimeException(e);
-	}
+  protected Response postHttpCall(Object body, String url, int port) {
+	return RestAssured.given()
+		.port(port)
+		.body(body)
+		.contentType(ContentType.JSON)
+		.when()
+		.post(url);
   }
 }

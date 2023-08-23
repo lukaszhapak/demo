@@ -53,6 +53,11 @@
 			<artifactId>lombok</artifactId>
 			<version>${lombok.version}</version>
 		</dependency>
+		<dependency>
+			<artifactId>rest-assured</artifactId>
+			<groupId>io.rest-assured</groupId>
+			<version>${rest-assured.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -60,12 +65,7 @@
 			<version>${spring-boot.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<artifactId>rest-assured</artifactId>
-			<groupId>io.rest-assured</groupId>
-			<version>${rest-assured.version}</version>
-			<scope>test</scope>
-		</dependency>
+
 
 	</dependencies>
 
