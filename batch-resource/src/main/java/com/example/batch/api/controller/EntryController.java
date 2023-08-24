@@ -2,6 +2,8 @@ package com.example.batch.api.controller;
 
 import com.example.batch.api.dto.EntryDTO;
 import com.example.batch.api.dto.ProcessResponseDTO;
+import com.example.batch.exception.SystemException;
+import com.example.batch.exception.ValidationException;
 import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +25,11 @@ public class EntryController {
 	int random = this.random.nextInt(10);
 	if (random == 1) {
 	  log.debug("response SystemProcessingException");
-	  processResponseDTO.setResponse("SystemProcessingException");
+	  throw new SystemException();
 	}
 	if (entryDTO.getData().equals("invalid")) {
 	  log.debug("response BusinessProcessingException");
-	  processResponseDTO.setResponse("BusinessProcessingException");
+	  throw new ValidationException();
 	} else {
 	  log.debug("response processed");
 	  processResponseDTO.setResponse("processed");

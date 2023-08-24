@@ -9,6 +9,8 @@ import com.example.batch.batch.exception.BusinessProcessingException;
 import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
 import com.example.batch.resource.EntryResourceClient;
+import java.io.IOException;
+import java.net.ConnectException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
@@ -27,17 +29,22 @@ public class EntryProcessor implements ItemProcessor<Entry, Entry> {
 	  entry.setStatus(COMPLETED);
 	  entry.setErrorType(null);
 	  entry.setErrorCode(null);
+	} catch (BusinessProcessingException exception) {
+	  log.warn("Business processing exception while processing Entry={}", entry);
+	  entry.setData("invalid");
+	  entry.setStatus(FAILED);
+	  entry.setErrorType(BUSINESS);
+	  entry.setErrorCode("Invalid data");
 	} catch (SystemProcessingException exception) {
 	  log.error("System processing exception while processing Entry={}", entry);
 	  entry.setStatus(FAILED);
 	  entry.setErrorType(SYSTEM);
 	  entry.setErrorCode("Rest Failure");
-	} catch (BusinessProcessingException exception) {
-	  log.error("Business processing exception while processing Entry={}", entry);
-	  entry.setData("invalid");
+	} catch (Exception exception) {
+	  log.error("other exception {}", exception.getClass());
 	  entry.setStatus(FAILED);
-	  entry.setErrorType(BUSINESS);
-	  entry.setErrorCode("Invalid data");
+	  entry.setErrorType(SYSTEM);
+	  entry.setErrorCode(exception.getMessage());
 	}
 	entry.setProcessingAttempts(entry.getProcessingAttempts() + 1);
 
