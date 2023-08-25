@@ -5,12 +5,10 @@ import static com.example.batch.core.model.EntryErrorType.SYSTEM;
 import static com.example.batch.core.model.EntryStatus.COMPLETED;
 import static com.example.batch.core.model.EntryStatus.FAILED;
 
-import com.example.batch.batch.exception.BusinessProcessingException;
-import com.example.batch.batch.exception.SystemProcessingException;
+import com.example.batch.core.exception.BusinessProcessingException;
+import com.example.batch.core.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
 import com.example.batch.resource.EntryResourceClient;
-import java.io.IOException;
-import java.net.ConnectException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
@@ -41,7 +39,7 @@ public class EntryProcessor implements ItemProcessor<Entry, Entry> {
 	  entry.setErrorType(SYSTEM);
 	  entry.setErrorCode("Rest Failure");
 	} catch (Exception exception) {
-	  log.error("other exception {}", exception.getClass());
+	  log.error("Other exception {}", exception.getClass());
 	  entry.setStatus(FAILED);
 	  entry.setErrorType(SYSTEM);
 	  entry.setErrorCode(exception.getMessage());

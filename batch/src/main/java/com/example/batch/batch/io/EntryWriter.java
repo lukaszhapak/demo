@@ -1,4 +1,4 @@
-package com.example.batch.batch.writer;
+package com.example.batch.batch.io;
 
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;

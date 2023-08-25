@@ -1,4 +1,4 @@
-package com.example.batch.batch.reader;
+package com.example.batch.batch.io;
 
 import com.example.batch.core.model.Entry;
 import lombok.extern.slf4j.Slf4j;

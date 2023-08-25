@@ -28,8 +28,9 @@ public class EntryManualRetryPreProcessingTasklet implements Tasklet {
 	int count = entryRepository.markProcessingStarted(originator, FAILED, STARTED, entryId);
 	if (count == 0) {
 	  contribution.setExitStatus(ExitStatus.NOOP);
+	} else {
+	  log.debug("{} entries selected for manual retry processing by originator {}", count, originator);
 	}
-	log.debug("{} entries selected for manual retry processing by originator {}", count, originator);
 	return RepeatStatus.FINISHED;
   }
 }

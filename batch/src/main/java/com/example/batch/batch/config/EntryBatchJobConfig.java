@@ -1,13 +1,13 @@
 package com.example.batch.batch.config;
 
+import com.example.batch.batch.io.EntryReader;
+import com.example.batch.batch.io.EntryWriter;
 import com.example.batch.batch.listener.EntryJobExecutionListener;
 import com.example.batch.batch.policy.CustomSkipPolicy;
 import com.example.batch.batch.processor.EntryInitProcessor;
 import com.example.batch.batch.processor.EntryProcessor;
-import com.example.batch.batch.reader.EntryReader;
 import com.example.batch.batch.tasklet.EntryPostProcessingTasklet;
 import com.example.batch.batch.tasklet.EntryPreProcessingTasklet;
-import com.example.batch.batch.writer.EntryWriter;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
 import com.example.batch.resource.EntryResourceClient;
@@ -50,7 +50,7 @@ public class EntryBatchJobConfig {
 	String query = "SELECT entry FROM Entry as entry where entry.originator = :originator order by entry.id ASC";
 	Map<String, Object> params = Map.of("originator", originator);
 	EntryReader itemReader = new EntryReader();
-	itemReader.setPageSize(20);
+	itemReader.setPageSize(100);
 	itemReader.setQueryString(query);
 	itemReader.setParameterValues(params);
 	itemReader.setEntityManagerFactory(entityManagerFactory);
@@ -112,7 +112,7 @@ public class EntryBatchJobConfig {
 	compositeItemProcessor.setDelegates(Arrays.asList(entryInitProcessor, entryProcessor));
 
 	return stepBuilderFactory.get("entryProcessingStep")
-		.<Entry, Entry>chunk(12)
+		.<Entry, Entry>chunk(20)
 		.reader(entryReader)
 		.processor(compositeItemProcessor)
 		.writer(entryWriter)

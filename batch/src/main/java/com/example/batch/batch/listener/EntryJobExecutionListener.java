@@ -23,10 +23,13 @@ public class EntryJobExecutionListener implements JobExecutionListener {
   @Override
   @Transactional
   public void afterJob(JobExecution jobExecution) {
+	log.debug("Starting entry job execution listener");
 	if (jobExecution.getStatus() == BatchStatus.FAILED) {
 	  String originator = (String) jobExecution.getJobParameters().getParameters().get("originator").getValue();
 	  int count = entryRepository.markProcessingFailed(originator, EntryStatus.STARTED, EntryStatus.FAILED, EntryErrorType.SYSTEM, "Batch global failure");
-	  log.debug("{} entries marked as failed  by originator = {}", count, originator);
+	  if (count > 0) {
+		log.debug("{} entries marked as failed by originator = {}", count, originator);
+	  }
 	}
   }
 }

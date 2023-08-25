@@ -1,8 +1,8 @@
 package com.example.batch.batch.config;
 
+import com.example.batch.batch.io.EntryReader;
+import com.example.batch.batch.io.EntryWriter;
 import com.example.batch.batch.processor.EntryProcessor;
-import com.example.batch.batch.reader.EntryReader;
-import com.example.batch.batch.writer.EntryWriter;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
 import com.example.batch.resource.EntryResourceClient;
