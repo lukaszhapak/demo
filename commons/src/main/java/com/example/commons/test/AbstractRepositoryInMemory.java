@@ -24,8 +24,7 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
   }
 
   protected Long deleteAllById(Long id) {
-	T removed = map.remove(id);
-	return removed == null ? 0L : 1L;
+	return map.remove(id) == null ? 0L : 1L;
   }
 
   private void setId(T entity) {
