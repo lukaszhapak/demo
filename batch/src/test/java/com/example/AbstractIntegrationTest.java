@@ -4,10 +4,10 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import com.example.batch.BatchApplication;
 import com.example.batch.config.TestConfig;
+import com.example.batch.config.TestEntryRepository;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.model.EntryErrorType;
 import com.example.batch.core.model.EntryStatus;
-import com.example.batch.core.repository.EntryRepository;
 import com.example.batch.resource.EntryResourceClient;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -25,7 +25,7 @@ public abstract class AbstractIntegrationTest {
   protected int port;
 
   @Autowired
-  protected EntryRepository entryRepository;
+  protected TestEntryRepository entryRepository;
 
   @Autowired
   protected EntryResourceClient entryResourceClient;

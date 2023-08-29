@@ -3,11 +3,15 @@ package com.example.batch.core.repository;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.model.EntryErrorType;
 import com.example.batch.core.model.EntryStatus;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.Repository;
 
-public interface EntryRepository extends JpaRepository<Entry, Long> {
+public interface EntryRepository extends Repository<Entry, Long> {
+
+  void saveAll(Iterable<? extends Entry> entries);
+
+  Entry save(Entry entry);
 
   @Modifying
   @Query("update Entry set originator = :originator, status = :processingStatus where status = :initStatus")
