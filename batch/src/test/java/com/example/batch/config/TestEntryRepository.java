@@ -4,9 +4,7 @@ import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface TestEntryRepository extends EntryRepository {
 
   List<Entry> findAllById(Iterable<Long> ids);
