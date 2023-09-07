@@ -1,4 +1,4 @@
-package com.example.batch.batch.policy;
+package com.example.batch.batch.exception;
 
 import org.springframework.batch.core.step.skip.SkipLimitExceededException;
 import org.springframework.batch.core.step.skip.SkipPolicy;

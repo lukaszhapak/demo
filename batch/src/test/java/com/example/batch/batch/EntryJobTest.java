@@ -9,7 +9,7 @@ import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 import com.example.AbstractIntegrationTest;
-import com.example.batch.core.exception.SystemProcessingException;
+import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.batch.starter.EntryBatchJobStarter;
 import com.example.batch.core.model.Entry;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.batch.core.exception;
+package com.example.batch.batch.exception;
 
 public class SystemProcessingException extends RuntimeException {
 

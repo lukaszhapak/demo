@@ -5,8 +5,8 @@ import static com.example.batch.core.model.EntryErrorType.SYSTEM;
 import static com.example.batch.core.model.EntryStatus.COMPLETED;
 import static com.example.batch.core.model.EntryStatus.FAILED;
 
-import com.example.batch.core.exception.BusinessProcessingException;
-import com.example.batch.core.exception.SystemProcessingException;
+import com.example.batch.batch.exception.BusinessProcessingException;
+import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
 import com.example.batch.resource.EntryResourceClient;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +29,6 @@ public class EntryProcessor implements ItemProcessor<Entry, Entry> {
 	  entry.setErrorCode(null);
 	} catch (BusinessProcessingException exception) {
 	  log.warn("Business processing exception while processing Entry={}", entry);
-	  entry.setData("invalid");
 	  entry.setStatus(FAILED);
 	  entry.setErrorType(BUSINESS);
 	  entry.setErrorCode("Invalid data");

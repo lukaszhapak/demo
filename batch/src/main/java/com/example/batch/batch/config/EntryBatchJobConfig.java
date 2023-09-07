@@ -3,7 +3,7 @@ package com.example.batch.batch.config;
 import com.example.batch.batch.io.EntryReader;
 import com.example.batch.batch.io.EntryWriter;
 import com.example.batch.batch.listener.EntryJobExecutionListener;
-import com.example.batch.batch.policy.CustomSkipPolicy;
+import com.example.batch.batch.exception.CustomSkipPolicy;
 import com.example.batch.batch.processor.EntryInitProcessor;
 import com.example.batch.batch.processor.EntryProcessor;
 import com.example.batch.batch.tasklet.EntryPostProcessingTasklet;

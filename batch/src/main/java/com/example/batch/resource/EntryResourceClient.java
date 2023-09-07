@@ -1,7 +1,7 @@
 package com.example.batch.resource;
 
-import com.example.batch.core.exception.BusinessProcessingException;
-import com.example.batch.core.exception.SystemProcessingException;
+import com.example.batch.batch.exception.BusinessProcessingException;
+import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
