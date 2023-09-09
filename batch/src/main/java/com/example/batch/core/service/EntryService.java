@@ -8,12 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EntryService {
 
   private final EntryRepository entryRepository;
 
-  @Transactional
   public EntryDTO postEntry(EntryDTO entry) {
 	return entryRepository.save(Entry.of(entry)).toDTO();
   }

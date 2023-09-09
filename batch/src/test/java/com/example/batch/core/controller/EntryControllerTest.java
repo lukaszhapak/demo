@@ -1,4 +1,4 @@
-package com.example.batch.api;
+package com.example.batch.core.controller;
 
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
