@@ -5,7 +5,7 @@ import com.example.batch.batch.io.EntryWriter;
 import com.example.batch.batch.processor.EntryProcessor;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
-import com.example.batch.resource.EntryResourceClient;
+import com.example.batch.batch.client.EntryResourceClient;
 import javax.persistence.EntityManagerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;

@@ -8,7 +8,7 @@ import com.example.batch.config.TestEntryRepository;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.model.EntryErrorType;
 import com.example.batch.core.model.EntryStatus;
-import com.example.batch.resource.EntryResourceClient;
+import com.example.batch.batch.client.EntryResourceClient;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

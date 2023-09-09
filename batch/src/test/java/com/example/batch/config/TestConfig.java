@@ -1,6 +1,6 @@
 package com.example.batch.config;
 
-import com.example.batch.resource.EntryResourceClient;
+import com.example.batch.batch.client.EntryResourceClient;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

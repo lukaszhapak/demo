@@ -1,4 +1,4 @@
-package com.example.batch.resource;
+package com.example.batch.batch.client;
 
 import com.example.batch.batch.exception.BusinessProcessingException;
 import com.example.batch.batch.exception.SystemProcessingException;

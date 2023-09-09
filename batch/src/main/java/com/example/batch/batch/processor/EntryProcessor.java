@@ -8,7 +8,7 @@ import static com.example.batch.core.model.EntryStatus.FAILED;
 import com.example.batch.batch.exception.BusinessProcessingException;
 import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
-import com.example.batch.resource.EntryResourceClient;
+import com.example.batch.batch.client.EntryResourceClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;

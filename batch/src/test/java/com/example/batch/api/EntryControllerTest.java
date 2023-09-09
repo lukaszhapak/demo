@@ -4,7 +4,7 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.AbstractIntegrationTest;
-import com.example.batch.api.dto.EntryDTO;
+import com.example.batch.core.model.EntryDTO;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

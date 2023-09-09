@@ -1,4 +1,4 @@
-package com.example.batch.api.dto;
+package com.example.batch.core.model;
 
 import lombok.Getter;
 import lombok.Setter;

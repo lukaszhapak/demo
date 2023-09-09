@@ -10,7 +10,7 @@ import com.example.batch.batch.tasklet.EntryPostProcessingTasklet;
 import com.example.batch.batch.tasklet.EntryPreProcessingTasklet;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
-import com.example.batch.resource.EntryResourceClient;
+import com.example.batch.batch.client.EntryResourceClient;
 import java.util.Arrays;
 import java.util.Map;
 import javax.persistence.EntityManagerFactory;

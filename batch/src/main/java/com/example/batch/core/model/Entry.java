@@ -3,7 +3,6 @@ package com.example.batch.core.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import com.example.batch.api.dto.EntryDTO;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

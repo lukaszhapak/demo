@@ -1,8 +1,7 @@
-package com.example.batch.api.controller;
+package com.example.batch.core.controller;
 
-import com.example.batch.api.dto.EntryDTO;
 import com.example.batch.batch.starter.EntryManualRetryBatchJobStarter;
-import com.example.batch.core.model.Entry;
+import com.example.batch.core.model.EntryDTO;
 import com.example.batch.core.service.EntryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,7 @@ public class EntryController {
 
   @PostMapping("/api/entry")
   public EntryDTO postEntry(@RequestBody EntryDTO entryDTO) {
-	return entryService.postEntry(Entry.of(entryDTO)).toDTO();
+	return entryService.postEntry(entryDTO);
   }
 
   @PostMapping("/api/entry/reprocess/{entryId}")
