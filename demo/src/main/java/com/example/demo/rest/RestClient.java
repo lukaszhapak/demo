@@ -4,10 +4,13 @@ import static io.restassured.RestAssured.given;
 
 import io.restassured.response.Response;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 class RestClient {
 
-  public static void main(String[] args) {
+  public void getPosts() {
+	log.debug("getting posts");
 	Response response = getHttpCall("https://jsonplaceholder.typicode.com/posts/");
 	List<Post> posts = List.of(response.getBody().as(Post[].class));
   }
