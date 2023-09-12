@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Params {
+class Params {
 
   private String name;
   private String surname;
