@@ -22,7 +22,7 @@ public class EntryResourceClient {
 	return entry;
   }
 
-  protected Response postHttpCall(Object body, String url, int port) {
+  private Response postHttpCall(Object body, String url, int port) {
 	return RestAssured.given()
 		.port(port)
 		.body(body)
