@@ -56,6 +56,22 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	}
 
 	@Test
+	@DisplayName("should not save patient with duplicated pesel")
+	void shouldNotSavePatientWithDuplicatedPesel() {
+	  // given
+	  PatientDTO request = getPatientDTO();
+
+	  // when
+	  Response response = postHttpCall(request, URL, port);
+	  ValidationExceptionDTO responseAsException = response.as(ValidationExceptionDTO.class);
+
+	  // then
+	  assertThat(response.statusCode()).isEqualTo(SC_BAD_REQUEST);
+	  assertThat(responseAsException.getInvalidFields()).hasSize(1)
+		  .containsKey("pesel");
+	}
+
+	@Test
 	@DisplayName("should not save patient with invalid fields")
 	void shouldNotSavePatientWithInvalidFields() {
 	  // given

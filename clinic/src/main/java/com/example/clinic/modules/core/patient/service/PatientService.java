@@ -5,6 +5,7 @@ import com.example.clinic.modules.core.patient.model.PatientDTO;
 import com.example.clinic.modules.core.patient.repository.PatientRepository;
 import com.example.commons.exception.NotFoundException;
 import java.text.MessageFormat;
+import javax.xml.bind.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ public class PatientService {
   public PatientDTO save(PatientDTO patientDTO) {
 	log.debug("Saving patient patientDTO={}", patientDTO);
 	patientValidator.validate(patientDTO);
+	patientValidator.validatePeselUniqueness(patientDTO.getPesel());
 	Patient patient = Patient.of(patientDTO);
 	return patientRepository.save(patient).toDTO();
   }

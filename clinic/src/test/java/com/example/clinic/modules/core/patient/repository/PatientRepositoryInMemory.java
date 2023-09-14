@@ -20,4 +20,10 @@ public class PatientRepositoryInMemory extends AbstractRepositoryInMemory<Patien
   public Long deleteAllById(Long id) {
 	return super.deleteAllById(id);
   }
+
+  @Override
+  public boolean existsByPesel(String pesel) {
+	return map.values().stream()
+		.anyMatch(x -> x.getPesel().equals(pesel));
+  }
 }

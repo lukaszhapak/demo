@@ -130,6 +130,22 @@ public class PatientServiceTest {
 	  assertThat(thrown.getInvalidFields()).hasSize(1)
 		  .containsKeys("phoneNumber");
 	}
+
+	@Test
+	@DisplayName("should not save patient with duplicated pesel")
+	void shouldNotSavePatientWithDuplicatedPesel() {
+	  // given
+	  PatientDTO request = getPatientDTO();
+	  patientService.save(request);
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(ValidationException.class);
+	  assertThat(thrown.getInvalidFields()).hasSize(1)
+		  .containsKeys("pesel");
+	}
   }
 
   @Nested

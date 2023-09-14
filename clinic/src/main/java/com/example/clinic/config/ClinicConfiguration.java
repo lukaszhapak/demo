@@ -17,7 +17,7 @@ public class ClinicConfiguration {
 
   @Bean
   public PatientService patientService(PatientRepository patientRepository) {
-	PatientValidator patientValidator = new PatientValidator();
+	PatientValidator patientValidator = new PatientValidator(patientRepository);
 	return new PatientService(patientRepository, patientValidator);
   }
 }

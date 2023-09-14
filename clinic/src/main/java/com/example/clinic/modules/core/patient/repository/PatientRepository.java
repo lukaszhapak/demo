@@ -11,4 +11,6 @@ public interface PatientRepository extends Repository<Patient, Long> {
   Patient save(Patient patient);
 
   Long deleteAllById(Long id);
+
+  boolean existsByPesel(String pesel);
 }
