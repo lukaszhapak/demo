@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FirstService {
+class FirstService {
 
   private final MessageSender messageSender;
   private final NotNeededService notNeededService;
