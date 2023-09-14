@@ -1,15 +1,15 @@
-//package com.example.demo.kafka;
-//
-//import org.springframework.kafka.annotation.KafkaHandler;
-//import org.springframework.kafka.annotation.KafkaListener;
-//import org.springframework.stereotype.Component;
-//
-//@Component
-//@KafkaListener(id = "demo-application", topics = "test-topic")
-//class KafkaClassListener {
-//
-//  @KafkaHandler
-//  void listen(String message) {
-//	System.out.println("KafkaHandler[String] {}" + message);
-//  }
-//}
+package com.example.demo.kafka;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
+
+@Slf4j
+@Component
+class KafkaClassListener {
+
+  @KafkaListener(id = "demo-application", topics = "test-topic")
+  void listen(SampleEvent sampleEvent) {
+	log.debug("Event received sampleEvent={}", sampleEvent);
+  }
+}
