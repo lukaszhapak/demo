@@ -1,12 +1,14 @@
 package com.example.demo.query;
 
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+@EntityScan
 @TestConfiguration
 @EnableJpaRepositories
-@EnableAutoConfiguration
+@AutoConfigureDataJpa
 class QueryConfig {
 
 }
