@@ -1,4 +1,4 @@
-package com.example.commons.test;
+package com.example.commons.commons;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

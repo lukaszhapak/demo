@@ -1,5 +1,6 @@
 package com.example.commons.test;
 
+import com.example.commons.commons.RestTestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
