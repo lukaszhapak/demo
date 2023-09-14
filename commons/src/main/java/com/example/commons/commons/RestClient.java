@@ -4,7 +4,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-public interface RestTestUtils {
+public interface RestClient {
 
   default Response getHttpCall(String url, int port) {
 	return RestAssured.given()
