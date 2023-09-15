@@ -5,9 +5,12 @@ import com.example.clinic.modules.core.patient.model.PatientDTO;
 import com.example.clinic.modules.core.patient.repository.PatientRepository;
 import com.example.commons.exception.NotFoundException;
 import java.text.MessageFormat;
-import javax.xml.bind.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
@@ -21,6 +24,11 @@ public class PatientService {
   public PatientDTO findById(Long id) {
 	log.debug("Getting patient id={}", id);
 	return getPatient(id).toDTO();
+  }
+
+  public PageImpl<PatientDTO> findByQuery(String query, int page, int size) {
+	Pageable pageRequest = PageRequest.of(page, size, Sort.by("id"));
+	return null;
   }
 
   public PatientDTO save(PatientDTO patientDTO) {

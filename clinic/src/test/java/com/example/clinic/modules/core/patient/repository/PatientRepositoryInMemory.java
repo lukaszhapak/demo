@@ -2,9 +2,16 @@ package com.example.clinic.modules.core.patient.repository;
 
 import com.example.clinic.modules.core.patient.model.Patient;
 import com.example.commons.test.AbstractRepositoryInMemory;
+import java.util.List;
 import java.util.Optional;
+import org.springframework.data.jpa.domain.Specification;
 
 public class PatientRepositoryInMemory extends AbstractRepositoryInMemory<Patient> implements PatientRepository {
+
+  @Override
+  public List<Patient> findAll(Specification<Patient> specification) {
+	return null;
+  }
 
   @Override
   public Optional<Patient> findById(Long id) {
