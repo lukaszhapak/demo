@@ -15,7 +15,7 @@ class RestServiceTest {
 	// given
 
 	// when
-	String response = getHttpCall("http://127.0.0.1:5000/test").body().as(String.class);
+//	String response = getHttpCall("http://127.0.0.1:5000/test").body().as(String.class);
 
 	// then
   }

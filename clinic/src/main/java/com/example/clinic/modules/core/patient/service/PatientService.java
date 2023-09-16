@@ -7,7 +7,7 @@ import com.example.commons.exception.NotFoundException;
 import java.text.MessageFormat;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -26,7 +26,7 @@ public class PatientService {
 	return getPatient(id).toDTO();
   }
 
-  public PageImpl<PatientDTO> findByQuery(String query, int page, int size) {
+  public Page<PatientDTO> findByQuery(String query, int page, int size) {
 	Pageable pageRequest = PageRequest.of(page, size, Sort.by("id"));
 	return null;
   }

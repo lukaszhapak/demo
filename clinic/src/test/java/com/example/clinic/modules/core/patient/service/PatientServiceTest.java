@@ -58,7 +58,6 @@ public class PatientServiceTest {
 	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(ValidationException.class);
 	  assertThat(thrown.getInvalidFields()).hasSize(4)
 		  .containsKeys(expectedInvalidFields);
 	}
@@ -142,7 +141,6 @@ public class PatientServiceTest {
 	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(ValidationException.class);
 	  assertThat(thrown.getInvalidFields()).hasSize(1)
 		  .containsKeys("pesel");
 	}
@@ -232,7 +230,6 @@ public class PatientServiceTest {
 	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.update(id, request));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(ValidationException.class);
 	  assertThat(thrown.getInvalidFields()).hasSize(4)
 		  .containsKeys(expectedInvalidFields);
 	}
@@ -247,13 +244,13 @@ public class PatientServiceTest {
 	@DisplayName("should delete patient")
 	void shouldDeletePatient() {
 	  // given
-	  PatientDTO patient = patientService.save(getPatientDTO());
+	  Long id = patientService.save(getPatientDTO()).getId();
 
 	  // when
-	  patientService.deleteById(patient.getId());
+	  patientService.deleteById(id);
 
 	  // then
-	  Throwable thrown = catchThrowable(() -> patientService.findById(patient.getId()));
+	  Throwable thrown = catchThrowable(() -> patientService.findById(id));
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);
 	}
 

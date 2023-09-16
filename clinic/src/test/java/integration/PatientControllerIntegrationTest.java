@@ -6,12 +6,14 @@ import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import com.example.clinic.commons.ClinicAbstractIntegrationTest;
 import com.example.clinic.modules.core.patient.model.Patient;
 import com.example.clinic.modules.core.patient.model.PatientDTO;
+import com.example.clinic.modules.core.patient.service.PatientService;
+import com.example.commons.exception.NotFoundException;
 import com.example.commons.exception.ValidationExceptionDTO;
-import com.example.commons.test.JdbcTestHelper;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -28,7 +30,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
   private final String URL = "/api/patient/";
 
   @Autowired
-  protected JdbcTestHelper<Patient> jdbcTestHelper;
+  protected PatientService patientService;
 
   @Nested
   @DisplayName("save tests")
@@ -42,33 +44,16 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  request.setPesel("93745637618");
 
 	  // when
-	  Response response = postHttpCall(request, URL, port);
-	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
+	  Response httpResponse = postHttpCall(request, URL, port);
+	  PatientDTO response = httpResponse.as(PatientDTO.class);
 
 	  // then
-	  assertThat(response.statusCode()).isEqualTo(SC_OK);
+	  assertThat(httpResponse.statusCode()).isEqualTo(SC_OK);
+	  assertThat(response.getId()).isNotNull();
+	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
-	  assertThat(responseAsPatient.getId()).isNotNull();
-	  assertThat(responseAsPatient).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
-
-	  Patient patient = jdbcTestHelper.fetchEntity("Patient", responseAsPatient.getId(), Patient.class);
-	  assertThat(patient).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
-	}
-
-	@Test
-	@DisplayName("should not save patient with duplicated pesel")
-	void shouldNotSavePatientWithDuplicatedPesel() {
-	  // given
-	  PatientDTO request = getPatientDTO();
-
-	  // when
-	  Response response = postHttpCall(request, URL, port);
-	  ValidationExceptionDTO responseAsException = response.as(ValidationExceptionDTO.class);
-
-	  // then
-	  assertThat(response.statusCode()).isEqualTo(SC_BAD_REQUEST);
-	  assertThat(responseAsException.getInvalidFields()).hasSize(1)
-		  .containsKey("pesel");
+	  PatientDTO patientInDb = patientService.findById(response.getId());
+	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
 
 	@Test
@@ -83,13 +68,30 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  String[] expectedInvalidFields = {"firstName", "lastName", "pesel", "phoneNumber"};
 
 	  // when
-	  Response response = postHttpCall(request, URL, port);
-	  ValidationExceptionDTO responseAsException = response.as(ValidationExceptionDTO.class);
+	  Response httpResponse = postHttpCall(request, URL, port);
+	  ValidationExceptionDTO thrown = httpResponse.as(ValidationExceptionDTO.class);
 
 	  // then
-	  assertThat(response.statusCode()).isEqualTo(SC_BAD_REQUEST);
-	  assertThat(responseAsException.getInvalidFields()).hasSize(4)
+	  assertThat(httpResponse.statusCode()).isEqualTo(SC_BAD_REQUEST);
+
+	  assertThat(thrown.getInvalidFields()).hasSize(4)
 		  .containsKeys(expectedInvalidFields);
+	}
+
+	@Test
+	@DisplayName("should not save patient with duplicated pesel")
+	void shouldNotSavePatientWithDuplicatedPesel() {
+	  // given
+	  PatientDTO request = getPatientDTO();
+
+	  // when
+	  Response httpResponse = postHttpCall(request, URL, port);
+	  ValidationExceptionDTO thrown = httpResponse.as(ValidationExceptionDTO.class);
+
+	  // then
+	  assertThat(httpResponse.statusCode()).isEqualTo(SC_BAD_REQUEST);
+	  assertThat(thrown.getInvalidFields()).hasSize(1)
+		  .containsKey("pesel");
 	}
   }
 
@@ -104,14 +106,14 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  Patient patient = getPatient();
 
 	  // when
-	  Response response = getHttpCall(URL + GET_PATIENT_ID, port);
-	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
+	  Response httpResponse = getHttpCall(URL + GET_PATIENT_ID, port);
+	  PatientDTO response = httpResponse.as(PatientDTO.class);
 
 	  // then
-	  assertThat(response.statusCode()).isEqualTo(SC_OK);
+	  assertThat(httpResponse.statusCode()).isEqualTo(SC_OK);
 
-	  assertThat(responseAsPatient.getId()).isNotNull();
-	  assertThat(responseAsPatient).usingRecursiveComparison().ignoringFields("id").isEqualTo(patient);
+	  assertThat(response.getId()).isNotNull();
+	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(patient);
 	}
 
 	@Test
@@ -143,22 +145,22 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  request.setPhoneNumber("789641615");
 
 	  // when
-	  Response response = putHttpCall(request, URL + UPDATE_PATIENT_ID, port);
-	  PatientDTO responseAsPatient = response.as(PatientDTO.class);
+	  Response httpResponse = putHttpCall(request, URL + UPDATE_PATIENT_ID, port);
+	  PatientDTO response = httpResponse.as(PatientDTO.class);
 
 	  // then
-	  assertThat(response.statusCode()).isEqualTo(SC_OK);
+	  assertThat(httpResponse.statusCode()).isEqualTo(SC_OK);
 
-	  assertThat(responseAsPatient.getId()).isNotNull();
-	  assertThat(responseAsPatient).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  assertThat(response.getId()).isNotNull();
+	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
-	  Patient patient = jdbcTestHelper.fetchEntity("Patient", responseAsPatient.getId(), Patient.class);
-	  assertThat(patient).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  PatientDTO patientInDb = patientService.findById(response.getId());
+	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
 
 	@Test
 	@DisplayName("should not update patient with invalid fields")
-	void shouldNotupdatePatientWithInvalidFields() {
+	void shouldNotUpdatePatientWithInvalidFields() {
 	  // given
 	  PatientDTO request = getPatientDTO();
 	  request.setFirstName("J");
@@ -168,12 +170,12 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  String[] expectedInvalidFields = {"firstName", "lastName", "pesel", "phoneNumber"};
 
 	  // when
-	  Response response = putHttpCall(request, URL + UPDATE_PATIENT_ID, port);
-	  ValidationExceptionDTO responseAsException = response.as(ValidationExceptionDTO.class);
+	  Response httpResponse = putHttpCall(request, URL + UPDATE_PATIENT_ID, port);
+	  ValidationExceptionDTO thrown = httpResponse.as(ValidationExceptionDTO.class);
 
 	  // then
-	  assertThat(response.statusCode()).isEqualTo(SC_BAD_REQUEST);
-	  assertThat(responseAsException.getInvalidFields()).hasSize(4)
+	  assertThat(httpResponse.statusCode()).isEqualTo(SC_BAD_REQUEST);
+	  assertThat(thrown.getInvalidFields()).hasSize(4)
 		  .containsKeys(expectedInvalidFields);
 	}
   }
@@ -194,7 +196,8 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  // then
 	  assertThat(response.statusCode()).isEqualTo(SC_OK);
 
-	  assertThat(jdbcTestHelper.existsById("PATIENT", id)).isFalse();
+	  Throwable thrown = catchThrowable(() -> patientService.findById(id));
+	  assertThat(thrown).isInstanceOf(NotFoundException.class);
 	}
 
 	@Test
@@ -208,7 +211,6 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 
 	  // then
 	  assertThat(response.statusCode()).isEqualTo(SC_NOT_FOUND);
-
 	}
   }
 }
