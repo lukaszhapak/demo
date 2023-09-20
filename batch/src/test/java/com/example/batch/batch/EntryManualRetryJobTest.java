@@ -32,7 +32,7 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
   @DisplayName("should start batch job and process entries")
   void shouldStartBatchJobAndProcessEntries() {
 	// given
-	Long id = entryRepository.save(createEntry(FAILED)).getId();
+	Long id = saveEntries(1, FAILED).get(0);
 
 	// when
 	entryManualRetryBatchJobStarter.startBatch(id);

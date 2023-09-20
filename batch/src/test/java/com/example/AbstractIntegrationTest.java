@@ -10,6 +10,8 @@ import com.example.batch.core.model.Entry;
 import com.example.batch.core.model.EntryErrorType;
 import com.example.batch.core.model.EntryStatus;
 import com.example.commons.commons.RestClient;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -27,6 +29,14 @@ public abstract class AbstractIntegrationTest implements RestClient {
 
   @Autowired
   protected EntryResourceClient entryResourceClient;
+
+  protected List<Long> saveEntries(int count, EntryStatus status) {
+	List<Long> ids = new ArrayList<>(count);
+	for (int i = 0; i < count; i++) {
+	  ids.add(entryRepository.save(createEntry(status)).getId());
+	}
+	return ids;
+  }
 
   protected Entry createEntry(EntryStatus status) {
 	Entry entry = new Entry();

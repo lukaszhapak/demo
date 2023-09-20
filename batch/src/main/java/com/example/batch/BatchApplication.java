@@ -1,5 +1,6 @@
 package com.example.batch;
 
+import com.example.batch.batch.config.BasicEntryBatchJobConfig;
 import com.example.batch.batch.config.EntryAutomaticRetryBatchJobConfig;
 import com.example.batch.batch.config.EntryBatchJobConfig;
 import com.example.batch.batch.config.EntryManualRetryBatchJobConfig;
@@ -13,7 +14,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableBatchProcessing
 @SpringBootApplication
-@Import({EntryBatchJobConfig.class, GlobalBatchJobConfig.class, EntryManualRetryBatchJobConfig.class, EntryAutomaticRetryBatchJobConfig.class})
+@Import({EntryBatchJobConfig.class, GlobalBatchJobConfig.class, EntryManualRetryBatchJobConfig.class, EntryAutomaticRetryBatchJobConfig.class, BasicEntryBatchJobConfig.class})
 public class BatchApplication {
 
   public static void main(String[] args) {

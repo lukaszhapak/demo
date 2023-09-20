@@ -13,6 +13,15 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class GlobalBatchJobConfig {
 
   @Bean
+  public TaskExecutor entryProcessorTaskExecutor() {
+	ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+	taskExecutor.setCorePoolSize(4);
+	taskExecutor.setMaxPoolSize(8);
+	taskExecutor.setQueueCapacity(50);
+	return taskExecutor;
+  }
+
+  @Bean
   public TaskExecutor asyncJobLauncherTaskExecutor() {
 	ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
 	taskExecutor.setCorePoolSize(1);

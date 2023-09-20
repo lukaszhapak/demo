@@ -91,15 +91,6 @@ public class EntryBatchJobConfig {
   }
 
   @Bean
-  public TaskExecutor entryProcessorTaskExecutor() {
-	ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-	taskExecutor.setCorePoolSize(4);
-	taskExecutor.setMaxPoolSize(8);
-	taskExecutor.setQueueCapacity(50);
-	return taskExecutor;
-  }
-
-  @Bean
   public Step entryProcessingStep(final StepBuilderFactory stepBuilderFactory, final ItemReader<Entry> entryReader, final ItemProcessor<Entry, Entry> entryProcessor,
 	  final ItemWriter<Entry> entryWriter, final ItemProcessor<Entry, Entry> entryInitProcessor, final TaskExecutor entryProcessorTaskExecutor) {
 

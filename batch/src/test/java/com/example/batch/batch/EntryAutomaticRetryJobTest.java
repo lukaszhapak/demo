@@ -2,6 +2,7 @@ package com.example.batch.batch;
 
 import static com.example.batch.core.model.EntryStatus.COMPLETED;
 import static com.example.batch.core.model.EntryStatus.FAILED;
+import static com.example.batch.core.model.EntryStatus.REGISTERED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.reset;
@@ -36,9 +37,7 @@ public class EntryAutomaticRetryJobTest extends AbstractIntegrationTest {
   @DisplayName("should start batch job and process entries")
   void shouldStartBatchJobAndProcessEntries() {
 	// given
-	List<Long> ids = Stream.of(entryRepository.save(createEntry(FAILED)), entryRepository.save(createEntry(FAILED)), entryRepository.save(createEntry(FAILED)),
-			entryRepository.save(createEntry(FAILED)))
-		.map(Entry::getId).collect(Collectors.toList());
+	List<Long> ids = saveEntries(10, FAILED);
 
 	// when
 	entryAutomaticRetryBatchJobStarter.startBatch();

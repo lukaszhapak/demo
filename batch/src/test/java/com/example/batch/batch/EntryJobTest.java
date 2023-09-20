@@ -13,8 +13,6 @@ import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.batch.starter.EntryBatchJobStarter;
 import com.example.batch.core.model.Entry;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -37,9 +35,7 @@ public class EntryJobTest extends AbstractIntegrationTest {
   @DisplayName("should start batch job and process entries")
   void shouldStartBatchJobAndProcessEntries() {
 	// given
-	List<Long> ids = Stream.of(entryRepository.save(createEntry(REGISTERED)), entryRepository.save(createEntry(REGISTERED)), entryRepository.save(createEntry(REGISTERED)),
-			entryRepository.save(createEntry(REGISTERED)))
-		.map(Entry::getId).collect(Collectors.toList());
+	List<Long> ids = saveEntries(10, REGISTERED);
 
 	// when
 	entryBatchJobStarter.startBatch();
