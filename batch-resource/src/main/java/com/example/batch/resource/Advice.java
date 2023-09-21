@@ -1,14 +1,12 @@
-package com.example.batch.api.advice;
+package com.example.batch.resource;
 
-import com.example.batch.exception.SystemException;
-import com.example.batch.exception.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class Advice {
+class Advice {
 
   @ExceptionHandler(SystemException.class)
   ResponseEntity<String> handleSystemException(Exception exception) {

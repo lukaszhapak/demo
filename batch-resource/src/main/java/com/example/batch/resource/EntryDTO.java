@@ -1,4 +1,4 @@
-package com.example.batch.api.dto;
+package com.example.batch.resource;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class EntryDTO {
+class EntryDTO {
 
   private Long id;
   private String data;
