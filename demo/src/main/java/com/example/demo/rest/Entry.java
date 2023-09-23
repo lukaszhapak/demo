@@ -1,4 +1,4 @@
-package com.example.demo.rest.entry;
+package com.example.demo.rest;
 
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -12,7 +12,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Entry {
+class Entry {
 
   @Id
   @GeneratedValue(strategy = IDENTITY)

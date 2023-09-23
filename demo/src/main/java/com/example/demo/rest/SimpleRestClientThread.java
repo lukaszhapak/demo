@@ -1,4 +1,4 @@
-package com.example.demo.rest.entry;
+package com.example.demo.rest;
 
 import lombok.AllArgsConstructor;
 
