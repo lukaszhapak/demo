@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 class EntryService {
 
-  public ProcessResponseDTO getProcessResponseDTO(EntryDTO entryDTO) {
+  ProcessResponseDTO getProcessResponseDTO(EntryDTO entryDTO) {
 	ProcessResponseDTO processResponseDTO = new ProcessResponseDTO();
 	log.debug("request {}", entryDTO);
 	if (entryDTO.getData().equals("system-exception")) {

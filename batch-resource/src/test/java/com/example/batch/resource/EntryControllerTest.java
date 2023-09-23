@@ -9,7 +9,7 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class EntryControllerTest extends AbstractIntegrationTest {
+class EntryControllerTest extends AbstractIntegrationTest {
 
   private final String URL = "/api/entry/process";
 
