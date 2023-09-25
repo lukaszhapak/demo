@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class KafkaMessageSender {
 
-  private final KafkaTemplate<String, SampleEvent> kafkaTemplate;
+  private final KafkaTemplate<String, KafkaEvent> kafkaTemplate;
 
   @Scheduled(fixedDelay = 10000)
   public void sendEvent() {
-	SampleEvent sampleEvent = new SampleEvent("John", 24, LocalDateTime.now());
-	log.debug("Sending event sampleEvent={}", sampleEvent);
-	kafkaTemplate.send("test-topic", "key1", sampleEvent);
+	KafkaEvent kafkaEvent = new KafkaEvent("John", 24, LocalDateTime.now());
+	log.debug("Sending event sampleEvent={}", kafkaEvent);
+	kafkaTemplate.send("test-topic", "key1", kafkaEvent);
   }
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 class KafkaClassListener {
 
   @KafkaListener(id = "demo-application", topics = "test-topic")
-  void listen(SampleEvent sampleEvent) {
-	log.debug("Event received sampleEvent={}", sampleEvent);
+  void listen(KafkaEvent kafkaEvent) {
+	log.debug("Event received kafkaEvent={}", kafkaEvent);
   }
 }

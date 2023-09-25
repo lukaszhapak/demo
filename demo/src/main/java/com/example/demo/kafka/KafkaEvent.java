@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-class SampleEvent {
+class KafkaEvent {
 
   private String name;
   private int age;
