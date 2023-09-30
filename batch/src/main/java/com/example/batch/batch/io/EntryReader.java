@@ -9,6 +9,10 @@ public class EntryReader extends JpaPagingItemReader<Entry> {
 
   @Override
   protected void doReadPage() {
-	super.doReadPage();
+	try{
+	  super.doReadPage();
+	} catch (Exception e) {
+	  throw new RuntimeException(e);
+	}
   }
 }
