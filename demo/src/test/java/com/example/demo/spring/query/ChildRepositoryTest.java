@@ -36,6 +36,5 @@ class ChildRepositoryTest extends AbstractIntegrationTest {
 	assertThat(childById.getId()).isNotNull();
 	assertThat(childById.getName()).isEqualTo("John");
 	assertThat(childById.getParents().get(0).getName()).isEqualTo("Jimmy");
-
   }
 }
