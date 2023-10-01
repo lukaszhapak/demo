@@ -1,46 +1,42 @@
 package com.example.demo.spring.outbox;
 
 import com.example.demo.commons.AbstractIntegrationTest;
-import com.example.demo.spring.outbox.Outbox;
-import com.example.demo.spring.outbox.OutboxJob;
-import com.example.demo.spring.outbox.OutboxRepository;
-import com.example.demo.spring.outbox.OutboxService;
-import com.example.demo.spring.outbox.Student;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 class OutboxJobTest extends AbstractIntegrationTest {
 
   @Autowired
-  OutboxService outboxService;
+  StudentService studentService;
   @Autowired
   OutboxJob outboxJob;
   @Autowired
   OutboxRepository outboxRepository;
-
+  @Autowired
+  StudentRepository studentRepository;
 
   @Test
   @DisplayName("should send message")
   void shouldSendMessage() {
 	// given
-	outboxService.registerMessage(getStudent(), "test-destination");
-	outboxService.registerMessage(getStudent(), "test-destination");
-	outboxService.registerMessage(getStudent(), "test-destination");
-	outboxService.registerMessage(getStudent(), "test-destination");
+	studentService.save(getStudent());
+	studentService.save(getStudent());
+	studentService.save(getStudent());
 
 	// when
 	outboxJob.sendMessages();
 
 	// then
 	List<Outbox> messages = outboxRepository.findAll();
+	List<Student> students = studentRepository.findAll();
   }
 
   private static Student getStudent() {
 	Student student = new Student();
 	student.setName("John");
+	student.setAge(24);
 	return student;
   }
 }

@@ -14,7 +14,7 @@ class StudentService {
   private final OutboxService outboxService;
 
   @Transactional // require public
-  public Student saveStudent(Student student) {
+  public Student save(Student student) {
 	outboxService.registerMessage(student, "student-registered-topic");
 	return studentRepository.save(student);
   }
