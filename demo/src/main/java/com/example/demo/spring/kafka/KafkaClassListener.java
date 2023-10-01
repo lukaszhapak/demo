@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@ConditionalOnProperty(	value="kafka.enabled",	havingValue = "true")
 class KafkaClassListener {
 
   @KafkaListener(id = "demo-application", topics = "test-topic")

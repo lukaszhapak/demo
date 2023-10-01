@@ -9,35 +9,28 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = TestContext.class)
-//@SpringBootTest(classes = TestContext.class)
-class ContextTest {
+@ContextConfiguration(classes = TestContextConfiguration.class)
+class ExtendingTestConfigWithAutoConfigurationTest {
 
   @Autowired
-  ServiceForTestContext serviceForTestContext;
+  StudentService studentService;
 
   @Autowired
   StudentRepository studentRepository;
 
   @Test
-  @DisplayName("Test name")
-  void testName() {
+  @DisplayName("should save student")
+  void shouldSaveStudent() {
 	// given
-    Stuudent stuudent = new Stuudent();
+	Student student = new Student();
 
 	// when
-    serviceForTestContext.runSomeMethod();
+	List<Student> all = studentRepository.findAll();
+	System.out.println(all.size());
+	studentService.save(student);
 
-
-    List<Stuudent> all = studentRepository.findAll();
-    System.out.println(all.size());
-
-
-    studentRepository.save(stuudent);
-
-    all = studentRepository.findAll();
-    System.out.println(all.size());
-
-    // then
+	// then
+	all = studentRepository.findAll();
+	System.out.println(all.size());
   }
 }

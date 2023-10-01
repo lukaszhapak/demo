@@ -1,12 +1,12 @@
 package com.example.demo.spring.requestparam;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 class Params {
 
   private String name;

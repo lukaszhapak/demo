@@ -1,5 +1,6 @@
 package com.example.demo.spring.outbox;
 
+import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.spring.outbox.Outbox;
 import com.example.demo.spring.outbox.OutboxJob;
 import com.example.demo.spring.outbox.OutboxRepository;
@@ -11,8 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class OutboxJobTest {
+class OutboxJobTest extends AbstractIntegrationTest {
 
   @Autowired
   OutboxService outboxService;

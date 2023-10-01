@@ -1,16 +1,14 @@
-package com.example.demo;
+package com.example.demo.spring.internalEvent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@EnableCaching
 @EnableScheduling
 @SpringBootApplication
-public class DemoApplication {
+class Application {
 
   public static void main(String[] args) {
-	SpringApplication.run(DemoApplication.class, args);
+	SpringApplication.run(Application.class, args);
   }
 }

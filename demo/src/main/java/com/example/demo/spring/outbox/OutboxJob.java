@@ -9,13 +9,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-//@ConditionalOnProperty(	value="outbox.enabled",	havingValue = "true")
 class OutboxJob {
 
   private final OutboxService outboxService;
   private final OutboxPublisher outboxPublisher;
 
-  @Scheduled(fixedDelay = 10000)
+  @Scheduled(fixedDelay = 5000)
     void sendMessages(){
 	log.debug("Sending messages");
 	List<Outbox> unSentMessages = outboxService.getUnsentMessages();

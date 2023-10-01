@@ -21,9 +21,16 @@ class CacheController {
 	return UUID.randomUUID().toString();
   }
 
-  @Scheduled(fixedDelay = 1000000)
   @CacheEvict("UUID")
-  public void evictCached() {
-	log.debug("Cache Evict");
+  @GetMapping("/cached/evict")
+  public String evictCached() {
+	log.debug("Manual cache evict");
+	return "Cache evicted";
+  }
+
+  @CacheEvict("UUID") // need public
+  @Scheduled(fixedDelay = 10000) // not need public
+  public void scheduledEvictCached() {
+	log.debug("Scheuled cache evict");
   }
 }

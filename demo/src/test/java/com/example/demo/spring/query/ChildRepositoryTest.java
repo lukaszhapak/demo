@@ -2,17 +2,13 @@ package com.example.demo.spring.query;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.example.demo.commons.AbstractIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = QueryConfig.class)
-class ChildRepositoryTest {
+class ChildRepositoryTest extends AbstractIntegrationTest {
 
   @Autowired
   ChildRepository childRepository;

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@ConditionalOnProperty(	value="kafka.enabled",	havingValue = "true")
 class KafkaMessageSender {
 
   private final KafkaTemplate<String, KafkaEvent> kafkaTemplate;
