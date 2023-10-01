@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.rest;
+package com.example.demo.nonspring.threads;
 
 class SimpleMain {
 
@@ -7,7 +7,7 @@ class SimpleMain {
 
   public static void main(String[] args) {
 	for (int i = 0; i < numberOfThreads; i++) {
-	  Thread thread = new SimpleRestClientThread(new EntryResourceClient(), NUMBER_OF_EXECUTIONS);
+	  Thread thread = new MyThread(new Service(), NUMBER_OF_EXECUTIONS);
 	  thread.start();
 	}
   }

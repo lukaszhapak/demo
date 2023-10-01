@@ -14,6 +14,13 @@ public interface RestClient {
 		.get(url);
   }
 
+  default Response getHttpCall(String url) {
+	return RestAssured.given()
+		.log().all()
+		.when()
+		.get(url);
+  }
+
   default Response postHttpCall(Object body, String url, int port) {
 	return RestAssured.given()
 		.port(port)
