@@ -1,4 +1,4 @@
-package com.example.demo.spring.query;
+package com.example.demo.spring.jpql;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

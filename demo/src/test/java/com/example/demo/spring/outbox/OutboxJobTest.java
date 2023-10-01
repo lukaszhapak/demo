@@ -24,10 +24,10 @@ class OutboxJobTest extends AbstractIntegrationTest {
 	studentService.save(getStudent());
 	studentService.save(getStudent());
 	studentService.save(getStudent());
-
-	// when
 	List<Outbox> messages = outboxRepository.findAll();
 	List<Student> students = studentRepository.findAll();
+
+	// when
 	outboxJob.sendMessages();
 
 	// then

@@ -1,4 +1,4 @@
-package com.example.demo.spring.query;
+package com.example.demo.spring.jpql;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

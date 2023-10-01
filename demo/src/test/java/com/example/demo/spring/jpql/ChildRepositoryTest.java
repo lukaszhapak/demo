@@ -1,4 +1,4 @@
-package com.example.demo.spring.query;
+package com.example.demo.spring.jpql;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
