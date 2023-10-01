@@ -7,5 +7,10 @@ class Service {
 
   public void execute(){
 	log.debug("execute");
+	try {
+	  Thread.sleep(10);
+	} catch (InterruptedException e) {
+	  throw new RuntimeException(e);
+	}
   }
 }
