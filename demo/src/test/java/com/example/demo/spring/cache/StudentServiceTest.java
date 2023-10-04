@@ -32,9 +32,11 @@ public class StudentServiceTest {
 	studentService.findById(1L);
 	studentService.update(1L, new Student());
 	studentService.findById(1L);
+	studentService.update(2L, new Student());
 	studentService.findById(1L);
 	studentService.deleteById(1L);
 	studentService.findById(1L);
+	studentService.deleteById(2L);
 	studentService.findById(1L);
 
 	verify(studentRepository, times(3)).findById(any());
