@@ -1,17 +1,22 @@
 package com.example.demo.spring.cache;
 
-import org.junit.jupiter.api.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.context.*;
-import org.springframework.boot.test.mock.mockito.*;
-import org.springframework.cache.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import java.util.*;
-
-import static org.mockito.Mockito.*;
+import java.util.ArrayList;
+import java.util.Optional;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cache.CacheManager;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class StudentServiceTest {
+
   @Autowired
   StudentService studentService;
   @MockBean
@@ -28,8 +33,11 @@ public class StudentServiceTest {
 	studentService.update(1L, new Student());
 	studentService.findById(1L);
 	studentService.findById(1L);
+	studentService.deleteById(1L);
+	studentService.findById(1L);
+	studentService.findById(1L);
 
-	verify(studentRepository, times(1)).findById(any());
+	verify(studentRepository, times(3)).findById(any());
   }
 
   @Test
@@ -41,21 +49,14 @@ public class StudentServiceTest {
 	studentService.save(new Student());
 	studentService.findAll();
 	studentService.findAll();
-
-	verify(studentRepository, times(2)).findAll();
-  }
-
-  @Test
-  void delete() {
-	when(studentRepository.findById(any())).thenReturn(Optional.of(new Student()));
-
-	studentService.findById(1L);
-	studentService.findById(1L);
+	studentService.update(1L, new Student());
+	studentService.findAll();
+	studentService.findAll();
 	studentService.deleteById(1L);
-	studentService.findById(1L);
-	studentService.findById(1L);
+	studentService.findAll();
+	studentService.findAll();
 
-	verify(studentRepository, times(2)).findById(any());
+	verify(studentRepository, times(4)).findAll();
   }
 
   @AfterEach
