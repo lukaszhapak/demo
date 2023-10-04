@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-class CacheJob {
+class UUIDJob {
 
-  private final CacheService cacheService;
+  private final UUIDService UUIDService;
 
-  @Scheduled(fixedDelay = 10000)
+  @Scheduled(fixedDelay = 10 * 60 * 1000)
   void scheduledEvictCached() {
-	log.debug("Scheuled cache evict");
-	cacheService.evictCached();
+	log.debug("Scheduled uuid cache evict");
+	UUIDService.evictCached();
   }
 }

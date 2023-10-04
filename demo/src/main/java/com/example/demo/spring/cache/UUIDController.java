@@ -8,21 +8,21 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-class CacheController {
+class UUIDController {
 
-  private final CacheService cacheService;
+  private final UUIDService UUIDService;
 
-  @GetMapping("/cached")
+  @GetMapping("/cache/uuid")
   public String getCached() {
-	log.debug("Get cached value request");
-	String cached = cacheService.getCached();
-	log.debug("Get cached value={}", cached);
+	log.debug("Get cached uuid value request");
+	String cached = UUIDService.getCached();
+	log.debug("Get cached uuid value={}", cached);
 	return cached;
   }
 
-  @GetMapping("/cached/evict")
+  @GetMapping("/cache/uuid/evict")
   public String evictCached() {
-	log.debug("Manual cache evict");
-	return cacheService.evictCached();
+	log.debug("Manual uuid cache evict");
+	return UUIDService.evictCached();
   }
 }

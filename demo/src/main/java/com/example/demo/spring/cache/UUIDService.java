@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-class CacheService {
+class UUIDService {
 
   @Cacheable("UUID")
   public String getCached() {
-	log.debug("Get cached value");
+	log.debug("Get cached uuid value");
 	return UUID.randomUUID().toString();
   }
 
   @CacheEvict("UUID")
   public String evictCached() {
-	log.debug("Evict cache");
-	return "Cache evicted";
+	log.debug("Evict uuid cache");
+	return "Cache uuid evicted";
   }
 }
