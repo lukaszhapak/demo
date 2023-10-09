@@ -15,7 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.cache.CacheManager;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class StudentServiceTest {
+class StudentServiceTest {
 
   @Autowired
   StudentService studentService;
@@ -29,6 +29,7 @@ public class StudentServiceTest {
 	when(studentRepository.findById(any())).thenReturn(Optional.of(new Student()));
 
 	studentService.findById(1L);
+	studentService.save(new Student());
 	studentService.findById(1L);
 	studentService.update(1L, new Student());
 	studentService.findById(1L);

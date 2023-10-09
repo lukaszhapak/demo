@@ -21,6 +21,5 @@ class UUIDControllerTest extends AbstractIntegrationTest {
 	UUIDController.getCached();
 	UUIDController.getCached();
 	UUIDController.getCached();
-
   }
 }
