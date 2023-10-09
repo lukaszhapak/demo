@@ -18,6 +18,6 @@ class Child {
   private Long id;
   private String name;
 
-  @OneToMany
+  @OneToMany(mappedBy = "child")
   List<Parent> parents;
 }
