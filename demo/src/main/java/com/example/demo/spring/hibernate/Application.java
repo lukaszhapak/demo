@@ -1,4 +1,4 @@
-package com.example.demo.spring.hibernatedatatypes;
+package com.example.demo.spring.hibernate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

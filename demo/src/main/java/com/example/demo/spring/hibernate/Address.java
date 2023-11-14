@@ -1,4 +1,4 @@
-package com.example.demo.spring.hibernatedatatypes;
+package com.example.demo.spring.hibernate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

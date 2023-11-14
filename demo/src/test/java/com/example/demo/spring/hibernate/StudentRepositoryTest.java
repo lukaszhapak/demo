@@ -1,4 +1,4 @@
-package com.example.demo.spring.hibernatedatatypes;
+package com.example.demo.spring.hibernate;
 
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +23,7 @@ class StudentRepositoryTest {
 
 	// then
 	List<Student> all = studentRepository.findAll();
+	System.out.println(all);
   }
 
   Student createStudent() {
@@ -30,10 +31,14 @@ class StudentRepositoryTest {
 		.firstName("John")
 		.lastName("Doe")
 		.age(24)
-		.grades(new int[]{2, 5, 4, 3, 2, 4})
+		.gradesArray(new Integer[]{1,2,3,4,5,6})
+		.gradesList(List.of(6,5,4,3,2,1))
 		.address(Address.builder()
 			.streetName("Street")
 			.flatNumber("22")
+			.build())
+		.oneToOne(StudentOneToOne.builder()
+			.name("Asd")
 			.build())
 		.build();
   }
