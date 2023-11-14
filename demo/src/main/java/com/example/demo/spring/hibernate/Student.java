@@ -23,8 +23,12 @@ class Student {
   private String lastName;
   private int age;
 
-  @OneToOne(cascade = PERSIST)
+  @OneToOne(cascade = PERSIST, fetch = FetchType.EAGER)
   private StudentOneToOne oneToOne;
+
+  @OneToMany(cascade = PERSIST)
+  @JoinColumn(name = "Student.id", nullable = false)
+  private List<DummyOneToMany> oneToMany;
 
   @Embedded
   private Address address;

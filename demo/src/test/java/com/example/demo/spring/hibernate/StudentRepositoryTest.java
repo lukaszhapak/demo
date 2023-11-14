@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
+
 @SpringBootTest
 class StudentRepositoryTest {
 
@@ -13,6 +15,7 @@ class StudentRepositoryTest {
   StudentRepository studentRepository;
 
   @Test
+  @Transactional
   @DisplayName("should save and fetch student")
   void shouldSaveAndFetchStudent() {
 	// given
@@ -40,6 +43,11 @@ class StudentRepositoryTest {
 		.oneToOne(StudentOneToOne.builder()
 			.name("Asd")
 			.build())
+			.oneToMany(List.of(
+					DummyOneToMany.builder().name("32111").build(),
+					DummyOneToMany.builder().name("32331").build(),
+					DummyOneToMany.builder().name("32121").build()
+			))
 		.build();
   }
 }

@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class StudentOneToMany {
+class DummyOneToMany {
 
     @Id
     @GeneratedValue
