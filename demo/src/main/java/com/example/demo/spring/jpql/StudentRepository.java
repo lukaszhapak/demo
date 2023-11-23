@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 interface StudentRepository extends JpaRepository<Student, Long> {
 
-    @Query("Select student.name from Student student where student.id = :id")
-    String selectName(Long id);
+  @Query("Select student.name from Student student where student.id = :id")
+  String selectNameById(Long id);
 }
