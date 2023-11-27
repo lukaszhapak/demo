@@ -17,7 +17,7 @@ class RequestParamControllerTest extends AbstractIntegrationTest {
   @Test
   @DisplayName("should get with query params")
   void shouldGetWithQueryParams() {
-	String url = "/params?name=John&surname=Doe&age=24";
+	String url = "/params?name=John&surname=Doe&age=24&ids=2,5,4";
 
 	Response httpResponse = getHttpCall(url, port);
 
