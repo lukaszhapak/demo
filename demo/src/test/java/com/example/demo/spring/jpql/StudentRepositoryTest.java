@@ -3,6 +3,7 @@ package com.example.demo.spring.jpql;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,20 @@ class StudentRepositoryTest extends AbstractIntegrationTest {
 
 	// Then:
 	assertThat(studentName).isEqualTo(john.getName());
+  }
+
+  @Test
+  @DisplayName("should save students and fetch list")
+  void shouldSaveStudentsAndFetchList() {
+	// given
+	studentRepository.save(getStudent());
+	studentRepository.save(getStudent());
+
+	// when
+	List<StudentDTO> studentDTOS = studentRepository.findAllAsDTOs();
+
+	// then
+	assertThat(studentDTOS.size()).isEqualTo(2);
   }
 
   private Student getStudent() {
