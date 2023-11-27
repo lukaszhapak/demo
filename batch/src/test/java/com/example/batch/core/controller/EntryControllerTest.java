@@ -26,9 +26,6 @@ public class EntryControllerTest extends AbstractIntegrationTest {
 	// then
 	assertThat(response.statusCode()).isEqualTo(SC_OK);
 	assertThat(responseAsEntryDTO.getId()).isNotNull();
-
-	// cleanup
-	entryRepository.deleteById(responseAsEntryDTO.getId());
   }
 
   private EntryDTO createEntryDTO() {

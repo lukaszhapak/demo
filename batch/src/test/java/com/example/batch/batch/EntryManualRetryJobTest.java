@@ -42,9 +42,6 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
 	Entry processedEntry = entryRepository.findById(id).get();
 
 	assertThat(processedEntry.getStatus()).isEqualTo(COMPLETED);
-
-	// clean up
-	entryRepository.deleteById(id);
   }
 
   protected Entry processEntry(Entry entry) {
