@@ -17,7 +17,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class StudentOneToOne {
+class StudentOneToMany {
 
   @Id
   @GeneratedValue
