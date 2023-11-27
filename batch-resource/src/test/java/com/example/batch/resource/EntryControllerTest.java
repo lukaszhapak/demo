@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 class EntryControllerTest extends AbstractIntegrationTest {
 
-  private final String URL = "/api/entry/process";
+  private final String URL = "/batch-resource/api/entry/process";
 
   @Test
   @DisplayName("should post entry")
