@@ -38,7 +38,6 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
 	entryManualRetryBatchJobStarter.startBatch(id);
 
 	// then
-	log.debug("test -- loading entries");
 	Entry processedEntry = entryRepository.findById(id).get();
 
 	assertThat(processedEntry.getStatus()).isEqualTo(COMPLETED);

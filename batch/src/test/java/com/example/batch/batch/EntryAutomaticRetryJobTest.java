@@ -43,7 +43,6 @@ public class EntryAutomaticRetryJobTest extends AbstractIntegrationTest {
 	entryAutomaticRetryBatchJobStarter.startBatch();
 
 	// then
-	log.debug("test -- loading entries");
 	List<Entry> processedEntries = entryRepository.findAllById(ids);
 
 	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 != 0)).allMatch(entry -> entry.getStatus() == COMPLETED);

@@ -17,7 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 @Import({BatchApplication.class, TestConfig.class})
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 public abstract class AbstractIntegrationTest implements RestClient {

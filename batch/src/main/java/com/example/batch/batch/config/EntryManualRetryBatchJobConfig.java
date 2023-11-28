@@ -42,5 +42,4 @@ public class EntryManualRetryBatchJobConfig {
 		.listener(entryJobExecutionListener)
 		.build();
   }
-
 }

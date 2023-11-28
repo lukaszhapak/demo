@@ -1,5 +1,7 @@
 package com.example.batch.batch.config;
 
+import com.example.batch.batch.properties.EntryBatchJobAsyncLauncherProperties;
+import com.example.batch.batch.properties.EntryBatchJobProcessorProperties;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
@@ -13,22 +15,22 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class GlobalBatchJobConfig {
 
   @Bean
-  public TaskExecutor entryProcessorTaskExecutor() {
+  public TaskExecutor entryProcessorTaskExecutor(final EntryBatchJobProcessorProperties entryBatchJobProcessorProperties) {
 	ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-	taskExecutor.setCorePoolSize(4);
-	taskExecutor.setMaxPoolSize(8);
-	taskExecutor.setQueueCapacity(50);
+	taskExecutor.setCorePoolSize(entryBatchJobProcessorProperties.getCorePoolSize());
+	taskExecutor.setMaxPoolSize(entryBatchJobProcessorProperties.getMaxPoolSize());
+	taskExecutor.setQueueCapacity(entryBatchJobProcessorProperties.getQueueCapacity());
 	return taskExecutor;
   }
 
   @Bean
-  public TaskExecutor asyncJobLauncherTaskExecutor() {
+  public TaskExecutor asyncJobLauncherTaskExecutor(final EntryBatchJobAsyncLauncherProperties entryBatchJobAsyncLauncherProperties) {
 	ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-	taskExecutor.setCorePoolSize(1);
-	taskExecutor.setMaxPoolSize(4);
-	taskExecutor.setQueueCapacity(10);
-	taskExecutor.setKeepAliveSeconds(30);
-	taskExecutor.setAllowCoreThreadTimeOut(true);
+	taskExecutor.setCorePoolSize(entryBatchJobAsyncLauncherProperties.getCorePoolSize());
+	taskExecutor.setMaxPoolSize(entryBatchJobAsyncLauncherProperties.getMaxPoolSize());
+	taskExecutor.setQueueCapacity(entryBatchJobAsyncLauncherProperties.getQueueCapacity());
+	taskExecutor.setKeepAliveSeconds(entryBatchJobAsyncLauncherProperties.getKeepAliveSeconds());
+	taskExecutor.setAllowCoreThreadTimeOut(entryBatchJobAsyncLauncherProperties.getAllowCoreThreadTimeout());
 	return taskExecutor;
   }
 

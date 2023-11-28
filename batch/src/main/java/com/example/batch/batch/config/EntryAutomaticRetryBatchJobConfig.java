@@ -18,7 +18,7 @@ public class EntryAutomaticRetryBatchJobConfig {
 
   @Bean
   @StepScope
-  public Tasklet entryAutomaticRetryPreProcessingTasklet(EntryRepository entryRepository) {
+  public Tasklet entryAutomaticRetryPreProcessingTasklet(final EntryRepository entryRepository) {
 	return new EntryAutomaticRetryPreProcessingTasklet(entryRepository);
   }
 
@@ -31,8 +31,7 @@ public class EntryAutomaticRetryBatchJobConfig {
 
   @Bean
   public Job entryAutomaticRetryBatchJob(final JobBuilderFactory jobBuilderFactory, final Step entryAutomaticRetryPreProcessingStep, final Step entryProcessingStep,
-	  final Step entryPostProcessingStep,
-	  final JobExecutionListener entryJobExecutionListener) {
+	  final Step entryPostProcessingStep, final JobExecutionListener entryJobExecutionListener) {
 	return jobBuilderFactory.get("entryAutomaticRetryBatchJob")
 		.preventRestart()
 		.flow(entryAutomaticRetryPreProcessingStep)
@@ -43,5 +42,4 @@ public class EntryAutomaticRetryBatchJobConfig {
 		.listener(entryJobExecutionListener)
 		.build();
   }
-
 }
