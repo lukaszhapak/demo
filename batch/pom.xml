@@ -42,9 +42,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>${postgresql.version}</version>
+			<artifactId>h2</artifactId>
+			<groupId>com.h2database</groupId>
+			<version>${h2.version}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -68,12 +68,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<version>${spring-boot.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<artifactId>h2</artifactId>
-			<groupId>com.h2database</groupId>
-			<version>${h2.version}</version>
 			<scope>test</scope>
 		</dependency>
 
