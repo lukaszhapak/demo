@@ -25,6 +25,7 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
   @BeforeEach
   void setUp() {
 	reset(entryResourceClient);
+	reset(entryProcessor);
 	when(entryResourceClient.processEntry(any())).thenAnswer(invocation -> processEntry(invocation.getArgument(0)));
   }
 
@@ -41,6 +42,8 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
 	Entry processedEntry = entryRepository.findById(id).get();
 
 	assertThat(processedEntry.getStatus()).isEqualTo(COMPLETED);
+	assertThat(processedEntry.getErrorCode()).isNull();
+	assertThat(processedEntry.getErrorType()).isNull();
   }
 
   protected Entry processEntry(Entry entry) {

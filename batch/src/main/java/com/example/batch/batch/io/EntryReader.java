@@ -1,5 +1,6 @@
 package com.example.batch.batch.io;
 
+import com.example.batch.batch.exception.BatchItemReaderException;
 import com.example.batch.core.model.Entry;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.database.JpaPagingItemReader;
@@ -12,7 +13,7 @@ public class EntryReader extends JpaPagingItemReader<Entry> {
 	try{
 	  super.doReadPage();
 	} catch (Exception e) {
-	  throw new RuntimeException(e);
+	  throw new BatchItemReaderException();
 	}
   }
 }

@@ -31,13 +31,12 @@ public class EntryAutomaticRetryBatchJobConfig {
 
   @Bean
   public Job entryAutomaticRetryBatchJob(final JobBuilderFactory jobBuilderFactory, final Step entryAutomaticRetryPreProcessingStep, final Step entryProcessingStep,
-	  final Step entryPostProcessingStep, final JobExecutionListener entryJobExecutionListener) {
+	  final JobExecutionListener entryJobExecutionListener) {
 	return jobBuilderFactory.get("entryAutomaticRetryBatchJob")
 		.preventRestart()
 		.flow(entryAutomaticRetryPreProcessingStep)
 		.on(ExitStatus.NOOP.getExitCode()).end()
 		.next(entryProcessingStep)
-		.next(entryPostProcessingStep)
 		.end()
 		.listener(entryJobExecutionListener)
 		.build();

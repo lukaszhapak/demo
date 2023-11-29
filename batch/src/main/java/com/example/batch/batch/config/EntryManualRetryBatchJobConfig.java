@@ -30,14 +30,13 @@ public class EntryManualRetryBatchJobConfig {
   }
 
   @Bean
-  public Job entryManualRetryBatchJob(final JobBuilderFactory jobBuilderFactory, final Step entryProcessingStep, final Step entryManualRetryPreProcessingStep, final Step entryPostProcessingStep,
+  public Job entryManualRetryBatchJob(final JobBuilderFactory jobBuilderFactory, final Step entryProcessingStep, final Step entryManualRetryPreProcessingStep,
 	  final JobExecutionListener entryJobExecutionListener) {
 	return jobBuilderFactory.get("entryManualRetryBatchJob")
 		.preventRestart()
 		.flow(entryManualRetryPreProcessingStep)
 		.on(ExitStatus.NOOP.getExitCode()).end()
 		.next(entryProcessingStep)
-		.next(entryPostProcessingStep)
 		.end()
 		.listener(entryJobExecutionListener)
 		.build();

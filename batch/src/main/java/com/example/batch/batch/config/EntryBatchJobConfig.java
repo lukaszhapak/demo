@@ -1,14 +1,13 @@
 package com.example.batch.batch.config;
 
 import com.example.batch.batch.client.EntryResourceClient;
-import com.example.batch.batch.properties.EntryBatchJobProperties;
 import com.example.batch.batch.exception.CustomSkipPolicy;
 import com.example.batch.batch.io.EntryReader;
 import com.example.batch.batch.io.EntryWriter;
 import com.example.batch.batch.listener.EntryJobExecutionListener;
 import com.example.batch.batch.processor.EntryInitProcessor;
 import com.example.batch.batch.processor.EntryProcessor;
-import com.example.batch.batch.tasklet.EntryPostProcessingTasklet;
+import com.example.batch.batch.properties.EntryBatchJobProperties;
 import com.example.batch.batch.tasklet.EntryPreProcessingTasklet;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
@@ -76,12 +75,6 @@ public class EntryBatchJobConfig {
   }
 
   @Bean
-  @StepScope
-  public Tasklet entryPostProcessingTasklet(final EntryRepository entryRepository) {
-	return new EntryPostProcessingTasklet(entryRepository);
-  }
-
-  @Bean
   public Step entryPreProcessingStep(final StepBuilderFactory stepBuilderFactory, final Tasklet entryPreProcessingTasklet) {
 	return stepBuilderFactory.get("entryPreProcessingStep")
 		.tasklet(entryPreProcessingTasklet)
@@ -107,26 +100,17 @@ public class EntryBatchJobConfig {
   }
 
   @Bean
-  public Step entryPostProcessingStep(final StepBuilderFactory stepBuilderFactory, final Tasklet entryPostProcessingTasklet) {
-	return stepBuilderFactory.get("entryPostProcessingStep")
-		.tasklet(entryPostProcessingTasklet)
-		.build();
-  }
-
-  @Bean
   public JobExecutionListener entryJobExecutionListener(final EntryRepository entryRepository) {
 	return new EntryJobExecutionListener(entryRepository);
   }
 
   @Bean
-  public Job entryBatchJob(final JobBuilderFactory jobBuilderFactory, final Step entryProcessingStep, final Step entryPreProcessingStep, final Step entryPostProcessingStep,
-	  final JobExecutionListener entryJobExecutionListener) {
+  public Job entryBatchJob(final JobBuilderFactory jobBuilderFactory, final Step entryProcessingStep, final Step entryPreProcessingStep, final JobExecutionListener entryJobExecutionListener) {
 	return jobBuilderFactory.get("entryBatchJob")
 		.preventRestart()
 		.flow(entryPreProcessingStep)
 		.on(ExitStatus.NOOP.getExitCode()).end()
 		.next(entryProcessingStep)
-		.next(entryPostProcessingStep)
 		.end()
 		.listener(entryJobExecutionListener)
 		.build();

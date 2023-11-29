@@ -1,7 +1,10 @@
 package com.example.batch.config;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+
 import com.example.batch.batch.client.EntryResourceClient;
-import org.mockito.Mockito;
+import com.example.batch.batch.processor.EntryProcessor;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.SyncTaskExecutor;
@@ -12,7 +15,13 @@ public class TestConfig {
 
   @Bean
   public EntryResourceClient entryResourceClient() {
-	return Mockito.mock(EntryResourceClient.class);
+	return mock(EntryResourceClient.class);
+  }
+
+  @Bean
+  public EntryProcessor entryProcessor(EntryResourceClient entryResourceClient) {
+	EntryProcessor entryProcessor = new EntryProcessor(entryResourceClient);
+	return spy(entryProcessor);
   }
 
   @Bean

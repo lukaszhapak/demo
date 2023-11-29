@@ -7,6 +7,6 @@ public class CustomSkipPolicy implements SkipPolicy {
 
   @Override
   public boolean shouldSkip(Throwable throwable, int skipCount) throws SkipLimitExceededException {
-	return throwable instanceof RuntimeException;
+	return !(throwable instanceof BatchItemReaderException);
   }
 }

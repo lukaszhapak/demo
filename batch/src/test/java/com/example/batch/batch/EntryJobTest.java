@@ -1,5 +1,6 @@
 package com.example.batch.batch;
 
+import static com.example.batch.core.model.EntryErrorType.SYSTEM;
 import static com.example.batch.core.model.EntryStatus.COMPLETED;
 import static com.example.batch.core.model.EntryStatus.FAILED;
 import static com.example.batch.core.model.EntryStatus.REGISTERED;
@@ -28,6 +29,8 @@ public class EntryJobTest extends AbstractIntegrationTest {
   @BeforeEach
   void setUp() {
 	reset(entryResourceClient);
+	reset(entryProcessor);
+//	doThrow(new RuntimeException("test")).when(entryProcessor).process(any());
 	when(entryResourceClient.processEntry(any())).thenAnswer(invocation -> processEntry(invocation.getArgument(0)));
   }
 
@@ -44,7 +47,12 @@ public class EntryJobTest extends AbstractIntegrationTest {
 	List<Entry> processedEntries = entryRepository.findAllById(ids);
 
 	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 != 0)).allMatch(entry -> entry.getStatus() == COMPLETED);
+	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 != 0)).allMatch(entry -> entry.getErrorCode() == null);
+	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 != 0)).allMatch(entry -> entry.getErrorType() == null);
+
 	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 == 0)).allMatch(entry -> entry.getStatus() == FAILED);
+	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 == 0)).allMatch(entry -> entry.getErrorType() == SYSTEM);
+	assertThat(processedEntries.stream().filter(x -> x.getId() % 2 == 0)).allMatch(entry -> entry.getErrorCode().equals("Rest Failure"));
   }
 
   private Entry processEntry(Entry entry) {
