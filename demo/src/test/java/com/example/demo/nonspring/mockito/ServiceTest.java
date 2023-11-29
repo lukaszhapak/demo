@@ -1,10 +1,13 @@
 package com.example.demo.nonspring.mockito;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doCallRealMethod;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +43,13 @@ class ServiceTest {
 	doCallRealMethod().when(serviceMock).returningVoid();
 
 	// when
-	serviceMock.returningInt();
+	int mockResult = serviceMock.returningInt();
 	serviceMock.returningVoid();
-	serviceSpy.returningInt();
+	int spyResult = serviceSpy.returningInt();
 	serviceSpy.returningVoid();
+
+	assertThat(mockResult).isEqualTo(5);
+	assertThat(spyResult).isEqualTo(5);
   }
 
   @Test
@@ -54,10 +60,14 @@ class ServiceTest {
 	doNothing().when(serviceMock).returningVoid();
 
 	// when
-	serviceMock.returningInt();
+	int mockResult = serviceMock.returningInt();
 	serviceMock.returningVoid();
-	serviceSpy.returningInt();
+	int spyResult = serviceSpy.returningInt();
 	serviceSpy.returningVoid();
+
+	// then
+	assertThat(mockResult).isEqualTo(0);
+	assertThat(spyResult).isEqualTo(5);
   }
 
   @Test
@@ -67,7 +77,24 @@ class ServiceTest {
 	when(serviceMock.returningInt(any())).thenAnswer(invocation -> testReturningInt(invocation.getArgument(0)));
 
 	// when
-	serviceMock.returningInt(3);
+	int result = serviceMock.returningInt(3);
+
+	// then
+	assertThat(result).isEqualTo(6);
+  }
+
+  @Test
+  @DisplayName("spy with dependency")
+  void spyWithDependency() {
+	// given
+	Repository repository = new Repository();
+	ServiceWithDependency service = spy(new ServiceWithDependency(repository));
+
+	// when
+	int result = service.returningIntFromRepository();
+
+	// then
+	assertThat(result).isEqualTo(255);
   }
 
   private int testReturningInt(Integer number) {
