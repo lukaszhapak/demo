@@ -9,6 +9,8 @@ import com.example.batch.batch.exception.BusinessProcessingException;
 import com.example.batch.batch.exception.SystemProcessingException;
 import com.example.batch.core.model.Entry;
 import com.example.batch.batch.client.EntryResourceClient;
+import com.example.batch.core.model.EntryErrorType;
+import com.example.batch.core.model.EntryStatus;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.item.ItemProcessor;
@@ -23,28 +25,25 @@ public class EntryProcessor implements ItemProcessor<Entry, Entry> {
   public Entry process(Entry entry) {
 	log.debug("Processing Entry={}", entry);
 	try {
+	  entry.setProcessingAttempts(entry.getProcessingAttempts() + 1);
 	  entry = entryResourceClient.processEntry(entry);
-	  entry.setStatus(COMPLETED);
-	  entry.setErrorType(null);
-	  entry.setErrorCode(null);
+	  updateEntry(entry, COMPLETED, null, null);
 	} catch (BusinessProcessingException exception) {
 	  log.warn("Business processing exception while processing Entry={}", entry);
-	  entry.setStatus(FAILED);
-	  entry.setErrorType(BUSINESS);
-	  entry.setErrorCode("Invalid data");
+	  updateEntry(entry, FAILED, BUSINESS, "Invalid data");
 	} catch (SystemProcessingException exception) {
 	  log.error("System processing exception while processing Entry={}", entry);
-	  entry.setStatus(FAILED);
-	  entry.setErrorType(SYSTEM);
-	  entry.setErrorCode("Rest Failure");
+	  updateEntry(entry, FAILED, SYSTEM, "Rest Failure");
 	} catch (Exception exception) {
 	  log.error("Other exception {}", exception.getClass());
-	  entry.setStatus(FAILED);
-	  entry.setErrorType(SYSTEM);
-	  entry.setErrorCode(exception.getMessage());
+	  updateEntry(entry, FAILED, SYSTEM, exception.getMessage());
 	}
-	entry.setProcessingAttempts(entry.getProcessingAttempts() + 1);
-
 	return entry;
+  }
+
+  private void updateEntry(Entry entry, EntryStatus status, EntryErrorType errorType, String errorCode) {
+	entry.setStatus(status);
+	entry.setErrorType(errorType);
+	entry.setErrorCode(errorCode);
   }
 }
