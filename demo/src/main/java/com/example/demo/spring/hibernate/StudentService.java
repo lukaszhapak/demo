@@ -3,9 +3,6 @@ package com.example.demo.spring.hibernate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,11 +21,6 @@ class StudentService {
 	return student;
   }
 
-  public List<Student> findAll() {
-	log.debug("get students");
-	return studentRepository.findAll();
-  }
-
   public Student save(Student student) {
 	log.debug("save student={}", student);
 	return studentRepository.save(student);
@@ -42,5 +34,12 @@ class StudentService {
   public List<StudentDTO> findAllAsDTOs() {
 	log.debug("get students as DTOs");
 	return studentRepository.findAllAsDTOs();
+  }
+
+  public Student findByAddressStreetName(String streetName){
+	log.debug("get student by streetName={}", streetName);
+	Student student = studentRepository.findByAddressStreetName(streetName);
+	log.debug("returning student={}", student);
+	return student;
   }
 }

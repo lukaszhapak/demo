@@ -21,6 +21,20 @@ class HibernateTest {
   StudentService studentService;
 
   @Test
+  @DisplayName("should fetch table names")
+  void shouldFetchTableNames() {
+	// given
+	String query = "SHOW TABLES";
+
+	// when
+	List<Object> tables = jdbcOperations.queryForList(query).stream().map(Map::values).map(x -> x.stream().findFirst().get()).collect(Collectors.toList());
+
+	// then
+	assertThat(tables.size()).isEqualTo(4);
+	System.out.println(tables);
+  }
+
+  @Test
   @DisplayName("should save and find student")
   void shouldSaveAndFindStudent() {
 	// given
@@ -64,18 +78,22 @@ class HibernateTest {
   }
 
   @Test
-  @DisplayName("should fetch table names")
-  void shouldFetchTableNames() {
+  @DisplayName("should save student and find by street name")
+  void shouldSaveStudentAndFindByStreetName() {
 	// given
-	String query = "SHOW TABLES";
+	String streetName = "test_street_name";
+	Student student = createStudent();
+	student.getAddress().setStreetName(streetName);
+	studentService.save(student);
+	studentService.save(createStudent());
 
 	// when
-	List<Object> tables = jdbcOperations.queryForList(query).stream().map(Map::values).map(x -> x.stream().findFirst().get()).collect(Collectors.toList());
+	Student result = studentService.findByAddressStreetName(streetName);
 
 	// then
-	assertThat(tables.size()).isEqualTo(4);
-	System.out.println(tables);
+	assertThat(result.getAddress().getStreetName()).isEqualTo(streetName);
   }
+
 
   Student createStudent() {
 	return Student.builder()
