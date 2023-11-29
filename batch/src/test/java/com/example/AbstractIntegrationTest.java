@@ -1,7 +1,6 @@
 package com.example;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.reset;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 import com.example.batch.BatchApplication;
@@ -19,9 +18,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -41,6 +38,12 @@ public abstract class AbstractIntegrationTest implements RestClient {
 
   @Autowired
   protected EntryProcessor entryProcessor;
+
+  @BeforeEach
+  void setUp() {
+	reset(entryResourceClient);
+	reset(entryProcessor);
+  }
 
   protected List<Long> saveEntries(int count, EntryStatus status) {
 	return IntStream.range(0, count).mapToObj(i -> entryRepository.save(createEntry(status)).getId()).collect(Collectors.toList());

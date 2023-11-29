@@ -6,7 +6,6 @@ import static com.example.batch.core.model.EntryStatus.REGISTERED;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.reset;
 
 import com.example.AbstractIntegrationTest;
 import com.example.batch.batch.exception.BatchItemReaderException;
@@ -14,7 +13,6 @@ import com.example.batch.batch.starter.EntryBatchJobStarter;
 import com.example.batch.core.model.Entry;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +23,11 @@ public class EntryJobGlobalFailureTest extends AbstractIntegrationTest {
   @Autowired
   EntryBatchJobStarter entryBatchJobStarter;
 
-  @BeforeEach
-  void setUp() {
-	reset(entryResourceClient);
-	reset(entryProcessor);
-	doThrow(new BatchItemReaderException()).when(entryProcessor).process(any());
-  }
-
   @Test
   @DisplayName("should start batch job and process entries")
   void shouldStartBatchJobAndProcessEntries() {
 	// given
+	doThrow(new BatchItemReaderException()).when(entryProcessor).process(any());
 	List<Long> ids = saveEntries(10, REGISTERED);
 
 	// when
