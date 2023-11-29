@@ -36,6 +36,7 @@ public class EntryManualRetryJobTest extends AbstractIntegrationTest {
 	assertThat(processedEntry.getStatus()).isEqualTo(COMPLETED);
 	assertThat(processedEntry.getErrorCode()).isNull();
 	assertThat(processedEntry.getErrorType()).isNull();
+	assertThat(processedEntry.getProcessingAttempts()).isEqualTo(2L);
   }
 
   protected Entry processEntry(Entry entry) {

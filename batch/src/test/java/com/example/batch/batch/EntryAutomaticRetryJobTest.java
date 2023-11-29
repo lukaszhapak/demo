@@ -39,6 +39,7 @@ public class EntryAutomaticRetryJobTest extends AbstractIntegrationTest {
 	assertThat(processedEntries).allMatch(entry -> entry.getStatus() == COMPLETED);
 	assertThat(processedEntries).allMatch(entry -> entry.getErrorCode() == null);
 	assertThat(processedEntries).allMatch(entry -> entry.getErrorType() == null);
+	assertThat(processedEntries).allMatch(entry -> entry.getProcessingAttempts().equals(2L));
   }
 
   private Entry processEntry(Entry entry) {

@@ -38,5 +38,6 @@ public class EntryJobProcessorFailureTest extends AbstractIntegrationTest {
 	assertThat(processedEntries).allMatch(entry -> entry.getStatus() == FAILED);
 	assertThat(processedEntries).allMatch(entry -> entry.getErrorCode().equals("Processing failure"));
 	assertThat(processedEntries).allMatch(entry -> entry.getErrorType().equals(SYSTEM));
+	assertThat(processedEntries).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
   }
 }

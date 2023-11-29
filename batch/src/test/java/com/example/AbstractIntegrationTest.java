@@ -1,5 +1,8 @@
 package com.example;
 
+import static com.example.batch.core.model.EntryErrorType.SYSTEM;
+import static com.example.batch.core.model.EntryStatus.FAILED;
+import static com.example.batch.core.model.EntryStatus.REGISTERED;
 import static org.mockito.Mockito.reset;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
@@ -9,7 +12,6 @@ import com.example.batch.batch.processor.EntryProcessor;
 import com.example.batch.config.TestConfig;
 import com.example.batch.config.TestEntryRepository;
 import com.example.batch.core.model.Entry;
-import com.example.batch.core.model.EntryErrorType;
 import com.example.batch.core.model.EntryStatus;
 import com.example.commons.commons.RestClient;
 import java.util.List;
@@ -50,12 +52,12 @@ public abstract class AbstractIntegrationTest implements RestClient {
   }
 
   protected Entry createEntry(EntryStatus status) {
-	Entry entry = new Entry();
-	entry.setData("test-data");
-	entry.setStatus(status);
-	entry.setErrorType(EntryErrorType.SYSTEM);
-	entry.setProcessingAttemptsLimit(5L);
-	entry.setProcessingAttempts(0L);
-	return entry;
+	return Entry.builder()
+		.data("test-data")
+		.status(status)
+		.errorType(status == FAILED ? SYSTEM : null)
+		.processingAttemptsLimit(5L)
+		.processingAttempts(status == REGISTERED ? 0L : 1L)
+		.build();
   }
 }
