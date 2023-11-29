@@ -1,4 +1,4 @@
-package com.example.demo.spring.hibernate;
+package com.example.demo.spring.jpql;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,5 +24,22 @@ class StudentService {
   public Student save(Student student) {
 	log.debug("save student={}", student);
 	return studentRepository.save(student);
+  }
+
+  public String findNameById(Long id) {
+	log.debug("get student name by id={}", id);
+	return studentRepository.findNameById(id);
+  }
+
+  public List<StudentDTO> findAllAsDTOs() {
+	log.debug("get students as DTOs");
+	return studentRepository.findAllAsDTOs();
+  }
+
+  public Student findByAddressStreetName(String streetName){
+	log.debug("get student by streetName={}", streetName);
+	Student student = studentRepository.findByAddressStreetName(streetName);
+	log.debug("returning student={}", student);
+	return student;
   }
 }

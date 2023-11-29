@@ -47,53 +47,6 @@ class HibernateTest {
 	assertThat(student).usingRecursiveComparison().ignoringFields("id", "oneToOne.id", "oneToMany.id").isEqualTo(createStudent());
   }
 
-  @Test
-  @DisplayName("should save find student name")
-  void shouldSaveFindStudentName() {
-	// given
-	Long id = studentService.save(createStudent()).getId();
-
-	// when
-	String name = studentService.findFirstNameById(id);
-
-	// then
-	assertThat(name).isEqualTo("John");
-  }
-
-  @Test
-  @DisplayName("should save students and find as DTOs")
-  void shouldSaveStudentsAndFindAsDtOs() {
-	// given
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-
-	// when
-	List<StudentDTO> allAsDTOs = studentService.findAllAsDTOs();
-
-	// then
-	assertThat(allAsDTOs.size()).isGreaterThan(4);
-  }
-
-  @Test
-  @DisplayName("should save student and find by street name")
-  void shouldSaveStudentAndFindByStreetName() {
-	// given
-	String streetName = "test_street_name";
-	Student student = createStudent();
-	student.getAddress().setStreetName(streetName);
-	studentService.save(student);
-	studentService.save(createStudent());
-
-	// when
-	Student result = studentService.findByAddressStreetName(streetName);
-
-	// then
-	assertThat(result.getAddress().getStreetName()).isEqualTo(streetName);
-  }
-
 
   Student createStudent() {
 	return Student.builder()

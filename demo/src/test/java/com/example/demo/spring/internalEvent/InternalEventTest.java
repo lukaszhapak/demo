@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class InternalEventPublisherTest extends AbstractIntegrationTest {
+class InternalEventTest extends AbstractIntegrationTest {
 
   @Autowired
   InternalEventPublisher internalEventPublisher;

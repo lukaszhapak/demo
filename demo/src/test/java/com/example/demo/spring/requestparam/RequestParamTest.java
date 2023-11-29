@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.server.LocalServerPort;
 
-class RequestParamControllerTest extends AbstractIntegrationTest {
+class RequestParamTest extends AbstractIntegrationTest {
 
   @LocalServerPort
   protected int port;

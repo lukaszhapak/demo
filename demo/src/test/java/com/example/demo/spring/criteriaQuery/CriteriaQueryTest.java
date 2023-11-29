@@ -1,12 +1,14 @@
 package com.example.demo.spring.criteriaQuery;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import com.example.demo.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
-class StudentServiceTest extends AbstractIntegrationTest {
+class CriteriaQueryTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentService studentService;
@@ -18,13 +20,15 @@ class StudentServiceTest extends AbstractIntegrationTest {
 	studentService.save(createStudent());
 	studentService.save(createStudent());
 	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
+	Student jimmy = createStudent();
+	jimmy.setFirstName("Jimmy");
+	studentService.save(jimmy);
 
 	// when
 	Page<Student> students = studentService.getStudents(createStudentSearchCriteria());
 
 	// then
+	assertThat(students.getTotalElements()).isEqualTo(1);
   }
 
   StudentSearchCriteria createStudentSearchCriteria() {
@@ -32,7 +36,7 @@ class StudentServiceTest extends AbstractIntegrationTest {
 		.page(0)
 		.size(4)
 		.sortBy("id")
-		.firstName("John")
+		.firstName("Jimmy")
 		.lastName("Doe")
 		.build();
   }

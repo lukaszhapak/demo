@@ -17,7 +17,7 @@ import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class StudentServiceTest {
+class CacheTest {
 
   @Autowired
   StudentService studentService;

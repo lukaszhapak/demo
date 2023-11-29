@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class OutboxJobTest extends AbstractIntegrationTest {
+class OutboxTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentService studentService;
