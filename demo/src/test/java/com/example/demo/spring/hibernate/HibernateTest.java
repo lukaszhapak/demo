@@ -47,7 +47,6 @@ class HibernateTest {
 	assertThat(student).usingRecursiveComparison().ignoringFields("id", "oneToOne.id", "oneToMany.id").isEqualTo(createStudent());
   }
 
-
   Student createStudent() {
 	return Student.builder()
 		.firstName("John")
