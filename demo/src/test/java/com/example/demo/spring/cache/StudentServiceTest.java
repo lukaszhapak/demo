@@ -6,12 +6,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -23,6 +25,9 @@ class StudentServiceTest {
   StudentRepository studentRepository;
   @Autowired
   CacheManager cacheManager;
+
+  @Autowired
+  AdminController adminController;
 
   @Test
   void findOne() {
@@ -39,6 +44,8 @@ class StudentServiceTest {
 	studentService.findById(1L);
 	studentService.deleteById(2L);
 	studentService.findById(1L);
+
+	Map<String, Cache> caches = adminController.getCaches();
 
 	verify(studentRepository, times(3)).findById(any());
   }
@@ -58,6 +65,8 @@ class StudentServiceTest {
 	studentService.deleteById(1L);
 	studentService.findAll();
 	studentService.findAll();
+
+	Map<String, Cache> caches = adminController.getCaches();
 
 	verify(studentRepository, times(4)).findAll();
   }

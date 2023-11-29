@@ -5,7 +5,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import javax.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,26 +12,55 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcOperations;
 
 @SpringBootTest
-class StudentRepositoryTest {
+class HibernateTest {
 
   @Autowired
   JdbcOperations jdbcOperations;
 
   @Autowired
-  StudentRepository studentRepository;
+  StudentService studentService;
 
   @Test
-  @Transactional
-  @DisplayName("should save and fetch student")
-  void shouldSaveAndFetchStudent() {
+  @DisplayName("should save and find student")
+  void shouldSaveAndFindStudent() {
 	// given
-	Long id = studentRepository.save(createStudent()).getId();
+	Long id = studentService.save(createStudent()).getId();
 
 	// when
-	Student student = studentRepository.findById(id).get();
+	Student student = studentService.findById(id);
 
 	// then
 	assertThat(student).usingRecursiveComparison().ignoringFields("id", "oneToOne.id", "oneToMany.id").isEqualTo(createStudent());
+  }
+
+  @Test
+  @DisplayName("should save find student name")
+  void shouldSaveFindStudentName() {
+	// given
+	Long id = studentService.save(createStudent()).getId();
+
+	// when
+	String name = studentService.findFirstNameById(id);
+
+	// then
+	assertThat(name).isEqualTo("John");
+  }
+
+  @Test
+  @DisplayName("should save students and find as DTOs")
+  void shouldSaveStudentsAndFindAsDtOs() {
+	// given
+	studentService.save(createStudent());
+	studentService.save(createStudent());
+	studentService.save(createStudent());
+	studentService.save(createStudent());
+	studentService.save(createStudent());
+
+	// when
+	List<StudentDTO> allAsDTOs = studentService.findAllAsDTOs();
+
+	// then
+	assertThat(allAsDTOs.size()).isGreaterThan(4);
   }
 
   @Test
@@ -61,12 +89,12 @@ class StudentRepositoryTest {
 			.flatNumber("22")
 			.build())
 		.oneToOne(StudentOneToOne.builder()
-			.name("Asd")
+			.name("159")
 			.build())
 		.oneToMany(List.of(
-			StudentOneToMany.builder().name("32111").build(),
-			StudentOneToMany.builder().name("32331").build(),
-			StudentOneToMany.builder().name("32121").build()
+			StudentOneToMany.builder().name("123").build(),
+			StudentOneToMany.builder().name("456").build(),
+			StudentOneToMany.builder().name("789").build()
 		))
 		.build();
   }
