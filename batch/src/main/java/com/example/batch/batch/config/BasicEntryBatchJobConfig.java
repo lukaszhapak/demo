@@ -4,6 +4,7 @@ import com.example.batch.batch.client.EntryResourceClient;
 import com.example.batch.batch.io.EntryReader;
 import com.example.batch.batch.io.EntryWriter;
 import com.example.batch.batch.processor.EntryProcessor;
+import com.example.batch.batch.properties.BasicEntryBatchJobProperties;
 import com.example.batch.core.model.Entry;
 import com.example.batch.core.repository.EntryRepository;
 import javax.persistence.EntityManagerFactory;
@@ -23,10 +24,10 @@ import org.springframework.core.task.TaskExecutor;
 public class BasicEntryBatchJobConfig {
 
   @Bean
-  public EntryReader basicEntryReader(EntityManagerFactory entityManagerFactory) {
+  public EntryReader basicEntryReader(EntityManagerFactory entityManagerFactory, BasicEntryBatchJobProperties basicEntryBatchJobProperties) {
 	String query = "SELECT entry FROM Entry as entry where entry.status='REGISTERED' order by entry.id ASC";
 	EntryReader itemReader = new EntryReader();
-	itemReader.setPageSize(10);
+	itemReader.setPageSize(basicEntryBatchJobProperties.getPageSize());
 	itemReader.setQueryString(query);
 	itemReader.setEntityManagerFactory(entityManagerFactory);
 	return itemReader;
@@ -46,9 +47,9 @@ public class BasicEntryBatchJobConfig {
 
   @Bean
   public Step basicEntryProcessingStep(StepBuilderFactory stepBuilderFactory, ItemReader<Entry> basicEntryReader, ItemProcessor<Entry, Entry> basicEntryProcessor,
-	  ItemWriter<Entry> basicEntryWriter, TaskExecutor entryProcessorTaskExecutor) {
+	  ItemWriter<Entry> basicEntryWriter, TaskExecutor entryProcessorTaskExecutor, BasicEntryBatchJobProperties basicEntryBatchJobProperties) {
 	return stepBuilderFactory.get("basicEntryProcessingStep")
-		.<Entry, Entry>chunk(20)
+		.<Entry, Entry>chunk(basicEntryBatchJobProperties.getChunkSize())
 		.reader(basicEntryReader)
 		.processor(basicEntryProcessor)
 		.writer(basicEntryWriter)
@@ -58,7 +59,7 @@ public class BasicEntryBatchJobConfig {
 
   @Bean
   public Job basicEntryBatchJob(JobBuilderFactory jobBuilderFactory, Step basicEntryProcessingStep) {
-	return jobBuilderFactory.get("entryBatchJob")
+	return jobBuilderFactory.get("baiscEntryBatchJob")
 		.preventRestart()
 		.flow(basicEntryProcessingStep)
 		.end()

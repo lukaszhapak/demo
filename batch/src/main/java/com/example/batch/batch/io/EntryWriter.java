@@ -15,8 +15,7 @@ public class EntryWriter implements ItemWriter<Entry> {
 
   @Override
   public void write(List<? extends Entry> entries) {
-	log.debug("Writing entries={}", entries);
+	log.debug("Writing {} entries={}",entries.size(), entries);
 	entryRepository.saveAll(entries);
   }
-
 }

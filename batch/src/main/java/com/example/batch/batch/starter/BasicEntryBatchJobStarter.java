@@ -7,25 +7,23 @@ import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionException;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Log4j2
 @Component
 @RequiredArgsConstructor
-public class EntryBatchJobStarter {
+public class BasicEntryBatchJobStarter {
 
   private final JobLauncher syncJobLauncher;
 
-  private final Job entryBatchJob;
+  private final Job basicEntryBatchJob;
 
-  @Scheduled(cron = "${batch.entry.cron}")
   public void startBatch() {
-	log.debug("Starting entry batch job");
+	log.debug("Starting basic entry batch job");
 	JobParametersBuilder jobParametersBuilder = new JobParametersBuilder();
 	jobParametersBuilder.addString("originator", "Job_" + UUID.randomUUID());
 	try {
-	  syncJobLauncher.run(entryBatchJob, jobParametersBuilder.toJobParameters());
+	  syncJobLauncher.run(basicEntryBatchJob, jobParametersBuilder.toJobParameters());
 	} catch (JobExecutionException e) {
 	  throw new RuntimeException(e);
 	}
