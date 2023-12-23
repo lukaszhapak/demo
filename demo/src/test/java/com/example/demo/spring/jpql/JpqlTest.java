@@ -89,13 +89,34 @@ class JpqlTest extends AbstractIntegrationTest {
 	assertThat(result.get(0).getAddress().getStreetName()).isEqualTo(streetName);
   }
 
+  @Test
+  @DisplayName("should save student and find by street name and flat number")
+  void shouldSaveStudentAndFindByStreetNameAndFlatNumber() {
+	// given
+	String streetName = "test_street_name";
+	String flatNumber = "51";
+	Student student = createStudent();
+	student.getAddress().setStreetName(streetName);
+	student.getAddress().setFlatNumber(flatNumber);
+	studentService.save(student);
+	studentService.save(createStudent());
+
+	// when
+	List<Student> result = studentService.findByAddressStreetNameAndFlatNumber(streetName, flatNumber);
+
+	// then
+	assertThat(result).hasSize(1);
+	assertThat(result.get(0).getAddress().getStreetName()).isEqualTo(streetName);
+	assertThat(result.get(0).getAddress().getFlatNumber()).isEqualTo(flatNumber);
+  }
+
   private Student createStudent() {
 	return Student.builder()
 		.age(22)
 		.name("John")
 		.address(Address.builder()
 			.streetName("street")
-			.flatNumber("22")
+			.flatNumber("25")
 			.build())
 		.build();
   }

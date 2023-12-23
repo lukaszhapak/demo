@@ -42,4 +42,11 @@ class StudentService {
 	log.debug("returning student={}", students);
 	return students;
   }
+
+  public List<Student> findByAddressStreetNameAndFlatNumber(String streetName, String flatNumber){
+	log.debug("get student by streetName={} and flatNumber={}", streetName, flatNumber);
+	List<Student> students = studentRepository.findByAddressStreetNameAndFlatNumber(streetName, flatNumber);
+	log.debug("returning student={}", students);
+	return students;
+  }
 }

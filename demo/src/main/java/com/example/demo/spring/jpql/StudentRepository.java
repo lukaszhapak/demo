@@ -14,4 +14,7 @@ interface StudentRepository extends JpaRepository<Student, Long> {
 
   @Query("Select s from Student s where s.address.streetName = :streetName")
   List<Student> findByAddressStreetName(String streetName);
+
+  @Query("Select s from Student s where s.address.streetName = :streetName and s.address.flatNumber = :flatNumber")
+  List<Student> findByAddressStreetNameAndFlatNumber(String streetName, String flatNumber);
 }
