@@ -36,10 +36,10 @@ class StudentService {
 	return studentRepository.findAllAsDTOs();
   }
 
-  public Student findByAddressStreetName(String streetName){
+  public List<Student> findByAddressStreetName(String streetName){
 	log.debug("get student by streetName={}", streetName);
-	Student student = studentRepository.findByAddressStreetName(streetName);
-	log.debug("returning student={}", student);
-	return student;
+	List<Student> students = studentRepository.findByAddressStreetName(streetName);
+	log.debug("returning student={}", students);
+	return students;
   }
 }

@@ -13,5 +13,5 @@ interface StudentRepository extends JpaRepository<Student, Long> {
   String findNameById(Long id);
 
   @Query("Select s from Student s where s.address.streetName = :streetName")
-  Student findByAddressStreetName(String streetName);
+  List<Student> findByAddressStreetName(String streetName);
 }

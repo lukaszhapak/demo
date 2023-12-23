@@ -82,10 +82,11 @@ class JpqlTest extends AbstractIntegrationTest {
 	studentService.save(createStudent());
 
 	// when
-	Student result = studentService.findByAddressStreetName(streetName);
+	List<Student> result = studentService.findByAddressStreetName(streetName);
 
 	// then
-	assertThat(result.getAddress().getStreetName()).isEqualTo(streetName);
+	assertThat(result).hasSize(1);
+	assertThat(result.get(0).getAddress().getStreetName()).isEqualTo(streetName);
   }
 
   private Student createStudent() {
