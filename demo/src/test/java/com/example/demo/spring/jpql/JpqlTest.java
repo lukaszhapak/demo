@@ -13,6 +13,9 @@ class JpqlTest extends AbstractIntegrationTest {
   @Autowired
   StudentService studentService;
 
+  @Autowired
+  StudentRepository studentRepository;
+
   @Test
   @DisplayName("should save student and fetch name")
   void shouldSaveStudentAndFetchName() {
@@ -75,7 +78,7 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save student and find by street name")
   void shouldSaveStudentAndFindByStreetName() {
 	// given
-	String streetName = "test_street_name";
+	String streetName = "test_street_name#123";
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
 	studentService.save(student);
@@ -93,7 +96,7 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save student and find by street name and flat number")
   void shouldSaveStudentAndFindByStreetNameAndFlatNumber() {
 	// given
-	String streetName = "test_street_name";
+	String streetName = "test_street_name#456";
 	String flatNumber = "51";
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
@@ -108,6 +111,19 @@ class JpqlTest extends AbstractIntegrationTest {
 	assertThat(result).hasSize(1);
 	assertThat(result.get(0).getAddress().getStreetName()).isEqualTo(streetName);
 	assertThat(result.get(0).getAddress().getFlatNumber()).isEqualTo(flatNumber);
+  }
+
+  @Test
+  @DisplayName("should save student and get name and age")
+  void shouldSaveStudentAndGetNameAndAge() {
+	// given
+	Long id = studentService.save(createStudent()).getId();
+
+	// when
+	String nameAndAgeById = studentService.findNameAndAgeById(id);
+
+	// then
+	assertThat(nameAndAgeById).isEqualTo("John,22");
   }
 
   private Student createStudent() {

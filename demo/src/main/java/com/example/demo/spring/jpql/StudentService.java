@@ -31,6 +31,11 @@ class StudentService {
 	return studentRepository.findNameById(id);
   }
 
+  String findNameAndAgeById(Long id) {
+	log.debug("get student name and age by id={}", id);
+	return studentRepository.findNameAndAgeById(id);
+  }
+
   public List<StudentDTO> findAllAsDTOs() {
 	log.debug("get students as DTOs");
 	return studentRepository.findAllAsDTOs();
