@@ -26,6 +26,11 @@ class StudentService {
 	return studentRepository.save(student);
   }
 
+  public List<Student> saveAll(Iterable<Student> students) {
+	log.debug("save students={}", students);
+	return studentRepository.saveAll(students);
+  }
+
   public String findNameById(Long id) {
 	log.debug("get student name by id={}", id);
 	return studentRepository.findNameById(id);
@@ -41,14 +46,14 @@ class StudentService {
 	return studentRepository.findAllAsDTOs();
   }
 
-  public List<Student> findByAddressStreetName(String streetName){
+  public List<Student> findByAddressStreetName(String streetName) {
 	log.debug("get student by streetName={}", streetName);
 	List<Student> students = studentRepository.findByAddressStreetName(streetName);
 	log.debug("returning student={}", students);
 	return students;
   }
 
-  public List<Student> findByAddressStreetNameAndFlatNumber(String streetName, String flatNumber){
+  public List<Student> findByAddressStreetNameAndFlatNumber(String streetName, String flatNumber) {
 	log.debug("get student by streetName={} and flatNumber={}", streetName, flatNumber);
 	List<Student> students = studentRepository.findByAddressStreetNameAndFlatNumber(streetName, flatNumber);
 	log.debug("returning student={}", students);

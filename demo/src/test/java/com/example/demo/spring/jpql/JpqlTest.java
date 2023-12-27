@@ -13,9 +13,6 @@ class JpqlTest extends AbstractIntegrationTest {
   @Autowired
   StudentService studentService;
 
-  @Autowired
-  StudentRepository studentRepository;
-
   @Test
   @DisplayName("should save student and fetch name")
   void shouldSaveStudentAndFetchName() {
@@ -34,7 +31,7 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save students and fetch list")
   void shouldSaveStudentsAndFetchList() {
 	// given
-	studentRepository.saveAll(List.of(createStudent(), createStudent()));
+	studentService.saveAll(List.of(createStudent(), createStudent()));
 
 	// when
 	List<StudentDTO> studentDTOS = studentService.findAllAsDTOs();
@@ -60,7 +57,7 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save students and find as DTOs")
   void shouldSaveStudentsAndFindAsDtOs() {
 	// given
-	studentRepository.saveAll(List.of(createStudent(), createStudent(), createStudent(), createStudent(), createStudent()));
+	studentService.saveAll(List.of(createStudent(), createStudent(), createStudent(), createStudent(), createStudent()));
 
 	// when
 	List<StudentDTO> allAsDTOs = studentService.findAllAsDTOs();
@@ -76,7 +73,7 @@ class JpqlTest extends AbstractIntegrationTest {
 	String streetName = "test_street_name#123";
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
-	studentRepository.saveAll(List.of(createStudent(), student));
+	studentService.saveAll(List.of(createStudent(), student));
 
 	// when
 	List<Student> result = studentService.findByAddressStreetName(streetName);
@@ -95,7 +92,7 @@ class JpqlTest extends AbstractIntegrationTest {
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
 	student.getAddress().setFlatNumber(flatNumber);
-	studentRepository.saveAll(List.of(createStudent(), student));
+	studentService.saveAll(List.of(createStudent(), student));
 
 	// when
 	List<Student> result = studentService.findByAddressStreetNameAndFlatNumber(streetName, flatNumber);
