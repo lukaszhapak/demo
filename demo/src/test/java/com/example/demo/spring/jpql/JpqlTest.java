@@ -34,8 +34,7 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save students and fetch list")
   void shouldSaveStudentsAndFetchList() {
 	// given
-	studentService.save(createStudent());
-	studentService.save(createStudent());
+	studentRepository.saveAll(List.of(createStudent(), createStudent()));
 
 	// when
 	List<StudentDTO> studentDTOS = studentService.findAllAsDTOs();
@@ -45,8 +44,8 @@ class JpqlTest extends AbstractIntegrationTest {
   }
 
   @Test
-  @DisplayName("should save find student name")
-  void shouldSaveFindStudentName() {
+  @DisplayName("should save and find student name")
+  void shouldSaveAndFindStudentName() {
 	// given
 	Long id = studentService.save(createStudent()).getId();
 
@@ -61,11 +60,7 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save students and find as DTOs")
   void shouldSaveStudentsAndFindAsDtOs() {
 	// given
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
+	studentRepository.saveAll(List.of(createStudent(), createStudent(), createStudent(), createStudent(), createStudent()));
 
 	// when
 	List<StudentDTO> allAsDTOs = studentService.findAllAsDTOs();
@@ -81,8 +76,7 @@ class JpqlTest extends AbstractIntegrationTest {
 	String streetName = "test_street_name#123";
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
-	studentService.save(student);
-	studentService.save(createStudent());
+	studentRepository.saveAll(List.of(createStudent(), student));
 
 	// when
 	List<Student> result = studentService.findByAddressStreetName(streetName);
@@ -101,8 +95,7 @@ class JpqlTest extends AbstractIntegrationTest {
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
 	student.getAddress().setFlatNumber(flatNumber);
-	studentService.save(student);
-	studentService.save(createStudent());
+	studentRepository.saveAll(List.of(createStudent(), student));
 
 	// when
 	List<Student> result = studentService.findByAddressStreetNameAndFlatNumber(streetName, flatNumber);
