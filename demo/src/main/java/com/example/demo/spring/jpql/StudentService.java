@@ -29,7 +29,7 @@ class StudentService {
 	return studentRepository.findNameById(id);
   }
 
-  String findNameAndAgeById(Long id) {
+  public String findNameAndAgeById(Long id) {
 	log.debug("get student name and age by id={}", id);
 	return studentRepository.findNameAndAgeById(id);
   }
@@ -37,6 +37,11 @@ class StudentService {
   public List<StudentDTO> findAllAsDTOs() {
 	log.debug("get students as DTOs");
 	return studentRepository.findAllAsDTOs();
+  }
+
+  public StudentDTO findByIdAsDTOs(Long id) {
+	log.debug("get student as DTO by id={}", id);
+	return studentRepository.findByIdAsDTOs(id);
   }
 
   public List<Student> findByAddressStreetName(String streetName) {

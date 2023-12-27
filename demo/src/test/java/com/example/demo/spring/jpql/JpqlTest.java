@@ -55,7 +55,7 @@ class JpqlTest extends AbstractIntegrationTest {
 
   @Test
   @DisplayName("should save students and find as DTOs")
-  void shouldSaveStudentsAndFindAsDtOs() {
+  void shouldSaveStudentsAndFindAsDTOs() {
 	// given
 	studentService.saveAll(List.of(createStudent(), createStudent(), createStudent(), createStudent(), createStudent()));
 
@@ -64,6 +64,19 @@ class JpqlTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(allAsDTOs.size()).isGreaterThan(4);
+  }
+
+  @Test
+  @DisplayName("should save students and find as DTOs")
+  void shouldSaveStudentAndFindAsDTOs() {
+	// given
+	Long id = studentService.save(createStudent()).getId();
+
+	// when
+	StudentDTO studentDTO = studentService.findByIdAsDTOs(id);
+
+	// then
+	assertThat(studentDTO.getName()).isEqualTo("John");
   }
 
   @Test
