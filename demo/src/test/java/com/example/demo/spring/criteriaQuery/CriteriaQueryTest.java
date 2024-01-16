@@ -3,6 +3,7 @@ package com.example.demo.spring.criteriaQuery;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +14,59 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
   @Autowired
   StudentService studentService;
 
+  @BeforeEach
+  void setUp() {
+	studentService.save(createStudent());
+	studentService.save(createStudent());
+	studentService.save(createStudent());
+  }
+
   @Test
-  @DisplayName("should get students")
-  void shouldGetStudents() {
+  @DisplayName("should get student by first name")
+  void shouldGetStudentByFirstName() {
 	// given
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	Student jimmy = createStudent();
-	jimmy.setFirstName("Jimmy");
-	studentService.save(jimmy);
+	Student student = createStudent();
+	student.setFirstName("Jimmy");
+	studentService.save(student);
+	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
+	studentSearchCriteria.setFirstName(student.getFirstName());
 
 	// when
-	Page<Student> students = studentService.getStudents(createStudentSearchCriteria());
+	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+
+	// then
+	assertThat(students.getTotalElements()).isEqualTo(1);
+  }
+
+  @Test
+  @DisplayName("should get student by street name")
+  void shouldGetStudentByStreetName() {
+	// given
+	Student student = createStudent();
+	student.getAddress().setStreetName("Ghj");
+	studentService.save(student);
+	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
+	studentSearchCriteria.setStreetName(student.getAddress().getStreetName());
+
+	// when
+	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+
+	// then
+	assertThat(students.getTotalElements()).isEqualTo(1);
+  }
+
+  @Test
+  @DisplayName("should get student by older than")
+  void shouldGetStudentByOlderThan() {
+	// given
+	Student student = createStudent();
+	student.setAge(32);
+	studentService.save(student);
+	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
+	studentSearchCriteria.setOlderThan(30);
+
+	// when
+	Page<Student> students = studentService.getStudents(studentSearchCriteria);
 
 	// then
 	assertThat(students.getTotalElements()).isEqualTo(1);
@@ -36,8 +77,6 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 		.page(0)
 		.size(4)
 		.sortBy("id")
-		.firstName("Jimmy")
-		.lastName("Doe")
 		.build();
   }
 
@@ -46,6 +85,9 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 		.firstName("John")
 		.lastName("Doe")
 		.age(24)
+		.address(Address.builder()
+			.streetName("Asd")
+			.build())
 		.build();
   }
 }

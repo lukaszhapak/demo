@@ -1,5 +1,6 @@
 package com.example.demo.spring.criteriaQuery;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,4 +26,7 @@ class Student {
   private String firstName;
   private String lastName;
   private int age;
+
+  @Embedded
+  private Address address;
 }

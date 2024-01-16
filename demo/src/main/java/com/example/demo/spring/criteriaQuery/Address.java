@@ -13,18 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class StudentSearchCriteria {
-  String sortBy;
-  Boolean sortAscending;
-  Integer page;
-  Integer size;
+class Address {
 
-  Integer id;
-  String firstName;
-  String lastName;
-
-  String streetName;
-
-  Integer olderThan;
-
+  private String streetName;
+  private String flatNumber;
 }
