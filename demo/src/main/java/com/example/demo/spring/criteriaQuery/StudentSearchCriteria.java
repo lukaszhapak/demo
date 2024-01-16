@@ -1,5 +1,6 @@
 package com.example.demo.spring.criteriaQuery;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,10 +22,8 @@ class StudentSearchCriteria {
 
   Integer id;
   String firstName;
-  String lastName;
-
+  List<String> lastNames;
   String streetName;
-
   Integer olderThan;
 
 }
