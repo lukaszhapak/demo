@@ -1,4 +1,4 @@
-package com.example.demo.spring.requestparam;
+package com.example.demo.spring.rest;
 
 import java.util.List;
 import lombok.Getter;

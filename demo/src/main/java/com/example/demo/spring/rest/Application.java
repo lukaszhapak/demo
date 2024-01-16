@@ -1,4 +1,4 @@
-package com.example.demo.spring.requestparam;
+package com.example.demo.spring.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
