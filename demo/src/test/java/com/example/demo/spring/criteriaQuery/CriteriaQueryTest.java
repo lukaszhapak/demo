@@ -75,7 +75,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
   StudentSearchCriteria createStudentSearchCriteria() {
 	return StudentSearchCriteria.builder()
 		.page(0)
-		.size(4)
+		.size(10)
 		.sortBy("id")
 		.build();
   }
