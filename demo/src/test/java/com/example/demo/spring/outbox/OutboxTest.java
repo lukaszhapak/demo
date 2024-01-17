@@ -1,5 +1,7 @@
 package com.example.demo.spring.outbox;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.example.demo.commons.AbstractIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +26,7 @@ class OutboxTest extends AbstractIntegrationTest {
 	studentService.save(getStudent());
 	studentService.save(getStudent());
 	studentService.save(getStudent());
-	List<Outbox> messages = outboxRepository.findAll();
+	List<Outbox> messagesBeforeJob = outboxRepository.findAll();
 	List<Student> students = studentRepository.findAll();
 
 	// when
@@ -32,7 +34,11 @@ class OutboxTest extends AbstractIntegrationTest {
 
 	// then
 	List<Outbox> messagesAfterJob = outboxRepository.findAll();
-	List<Student> studentsAfterJob = studentRepository.findAll();
+	assertThat(students.size()).isEqualTo(3);
+	assertThat(messagesBeforeJob.size()).isEqualTo(3);
+	assertThat(messagesAfterJob.size()).isEqualTo(3);
+	assertThat(messagesBeforeJob).allMatch(message -> !message.isSent());
+	assertThat(messagesAfterJob).allMatch(Outbox::isSent);
   }
 
   private static Student getStudent() {
