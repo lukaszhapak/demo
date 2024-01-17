@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
@@ -21,20 +22,23 @@ class RestTest extends AbstractIntegrationTest {
   @Test
   @DisplayName("should get with query params")
   void shouldGetWithQueryParams() {
-	String url = "/get?name=John&surname=Doe&age=24&ids=2,5,4";
+	String url = "/post?name=John&surname=Doe&age=24&ids=2,5,4";
+	Student student = new Student("John", 24);
 
-	Response httpResponse = getHttpCall(url, port, getHeaders());
+	Response httpResponse = postHttpCall(url, port, getHeaders(), student);
 
 	assertThat(httpResponse.statusCode()).isEqualTo(SC_OK);
   }
 
-  private Response getHttpCall(String url, int port, Headers headers) {
+  private Response postHttpCall(String url, int port, Headers headers, Object body) {
 	return RestAssured.given()
 		.port(port)
 		.headers(headers)
+		.body(body)
+		.contentType(ContentType.JSON)
 		.log().all()
 		.when()
-		.get(url);
+		.post(url);
   }
 
   private Headers getHeaders() {
