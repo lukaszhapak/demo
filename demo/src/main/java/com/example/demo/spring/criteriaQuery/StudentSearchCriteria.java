@@ -25,5 +25,6 @@ class StudentSearchCriteria {
   List<String> lastNames;
   String streetName;
   Integer olderThan;
+  Integer minimalAge;
 
 }

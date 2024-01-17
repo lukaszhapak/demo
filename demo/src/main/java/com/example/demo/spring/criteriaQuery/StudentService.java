@@ -25,4 +25,9 @@ class StudentService {
 	log.debug("saving student={}", student);
 	return studentRepository.save(student);
   }
+
+  void deleteAll(){
+	log.debug("deleting all");
+	studentRepository.deleteAll();
+  }
 }

@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,11 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	studentService.save(createStudent());
 	studentService.save(createStudent());
 	studentService.save(createStudent());
+  }
+
+  @AfterEach
+  void tearDown() {
+	studentService.deleteAll();
   }
 
   @Test
@@ -65,6 +71,23 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	studentService.save(student);
 	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
 	studentSearchCriteria.setOlderThan(30);
+
+	// when
+	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+
+	// then
+	assertThat(students.getTotalElements()).isEqualTo(1);
+  }
+
+  @Test
+  @DisplayName("should get student by minimal age")
+  void shouldGetStudentByMinimalAge() {
+	// given
+	Student student = createStudent();
+	student.setAge(32);
+	studentService.save(student);
+	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
+	studentSearchCriteria.setMinimalAge(32);
 
 	// when
 	Page<Student> students = studentService.getStudents(studentSearchCriteria);
