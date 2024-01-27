@@ -6,20 +6,31 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 class Service {
-    private final ObjectMapper objectMapper;
 
-	Student getStudentFromJson() {
-	  try {
-		return objectMapper.readValue(getStudentAsJson(), Student.class);
-	  } catch (JsonProcessingException e) {
-		throw new RuntimeException(e);
-	  }
-	}
+  private final ObjectMapper objectMapper;
 
-	private String getStudentAsJson() {
-	  return "{"
-		  + "\"name\": \"John\","
-		  + "\"age\": \"25\""
-		  + "}";
+  Student getStudentAsObject() {
+	try {
+	  return objectMapper.readValue(getStudentAsJson(), Student.class);
+	} catch (JsonProcessingException e) {
+	  throw new RuntimeException(e);
 	}
+  }
+
+  String getStudentAsString() {
+	String student;
+	try {
+	  student = objectMapper.writeValueAsString(getStudentAsObject());
+	} catch (JsonProcessingException e) {
+	  throw new RuntimeException(e);
+	}
+	return student;
+  }
+
+  private String getStudentAsJson() {
+	return "{"
+		+ "\"name\": \"John\","
+		+ "\"age\": \"25\""
+		+ "}";
+  }
 }
