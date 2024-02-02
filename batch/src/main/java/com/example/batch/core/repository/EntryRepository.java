@@ -13,6 +13,8 @@ public interface EntryRepository extends Repository<Entry, Long> {
 
   Entry save(Entry entry);
 
+  Entry findById(Long id);
+
   @Modifying
   @Query("update Entry set originator = :originator, status = :processingStatus where status = :initStatus")
   int markProcessingStarted(String originator, EntryStatus initStatus, EntryStatus processingStatus);

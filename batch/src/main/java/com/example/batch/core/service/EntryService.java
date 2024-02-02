@@ -20,4 +20,9 @@ public class EntryService {
 	log.debug("posting entryDTO={}", entryDTO);
 	return entryRepository.save(Entry.of(entryDTO)).toDTO();
   }
+
+  public EntryDTO findById(Long id) {
+	log.debug("finding by id={}", id);
+	return entryRepository.findById(id).toDTO();
+  }
 }

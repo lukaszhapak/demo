@@ -5,6 +5,7 @@ import com.example.batch.core.model.EntryDTO;
 import com.example.batch.core.service.EntryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +23,11 @@ public class EntryController {
   public EntryDTO postEntry(@RequestBody EntryDTO entryDTO) {
 	log.debug("posting entryDTO={}", entryDTO);
 	return entryService.postEntry(entryDTO);
+  }
+  @GetMapping("/api/entry/{id}")
+  public EntryDTO getEntry(@PathVariable Long id) {
+	log.debug("getting entry by id={}", id);
+	return entryService.findById(id);
   }
 
   @PostMapping("/api/entry/reprocess/{entryId}")
