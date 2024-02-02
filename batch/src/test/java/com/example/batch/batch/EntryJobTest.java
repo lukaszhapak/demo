@@ -39,25 +39,25 @@ public class EntryJobTest extends AbstractIntegrationTest {
 	// then
 	List<Entry> processedEntries = entryRepository.findAllById(ids);
 
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 0)).allMatch(entry -> entry.getStatus() == COMPLETED);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 0)).allMatch(entry -> entry.getErrorCode() == null);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 0)).allMatch(entry -> entry.getErrorType() == null);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)).allMatch(entry -> entry.getStatus() == COMPLETED);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)).allMatch(entry -> entry.getErrorCode() == null);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)).allMatch(entry -> entry.getErrorType() == null);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
 
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 1)).allMatch(entry -> entry.getStatus() == FAILED);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 1)).allMatch(entry -> entry.getErrorType() == BUSINESS);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 1)).allMatch(entry -> entry.getErrorCode().equals("Invalid data"));
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 1)).allMatch(entry -> entry.getStatus() == FAILED);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 1)).allMatch(entry -> entry.getErrorType() == BUSINESS);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 1)).allMatch(entry -> entry.getErrorCode().equals("Invalid data"));
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
 
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 2)).allMatch(entry -> entry.getStatus() == FAILED);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 2)).allMatch(entry -> entry.getErrorType() == SYSTEM);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 2)).allMatch(entry -> entry.getErrorCode().equals("Rest Failure"));
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 2)).allMatch(entry -> entry.getStatus() == FAILED);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 2)).allMatch(entry -> entry.getErrorType() == SYSTEM);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 2)).allMatch(entry -> entry.getErrorCode().equals("Rest Failure"));
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
 
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 3)).allMatch(entry -> entry.getStatus() == FAILED);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 3)).allMatch(entry -> entry.getErrorType() == SYSTEM);
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 3)).allMatch(entry -> entry.getErrorCode().equals("Test exception"));
-	assertThat(processedEntries.stream().filter(x -> x.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 3)).allMatch(entry -> entry.getStatus() == FAILED);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 3)).allMatch(entry -> entry.getErrorType() == SYSTEM);
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 3)).allMatch(entry -> entry.getErrorCode().equals("Test exception"));
+	assertThat(processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
   }
 
   private Entry processEntry(Entry entry) {

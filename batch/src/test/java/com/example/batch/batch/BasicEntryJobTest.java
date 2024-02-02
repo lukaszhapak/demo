@@ -10,6 +10,7 @@ import com.example.AbstractIntegrationTest;
 import com.example.batch.batch.starter.BasicEntryBatchJobStarter;
 import com.example.batch.core.model.Entry;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,13 +35,17 @@ public class BasicEntryJobTest extends AbstractIntegrationTest {
 	// then
 	List<Entry> processedEntries = entryRepository.findAllById(ids);
 
-	assertThat(processedEntries.stream().filter(x -> x.getId() < 9)).allMatch(entry -> entry.getErrorCode() == null);
-	assertThat(processedEntries.stream().filter(x -> x.getId() < 9)).allMatch(entry -> entry.getErrorType() == null);
-	assertThat(processedEntries.stream().filter(x -> x.getId() < 9)).allMatch(entry -> entry.getProcessingAttempts().equals(1L));
-	assertThat(processedEntries.stream().filter(x -> x.getId() < 9)).allMatch(entry -> entry.getStatus() == COMPLETED);
+	assertThat(processedEntries.stream().filter(
+		entry -> entry.getStatus() == COMPLETED
+		&& entry.getProcessingAttempts().equals(1L)
+		&& entry.getErrorType() == null
+		&& entry.getErrorCode() == null
+	).collect(Collectors.toList())).hasSize(8);
 
-	assertThat(processedEntries.stream().filter(x -> x.getId() >= 9)).allMatch(entry -> entry.getStatus() == REGISTERED);
-	assertThat(processedEntries.stream().filter(x -> x.getId() >= 9)).allMatch(entry -> entry.getProcessingAttempts().equals(0L));
+	assertThat(processedEntries.stream().filter(
+		entry -> entry.getStatus() == REGISTERED
+		&& entry.getProcessingAttempts().equals(0L))
+		.collect(Collectors.toList())).hasSize(2);
   }
 
   private Entry processEntry(Entry entry) {
