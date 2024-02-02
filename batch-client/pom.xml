@@ -6,52 +6,29 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.1</version>
+		<version>2.6.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>batch</artifactId>
+	<artifactId>batch-client</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>batch</name>
+	<name>batch-client</name>
 	<description>Demo project for Spring Batch</description>
 
 	<properties>
-		<java.version>11</java.version>
-		<spring-boot.version>2.7.1</spring-boot.version>
-		<postgresql.version>42.2.23</postgresql.version>
-		<h2.version>2.1.214</h2.version>
+		<java.version>11
+		</java.version>
+		<spring-boot.version>2.6.6</spring-boot.version>
 		<lombok.version>1.18.24</lombok.version>
 		<rest-assured.version>4.2.0</rest-assured.version>
 	</properties>
 
+
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-batch</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-			<version>${spring-boot.version}</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring-boot.version}</version>
-		</dependency>
-
-		<dependency>
-			<artifactId>h2</artifactId>
-			<groupId>com.h2database</groupId>
-			<version>${h2.version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<version>${postgresql.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -63,11 +40,16 @@
 			<groupId>io.rest-assured</groupId>
 			<version>${rest-assured.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>commons</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-boot-starter-data-jpa</artifactId>
+					<groupId>org.springframework.boot</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
