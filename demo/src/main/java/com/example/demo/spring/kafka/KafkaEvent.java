@@ -18,5 +18,4 @@ class KafkaEvent {
 
   private String name;
   private int age;
-  private LocalDateTime timestamp;
 }

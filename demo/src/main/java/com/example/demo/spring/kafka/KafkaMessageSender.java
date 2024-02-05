@@ -16,7 +16,7 @@ class KafkaMessageSender {
 
   @Scheduled(fixedDelay = 10000)
   public void sendEvent() {
-	KafkaEvent kafkaEvent = new KafkaEvent("John", 24, LocalDateTime.now());
+	KafkaEvent kafkaEvent = new KafkaEvent("John", 24);
 	log.debug("Sending event sampleEvent={}", kafkaEvent);
 	kafkaTemplate.send("test-topic", kafkaEvent);
   }
