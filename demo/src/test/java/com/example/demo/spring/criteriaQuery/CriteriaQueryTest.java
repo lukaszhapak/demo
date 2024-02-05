@@ -3,6 +3,7 @@ package com.example.demo.spring.criteriaQuery;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -114,6 +115,26 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(students.getTotalElements()).isEqualTo(2);
+  }
+
+  @Test
+  @DisplayName("should get all students when last names is empty list")
+  void shouldGetAllStudentsWhenLastNamesIsEmptyList() {
+	// given
+	Student student = createStudent();
+	student.setLastName("QWE");
+	studentService.save(student);
+	Student student2 = createStudent();
+	student2.setLastName("RTY");
+	studentService.save(student2);
+	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
+	studentSearchCriteria.setLastNames(Collections.emptyList());
+
+	// when
+	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+
+	// then
+	assertThat(students.getTotalElements()).isEqualTo(5);
   }
 
   StudentSearchCriteria createStudentSearchCriteria() {
