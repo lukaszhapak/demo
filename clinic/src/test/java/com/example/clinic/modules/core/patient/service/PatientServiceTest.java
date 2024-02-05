@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import com.example.clinic.config.ClinicConfiguration;
+import com.example.clinic.modules.core.patient.config.PatientConfiguration;
 import com.example.clinic.modules.core.patient.model.PatientDTO;
 import com.example.clinic.modules.core.patient.repository.PatientRepositoryInMemory;
 import com.example.commons.exception.NotFoundException;
@@ -18,7 +19,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 @DisplayName("Patient service test")
 public class PatientServiceTest {
 
-  private final PatientService patientService = new ClinicConfiguration().patientService(new PatientRepositoryInMemory());
+  private final PatientService patientService = new PatientConfiguration().patientService(new PatientRepositoryInMemory());
 
   private static final long NON_EXISTING_PATIENT_ID = 9999999L;
 
