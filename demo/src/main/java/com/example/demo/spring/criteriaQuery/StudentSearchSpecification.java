@@ -8,6 +8,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.CollectionUtils;
 
 @RequiredArgsConstructor
 class StudentSearchSpecification implements Specification<Student> {
@@ -24,7 +25,7 @@ class StudentSearchSpecification implements Specification<Student> {
 	if (studentSearchCriteria.getFirstName() != null) {
 	  predicates.add(criteriaBuilder.like(root.get("firstName"), studentSearchCriteria.getFirstName()));
 	}
-	if (studentSearchCriteria.getLastNames() != null) {
+	if (!CollectionUtils.isEmpty(studentSearchCriteria.getLastNames())) {
 	  predicates.add(criteriaBuilder.and(root.get("lastName").in(studentSearchCriteria.getLastNames())));
 	}
 	if (studentSearchCriteria.getStreetName() != null) {
