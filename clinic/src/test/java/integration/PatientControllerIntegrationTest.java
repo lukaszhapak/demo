@@ -27,7 +27,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
   private static final long DELETE_PATIENT_ID = 1000003L;
   private static final long NON_EXISTING_PATIENT_ID = 9999999L;
 
-  private final String URL = "/api/patient/";
+  private final String URL = "/clinic/api/patient/";
 
   @Autowired
   protected PatientService patientService;
