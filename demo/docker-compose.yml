@@ -1,12 +1,12 @@
 version: '3'
 services:
 
-  database:
-    container_name: database
+  postgres:
+    container_name: postgres
     image: postgres:14.0
     environment:
       POSTGRES_DB: database
-      POSTGRES_USER: user
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
@@ -63,3 +63,13 @@ services:
       - REDIS_PASSWORD=null
       - REDIS_PORT=6739
       - REDIS_DATABASES=16
+
+  mysql:
+    container_name: mysql:8.0.25
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
