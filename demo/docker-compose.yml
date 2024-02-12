@@ -2,8 +2,8 @@ version: '3'
 services:
 
   postgres:
-    container_name: postgres
     image: postgres:14.0
+    container_name: postgres
     environment:
       POSTGRES_DB: database
       POSTGRES_USER: postgres
@@ -44,8 +44,8 @@ services:
       - zookeeper
 
   mailhog:
-    container_name: mailhog
     image: mailhog/mailhog
+    container_name: mailhog
     ports:
       - "1025:1025"
       - "8025:8025"
@@ -65,8 +65,8 @@ services:
       - REDIS_DATABASES=16
 
   mysql:
-    container_name: mysql:8.0.25
-    image: mysql
+    image: mysql:8.0.25
+    container_name: mysql
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:

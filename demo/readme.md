@@ -31,3 +31,4 @@ TODO:
 * docker compose for single module in demo
 * design patterns
 * db indexes
+* test container with kafka
