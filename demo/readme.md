@@ -13,7 +13,6 @@ TODO:
 
 ---
  
-* mock mvc
 * rest template
 * open feign
 

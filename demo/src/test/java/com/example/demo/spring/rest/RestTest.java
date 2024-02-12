@@ -22,23 +22,16 @@ class RestTest extends AbstractIntegrationTest {
   @Test
   @DisplayName("should get with query params")
   void shouldGetWithQueryParams() {
-	String url = "/post?name=John&surname=Doe&age=24&ids=2,5,4";
+	String url = "/post?name=Jim&surname=Doe&age=24&ids=2,5,4";
 	Student student = new Student("John", 24);
 
 	Response httpResponse = postHttpCall(url, port, getHeaders(), student);
 
 	assertThat(httpResponse.statusCode()).isEqualTo(SC_OK);
-  }
-
-  private Response postHttpCall(String url, int port, Headers headers, Object body) {
-	return RestAssured.given()
-		.port(port)
-		.headers(headers)
-		.body(body)
-		.contentType(ContentType.JSON)
-		.log().all()
-		.when()
-		.post(url);
+	ResponseDTO responseDTO = httpResponse.as(ResponseDTO.class);
+	assertThat(responseDTO.getPlayerId()).isEqualTo("12344");
+	assertThat(responseDTO.getStudent().getName()).isEqualTo("John");
+	assertThat(responseDTO.getParams().getName()).isEqualTo("Jim");
   }
 
   private Headers getHeaders() {

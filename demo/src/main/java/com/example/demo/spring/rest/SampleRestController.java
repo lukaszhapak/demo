@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 class SampleRestController {
 
   @PostMapping("/post")
-  public String post(Params params, @RequestHeader("player-id") String playerId, @RequestBody Student student) {
-	log.debug("Posting with params={}, playerId={}, student={}", params, playerId, student);
-	return "todo";
+  public ResponseDTO post(Params params, @RequestHeader("player-id") String playerId, @RequestBody Student student) {
+	log.debug("Request with params={}, playerId={}, student={}", params, playerId, student);
+	return new ResponseDTO(params, student, playerId);
   }
 }
