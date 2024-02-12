@@ -1,4 +1,3 @@
-
 TODO:
 
 ---
@@ -25,3 +24,10 @@ TODO:
 ---
 
 * n plus one
+* reflection
+* logs to elk https://www.youtube.com/watch?v=hvYUwUmHB6M
+* metrics to elk
+* actuator
+* docker compose for single module in demo
+* design patterns
+* db indexes
