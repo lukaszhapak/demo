@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-class StudentServiceImplTest {
+class ArgumentCaptorTest {
 
   private final ArgumentCaptor<Student> studentArgumentCaptor = ArgumentCaptor.forClass(Student.class);
   private final StudentRepository studentRepository = mock(StudentRepository.class);

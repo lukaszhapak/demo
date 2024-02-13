@@ -32,3 +32,4 @@ TODO:
 * design patterns
 * db indexes
 * test container with kafka
+* group modules, spring core, web, database, tools
