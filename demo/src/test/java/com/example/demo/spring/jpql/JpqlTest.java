@@ -11,17 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 class JpqlTest extends AbstractIntegrationTest {
 
   @Autowired
-  StudentService studentService;
+  StudentRepository studentRepository;
 
   @Test
   @DisplayName("should save student and fetch name")
   void shouldSaveStudentAndFetchName() {
 	// Setup:
 	Student john = createStudent();
-	studentService.save(john);
+	studentRepository.save(john);
 
 	// When:
-	String studentName = studentService.findNameById(john.getId());
+	String studentName = studentRepository.findNameById(john.getId());
 
 	// Then:
 	assertThat(studentName).isEqualTo(john.getName());
@@ -31,10 +31,10 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save students and fetch list")
   void shouldSaveStudentsAndFetchList() {
 	// given
-	studentService.saveAll(List.of(createStudent(), createStudent()));
+	studentRepository.saveAll(List.of(createStudent(), createStudent()));
 
 	// when
-	List<StudentDTO> studentDTOS = studentService.findAllAsDTOs();
+	List<StudentDTO> studentDTOS = studentRepository.findAllAsDTOs();
 
 	// then
 	assertThat(studentDTOS.size()).isGreaterThan(1);
@@ -44,10 +44,10 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save and find student name")
   void shouldSaveAndFindStudentName() {
 	// given
-	Long id = studentService.save(createStudent()).getId();
+	Long id = studentRepository.save(createStudent()).getId();
 
 	// when
-	String name = studentService.findNameById(id);
+	String name = studentRepository.findNameById(id);
 
 	// then
 	assertThat(name).isEqualTo("John");
@@ -57,10 +57,10 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save students and find as DTOs")
   void shouldSaveStudentsAndFindAsDTOs() {
 	// given
-	studentService.saveAll(List.of(createStudent(), createStudent(), createStudent(), createStudent(), createStudent()));
+	studentRepository.saveAll(List.of(createStudent(), createStudent(), createStudent(), createStudent(), createStudent()));
 
 	// when
-	List<StudentDTO> allAsDTOs = studentService.findAllAsDTOs();
+	List<StudentDTO> allAsDTOs = studentRepository.findAllAsDTOs();
 
 	// then
 	assertThat(allAsDTOs.size()).isGreaterThan(4);
@@ -70,10 +70,10 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save students and find as DTOs")
   void shouldSaveStudentAndFindAsDTOs() {
 	// given
-	Long id = studentService.save(createStudent()).getId();
+	Long id = studentRepository.save(createStudent()).getId();
 
 	// when
-	StudentDTO studentDTO = studentService.findByIdAsDTOs(id);
+	StudentDTO studentDTO = studentRepository.findByIdAsDTOs(id);
 
 	// then
 	assertThat(studentDTO.getName()).isEqualTo("John");
@@ -86,10 +86,10 @@ class JpqlTest extends AbstractIntegrationTest {
 	String streetName = "test_street_name#123";
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
-	studentService.saveAll(List.of(createStudent(), student));
+	studentRepository.saveAll(List.of(createStudent(), student));
 
 	// when
-	List<Student> result = studentService.findByAddressStreetName(streetName);
+	List<Student> result = studentRepository.findByAddressStreetName(streetName);
 
 	// then
 	assertThat(result).hasSize(1);
@@ -105,10 +105,10 @@ class JpqlTest extends AbstractIntegrationTest {
 	Student student = createStudent();
 	student.getAddress().setStreetName(streetName);
 	student.getAddress().setFlatNumber(flatNumber);
-	studentService.saveAll(List.of(createStudent(), student));
+	studentRepository.saveAll(List.of(createStudent(), student));
 
 	// when
-	List<Student> result = studentService.findByAddressStreetNameAndFlatNumber(streetName, flatNumber);
+	List<Student> result = studentRepository.findByAddressStreetNameAndFlatNumber(streetName, flatNumber);
 
 	// then
 	assertThat(result).hasSize(1);
@@ -120,10 +120,10 @@ class JpqlTest extends AbstractIntegrationTest {
   @DisplayName("should save student and get name and age")
   void shouldSaveStudentAndGetNameAndAge() {
 	// given
-	Long id = studentService.save(createStudent()).getId();
+	Long id = studentRepository.save(createStudent()).getId();
 
 	// when
-	String nameAndAgeById = studentService.findNameAndAgeById(id);
+	String nameAndAgeById = studentRepository.findNameAndAgeById(id);
 
 	// then
 	assertThat(nameAndAgeById).isEqualTo("John,22");
