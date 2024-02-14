@@ -16,5 +16,12 @@ class StudentService {
   Student getStudentByName(String name) {
 	return studentRepository.getStudentByName(name);
   }
+  Student getStudentById(Long id) {
+	return studentRepository.getStudentById(id);
+  }
 
+  Student getStudentByNameAndId(String name, Long id) {
+	return studentRepository.getStudentByNameAndId(name, id);
+
+  }
 }

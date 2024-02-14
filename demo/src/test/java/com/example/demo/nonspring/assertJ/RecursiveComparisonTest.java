@@ -18,7 +18,7 @@ class RecursiveComparisonTest {
 	// When:
 
 	// Then:
-	assertThat(student).isNotEqualTo(studentDTO); // not equal different class
+	assertThat(student).isNotEqualTo(studentDTO); // not equal, different class
 	assertThat(studentDTO).usingRecursiveComparison().isEqualTo(student); // is equal to because DTO have no id
 	assertThat(student).usingRecursiveComparison().isNotEqualTo(studentDTO); // not equal to because student have id
 	assertThat(student).usingRecursiveComparison().ignoringFields("id").isEqualTo(studentDTO);
