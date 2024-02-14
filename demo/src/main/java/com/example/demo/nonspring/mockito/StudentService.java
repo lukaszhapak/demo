@@ -13,4 +13,8 @@ class StudentService {
 	return studentRepository.save(student);
   }
 
+  Student getStudentByName(String name) {
+	return studentRepository.getStudentByName(name);
+  }
+
 }
