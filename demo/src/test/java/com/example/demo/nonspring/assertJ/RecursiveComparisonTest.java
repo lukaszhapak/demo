@@ -13,7 +13,7 @@ class RecursiveComparisonTest {
   void recursiveComparison() {
 	// Setup:
 	Student student = getStudent();
-	StudentDTO studentDTO = getStudentResponse();
+	StudentDTO studentDTO = getStudentDTO();
 
 	// When:
 
@@ -38,7 +38,7 @@ class RecursiveComparisonTest {
 		.build();
   }
 
-  private static StudentDTO getStudentResponse() {
+  private static StudentDTO getStudentDTO() {
 	return StudentDTO.builder()
 		.name("John")
 		.age(22)

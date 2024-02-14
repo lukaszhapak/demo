@@ -83,7 +83,6 @@ class ArgumentMatchersTest {
 	assertThat(response.getName()).isEqualTo("John");
   }
 
-
   @Test
   @DisplayName("should get student by name and id")
   void shouldGetStudentByNameAndId() {

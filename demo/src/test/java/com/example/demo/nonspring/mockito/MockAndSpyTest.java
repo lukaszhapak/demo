@@ -70,7 +70,7 @@ class MockAndSpyTest {
 	// given
 	doNothing().when(numberServiceMock).returningVoid();
 	doNothing().when(numberServiceSpy).returningVoid();
-	// Only void methods can doNothing()!
+	// Only void methods can doNothing()
 
 	// when
 	int mockResult = numberServiceMock.returningInt();
