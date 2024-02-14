@@ -85,20 +85,6 @@ class MockAndSpyTest {
   }
 
   @Test
-  @DisplayName("stubbing with callback")
-  void stubbingWithCallback() {
-	// given
-	when(numberServiceMock.returningInt(any())).thenAnswer(invocation -> testReturningInt(invocation.getArgument(0)));
-	// cannot do that with spy
-
-	// when
-	int result = numberServiceMock.returningInt(3);
-
-	// then
-	assertThat(result).isEqualTo(6);
-  }
-
-  @Test
   @DisplayName("spy with dependency")
   void spyWithDependency() {
 	// given
@@ -111,6 +97,20 @@ class MockAndSpyTest {
 
 	// then
 	assertThat(result).isEqualTo(255);
+  }
+
+  @Test
+  @DisplayName("stubbing with callback")
+  void stubbingWithCallback() {
+	// given
+	when(numberServiceMock.returningInt(any())).thenAnswer(invocation -> testReturningInt(invocation.getArgument(0)));
+	// cannot do that with spy
+
+	// when
+	int result = numberServiceMock.returningInt(3);
+
+	// then
+	assertThat(result).isEqualTo(6);
   }
 
   private int testReturningInt(Integer number) {
