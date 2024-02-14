@@ -32,15 +32,11 @@ class MockAndSpyTest {
 
 	// when
 	Throwable thrown = catchThrowable(numberServiceMock::returningVoid);
-	Throwable thrown2 = catchThrowable(numberServiceMock::returningInt);
-
-	Throwable thrown3 = catchThrowable(numberServiceSpy::returningVoid);
-	Throwable thrown4 = catchThrowable(numberServiceSpy::returningInt);
 
 	assertThat(thrown).isInstanceOf(RuntimeException.class);
-	assertThat(thrown2).isInstanceOf(RuntimeException.class);
-	assertThat(thrown3).isInstanceOf(RuntimeException.class);
-	assertThat(thrown4).isInstanceOf(RuntimeException.class);
+	assertThat(catchThrowable(numberServiceMock::returningInt)).isInstanceOf(RuntimeException.class);
+	assertThat(catchThrowable(numberServiceSpy::returningVoid)).isInstanceOf(RuntimeException.class);
+	assertThat(catchThrowable(numberServiceSpy::returningInt)).isInstanceOf(RuntimeException.class);
   }
 
   @Test
