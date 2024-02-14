@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 class InternalEventListener {
   @EventListener
-  void handleMovieCreated(InternalEvent event) {
+  void handleEvent(InternalEvent event) {
 	log.debug("Got InternalEvent={}", event);
   }
 }

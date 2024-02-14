@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 class OutboxPublisher {
 
-  void publish(Outbox message){
-    log.debug("Publishing message={}", message);
+  void publish(Outbox message) {
+	log.debug("Publishing message={}", message);
   }
 }

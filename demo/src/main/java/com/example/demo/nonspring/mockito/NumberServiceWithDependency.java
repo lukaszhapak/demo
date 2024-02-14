@@ -5,12 +5,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-class ServiceWithDependency {
+class NumberServiceWithDependency {
 
-  private final Repository repository;
+  private final NumberRepository numberRepository;
 
   int returningIntFromRepository() {
 	log.debug("returning int from repository");
-	return repository.returningInt();
+	return numberRepository.returningInt();
   }
 }

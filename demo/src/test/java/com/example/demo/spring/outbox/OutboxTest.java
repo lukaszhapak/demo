@@ -37,7 +37,7 @@ class OutboxTest extends AbstractIntegrationTest {
 	assertThat(students.size()).isEqualTo(3);
 	assertThat(messagesBeforeJob.size()).isEqualTo(3);
 	assertThat(messagesAfterJob.size()).isEqualTo(3);
-	assertThat(messagesBeforeJob).allMatch(message -> !message.isSent());
+	assertThat(messagesBeforeJob).noneMatch(Outbox::isSent);
 	assertThat(messagesAfterJob).allMatch(Outbox::isSent);
   }
 

@@ -3,7 +3,7 @@ package com.example.demo.nonspring.mockito;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class Service {
+class NumberService {
 
   int returningInt(Integer number) {
 	log.debug("returning int, number={}", number);

@@ -33,6 +33,7 @@ class OutboxService {
 
   void markMessageAsSent(Outbox message) {
 	log.debug("Marking message as sent message={}", message);
+	message.setSent(true);
 	outboxRepository.save(message);
   }
 

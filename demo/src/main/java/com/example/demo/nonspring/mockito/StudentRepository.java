@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.argumentCaptor;
+package com.example.demo.nonspring.mockito;
 
 
 class StudentRepository {

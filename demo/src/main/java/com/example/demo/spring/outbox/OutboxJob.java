@@ -25,7 +25,6 @@ class OutboxJob {
 	log.debug("Sending message={}", message);
 	try {
 	  outboxPublisher.publish(message);
-	  message.setSent(true);
 	  outboxService.markMessageAsSent(message);
 	} catch (Exception e) {
 	  throw new RuntimeException(e);

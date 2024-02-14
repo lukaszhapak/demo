@@ -1,8 +1,7 @@
-package com.example.demo.nonspring.argumentCaptor;
+package com.example.demo.nonspring.mockito;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.DisplayName;
@@ -27,9 +26,12 @@ class ArgumentCaptorTest {
 	studentService.save(student);
 
 	// then
-	verify(studentRepository, times(1)).save(studentArgumentCaptor.capture());
+	verify(studentRepository).save(studentArgumentCaptor.capture());
 	Student studentArgumentCaptorValue = studentArgumentCaptor.getValue();
-	assertThat(studentArgumentCaptorValue.getName()).isEqualTo("John");
+
+	assertThat(studentArgumentCaptorValue.getName()).isEqualTo("John"); // comparing fields one by one
 	assertThat(studentArgumentCaptorValue.getAge()).isEqualTo(24);
+
+	assertThat(studentArgumentCaptorValue).usingRecursiveComparison().isEqualTo(student); // or all at once
   }
 }

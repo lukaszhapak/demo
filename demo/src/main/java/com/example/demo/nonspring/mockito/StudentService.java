@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.argumentCaptor;
+package com.example.demo.nonspring.mockito;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
