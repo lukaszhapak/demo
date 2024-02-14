@@ -31,7 +31,7 @@ class ArgumentMatchersTest {
   }
 
   @Test
-  @DisplayName("should save student wit argument matcher")
+  @DisplayName("should save student with argument matcher")
   void shouldSaveStudentWithArgumentMatcher() {
 	// given
 	Student student = getStudent();
