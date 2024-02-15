@@ -18,7 +18,7 @@ public interface JsonMapper {
 	return result;
   }
 
-  default Object deserialize(String string, Class clazz) {
+  default <T> T deserialize(String string, Class<T> clazz) {
 	try {
 	  return objectMapper.readValue(string, clazz);
 	} catch (JsonProcessingException e) {
