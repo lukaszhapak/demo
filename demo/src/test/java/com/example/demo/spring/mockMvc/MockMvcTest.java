@@ -5,6 +5,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.example.demo.commons.JsonMapper;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class MockMvcTest {
+class MockMvcTest implements JsonMapper {
+
+  private static final String URL = "/mock-mvc/student";
 
   @Autowired
   private MockMvc mockMvc;
@@ -24,26 +28,34 @@ class MockMvcTest {
   @DisplayName("should post and get students")
   void shouldPostAndGetStudents() throws Exception {
 	// given
-	mockMvc.perform(
-		post("/mock-mvc/student")
-			.content("{ \"name\": \"John\", \"age\": 25 }")
-			.contentType(MediaType.APPLICATION_JSON)
-	).andExpect(status().isOk());
-
-	mockMvc.perform(
-		post("/mock-mvc/student")
-			.content("{ \"name\": \"Jim\", \"age\": 22 }")
-			.contentType(MediaType.APPLICATION_JSON)
-	).andExpect(status().isOk());
+	Student jim = Student.builder().name("Jim").age(22).build();
+	Student john = Student.builder().name("John").age(25).build();
+	postHttpCall(URL, john, Student.class, 200);
+	postHttpCall(URL, jim, Student.class, 200);
 
 	// when
-	String jsonResponse = mockMvc.perform(get("/mock-mvc/student"))
-		.andExpect(status().isOk())
-		.andReturn().getResponse().getContentAsString();
+	List<Student> studentsResponse = List.of((Student[]) getHttpCall(URL, Student[].class, 200));
 
 	// then
-	assertThat(jsonResponse)
-		.contains("{\"id\":1,\"name\":\"John\",\"age\":25}")
-		.contains("{\"id\":2,\"name\":\"Jim\",\"age\":22}");
+	assertThat(studentsResponse).usingRecursiveComparison()
+		.ignoringFields("id")
+		.ignoringCollectionOrder()
+		.isEqualTo(List.of(jim, john));
+  }
+
+  private Object getHttpCall(String url, Class returnType, int expectedStatusCode) throws Exception {
+	return deserialize(mockMvc.perform(get(url))
+		.andExpect(status().is(expectedStatusCode))
+		.andReturn().getResponse()
+		.getContentAsString(), returnType);
+  }
+
+  private Object postHttpCall(String url, Object body, Class returnType, int expectedStatusCode) throws Exception {
+	return deserialize(mockMvc.perform(post(url)
+			.content(serialize(body))
+			.contentType(MediaType.APPLICATION_JSON))
+		.andExpect(status().is(expectedStatusCode))
+		.andReturn().getResponse()
+		.getContentAsString(), returnType);
   }
 }

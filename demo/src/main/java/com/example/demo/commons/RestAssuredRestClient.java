@@ -5,7 +5,7 @@ import io.restassured.http.ContentType;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 
-public interface RestClient {
+public interface RestAssuredRestClient {
 
   default Response getHttpCall(String url, int port) {
 	return RestAssured.given()

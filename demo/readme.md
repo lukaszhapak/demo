@@ -19,7 +19,6 @@ TODO:
 * logs to elk https://www.youtube.com/watch?v=hvYUwUmHB6M
 * metrics to elk
 * actuator
-* docker compose for single module in demo
 * design patterns
 * db indexes, partial index (where name != null)
 * test container with kafka
@@ -31,3 +30,7 @@ TODO:
 * Awaitility tests for async executions
 * mockito extension  (@Mock, @Captor)
 * mockito argument matcher
+* parameterized tests
+* spock tests
+* custom handler interceptor
+* mockmvc  use object mapper so assertions can be performed on pojos

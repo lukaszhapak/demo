@@ -8,7 +8,6 @@ public interface JsonMapper {
 
   ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
-
   default String serialize(Object object) {
 	String result;
 	try {
