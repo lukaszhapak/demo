@@ -28,8 +28,6 @@ TODO:
 * @Query with update (@Modifying)
 * Awaitility tests for async executions
 * mockito extension  (@Mock, @Captor)
-* mockito argument matcher
 * parameterized tests
 * spock tests
 * custom handler interceptor
-* mockmvc  use object mapper so assertions can be performed on pojos

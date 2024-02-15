@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 interface StudentRepository extends JpaRepository<Student, Long> {
 
+  // find {limit} By {property / properties expression} {comparison} {ordering operator}
+
   @Query("SELECT NEW com.example.demo.spring.jpql.StudentDTO(s.name, s.age) FROM Student s")
   List<StudentDTO> findAllAsDTOs();
 
