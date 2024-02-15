@@ -16,38 +16,65 @@
 	<description>demo</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-boot.version>2.6.6</spring-boot.version>
+		<lombok.version>1.18.24</lombok.version>
+		<h2.version>2.1.214</h2.version>
+		<flyway.version>8.2.0</flyway.version>
+		<postgresql.version>42.2.23</postgresql.version>
+		<shedlock.version>4.30.0</shedlock.version>
+		<spring-kafka.version>2.9.4</spring-kafka.version>
+
+		<rest-assured.version>4.2.0</rest-assured.version>
+		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
+		<testcontainers.version>1.16.3</testcontainers.version>
+		<pitest-maven.version>1.11.0</pitest-maven.version>
+		<pitest-junit5-plugin.version>1.1.2</pitest-junit5-plugin.version>
 	</properties>
+
 	<dependencies>
-
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
+			<groupId>org.projectlombok</groupId>
 			<optional>true</optional>
+			<version>${lombok.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>h2</artifactId>
+			<groupId>com.h2database</groupId>
+			<version>${h2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>${spring-kafka.version}</version>
+		</dependency>
+		<dependency>
+			<artifactId>rest-assured</artifactId>
+			<groupId>io.rest-assured</groupId>
+			<version>${rest-assured.version}</version>
 		</dependency>
 
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<groupId>org.springframework.boot</groupId>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>2.1.214</version>
-		</dependency>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>rest-assured</artifactId>
-			<version>4.2.0</version>
-			<scope>test</scope>
+			<version>${spring-boot.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:include="fragments/generated :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/generated :: navbar"></nav>
+
+<div class="container my-5">
+
+
+  <form method="post" th:object="${generated}">
+    <table class="table table-striped mb-5">
+      <tr>
+        <td><label for="name">name:</label></td>
+        <td><input class="form-control" id="name" th:field="*{name}" type="text"></td>
+      </tr>
+      <tr>
+        <td><label for="age">age:</label></td>
+        <td><input class="form-control" id="age" th:field="*{age}" type="text"></td>
+      </tr>
+    </table>
+
+    <div class="float-right">
+      <a class="btn btn-danger" th:href="@{|/generated/${generated.id}}">Cancel</a>
+      <button class="btn btn-primary" type="submit">Update</button>
+    </div>
+  </form>
+
+
+</div>
+
+<div th:replace="fragments/generated :: scripts"></div>
+
+</body>
+</html>
+
