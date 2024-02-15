@@ -1,29 +1,15 @@
 package com.example.demo.spring.mockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.example.demo.commons.JsonMapper;
+import com.example.demo.commons.AbstractMockMvcIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-class MockMvcTest implements JsonMapper {
+class MockMvcTest extends AbstractMockMvcIntegrationTest {
 
   private static final String URL = "/mock-mvc/student/";
-
-  @Autowired
-  private MockMvc mockMvc;
 
   @Test
   @DisplayName("should post get and delete student")
@@ -59,26 +45,5 @@ class MockMvcTest implements JsonMapper {
 		.ignoringFields("id")
 		.ignoringCollectionOrder()
 		.isEqualTo(List.of(jim, john));
-  }
-
-  private <T> T getHttpCall(String url, Class<T> returnType, int expectedStatusCode) throws Exception {
-	return deserialize(mockMvc.perform(get(url))
-		.andExpect(status().is(expectedStatusCode))
-		.andReturn().getResponse()
-		.getContentAsString(), returnType);
-  }
-
-  private <T> T postHttpCall(String url, Object body, Class<T> returnType, int expectedStatusCode) throws Exception {
-	return deserialize(mockMvc.perform(post(url)
-			.content(serialize(body))
-			.contentType(MediaType.APPLICATION_JSON))
-		.andExpect(status().is(expectedStatusCode))
-		.andReturn().getResponse()
-		.getContentAsString(), returnType);
-  }
-
-  private void deleteHttpCall(String url, int expectedStatusCode) throws Exception {
-	mockMvc.perform(delete(url))
-		.andExpect(status().is(expectedStatusCode));
   }
 }
