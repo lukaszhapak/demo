@@ -24,7 +24,6 @@ TODO:
 * test container with kafka
 * group modules, spring core, web, database, tools
 * more comments with explanation
-* com.example.demo.spring.mockMvc.StudentService.update does not work  same in cache
 * wiremock / test server
 * @Query with update (@Modifying)
 * Awaitility tests for async executions

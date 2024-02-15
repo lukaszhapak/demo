@@ -31,7 +31,7 @@ class StudentService {
 
   Student update(Long id, Student student) {
 	log.debug("update student id={}, student={}", id, student);
-	student.setId(id); // todo does not work, same in cache
+	student.setId(id);
 	return studentRepository.save(student);
   }
 

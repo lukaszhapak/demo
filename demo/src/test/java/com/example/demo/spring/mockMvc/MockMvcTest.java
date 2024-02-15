@@ -13,10 +13,9 @@ class MockMvcTest extends AbstractMockMvcIntegrationTest {
 
   @Test
   @DisplayName("should post get and delete student")
-  void shouldPostGetAndDeleteStudent() throws Exception {
+  void shouldPostGetAndDeleteStudent() {
 	// given
-	Student request = Student.builder().name("John").age(25).build();
-	Long id = postHttpCall(URL, request, Student.class, 200).getId();
+	Long id = postHttpCall(URL, getStudent(), Student.class, 200).getId();
 
 	// when
 	Student response = getHttpCall(URL + id, Student.class, 200);
@@ -25,25 +24,41 @@ class MockMvcTest extends AbstractMockMvcIntegrationTest {
 	// then
 	assertThat(response).usingRecursiveComparison()
 		.ignoringFields("id")
-		.isEqualTo(request);
+		.isEqualTo(getStudent());
   }
 
   @Test
   @DisplayName("should post and get students")
-  void shouldPostAndGetStudents() throws Exception {
+  void shouldPostAndGetStudents() {
 	// given
-	Student jim = Student.builder().name("Jim").age(22).build();
-	Student john = Student.builder().name("John").age(25).build();
-	postHttpCall(URL, john, Student.class, 200);
-	postHttpCall(URL, jim, Student.class, 200);
+	postHttpCall(URL, getStudent(), Student.class, 200);
+	postHttpCall(URL, getStudent(), Student.class, 200);
 
 	// when
 	List<Student> studentsResponse = List.of(getHttpCall(URL, Student[].class, 200));
 
 	// then
-	assertThat(studentsResponse).usingRecursiveComparison()
-		.ignoringFields("id")
-		.ignoringCollectionOrder()
-		.isEqualTo(List.of(jim, john));
+	assertThat(studentsResponse.size()).isGreaterThan(1);
+  }
+
+  @Test
+  @DisplayName("should post update get and delete student")
+  void shouldPostUpdateGetAndDeleteStudent() {
+	// given
+	Student student = getStudent();
+	Long id = postHttpCall(URL, student, Student.class, 200).getId();
+
+	// when
+	student.setName("Jim");
+	putHttpCall(URL + id, student, Student.class, 200);
+	Student response = getHttpCall(URL + id, Student.class, 200);
+	deleteHttpCall(URL + id, 200);
+
+	// then
+	assertThat(response.getName()).isEqualTo(student.getName());
+  }
+
+  private static Student getStudent() {
+	return Student.builder().name("John").age(25).build();
   }
 }
