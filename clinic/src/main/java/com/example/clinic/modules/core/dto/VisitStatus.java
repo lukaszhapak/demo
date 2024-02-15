@@ -1,4 +1,4 @@
-package com.example.clinic.modules.core.visit.model;
+package com.example.clinic.modules.core.dto;
 
 public enum VisitStatus {
   AWAITING, CANCELLED, DONE

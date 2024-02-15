@@ -1,6 +1,5 @@
 package integration;
 
-import static com.example.clinic.commons.TestUtils.getPatient;
 import static com.example.clinic.commons.TestUtils.getPatientDTO;
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_NOT_FOUND;
@@ -9,9 +8,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 import com.example.clinic.commons.ClinicAbstractIntegrationTest;
-import com.example.clinic.modules.core.patient.model.Patient;
-import com.example.clinic.modules.core.patient.model.PatientDTO;
-import com.example.clinic.modules.core.patient.service.PatientService;
+import com.example.clinic.modules.core.domain.PatientFacade;
+import com.example.clinic.modules.core.dto.PatientDTO;
 import com.example.commons.exception.NotFoundException;
 import com.example.commons.exception.ValidationExceptionDTO;
 import io.restassured.response.Response;
@@ -30,7 +28,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
   private final String URL = "/clinic/api/patient/";
 
   @Autowired
-  protected PatientService patientService;
+  protected PatientFacade patientFacade;
 
   @Nested
   @DisplayName("save tests")
@@ -40,7 +38,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	@DisplayName("should save valid patient")
 	void shouldSaveValidPatient() {
 	  // given
-	  Patient request = getPatient();
+	  PatientDTO request = getPatientDTO();
 	  request.setPesel("93745637618");
 
 	  // when
@@ -52,7 +50,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  assertThat(response.getId()).isNotNull();
 	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
-	  PatientDTO patientInDb = patientService.findById(response.getId());
+	  PatientDTO patientInDb = patientFacade.findById(response.getId());
 	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
 
@@ -103,7 +101,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	@DisplayName("should get patient")
 	void shouldGetPatient() {
 	  // given
-	  Patient patient = getPatient();
+	  PatientDTO patient = getPatientDTO();
 
 	  // when
 	  Response httpResponse = getHttpCall(URL + GET_PATIENT_ID, port);
@@ -138,7 +136,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	@DisplayName("should update patient")
 	void shouldUpdatePatient() {
 	  // given
-	  Patient request = getPatient();
+	  PatientDTO request = getPatientDTO();
 	  request.setFirstName("Jimmy");
 	  request.setLastName("Newman");
 	  request.setPesel("98654222942");
@@ -154,7 +152,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  assertThat(response.getId()).isNotNull();
 	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
-	  PatientDTO patientInDb = patientService.findById(response.getId());
+	  PatientDTO patientInDb = patientFacade.findById(response.getId());
 	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
 
@@ -196,7 +194,7 @@ public class PatientControllerIntegrationTest extends ClinicAbstractIntegrationT
 	  // then
 	  assertThat(response.statusCode()).isEqualTo(SC_OK);
 
-	  Throwable thrown = catchThrowable(() -> patientService.findById(id));
+	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);
 	}
 

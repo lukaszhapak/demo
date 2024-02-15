@@ -1,6 +1,8 @@
-package com.example.clinic.modules.core.visit.model;
+package com.example.clinic.modules.core.domain;
 
-import com.example.clinic.modules.core.patient.model.Patient;
+import com.example.clinic.modules.core.dto.VisitDTO;
+import com.example.clinic.modules.core.dto.VisitPaymentStatus;
+import com.example.clinic.modules.core.dto.VisitStatus;
 import com.example.commons.commons.AbstractEntity;
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
@@ -19,7 +21,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Visit extends AbstractEntity {
+class Visit extends AbstractEntity {
 
   private LocalDateTime visitDate;
   @Enumerated(EnumType.STRING)
@@ -30,7 +32,7 @@ public class Visit extends AbstractEntity {
   @ManyToOne
   private Patient patient;
 
-  public VisitDTO toDTO() {
+  VisitDTO toDTO() {
 	return VisitDTO.builder()
 		.id(getId())
 		.visitDate(visitDate)
@@ -41,7 +43,7 @@ public class Visit extends AbstractEntity {
 		.build();
   }
 
-  public static Visit of(VisitDTO visitDTO) {
+  static Visit of(VisitDTO visitDTO) {
 	return Visit.builder()
 		.visitDate(visitDTO.getVisitDate())
 		.paymentStatus(visitDTO.getPaymentStatus())

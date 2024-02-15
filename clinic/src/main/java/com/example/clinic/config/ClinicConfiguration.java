@@ -5,10 +5,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ClinicConfiguration {
+class ClinicConfiguration {
 
   @Bean
-  public Advice advice() {
+  Advice advice() {
 	return new Advice();
   }
 }

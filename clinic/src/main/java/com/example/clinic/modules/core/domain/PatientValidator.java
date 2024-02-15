@@ -1,7 +1,6 @@
-package com.example.clinic.modules.core.patient.service;
+package com.example.clinic.modules.core.domain;
 
-import com.example.clinic.modules.core.patient.model.PatientDTO;
-import com.example.clinic.modules.core.patient.repository.PatientRepository;
+import com.example.clinic.modules.core.dto.PatientDTO;
 import com.example.commons.commons.AbstractValidator;
 import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
@@ -9,11 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RequiredArgsConstructor
-public class PatientValidator extends AbstractValidator {
+class PatientValidator extends AbstractValidator {
 
   private final PatientRepository patientRepository;
 
-  public void validate(PatientDTO patientDTO) {
+  void validate(PatientDTO patientDTO) {
 	log.debug("Validating patient patientDTO={}", patientDTO);
 	invalidFields = new HashMap<>();
 	validateString(patientDTO.getFirstName(), 2, 64, "firstName");
@@ -23,7 +22,7 @@ public class PatientValidator extends AbstractValidator {
 	throwException("Patient");
   }
 
-  public void validatePeselUniqueness(String pesel) {
+  void validatePeselUniqueness(String pesel) {
 	if (patientRepository.existsByPesel(pesel)){
 	  invalidFields.put("pesel", "pesel must be unique");
 	  throwException("Patient");

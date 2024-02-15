@@ -1,18 +1,13 @@
 package com.example.clinic.commons;
 
-import com.example.clinic.modules.core.patient.model.PatientDTO;
-import com.example.clinic.modules.core.patient.model.Patient;
-import com.example.clinic.modules.core.patient.model.PatientGender;
+import com.example.clinic.modules.core.dto.PatientDTO;
+import com.example.clinic.modules.core.dto.PatientGender;
 import java.time.LocalDate;
 
 public interface TestUtils {
 
   static PatientDTO getPatientDTO() {
-	return getPatient().toDTO();
-  }
-
-  static Patient getPatient() {
-	return Patient.builder()
+	return PatientDTO.builder()
 		.firstName("John")
 		.lastName("Doe")
 		.pesel("98654273941")

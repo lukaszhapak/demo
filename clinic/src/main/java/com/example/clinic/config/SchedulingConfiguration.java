@@ -11,10 +11,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableScheduling
 @EnableSchedulerLock(defaultLockAtMostFor = "30s")
-public class SchedulingConfiguration {
+class SchedulingConfiguration {
 
   @Bean
-  public LockProvider lockProvider(DataSource dataSource) {
+  LockProvider lockProvider(DataSource dataSource) {
 	return new JdbcTemplateLockProvider(dataSource, "shedlock");
   }
 }

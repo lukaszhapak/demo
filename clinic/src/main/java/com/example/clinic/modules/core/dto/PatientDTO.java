@@ -1,4 +1,4 @@
-package com.example.clinic.modules.core.patient.model;
+package com.example.clinic.modules.core.dto;
 
 import java.time.LocalDate;
 import lombok.AllArgsConstructor;

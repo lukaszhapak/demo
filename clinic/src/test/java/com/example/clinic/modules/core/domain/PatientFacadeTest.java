@@ -1,12 +1,10 @@
-package com.example.clinic.modules.core.patient.service;
+package com.example.clinic.modules.core.domain;
 
 import static com.example.clinic.commons.TestUtils.getPatientDTO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
-import com.example.clinic.modules.core.CoreConfiguration;
-import com.example.clinic.modules.core.patient.model.PatientDTO;
-import com.example.clinic.modules.core.patient.repository.PatientRepositoryInMemory;
+import com.example.clinic.modules.core.dto.PatientDTO;
 import com.example.commons.exception.NotFoundException;
 import com.example.commons.exception.ValidationException;
 import org.junit.jupiter.api.DisplayName;
@@ -15,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-@DisplayName("Patient service test")
-public class PatientServiceTest {
+@DisplayName("Patient facade test")
+public class PatientFacadeTest {
 
-  private final PatientService patientService = new CoreConfiguration().patientService(new PatientRepositoryInMemory());
+  private final PatientFacade patientFacade = new CoreConfiguration().patientFacade(new PatientRepositoryInMemory());
 
   private static final long NON_EXISTING_PATIENT_ID = 9999999L;
 
@@ -33,13 +31,13 @@ public class PatientServiceTest {
 	  PatientDTO request = getPatientDTO();
 
 	  // when
-	  PatientDTO response = patientService.save(request);
+	  PatientDTO response = patientFacade.save(request);
 
 	  // then
 	  assertThat(response.getId()).isNotNull();
 	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
-	  PatientDTO patientInDb = patientService.findById(response.getId());
+	  PatientDTO patientInDb = patientFacade.findById(response.getId());
 	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
 
@@ -55,7 +53,7 @@ public class PatientServiceTest {
 	  String[] expectedInvalidFields = {"firstName", "lastName", "pesel", "phoneNumber"};
 
 	  // when
-	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
 
 	  // then
 	  assertThat(thrown.getInvalidFields()).hasSize(4)
@@ -71,7 +69,7 @@ public class PatientServiceTest {
 	  request.setFirstName(firstName);
 
 	  // when
-	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(ValidationException.class);
@@ -88,7 +86,7 @@ public class PatientServiceTest {
 	  request.setLastName(lastName);
 
 	  // when
-	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(ValidationException.class);
@@ -105,7 +103,7 @@ public class PatientServiceTest {
 	  request.setPesel(pesel);
 
 	  // when
-	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(ValidationException.class);
@@ -122,7 +120,7 @@ public class PatientServiceTest {
 	  request.setPhoneNumber(phoneNumber);
 
 	  // when
-	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(ValidationException.class);
@@ -135,10 +133,10 @@ public class PatientServiceTest {
 	void shouldNotSavePatientWithDuplicatedPesel() {
 	  // given
 	  PatientDTO request = getPatientDTO();
-	  patientService.save(request);
+	  patientFacade.save(request);
 
 	  // when
-	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.save(request));
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.save(request));
 
 	  // then
 	  assertThat(thrown.getInvalidFields()).hasSize(1)
@@ -154,10 +152,10 @@ public class PatientServiceTest {
 	@DisplayName("should get patient")
 	void shouldGetPatient() {
 	  // given
-	  PatientDTO patient = patientService.save(getPatientDTO());
+	  PatientDTO patient = patientFacade.save(getPatientDTO());
 
 	  // when
-	  PatientDTO response = patientService.findById(patient.getId());
+	  PatientDTO response = patientFacade.findById(patient.getId());
 
 	  // then
 	  assertThat(response).usingRecursiveComparison().isEqualTo(patient);
@@ -170,7 +168,7 @@ public class PatientServiceTest {
 	  Long id = NON_EXISTING_PATIENT_ID;
 
 	  // when
-	  Throwable thrown = catchThrowable(() -> patientService.findById(id));
+	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);
@@ -185,19 +183,19 @@ public class PatientServiceTest {
 	@DisplayName("should update patient")
 	void shouldUpdatePatient() {
 	  // given
-	  Long id = patientService.save(getPatientDTO()).getId();
+	  Long id = patientFacade.save(getPatientDTO()).getId();
 	  PatientDTO request = getPatientDTO();
 	  request.setFirstName("Jimmy");
 	  request.setLastName("Newman");
 	  request.setPhoneNumber("789641615");
 
 	  // when
-	  PatientDTO response = patientService.update(id, request);
+	  PatientDTO response = patientFacade.update(id, request);
 
 	  // then
 	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 
-	  PatientDTO patientInDb = patientService.findById(response.getId());
+	  PatientDTO patientInDb = patientFacade.findById(response.getId());
 	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
 	}
 
@@ -208,7 +206,7 @@ public class PatientServiceTest {
 	  Long id = NON_EXISTING_PATIENT_ID;
 	  PatientDTO request = getPatientDTO();
 
-	  Throwable thrown = catchThrowable(() -> patientService.update(id, request));
+	  Throwable thrown = catchThrowable(() -> patientFacade.update(id, request));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);
@@ -218,7 +216,7 @@ public class PatientServiceTest {
 	@DisplayName("should not update patient with invalid fields")
 	void shouldNotUpdatePatientWithInvalidFields() {
 	  // given
-	  Long id = patientService.save(getPatientDTO()).getId();
+	  Long id = patientFacade.save(getPatientDTO()).getId();
 	  PatientDTO request = getPatientDTO();
 	  request.setFirstName("J");
 	  request.setLastName("N");
@@ -227,13 +225,12 @@ public class PatientServiceTest {
 	  String[] expectedInvalidFields = {"firstName", "lastName", "pesel", "phoneNumber"};
 
 	  // when
-	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientService.update(id, request));
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> patientFacade.update(id, request));
 
 	  // then
 	  assertThat(thrown.getInvalidFields()).hasSize(4)
 		  .containsKeys(expectedInvalidFields);
 	}
-
   }
 
   @Nested
@@ -244,13 +241,13 @@ public class PatientServiceTest {
 	@DisplayName("should delete patient")
 	void shouldDeletePatient() {
 	  // given
-	  Long id = patientService.save(getPatientDTO()).getId();
+	  Long id = patientFacade.save(getPatientDTO()).getId();
 
 	  // when
-	  patientService.deleteById(id);
+	  patientFacade.deleteById(id);
 
 	  // then
-	  Throwable thrown = catchThrowable(() -> patientService.findById(id));
+	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);
 	}
 
@@ -261,7 +258,7 @@ public class PatientServiceTest {
 	  Long id = NON_EXISTING_PATIENT_ID;
 
 	  // when
-	  Throwable thrown = catchThrowable(() -> patientService.deleteById(id));
+	  Throwable thrown = catchThrowable(() -> patientFacade.deleteById(id));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);

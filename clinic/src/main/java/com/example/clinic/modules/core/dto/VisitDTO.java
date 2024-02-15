@@ -1,6 +1,5 @@
-package com.example.clinic.modules.core.visit.model;
+package com.example.clinic.modules.core.dto;
 
-import com.example.clinic.modules.core.patient.model.PatientDTO;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

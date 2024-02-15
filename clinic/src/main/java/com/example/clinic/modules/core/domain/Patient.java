@@ -1,9 +1,10 @@
-package com.example.clinic.modules.core.patient.model;
+package com.example.clinic.modules.core.domain;
 
 import static javax.persistence.CascadeType.REMOVE;
 import static javax.persistence.EnumType.STRING;
 
-import com.example.clinic.modules.core.visit.model.Visit;
+import com.example.clinic.modules.core.dto.PatientDTO;
+import com.example.clinic.modules.core.dto.PatientGender;
 import com.example.commons.commons.AbstractEntity;
 import java.time.LocalDate;
 import java.util.List;
@@ -22,7 +23,7 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Patient extends AbstractEntity {
+class Patient extends AbstractEntity {
 
   private String firstName;
   private String lastName;
@@ -34,7 +35,7 @@ public class Patient extends AbstractEntity {
   @OneToMany(mappedBy = "patient", cascade = REMOVE)
   private List<Visit> visits;
 
-  public void update(PatientDTO patientDTO) {
+  void update(PatientDTO patientDTO) {
 	firstName = patientDTO.getFirstName();
 	lastName = patientDTO.getLastName();
 	pesel = patientDTO.getPesel();
@@ -43,7 +44,7 @@ public class Patient extends AbstractEntity {
 	phoneNumber = patientDTO.getPhoneNumber();
   }
 
-  public PatientDTO toDTO() {
+  PatientDTO toDTO() {
 	return PatientDTO.builder()
 		.id(getId())
 		.firstName(firstName)
