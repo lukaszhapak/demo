@@ -2,7 +2,9 @@ package com.example.clinic.commons;
 
 import com.example.clinic.modules.core.dto.PatientDTO;
 import com.example.clinic.modules.core.dto.PatientGender;
+import com.example.clinic.modules.core.dto.VisitDTO;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public interface TestUtils {
 
@@ -14,6 +16,12 @@ public interface TestUtils {
 		.gender(PatientGender.MALE)
 		.birthDate(LocalDate.of(1998, 2, 15))
 		.phoneNumber("987468231")
+		.build();
+  }
+
+  static VisitDTO getVisitDTO() {
+	return VisitDTO.builder()
+		.date(LocalDateTime.now().plusDays(1))
 		.build();
   }
 }

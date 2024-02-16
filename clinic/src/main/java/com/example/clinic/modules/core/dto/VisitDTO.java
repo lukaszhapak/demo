@@ -15,7 +15,7 @@ import lombok.Setter;
 public class VisitDTO {
 
   private Long id;
-  private LocalDateTime visitDate;
+  private LocalDateTime date;
   private VisitPaymentStatus paymentStatus;
   private VisitStatus status;
   private boolean reminderSent;

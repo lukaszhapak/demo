@@ -23,7 +23,7 @@ class PatientValidator extends AbstractValidator {
   }
 
   void validatePeselUniqueness(String pesel) {
-	if (patientRepository.existsByPesel(pesel)){
+	if (patientRepository.existsByPesel(pesel)) {
 	  invalidFields.put("pesel", "pesel must be unique");
 	  throwException("Patient");
 	}

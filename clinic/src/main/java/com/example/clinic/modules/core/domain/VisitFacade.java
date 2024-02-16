@@ -12,10 +12,13 @@ public class VisitFacade {
   private final VisitRepository visitRepository;
   private final VisitValidator visitValidator;
 
-  VisitDTO save(VisitDTO visitDTO) {
+  VisitDTO save(Long patientId, VisitDTO visitDTO) {
 	visitValidator.validate(visitDTO);
 	Visit visit = Visit.of(visitDTO);
 	return visitRepository.save(visit).toDTO();
   }
 
+  public VisitDTO findById(Long id) {
+	return null;
+  }
 }

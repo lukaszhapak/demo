@@ -18,7 +18,7 @@ public class PatientFacadeTest {
 
   private final PatientFacade patientFacade = new CoreConfiguration().patientFacade(new PatientRepositoryInMemory());
 
-  private static final long NON_EXISTING_PATIENT_ID = 9999999L;
+  private static final long NON_EXISTING_PATIENT_ID = 1000000L;
 
   @Nested
   @DisplayName("save tests")

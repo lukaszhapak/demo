@@ -1,5 +1,8 @@
 package com.example.clinic.modules.core.domain;
 
+import static com.example.clinic.modules.core.dto.VisitPaymentStatus.AWAITING_PAYMENT;
+import static com.example.clinic.modules.core.dto.VisitStatus.*;
+
 import com.example.clinic.modules.core.dto.VisitDTO;
 import com.example.clinic.modules.core.dto.VisitPaymentStatus;
 import com.example.clinic.modules.core.dto.VisitStatus;
@@ -35,7 +38,7 @@ class Visit extends AbstractEntity {
   VisitDTO toDTO() {
 	return VisitDTO.builder()
 		.id(getId())
-		.visitDate(visitDate)
+		.date(visitDate)
 		.paymentStatus(paymentStatus)
 		.status(status)
 		.reminderSent(reminderSent)
@@ -45,10 +48,10 @@ class Visit extends AbstractEntity {
 
   static Visit of(VisitDTO visitDTO) {
 	return Visit.builder()
-		.visitDate(visitDTO.getVisitDate())
-		.paymentStatus(visitDTO.getPaymentStatus())
-		.status(visitDTO.getStatus())
-		.reminderSent(visitDTO.isReminderSent())
+		.visitDate(visitDTO.getDate())
+		.paymentStatus(AWAITING_PAYMENT)
+		.status(AWAITING)
+		.reminderSent(false)
 		.build();
   }
 }
