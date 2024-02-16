@@ -26,7 +26,9 @@ class ArgumentMatchersTest {
 	studentService.save(student);
 
 	// then
-	verify(studentRepository).save(argThat(arg -> arg.getName().equals(student.getName())));
+	verify(studentRepository).save(argThat(arg -> arg.getName().equals(student.getName())
+		&& arg.getAge() == (student.getAge())
+	));
 	// for many fields argument captor with recursive comparison is better
   }
 
