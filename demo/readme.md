@@ -28,7 +28,7 @@ TODO:
 * @Query with update (@Modifying)
 * Awaitility tests for async executions
 * mockito extension  (@Mock, @Captor)
-* parameterized tests
 * spock tests
 * custom handler interceptor
 * arch unit
+* java streams
