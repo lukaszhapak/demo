@@ -32,3 +32,5 @@ TODO:
 * custom handler interceptor
 * arch unit
 * java streams
+* clean test data: @sql with delete script  @before each with repo.delete(), @transactional on test class
+* p6spy

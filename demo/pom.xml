@@ -19,11 +19,11 @@
 		<spring-boot.version>2.6.6</spring-boot.version>
 		<lombok.version>1.18.24</lombok.version>
 		<h2.version>2.1.214</h2.version>
-		<flyway.version>8.2.0</flyway.version>
 		<postgresql.version>42.2.23</postgresql.version>
+		<mysql.version>8.0.33</mysql.version>
 		<shedlock.version>4.30.0</shedlock.version>
+		<flyway.version>8.2.0</flyway.version>
 		<spring-kafka.version>2.9.4</spring-kafka.version>
-
 		<rest-assured.version>4.2.0</rest-assured.version>
 		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
@@ -48,33 +48,46 @@
 			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
+			<version>${spring-kafka.version}</version>
+		</dependency>
+
+		<dependency>
 			<artifactId>lombok</artifactId>
 			<groupId>org.projectlombok</groupId>
 			<optional>true</optional>
 			<version>${lombok.version}</version>
 		</dependency>
+
 		<dependency>
 			<artifactId>h2</artifactId>
 			<groupId>com.h2database</groupId>
 			<version>${h2.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-			<version>${spring-kafka.version}</version>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+
 		<dependency>
 			<artifactId>rest-assured</artifactId>
 			<groupId>io.rest-assured</groupId>
 			<version>${rest-assured.version}</version>
 		</dependency>
 
-
 		<dependency>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<groupId>org.springframework.boot</groupId>
-			<scope>test</scope>
 			<version>${spring-boot.version}</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
