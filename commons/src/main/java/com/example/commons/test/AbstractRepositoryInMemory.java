@@ -11,7 +11,7 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
   protected Map<Long, T> map = new HashMap<>();
   private Long id = 0L;
 
-  protected T save(T entity) {
+  public T save(T entity) {
 	if (entity.getId() == null || !map.containsKey(entity.getId())) {
 	  setId(entity);
 	}
@@ -19,11 +19,11 @@ public abstract class AbstractRepositoryInMemory<T extends AbstractEntity> imple
 	return entity;
   }
 
-  protected Optional<T> findById(Long id) {
+  public Optional<T> findById(Long id) {
 	return Optional.ofNullable(map.get(id));
   }
 
-  protected Long deleteAllById(Long id) {
+  public Long deleteAllById(Long id) {
 	return map.remove(id) == null ? 0L : 1L;
   }
 

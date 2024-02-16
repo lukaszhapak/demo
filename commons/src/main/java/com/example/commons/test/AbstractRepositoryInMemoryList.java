@@ -12,7 +12,7 @@ public abstract class AbstractRepositoryInMemoryList<T extends AbstractEntity> i
   protected List<T> list = new ArrayList<>();
   private Long id = 0L;
 
-  protected T save(T entity) {
+  public T save(T entity) {
 	if (entity.getId() == null || !existsById(entity.getId())) {
 	  setId(entity);
 	}
@@ -23,13 +23,13 @@ public abstract class AbstractRepositoryInMemoryList<T extends AbstractEntity> i
 	return entity;
   }
 
-  protected Optional<T> findById(Long id) {
+  public Optional<T> findById(Long id) {
 	return list.stream()
 		.filter(x -> Objects.equals(x.getId(), id))
 		.findFirst();
   }
 
-  protected Long deleteAllById(Long id) {
+  public Long deleteAllById(Long id) {
 	Optional<T> entity = list.stream()
 		.filter(x -> Objects.equals(x.getId(), id))
 		.findFirst();
@@ -41,7 +41,7 @@ public abstract class AbstractRepositoryInMemoryList<T extends AbstractEntity> i
 	}
   }
 
-  protected boolean existsById(Long id) {
+  public boolean existsById(Long id) {
 	Optional<T> entity = list.stream()
 		.filter(x -> Objects.equals(x.getId(), id))
 		.findFirst();
