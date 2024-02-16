@@ -3,7 +3,7 @@ package com.example.demo.spring.rest;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.server.LocalServerPort;
 
-class RestTest extends AbstractIntegrationTest {
+class RestTest extends AbstractRestAssuredIntegrationTest {
 
   @LocalServerPort
   protected int port;

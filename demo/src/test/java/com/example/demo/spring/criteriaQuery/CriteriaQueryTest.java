@@ -2,7 +2,7 @@ package com.example.demo.spring.criteriaQuery;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
-class CriteriaQueryTest extends AbstractIntegrationTest {
+class CriteriaQueryTest extends AbstractRestAssuredIntegrationTest {
 
   @Autowired
   StudentService studentService;

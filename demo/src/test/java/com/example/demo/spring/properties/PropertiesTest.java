@@ -2,12 +2,12 @@ package com.example.demo.spring.properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class PropertiesTest extends AbstractIntegrationTest {
+class PropertiesTest extends AbstractRestAssuredIntegrationTest {
 
   @Autowired
   PropertiesService propertiesService;

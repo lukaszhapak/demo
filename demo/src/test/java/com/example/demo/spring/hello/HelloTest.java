@@ -3,13 +3,13 @@ package com.example.demo.spring.hello;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.web.server.LocalServerPort;
 
-class HelloTest extends AbstractIntegrationTest {
+class HelloTest extends AbstractRestAssuredIntegrationTest {
 
   @LocalServerPort
   protected int port;

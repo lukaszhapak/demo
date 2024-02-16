@@ -1,11 +1,11 @@
 package com.example.demo.spring.beanprocessor;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class BeanProcessorTest extends AbstractIntegrationTest {
+class BeanProcessorTest extends AbstractRestAssuredIntegrationTest {
 
   @Autowired
   StudentService studentServiceImpl;

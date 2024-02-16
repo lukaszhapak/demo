@@ -2,7 +2,7 @@ package com.example.demo.spring.sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 
 @Sql("classpath:sql/insert-student.sql")
-class SqlTest extends AbstractIntegrationTest {
+class SqlTest extends AbstractRestAssuredIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;

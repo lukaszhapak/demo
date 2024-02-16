@@ -1,12 +1,12 @@
 package com.example.demo.nonspring.rest;
 
-import com.example.demo.commons.RestAssuredRestClient;
+import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-class PostsRestClient implements RestAssuredRestClient {
+class PostsRestClient {
 
   public List<Post> getPosts() {
 	log.debug("getting posts");
@@ -22,5 +22,12 @@ class PostsRestClient implements RestAssuredRestClient {
 	Post post = response.getBody().as(Post.class);
 	log.debug("post={}", post);
 	return post;
+  }
+
+  private Response getHttpCall(String url) {
+	return RestAssured.given()
+		.log().all()
+		.when()
+		.get(url);
   }
 }

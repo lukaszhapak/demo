@@ -1,11 +1,11 @@
 package com.example.demo.spring.aop;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class AopTest extends AbstractIntegrationTest {
+class AopTest extends AbstractRestAssuredIntegrationTest {
 
   @Autowired
   StudentService studentService;

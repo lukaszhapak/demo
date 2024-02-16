@@ -6,6 +6,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,14 +16,16 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public abstract class AbstractMockMvcIntegrationTest implements JsonMapper {
+public abstract class AbstractMockMvcIntegrationTest {
+
+  private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
   @Autowired
   protected MockMvc mockMvc;
 
   protected <T> T getHttpCall(String url, Class<T> returnType, int expectedStatusCode) {
 	try {
-	  return deserialize(mockMvc.perform(get(url))
+	  return objectMapper.readValue(mockMvc.perform(get(url))
 		  .andExpect(status().is(expectedStatusCode))
 		  .andReturn().getResponse()
 		  .getContentAsString(), returnType);
@@ -32,8 +36,8 @@ public abstract class AbstractMockMvcIntegrationTest implements JsonMapper {
 
   protected <T> T postHttpCall(String url, Object body, Class<T> returnType, int expectedStatusCode) {
 	try {
-	  return deserialize(mockMvc.perform(post(url)
-			  .content(serialize(body))
+	  return objectMapper.readValue(mockMvc.perform(post(url)
+			  .content(objectMapper.writeValueAsString(body))
 			  .contentType(MediaType.APPLICATION_JSON))
 		  .andExpect(status().is(expectedStatusCode))
 		  .andReturn().getResponse()
@@ -42,10 +46,11 @@ public abstract class AbstractMockMvcIntegrationTest implements JsonMapper {
 	  throw new RuntimeException(e);
 	}
   }
+
   protected <T> T putHttpCall(String url, Object body, Class<T> returnType, int expectedStatusCode) {
 	try {
-	  return deserialize(mockMvc.perform(put(url)
-			  .content(serialize(body))
+	  return objectMapper.readValue(mockMvc.perform(put(url)
+			  .content(objectMapper.writeValueAsString(body))
 			  .contentType(MediaType.APPLICATION_JSON))
 		  .andExpect(status().is(expectedStatusCode))
 		  .andReturn().getResponse()

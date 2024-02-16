@@ -2,13 +2,13 @@ package com.example.demo.spring.jpql;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class JpqlTest extends AbstractIntegrationTest {
+class JpqlTest extends AbstractRestAssuredIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;
