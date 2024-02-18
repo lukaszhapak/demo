@@ -11,10 +11,6 @@ class MockMvcTest extends AbstractMockMvcIntegrationTest {
 
   static final String URL = "/api/student/";
 
-  static Student getStudent() {
-	return Student.builder().name("John").age(25).build();
-  }
-
   @Test
   @DisplayName("should post get and delete student")
   void shouldPostGetAndDeleteStudent() {
@@ -60,5 +56,9 @@ class MockMvcTest extends AbstractMockMvcIntegrationTest {
 
 	// then
 	assertThat(response.getName()).isEqualTo(student.getName());
+  }
+
+  static Student getStudent() {
+	return Student.builder().name("John").age(25).build();
   }
 }
