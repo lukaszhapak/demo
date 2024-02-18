@@ -8,6 +8,21 @@ import org.junit.jupiter.api.Test;
 class RecursiveComparisonTest {
 
 
+  private static Student getStudent() {
+	return Student.builder()
+		.id(14L)
+		.name("John")
+		.age(22)
+		.build();
+  }
+
+  private static StudentDTO getStudentDTO() {
+	return StudentDTO.builder()
+		.name("John")
+		.age(22)
+		.build();
+  }
+
   @Test
   @DisplayName("recursive comparison")
   void recursiveComparison() {
@@ -28,20 +43,5 @@ class RecursiveComparisonTest {
 	student.setName("Jim");
 	assertThat(studentDTO).usingRecursiveComparison().isNotEqualTo(student);
 	assertThat(student).usingRecursiveComparison().ignoringFields("id").isNotEqualTo(studentDTO);
-  }
-
-  private static Student getStudent() {
-	return Student.builder()
-		.id(14L)
-		.name("John")
-		.age(22)
-		.build();
-  }
-
-  private static StudentDTO getStudentDTO() {
-	return StudentDTO.builder()
-		.name("John")
-		.age(22)
-		.build();
   }
 }

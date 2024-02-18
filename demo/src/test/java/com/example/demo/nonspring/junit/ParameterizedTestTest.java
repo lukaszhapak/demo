@@ -19,6 +19,31 @@ class ParameterizedTestTest {
 
   StudentService studentService = new StudentService();
 
+  private static Stream<Arguments> getArguments() {
+	return Stream.of(
+		Arguments.of(12, true),
+		Arguments.of(7, true),
+		Arguments.of(3, false),
+		Arguments.of(0, false)
+	);
+  }
+
+  private static Stream<Arguments> getArguments2() {
+	return Stream.of(
+		Arguments.of(12, List.of(2, 4, 12)),
+		Arguments.of(7, List.of(2, 4, 7)),
+		Arguments.of(3, List.of(8, 4, 3)),
+		Arguments.of(0, List.of(2, 4, 0))
+	);
+  }
+
+  private static Stream<Arguments> getArguments3() {
+	return Stream.of(
+		Arguments.of("John", new Student("John", 21)),
+		Arguments.of("Jim", new Student("Jim", 24))
+	);
+  }
+
   @ParameterizedTest
   @ValueSource(strings = {"a", "0", "this string has more than 64 characters--------------------------"})
   @DisplayName("value source")
@@ -38,7 +63,6 @@ class ParameterizedTestTest {
   void nullSource(String input) {
 	assertThat(Strings.isBlank(input)).isTrue();
   }
-
 
   @ParameterizedTest
   @EmptySource
@@ -68,40 +92,15 @@ class ParameterizedTestTest {
 	assertThat(number > 5).isEqualTo(expected);
   }
 
-  private static Stream<Arguments> getArguments() {
-	return Stream.of(
-		Arguments.of(12, true),
-		Arguments.of(7, true),
-		Arguments.of(3, false),
-		Arguments.of(0, false)
-	);
-  }
-
   @ParameterizedTest
   @MethodSource("getArguments2")
   void methodSource2(int number, List<Integer> list) {
 	assertThat(list.get(2)).isEqualTo(number);
   }
 
-  private static Stream<Arguments> getArguments2() {
-	return Stream.of(
-		Arguments.of(12, List.of(2, 4, 12)),
-		Arguments.of(7, List.of(2, 4, 7)),
-		Arguments.of(3, List.of(8, 4, 3)),
-		Arguments.of(0, List.of(2, 4, 0))
-	);
-  }
-
   @ParameterizedTest
   @MethodSource("getArguments3")
   void methodSource3(String name, Student student) {
 	assertThat(student.getName()).isEqualTo(name);
-  }
-
-  private static Stream<Arguments> getArguments3() {
-	return Stream.of(
-		Arguments.of("John", new Student("John", 21)),
-		Arguments.of("Jim", new Student("Jim", 24))
-	);
   }
 }

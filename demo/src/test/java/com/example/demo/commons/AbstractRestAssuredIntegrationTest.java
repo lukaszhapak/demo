@@ -15,57 +15,57 @@ public abstract class AbstractRestAssuredIntegrationTest {
   protected int port;
 
   protected Response getHttpCall(String url, int port) {
-    return RestAssured.given()
-        .port(port)
-        .log().all()
-        .when()
-        .get(url);
+	return RestAssured.given()
+		.port(port)
+		.log().all()
+		.when()
+		.get(url);
   }
 
   protected Response getHttpCall(String url) {
-    return RestAssured.given()
-        .log().all()
-        .when()
-        .get(url);
+	return RestAssured.given()
+		.log().all()
+		.when()
+		.get(url);
   }
 
   protected Response postHttpCall(Object body, String url, int port) {
-    return RestAssured.given()
-        .port(port)
-        .body(body)
-        .contentType(ContentType.JSON)
-        .log().all()
-        .when()
-        .post(url);
+	return RestAssured.given()
+		.port(port)
+		.body(body)
+		.contentType(ContentType.JSON)
+		.log().all()
+		.when()
+		.post(url);
   }
 
   protected Response postHttpCall(String url, int port, Headers headers, Object body) {
-    return RestAssured.given()
-        .port(port)
-        .headers(headers)
-        .body(body)
-        .contentType(ContentType.JSON)
-        .log().all()
-        .when()
-        .post(url);
+	return RestAssured.given()
+		.port(port)
+		.headers(headers)
+		.body(body)
+		.contentType(ContentType.JSON)
+		.log().all()
+		.when()
+		.post(url);
   }
 
   protected Response deleteHttpCall(String url, int port) {
-    return RestAssured.given()
-        .port(port)
-        .contentType(ContentType.JSON)
-        .log().all()
-        .when()
-        .delete(url);
+	return RestAssured.given()
+		.port(port)
+		.contentType(ContentType.JSON)
+		.log().all()
+		.when()
+		.delete(url);
   }
 
   protected Response putHttpCall(Object body, String url, int port) {
-    return RestAssured.given()
-        .port(port)
-        .body(body)
-        .contentType(ContentType.JSON)
-        .log().all()
-        .when()
-        .put(url);
+	return RestAssured.given()
+		.port(port)
+		.body(body)
+		.contentType(ContentType.JSON)
+		.log().all()
+		.when()
+		.put(url);
   }
 }

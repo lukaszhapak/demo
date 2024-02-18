@@ -6,7 +6,6 @@ Demo application
 
 TODO:
 
-* mysql createDatabaseIfNotExist=true, maybe the same exists for postgre
 * entity manager
 * jdbc spring / non spring
 * hibernate with no spring
@@ -26,11 +25,9 @@ TODO:
 * design patterns
 * db indexes, partial index (where name != null)
 * test container with kafka
-* group modules, spring core, web, database, tools
 * more comments with explanation
 * wiremock / test server
 * @Query with update (@Modifying)
-* Awaitility tests for async executions
 * mockito extension  (@Mock, @Captor)
 * spock tests
 * custom handler interceptor
