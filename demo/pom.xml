@@ -28,6 +28,7 @@
 		<mysql.version>8.0.33</mysql.version>
 		<flyway.version>8.2.0</flyway.version>
 		<shedlock.version>4.30.0</shedlock.version>
+		<p6spy.version>3.0.0</p6spy.version>
 
 		<rest-assured.version>5.3.1</rest-assured.version>
 		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
@@ -85,6 +86,11 @@
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 			<version>${flyway.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>p6spy</groupId>
+			<artifactId>p6spy</artifactId>
+			<version>${p6spy.version}</version>
 		</dependency>
 
 		<dependency>
