@@ -129,7 +129,7 @@ class JpqlTest extends AbstractIntegrationTest {
 	assertThat(nameAndAgeById).isEqualTo("John,22");
   }
 
-  private Student createStudent() {
+  Student createStudent() {
 	return Student.builder()
 		.age(22)
 		.name("John")

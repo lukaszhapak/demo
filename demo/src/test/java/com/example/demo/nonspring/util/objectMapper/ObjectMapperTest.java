@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class ObjectMapperTest {
 
-  private final Service service = new Service(new ObjectMapper().registerModule(new JavaTimeModule()));
+  final Service service = new Service(new ObjectMapper().registerModule(new JavaTimeModule()));
 
   @Test
   @DisplayName("should get student")

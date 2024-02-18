@@ -10,9 +10,9 @@ import org.mockito.ArgumentCaptor;
 
 class ArgumentCaptorTest {
 
-  private final ArgumentCaptor<Student> studentArgumentCaptor = ArgumentCaptor.forClass(Student.class);
-  private final StudentRepository studentRepository = mock(StudentRepository.class);
-  private final StudentService studentService = new StudentService(studentRepository);
+  final ArgumentCaptor<Student> studentArgumentCaptor = ArgumentCaptor.forClass(Student.class);
+  final StudentRepository studentRepository = mock(StudentRepository.class);
+  final StudentService studentService = new StudentService(studentRepository);
 
   @Test
   @DisplayName("should save student")

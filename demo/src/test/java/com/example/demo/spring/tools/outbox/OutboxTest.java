@@ -19,7 +19,7 @@ class OutboxTest extends AbstractIntegrationTest {
   @Autowired
   StudentRepository studentRepository;
 
-  private static Student getStudent() {
+  static Student getStudent() {
 	Student student = new Student();
 	student.setName("John");
 	student.setAge(24);

@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 
 class ArgumentMatchersTest {
 
-  private final StudentRepository studentRepository = mock(StudentRepository.class);
-  private final StudentService studentService = new StudentService(studentRepository);
+  final StudentRepository studentRepository = mock(StudentRepository.class);
+  final StudentService studentService = new StudentService(studentRepository);
 
   @Test
   @DisplayName("should save student")
@@ -98,7 +98,7 @@ class ArgumentMatchersTest {
 	assertThat(response.getName()).isEqualTo("John");
   }
 
-  private Student getStudent() {
+  Student getStudent() {
 	return Student.builder()
 		.name("John")
 		.age(24)

@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 class MockMvcTest extends AbstractMockMvcIntegrationTest {
 
-  private static final String URL = "/api/student/";
+  static final String URL = "/api/student/";
 
-  private static Student getStudent() {
+  static Student getStudent() {
 	return Student.builder().name("John").age(25).build();
   }
 

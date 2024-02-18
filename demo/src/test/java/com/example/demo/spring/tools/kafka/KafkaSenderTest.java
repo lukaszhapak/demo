@@ -30,7 +30,7 @@ class KafkaSenderTest extends AbstractIntegrationTest {
   KafkaTestConsumer testConsumer;
 
   @BeforeEach
-  public void resetListener() {
+  void resetListener() {
 	testConsumer.resetLatch();
   }
 
@@ -47,7 +47,7 @@ class KafkaSenderTest extends AbstractIntegrationTest {
   }
 
   @TestConfiguration
-  public static class KafkaTestConfig {
+  static class KafkaTestConfig {
 
 	@Bean
 	KafkaTestConsumer testConsumer() {
@@ -56,21 +56,21 @@ class KafkaSenderTest extends AbstractIntegrationTest {
   }
 
   @Slf4j
-  public static class KafkaTestConsumer {
+  static class KafkaTestConsumer {
 
-	private CompletableFuture<ConsumerRecord<String, KafkaEvent>> receivedRecord = new CompletableFuture<>();
+	CompletableFuture<ConsumerRecord<String, KafkaEvent>> receivedRecord = new CompletableFuture<>();
 
 	@KafkaListener(id = "test-demo-application", topics = "test-topic")
-	public void listen(ConsumerRecord<String, KafkaEvent> kafkaEvent) {
+	void listen(ConsumerRecord<String, KafkaEvent> kafkaEvent) {
 	  log.debug("Event received kafkaEvent={}", kafkaEvent);
 	  receivedRecord.complete(kafkaEvent);
 	}
 
-	public ConsumerRecord<String, KafkaEvent> receive(Duration timeout) throws ExecutionException, InterruptedException {
+	ConsumerRecord<String, KafkaEvent> receive(Duration timeout) throws ExecutionException, InterruptedException {
 	  return receivedRecord.orTimeout(timeout.toMillis(), TimeUnit.MILLISECONDS).get();
 	}
 
-	public void resetLatch() {
+	void resetLatch() {
 	  receivedRecord = new CompletableFuture<>();
 	}
   }

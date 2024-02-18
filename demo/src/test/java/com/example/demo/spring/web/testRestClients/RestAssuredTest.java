@@ -28,7 +28,7 @@ class RestAssuredTest extends AbstractRestAssuredIntegrationTest {
 	assertThat(responseDTO.getParamsDTO().getName()).isEqualTo("Jim");
   }
 
-  private Headers getHeaders() {
+  Headers getHeaders() {
 	return new Headers(List.of(new Header("user-id", "12344")));
   }
 }

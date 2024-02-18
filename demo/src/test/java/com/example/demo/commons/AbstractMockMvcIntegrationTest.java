@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public abstract class AbstractMockMvcIntegrationTest {
 
-  private final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+  final ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
 
   @Autowired
   protected MockMvc mockMvc;

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 class RecursiveComparisonTest {
 
 
-  private static Student getStudent() {
+  static Student getStudent() {
 	return Student.builder()
 		.id(14L)
 		.name("John")
@@ -16,7 +16,7 @@ class RecursiveComparisonTest {
 		.build();
   }
 
-  private static StudentDTO getStudentDTO() {
+  static StudentDTO getStudentDTO() {
 	return StudentDTO.builder()
 		.name("John")
 		.age(22)

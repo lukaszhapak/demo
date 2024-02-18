@@ -17,8 +17,8 @@ import org.junit.jupiter.api.Test;
 @Slf4j
 class MockAndSpyTest {
 
-  private final NumberService numberServiceMock = mock(NumberService.class);
-  private final NumberService numberServiceSpy = spy(NumberService.class);
+  final NumberService numberServiceMock = mock(NumberService.class);
+  final NumberService numberServiceSpy = spy(NumberService.class);
 
   @Test
   @DisplayName("throw exception")
@@ -109,7 +109,7 @@ class MockAndSpyTest {
 	assertThat(result).isEqualTo(6);
   }
 
-  private int testReturningInt(Integer number) {
+  int testReturningInt(Integer number) {
 	log.debug("returning int, number={}", number + 3);
 	return number + 3;
   }

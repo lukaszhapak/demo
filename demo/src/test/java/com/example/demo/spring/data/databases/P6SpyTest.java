@@ -27,7 +27,7 @@ class P6SpyTest extends AbstractIntegrationTest {
 	assertThat(student).usingRecursiveComparison().ignoringFields("id").isEqualTo(createStudent());
   }
 
-  private Student createStudent() {
+  Student createStudent() {
 	return Student.builder()
 		.age(22)
 		.name("John")

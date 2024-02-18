@@ -19,7 +19,7 @@ class ParameterizedTestTest {
 
   StudentService studentService = new StudentService();
 
-  private static Stream<Arguments> getArguments() {
+  static Stream<Arguments> getArguments() {
 	return Stream.of(
 		Arguments.of(12, true),
 		Arguments.of(7, true),
@@ -28,7 +28,7 @@ class ParameterizedTestTest {
 	);
   }
 
-  private static Stream<Arguments> getArguments2() {
+  static Stream<Arguments> getArguments2() {
 	return Stream.of(
 		Arguments.of(12, List.of(2, 4, 12)),
 		Arguments.of(7, List.of(2, 4, 7)),
@@ -37,7 +37,7 @@ class ParameterizedTestTest {
 	);
   }
 
-  private static Stream<Arguments> getArguments3() {
+  static Stream<Arguments> getArguments3() {
 	return Stream.of(
 		Arguments.of("John", new Student("John", 21)),
 		Arguments.of("Jim", new Student("Jim", 24))
