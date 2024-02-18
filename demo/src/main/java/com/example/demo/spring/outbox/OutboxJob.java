@@ -14,7 +14,7 @@ class OutboxJob {
   private final OutboxService outboxService;
   private final OutboxPublisher outboxPublisher;
 
-  @Scheduled(fixedDelay = 1000)
+  @Scheduled(cron = "${outbox.cron}")
     void sendMessages(){
 	log.debug("Sending messages");
 	List<Outbox> unSentMessages = outboxService.getUnsentMessages();

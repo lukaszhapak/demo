@@ -10,7 +10,6 @@ class AopTest extends AbstractRestAssuredIntegrationTest {
   @Autowired
   StudentService studentService;
 
-
   @Test
   @DisplayName("Test name")
   void testName() {
