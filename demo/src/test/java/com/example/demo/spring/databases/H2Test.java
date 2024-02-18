@@ -1,4 +1,4 @@
-package com.example.demo.spring.p6spy;
+package com.example.demo.spring.databases;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,7 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
 @ActiveProfiles("h2")
-class P6SpyTest {
+class H2Test {
 
   @Autowired
   StudentRepository studentRepository;
@@ -27,7 +27,6 @@ class P6SpyTest {
 	// then
 	assertThat(student).usingRecursiveComparison().ignoringFields("id").isEqualTo(createStudent());
   }
-
 
   private Student createStudent() {
 	return Student.builder()

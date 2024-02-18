@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.rest;
+package com.example.demo.nonspring.restClient;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

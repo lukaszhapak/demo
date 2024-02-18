@@ -1,4 +1,4 @@
-package com.example.demo.spring.p6spy;
+package com.example.demo.spring.databases;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

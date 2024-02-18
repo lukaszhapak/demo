@@ -1,4 +1,4 @@
-package com.example.demo.spring.beanprocessor;
+package com.example.demo.spring.beanProcessor;
 
 import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import org.junit.jupiter.api.DisplayName;

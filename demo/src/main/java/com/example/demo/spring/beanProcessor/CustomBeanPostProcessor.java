@@ -1,4 +1,4 @@
-package com.example.demo.spring.beanprocessor;
+package com.example.demo.spring.beanProcessor;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.MethodBeforeAdvice;

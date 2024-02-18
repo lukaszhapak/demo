@@ -1,4 +1,4 @@
-package com.example.demo.spring.beanprocessor;
+package com.example.demo.spring.beanProcessor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

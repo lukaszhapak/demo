@@ -1,10 +1,9 @@
-package com.example.demo.spring.beanprocessor;
+package com.example.demo.spring.beanProcessor;
 
 import static java.util.Arrays.stream;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

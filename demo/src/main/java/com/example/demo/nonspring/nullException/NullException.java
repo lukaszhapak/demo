@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.nullexception;
+package com.example.demo.nonspring.nullException;
 
 class NullException {
 

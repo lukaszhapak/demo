@@ -1,4 +1,4 @@
-package com.example.demo.spring.p6spy;
+package com.example.demo.spring.databases;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

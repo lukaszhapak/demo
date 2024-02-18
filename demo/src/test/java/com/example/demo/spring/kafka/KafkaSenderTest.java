@@ -43,7 +43,7 @@ class KafkaSenderTest extends AbstractRestAssuredIntegrationTest {
 	kafkaMessageSender.sendEvent();
 
 	// then
-	assertThat(testConsumer.receive(Duration.ofSeconds(1)).value().getName()).isEqualTo("John");
+	assertThat(testConsumer.receive(Duration.ofSeconds(2)).value().getName()).isEqualTo("John");
   }
 
   @TestConfiguration

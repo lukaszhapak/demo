@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.rest;
+package com.example.demo.nonspring.restClient;
 
 import lombok.Getter;
 import lombok.Setter;

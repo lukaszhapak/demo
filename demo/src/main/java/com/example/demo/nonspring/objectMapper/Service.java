@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.objectmapper;
+package com.example.demo.nonspring.objectMapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
