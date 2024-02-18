@@ -1,4 +1,4 @@
-package com.example.demo.spring.mockMvc;
+package com.example.demo.spring.testRestClients;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -17,27 +18,32 @@ class StudentController {
 
   private final StudentService studentService;
 
-  @GetMapping("/mock-mvc/student/{id}")
+  @PostMapping("/api/all")
+  public ResponseDTO post(ParamsDTO paramsDTO, @RequestHeader("user-id") String userId, @RequestBody Student student) {
+	return new ResponseDTO(paramsDTO, student, userId);
+  }
+
+  @GetMapping("/api/student/{id}")
   public Student findById(@PathVariable Long id) {
 	return studentService.findById(id);
   }
 
-  @GetMapping("/mock-mvc/student")
+  @GetMapping("/api/student")
   public List<Student> findAll() {
 	return studentService.findAll();
   }
 
-  @PutMapping("/mock-mvc/student/{id}")
+  @PutMapping("/api/student/{id}")
   public Student update(@PathVariable Long id, @RequestBody Student student) {
 	return studentService.update(id, student);
   }
 
-  @PostMapping("/mock-mvc/student")
+  @PostMapping("/api/student")
   public Student save(@RequestBody Student student) {
 	return studentService.save(student);
   }
 
-  @DeleteMapping("/mock-mvc/student/{id}")
+  @DeleteMapping("/api/student/{id}")
   public void delete(@PathVariable Long id) {
 	studentService.deleteById(id);
   }

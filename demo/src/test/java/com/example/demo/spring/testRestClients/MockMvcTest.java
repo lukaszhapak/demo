@@ -1,4 +1,4 @@
-package com.example.demo.spring.mockMvc;
+package com.example.demo.spring.testRestClients;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class MockMvcTest extends AbstractMockMvcIntegrationTest {
 
-  private static final String URL = "/mock-mvc/student/";
+  private static final String URL = "/api/student/";
 
   @Test
   @DisplayName("should post get and delete student")

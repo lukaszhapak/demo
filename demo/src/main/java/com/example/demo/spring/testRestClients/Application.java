@@ -1,4 +1,4 @@
-package com.example.demo.spring.mockMvc;
+package com.example.demo.spring.testRestClients;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

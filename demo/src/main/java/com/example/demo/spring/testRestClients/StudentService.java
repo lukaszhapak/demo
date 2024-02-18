@@ -1,4 +1,4 @@
-package com.example.demo.spring.mockMvc;
+package com.example.demo.spring.testRestClients;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;

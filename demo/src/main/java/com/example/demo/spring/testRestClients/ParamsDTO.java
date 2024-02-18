@@ -1,4 +1,4 @@
-package com.example.demo.spring.rest;
+package com.example.demo.spring.testRestClients;
 
 import java.util.List;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-class Params {
+class ParamsDTO {
 
   private String name;
   private String surname;
