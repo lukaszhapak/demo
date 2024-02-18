@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.hibernate;
+package com.example.demo.spring.data.jpaDataTypes;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

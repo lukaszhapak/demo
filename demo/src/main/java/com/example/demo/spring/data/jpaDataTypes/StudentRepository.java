@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.hibernate;
+package com.example.demo.spring.data.jpaDataTypes;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.hibernate;
+package com.example.demo.spring.data.jpaDataTypes;
 
 import static javax.persistence.CascadeType.PERSIST;
 

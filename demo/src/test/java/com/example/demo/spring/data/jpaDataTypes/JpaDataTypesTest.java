@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.hibernate;
+package com.example.demo.spring.data.jpaDataTypes;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcOperations;
 
 @SpringBootTest
-class HibernateTest {
+class JpaDataTypesTest {
 
   @Autowired
   JdbcOperations jdbcOperations;
