@@ -2,15 +2,14 @@ package com.example.demo.spring.data.databases;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.demo.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
 @ActiveProfiles("h2")
-class H2Test {
+class H2Test extends AbstractIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;

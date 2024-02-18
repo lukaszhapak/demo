@@ -3,7 +3,7 @@ package com.example.demo.spring.tools.kafka;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
+import com.example.demo.commons.AbstractIntegrationTest;
 import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -22,7 +22,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @EmbeddedKafka(topics = "test-topic")
 @ActiveProfiles("embedded-kafka")
-class KafkaSenderTest extends AbstractRestAssuredIntegrationTest {
+class KafkaSenderTest extends AbstractIntegrationTest {
 
   @Autowired
   KafkaMessageSender kafkaMessageSender;

@@ -1,11 +1,11 @@
 package com.example.demo.spring.core.internalEvent;
 
-import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
+import com.example.demo.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class InternalEventTest extends AbstractRestAssuredIntegrationTest {
+class InternalEventTest extends AbstractIntegrationTest {
 
   @Autowired
   InternalEventPublisher internalEventPublisher;

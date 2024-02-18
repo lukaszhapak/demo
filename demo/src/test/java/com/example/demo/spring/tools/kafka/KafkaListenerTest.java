@@ -3,7 +3,7 @@ package com.example.demo.spring.tools.kafka;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
+import com.example.demo.commons.AbstractIntegrationTest;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import org.testcontainers.shaded.org.awaitility.Awaitility;
 
 @EmbeddedKafka(topics = "test-topic")
 @ActiveProfiles("embedded-kafka")
-class KafkaListenerTest extends AbstractRestAssuredIntegrationTest {
+class KafkaListenerTest extends AbstractIntegrationTest {
 
   @Autowired
   KafkaTemplate<String, KafkaEvent> kafkaTemplate;

@@ -2,15 +2,14 @@ package com.example.demo.spring.data.databases;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.example.demo.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-@SpringBootTest
 @ActiveProfiles("postgres")  // requires postgres database with test schema, can be found in docker compose
-class PostgresTest {
+class PostgresTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;

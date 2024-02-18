@@ -2,13 +2,13 @@ package com.example.demo.spring.tools.outbox;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
+import com.example.demo.commons.AbstractIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class OutboxTest extends AbstractRestAssuredIntegrationTest {
+class OutboxTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentService studentService;

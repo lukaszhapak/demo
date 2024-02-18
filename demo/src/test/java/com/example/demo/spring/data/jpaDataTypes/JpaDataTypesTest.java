@@ -2,17 +2,16 @@ package com.example.demo.spring.data.jpaDataTypes;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.example.demo.commons.AbstractIntegrationTest;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.jdbc.core.JdbcOperations;
 
-@SpringBootTest
-class JpaDataTypesTest {
+class JpaDataTypesTest extends AbstractIntegrationTest {
 
   @Autowired
   JdbcOperations jdbcOperations;
