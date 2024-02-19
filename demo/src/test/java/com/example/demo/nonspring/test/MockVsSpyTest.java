@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.test.mockito;
+package com.example.demo.nonspring.test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-class MockAndSpyTest {
+class MockVsSpyTest {
 
   final NumberService numberServiceMock = mock(NumberService.class);
   final NumberService numberServiceSpy = spy(NumberService.class);

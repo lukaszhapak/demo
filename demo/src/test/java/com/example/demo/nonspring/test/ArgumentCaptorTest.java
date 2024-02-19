@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.test.mockito;
+package com.example.demo.nonspring.test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -32,6 +32,6 @@ class ArgumentCaptorTest {
 	assertThat(studentArgumentCaptorValue.getName()).isEqualTo("John"); // comparing fields one by one
 	assertThat(studentArgumentCaptorValue.getAge()).isEqualTo(24);
 
-	assertThat(studentArgumentCaptorValue).usingRecursiveComparison().isEqualTo(student); // or all at once
+	assertThat(studentArgumentCaptorValue).usingRecursiveComparison().isEqualTo(student); // or all at once using recursive comparison
   }
 }

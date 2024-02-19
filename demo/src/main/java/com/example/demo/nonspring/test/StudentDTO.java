@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.test.assertJ;
+package com.example.demo.nonspring.test;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

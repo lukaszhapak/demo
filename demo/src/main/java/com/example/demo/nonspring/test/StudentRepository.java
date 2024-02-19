@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.test.mockito;
+package com.example.demo.nonspring.test;
 
 
 class StudentRepository {

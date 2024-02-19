@@ -1,6 +1,6 @@
-package com.example.demo.nonspring.test.junit;
+package com.example.demo.nonspring.test;
 
-class StudentService {
+class StudentValidator {
 
   boolean validateStudent(Student student) {
 	return student.getName().length() > 2

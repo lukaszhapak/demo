@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.test.junit;
+package com.example.demo.nonspring.test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -17,7 +17,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class ParameterizedTestTest {
 
-  StudentService studentService = new StudentService();
+  StudentValidator studentValidator = new StudentValidator();
 
   static Stream<Arguments> getArguments() {
 	return Stream.of(
@@ -52,7 +52,7 @@ class ParameterizedTestTest {
 	Student student = Student.builder().name(name).age(24).build();
 
 	// when
-	boolean response = studentService.validateStudent(student);
+	boolean response = studentValidator.validateStudent(student);
 
 	// then
 	assertThat(response).isFalse();
