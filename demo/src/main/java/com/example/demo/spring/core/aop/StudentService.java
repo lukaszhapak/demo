@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 class StudentService {
 
   @Cacheable
+  @Logging
   String getStudent(Integer id) {
-	log.debug("get student id={}", id);
-	if (id % 2 == 0){
+	if (id % 2 == 0) {
 	  return "John";
 	}
 	return "Brian";
