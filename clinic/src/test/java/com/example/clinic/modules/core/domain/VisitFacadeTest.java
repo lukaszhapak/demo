@@ -22,9 +22,6 @@ public class VisitFacadeTest {
   private final PatientFacade patientFacade = new CoreConfiguration().patientFacade(new PatientRepositoryInMemory());
   private final VisitFacade visitFacade = new CoreConfiguration().visitFacade(new VisitRepositoryInMemory(), patientFacade);
 
-  private static final long NON_EXISTING_PATIENT_ID = 1000000L;
-  private static final long NON_EXISTING_VISIT_ID = 2000000L;
-
   @Nested
   @DisplayName("save tests")
   class SaveTests {
@@ -74,15 +71,16 @@ public class VisitFacadeTest {
 	  VisitDTO request = getVisitDTO();
 
 	  // when
-	  Throwable thrown = catchThrowable(() -> visitFacade.save(NON_EXISTING_PATIENT_ID, request));
+	  Throwable thrown = catchThrowable(() -> visitFacade.save(100L, request));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	  assertThat(thrown).isInstanceOf(NotFoundException.class)
+		  .hasMessageStartingWith("Patient");
 	}
   }
 
   @Nested
-  @DisplayName("save tests")
+  @DisplayName("get tests")
   class GetTests {
 
 	@Test
@@ -109,7 +107,8 @@ public class VisitFacadeTest {
 	  Throwable thrown = catchThrowable(() -> visitFacade.findById(id));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	  assertThat(thrown).isInstanceOf(NotFoundException.class)
+		  .hasMessageStartingWith("Visit");
 	}
   }
 }

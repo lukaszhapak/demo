@@ -169,7 +169,8 @@ public class PatientFacadeTest {
 	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	  assertThat(thrown).isInstanceOf(NotFoundException.class)
+		  .hasMessageStartingWith("Patient");
 	}
   }
 
@@ -206,7 +207,8 @@ public class PatientFacadeTest {
 	  Throwable thrown = catchThrowable(() -> patientFacade.update(100L, request));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	  assertThat(thrown).isInstanceOf(NotFoundException.class)
+		  .hasMessageStartingWith("Patient");
 	}
 
 	@Test
@@ -245,7 +247,8 @@ public class PatientFacadeTest {
 
 	  // then
 	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
-	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	  assertThat(thrown).isInstanceOf(NotFoundException.class)
+		  .hasMessageStartingWith("Patient");
 	}
 
 	@Test
@@ -258,7 +261,8 @@ public class PatientFacadeTest {
 	  Throwable thrown = catchThrowable(() -> patientFacade.deleteById(id));
 
 	  // then
-	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	  assertThat(thrown).isInstanceOf(NotFoundException.class)
+		  .hasMessageStartingWith("Patient");
 	}
   }
 }
