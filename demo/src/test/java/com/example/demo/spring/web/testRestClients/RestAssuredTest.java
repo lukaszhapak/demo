@@ -1,5 +1,6 @@
 package com.example.demo.spring.web.testRestClients;
 
+import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -30,5 +31,31 @@ class RestAssuredTest extends AbstractRestAssuredIntegrationTest {
 
   Headers getHeaders() {
 	return new Headers(List.of(new Header("user-id", "12344")));
+  }
+
+  @Test
+  @DisplayName("single param")
+  void singleParam() {
+	// given
+	String url = "/api/single/param?name=asd";
+
+	// when
+	Response httpResponse = getHttpCall(url, port);
+
+	// then
+	assertThat(httpResponse.statusCode()).isEqualTo(SC_OK);
+  }
+
+  @Test
+  @DisplayName("single param empty")
+  void singleParamEmpty() {
+	// given
+	String url = "/api/single/param";
+
+	// when
+	Response httpResponse = getHttpCall(url, port);
+
+	// then
+	assertThat(httpResponse.statusCode()).isEqualTo(SC_BAD_REQUEST);
   }
 }

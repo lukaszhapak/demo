@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -17,6 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 class StudentController {
 
   private final StudentService studentService;
+
+  @GetMapping("/api/single/param")
+  public String singleParam(@RequestParam(required = true) String name) {
+	return name;
+  }
 
   @PostMapping("/api/all")
   public ResponseDTO post(ParamsDTO paramsDTO, @RequestHeader("user-id") String userId, @RequestBody Student student) {
