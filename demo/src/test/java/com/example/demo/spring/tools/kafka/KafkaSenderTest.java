@@ -1,16 +1,15 @@
 package com.example.demo.spring.tools.kafka;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static java.time.Duration.ofMillis;
+import static java.time.Duration.ofSeconds;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import com.example.demo.commons.AbstractIntegrationTest;
-import java.time.Duration;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import lombok.extern.slf4j.Slf4j;
+import java.util.LinkedList;
+import java.util.List;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +28,17 @@ class KafkaSenderTest extends AbstractIntegrationTest {
   @Autowired
   KafkaTestConsumer testConsumer;
 
-  @BeforeEach
-  void resetListener() {
-	testConsumer.resetLatch();
-  }
-
   @Test
   @DisplayName("should send message")
-  void shouldSendMessage() throws ExecutionException, InterruptedException {
+  void shouldSendMessage() {
 	// given
 
 	// when
 	kafkaMessageSender.sendEvent();
 
 	// then
-	assertThat(testConsumer.receive(Duration.ofSeconds(2)).value().getName()).isEqualTo("John");
+	await().atMost(ofSeconds(2)).pollInterval(ofMillis(20)).untilAsserted(() ->
+		assertThat(testConsumer.receivedRecords.size()).describedAs("Message was received").isEqualTo(1));
   }
 
   @TestConfiguration
@@ -55,23 +50,13 @@ class KafkaSenderTest extends AbstractIntegrationTest {
 	}
   }
 
-  @Slf4j
   static class KafkaTestConsumer {
 
-	CompletableFuture<ConsumerRecord<String, KafkaEvent>> receivedRecord = new CompletableFuture<>();
+	List<KafkaEvent> receivedRecords = new LinkedList<>();
 
 	@KafkaListener(id = "test-demo-application", topics = "test-topic")
 	void listen(ConsumerRecord<String, KafkaEvent> kafkaEvent) {
-	  log.debug("Event received kafkaEvent={}", kafkaEvent);
-	  receivedRecord.complete(kafkaEvent);
-	}
-
-	ConsumerRecord<String, KafkaEvent> receive(Duration timeout) throws ExecutionException, InterruptedException {
-	  return receivedRecord.orTimeout(timeout.toMillis(), TimeUnit.MILLISECONDS).get();
-	}
-
-	void resetLatch() {
-	  receivedRecord = new CompletableFuture<>();
+	  receivedRecords.add(kafkaEvent.value());
 	}
   }
 }

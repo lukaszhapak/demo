@@ -1,11 +1,12 @@
 package com.example.demo.spring.tools.kafka;
 
 
+import static java.time.Duration.ofMillis;
+import static java.time.Duration.ofSeconds;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import com.example.demo.commons.AbstractIntegrationTest;
-import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,12 @@ class KafkaListenerTest extends AbstractIntegrationTest {
   void shouldReceiveMessage() {
 	// given
 	KafkaEvent kafkaEvent = new KafkaEvent("Jim", 24);
-	long studentCountBeforeSendingMessage = studentRepository.count();
 
 	// when
 	kafkaTemplate.send("test-topic", kafkaEvent);
 
 	// then
-	await().atMost(2, TimeUnit.SECONDS).pollInterval(20, TimeUnit.MILLISECONDS).untilAsserted(() ->
-		assertThat(studentRepository.count()).describedAs("Student was persisted").isEqualTo(studentCountBeforeSendingMessage + 1));
+	await().atMost(ofSeconds(2)).pollInterval(ofMillis(20)).untilAsserted(() ->
+		assertThat(studentRepository.count()).describedAs("Student was persisted").isEqualTo(1));
   }
 }
