@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("h2-p6spy")
-class P6SpyTest extends AbstractIntegrationTest {
+class H2P6SpyTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;
