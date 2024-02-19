@@ -39,3 +39,4 @@ TODO:
 * mock application context to get prototype scope bean in unit test
 * @Scheduled tests, override test cron to run every second, or disable cron and manually start bean method   cron="-" means 'DISABLE'
 * mongo: embedded, docker
+* @WithMockUser, whe performing http call and when calling a bean method
