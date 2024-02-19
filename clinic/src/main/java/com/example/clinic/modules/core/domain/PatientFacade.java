@@ -43,7 +43,7 @@ public class PatientFacade {
 	}
   }
 
-  private Patient getPatient(Long id) {
+  Patient getPatient(Long id) {
 	return patientRepository.findById(id)
 		.orElseThrow(() -> new NotFoundException(MessageFormat.format("Patient with id={0} not found", id)));
   }

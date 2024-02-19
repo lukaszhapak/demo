@@ -18,8 +18,6 @@ public class PatientFacadeTest {
 
   private final PatientFacade patientFacade = new CoreConfiguration().patientFacade(new PatientRepositoryInMemory());
 
-  private static final long NON_EXISTING_PATIENT_ID = 1000000L;
-
   @Nested
   @DisplayName("save tests")
   class SaveTests {
@@ -35,10 +33,10 @@ public class PatientFacadeTest {
 
 	  // then
 	  assertThat(response.getId()).isNotNull();
-	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(request);
 
 	  PatientDTO patientInDb = patientFacade.findById(response.getId());
-	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  assertThat(patientInDb).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(request);
 	}
 
 	@Test
@@ -165,7 +163,7 @@ public class PatientFacadeTest {
 	@DisplayName("should not get non existing patient")
 	void shouldNotGetNonExistingPatient() {
 	  // given
-	  Long id = NON_EXISTING_PATIENT_ID;
+	  Long id = 100L;
 
 	  // when
 	  Throwable thrown = catchThrowable(() -> patientFacade.findById(id));
@@ -193,20 +191,19 @@ public class PatientFacadeTest {
 	  PatientDTO response = patientFacade.update(id, request);
 
 	  // then
-	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(request);
 
 	  PatientDTO patientInDb = patientFacade.findById(response.getId());
-	  assertThat(patientInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  assertThat(patientInDb).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(request);
 	}
 
 	@Test
 	@DisplayName("should not update not existing patient")
 	void shouldNotUpdateNotExistingPatient() {
 	  // given
-	  Long id = NON_EXISTING_PATIENT_ID;
 	  PatientDTO request = getPatientDTO();
 
-	  Throwable thrown = catchThrowable(() -> patientFacade.update(id, request));
+	  Throwable thrown = catchThrowable(() -> patientFacade.update(100L, request));
 
 	  // then
 	  assertThat(thrown).isInstanceOf(NotFoundException.class);
@@ -255,7 +252,7 @@ public class PatientFacadeTest {
 	@DisplayName("should not delete non existing patient")
 	void shouldNotDeleteNonExistingPatient() {
 	  // given
-	  Long id = NON_EXISTING_PATIENT_ID;
+	  Long id = 100L;
 
 	  // when
 	  Throwable thrown = catchThrowable(() -> patientFacade.deleteById(id));

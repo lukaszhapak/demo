@@ -7,6 +7,7 @@ import com.example.clinic.modules.core.dto.PatientDTO;
 import com.example.clinic.modules.core.dto.PatientGender;
 import com.example.commons.commons.AbstractEntity;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -16,11 +17,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @Builder
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 class Patient extends AbstractEntity {
@@ -65,5 +68,13 @@ class Patient extends AbstractEntity {
 		.birthDate(patientDTO.getBirthDate())
 		.phoneNumber(patientDTO.getPhoneNumber())
 		.build();
+  }
+
+  public void addVisit(Visit visit) {
+	if (this.visits == null) {
+		this.visits = new ArrayList<>();
+	}
+	this.visits.add(visit);
+	visit.setPatient(this);
   }
 }

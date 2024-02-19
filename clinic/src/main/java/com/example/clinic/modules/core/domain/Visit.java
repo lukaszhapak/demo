@@ -17,16 +17,18 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Entity
 @Builder
+@ToString(exclude = "patient")
 @NoArgsConstructor
 @AllArgsConstructor
 class Visit extends AbstractEntity {
 
-  private LocalDateTime visitDate;
+  private LocalDateTime date;
   @Enumerated(EnumType.STRING)
   private VisitPaymentStatus paymentStatus;
   @Enumerated(EnumType.STRING)
@@ -38,7 +40,7 @@ class Visit extends AbstractEntity {
   VisitDTO toDTO() {
 	return VisitDTO.builder()
 		.id(getId())
-		.date(visitDate)
+		.date(date)
 		.paymentStatus(paymentStatus)
 		.status(status)
 		.reminderSent(reminderSent)
@@ -48,7 +50,7 @@ class Visit extends AbstractEntity {
 
   static Visit of(VisitDTO visitDTO) {
 	return Visit.builder()
-		.visitDate(visitDTO.getDate())
+		.date(visitDTO.getDate())
 		.paymentStatus(AWAITING_PAYMENT)
 		.status(AWAITING)
 		.reminderSent(false)

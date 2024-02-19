@@ -13,8 +13,8 @@ class CoreConfiguration {
   }
 
   @Bean
-  VisitFacade visitFacade(VisitRepository visitRepository) {
+  VisitFacade visitFacade(VisitRepository visitRepository, PatientFacade patientFacade) {
 	VisitValidator visitValidator = new VisitValidator();
-	return new VisitFacade(visitRepository, visitValidator);
+	return new VisitFacade(visitRepository, visitValidator, patientFacade);
   }
 }

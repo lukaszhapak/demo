@@ -2,7 +2,7 @@ package com.example.clinic.modules.core.domain;
 
 import static com.example.clinic.commons.TestUtils.getPatientDTO;
 import static com.example.clinic.commons.TestUtils.getVisitDTO;
-import static com.example.clinic.modules.core.dto.VisitPaymentStatus.FAILED;
+import static com.example.clinic.modules.core.dto.VisitPaymentStatus.AWAITING_PAYMENT;
 import static com.example.clinic.modules.core.dto.VisitStatus.AWAITING;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 public class VisitFacadeTest {
 
   private final PatientFacade patientFacade = new CoreConfiguration().patientFacade(new PatientRepositoryInMemory());
-  private final VisitFacade visitFacade = new CoreConfiguration().visitFacade(new VisitRepositoryInMemory());
+  private final VisitFacade visitFacade = new CoreConfiguration().visitFacade(new VisitRepositoryInMemory(), patientFacade);
 
   private static final long NON_EXISTING_PATIENT_ID = 1000000L;
   private static final long NON_EXISTING_VISIT_ID = 2000000L;
@@ -29,7 +29,7 @@ public class VisitFacadeTest {
   @DisplayName("save tests")
   class SaveTests {
 
-//	@Test
+	@Test
 	@DisplayName("should save valid visit")
 	void shouldSaveValidVisit() {
 	  // given
@@ -41,43 +41,75 @@ public class VisitFacadeTest {
 
 	  // then
 	  assertThat(response.getId()).isNotNull();
-	  assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  assertThat(response).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(request);
 
 	  VisitDTO visitInDb = visitFacade.findById(response.getId());
-	  assertThat(visitInDb).usingRecursiveComparison().ignoringFields("id").isEqualTo(request);
+	  assertThat(visitInDb).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(request);
 	  assertThat(visitInDb.getStatus()).isEqualTo(AWAITING);
-	  assertThat(visitInDb.getPaymentStatus()).isEqualTo(FAILED);
+	  assertThat(visitInDb.getPaymentStatus()).isEqualTo(AWAITING_PAYMENT);
 	  assertThat(visitInDb.isReminderSent()).isFalse();
+	  assertThat(visitInDb.getPatient().getId()).isEqualTo(savedPatient.getId());
+	}
+
+	@Test
+	@DisplayName("should not save visit with past date")
+	void shouldNotSaveVisitWithPastDate() {
+	  // given
+	  VisitDTO request = getVisitDTO();
+	  request.setDate(LocalDateTime.now().minusDays(1));
+	  PatientDTO savedPatient = patientFacade.save(getPatientDTO());
+
+	  // when
+	  ValidationException thrown = (ValidationException) catchThrowable(() -> visitFacade.save(savedPatient.getId(), request));
+
+	  // then
+	  assertThat(thrown.getInvalidFields()).hasSize(1)
+		  .containsKeys("date");
+	}
+
+	@Test
+	@DisplayName("should not save visit for non existing patient")
+	void shouldNotSaveVisitForNonExisting() {
+	  // given
+	  VisitDTO request = getVisitDTO();
+
+	  // when
+	  Throwable thrown = catchThrowable(() -> visitFacade.save(NON_EXISTING_PATIENT_ID, request));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(NotFoundException.class);
 	}
   }
 
-//  @Test
-  @DisplayName("should not save visit with past date")
-  void shouldNotSaveVisitWithPastDate() {
-	// given
-	VisitDTO request = getVisitDTO();
-	request.setDate(LocalDateTime.now().minusDays(1));
-	PatientDTO savedPatient = patientFacade.save(getPatientDTO());
+  @Nested
+  @DisplayName("save tests")
+  class GetTests {
 
-	// when
-	ValidationException thrown = (ValidationException) catchThrowable(() -> visitFacade.save(savedPatient.getId(), request));
+	@Test
+	@DisplayName("should get visit")
+	void shouldGetVisit() {
+	  // given
+	  PatientDTO savedPatient = patientFacade.save(getPatientDTO());
+	  VisitDTO savedVisit = visitFacade.save(savedPatient.getId(), getVisitDTO());
 
-	// then
-	assertThat(thrown.getInvalidFields()).hasSize(1)
-		.containsKeys("date");
-  }
+	  // when
+	  VisitDTO response = visitFacade.findById(savedVisit.getId());
 
-//  @Test
-  @DisplayName("should not save visit for non existing patient")
-  void shouldNotSaveVisitForNonExisting() {
-	// given
-	VisitDTO request = getVisitDTO();
-	request.setDate(LocalDateTime.now().minusDays(1));
+	  // then
+	  assertThat(response).usingRecursiveComparison().isEqualTo(savedVisit);
+	}
 
-	// when
-	Throwable thrown = catchThrowable(() -> visitFacade.save(NON_EXISTING_VISIT_ID, request));
+	@Test
+	@DisplayName("should not get not existing visit")
+	void shouldNotGetNotExistingVisit() {
+	  // given
+	  Long id = 100L;
 
-	// then
-	assertThat(thrown).isInstanceOf(NotFoundException.class);
+	  // when
+	  Throwable thrown = catchThrowable(() -> visitFacade.findById(id));
+
+	  // then
+	  assertThat(thrown).isInstanceOf(NotFoundException.class);
+	}
   }
 }
