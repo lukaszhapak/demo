@@ -41,9 +41,6 @@ class Patient extends AbstractEntity {
   void update(PatientDTO patientDTO) {
 	firstName = patientDTO.getFirstName();
 	lastName = patientDTO.getLastName();
-	pesel = patientDTO.getPesel();
-	gender = patientDTO.getGender();
-	birthDate = patientDTO.getBirthDate();
 	phoneNumber = patientDTO.getPhoneNumber();
   }
 
@@ -71,10 +68,8 @@ class Patient extends AbstractEntity {
   }
 
   public void addVisit(Visit visit) {
-	if (this.visits == null) {
-		this.visits = new ArrayList<>();
-	}
-	this.visits.add(visit);
+	visits = visits == null ? new ArrayList<>() : visits;
+	visits.add(visit);
 	visit.setPatient(this);
   }
 }
