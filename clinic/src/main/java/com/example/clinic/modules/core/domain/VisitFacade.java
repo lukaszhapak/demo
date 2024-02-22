@@ -15,7 +15,7 @@ public class VisitFacade {
   private final VisitValidator visitValidator;
   private final PatientFacade patientFacade;
 
-  VisitDTO save(Long patientId, VisitDTO visitDTO) {
+  public VisitDTO save(Long patientId, VisitDTO visitDTO) {
 	visitValidator.validate(visitDTO);
 	Visit visit = Visit.of(visitDTO);
 	Patient patient = patientFacade.getPatient(patientId);
