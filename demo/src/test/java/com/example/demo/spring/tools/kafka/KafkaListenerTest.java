@@ -15,7 +15,7 @@ import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.test.context.ActiveProfiles;
 
 @EmbeddedKafka(topics = "test-topic")
-@ActiveProfiles("embedded-kafka")
+@ActiveProfiles("kafka-embedded")
 class KafkaListenerTest extends AbstractIntegrationTest {
 
   @Autowired
