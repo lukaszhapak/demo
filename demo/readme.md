@@ -24,11 +24,9 @@ TODO:
 * actuator
 * design patterns
 * db indexes, partial index (where name != null)
-* test container with kafka
 * more comments with explanation
 * wiremock / test server
 * @Query with update (@Modifying)
-* mockito extension  (@Mock, @Captor)
 * spock tests
 * custom handler interceptor
 * arch unit
@@ -38,5 +36,4 @@ TODO:
 * Domain Specific Language for test scenarios, like givenUserIsSaved()   whenUserNameIsUpdated(String name)    thenUser
 * mock application context to get prototype scope bean in unit test
 * @Scheduled tests, override test cron to run every second, or disable cron and manually start bean method   cron="-" means 'DISABLE'
-* mongo: embedded, docker
 * @WithMockUser, whe performing http call and when calling a bean method
