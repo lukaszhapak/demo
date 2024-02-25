@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Log4j2
 @Component
 @RequiredArgsConstructor
-class InternalEventPublisher {
+class InternalEvenSender {
 
   private final ApplicationEventPublisher applicationEventPublisher;
 
-  @Scheduled(fixedDelay = 10000)
+  @Scheduled(cron = "${internal.sender.cron}")
   void send() {
 	InternalEvent event = new InternalEvent();
 	event.setBody(UUID.randomUUID().toString());
