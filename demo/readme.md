@@ -25,7 +25,6 @@ TODO:
 * design patterns
 * db indexes, partial index (where name != null)
 * more comments with explanation
-* wiremock / test server
 * @Query with update (@Modifying)
 * spock tests
 * custom handler interceptor
