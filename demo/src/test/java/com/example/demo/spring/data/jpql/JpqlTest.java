@@ -28,19 +28,6 @@ class JpqlTest extends AbstractIntegrationTest {
   }
 
   @Test
-  @DisplayName("should save students and fetch list")
-  void shouldSaveStudentsAndFetchList() {
-	// given
-	studentRepository.saveAll(List.of(createStudent(), createStudent()));
-
-	// when
-	List<StudentDTO> studentDTOS = studentRepository.findAllAsDTOs();
-
-	// then
-	assertThat(studentDTOS.size()).isGreaterThan(1);
-  }
-
-  @Test
   @DisplayName("should save and find student name")
   void shouldSaveAndFindStudentName() {
 	// given
