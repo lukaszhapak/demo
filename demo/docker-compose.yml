@@ -12,10 +12,10 @@ services:
     volumes:
       - ./database:/data/postgres
     expose:
-      - "5431"
+      - "5432"
     ports:
-      - "5431:5431"
-    command: -p 5431
+      - "5432:5432"
+    command: -p 5432
     restart: always
 
   zookeeper:
