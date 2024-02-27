@@ -1,4 +1,4 @@
-package com.example.demo.spring.tools.restClient;
+package com.example.demo.spring.tools.httpClient;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 class StudentService {
 
   private final StudentRepository studentRepository;
-  private final StudentNameRestClient studentNameRestClient;
+  private final StudentNameHttpClient studentNameHttpClient;
 
   Student save(Student student) {
-	student.setName(studentNameRestClient.getName());
+	student.setName(studentNameHttpClient.getName(student.getSource()));
 	return studentRepository.save(student);
   }
 }

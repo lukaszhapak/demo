@@ -1,4 +1,4 @@
-package com.example.demo.spring.tools.restClient;
+package com.example.demo.spring.tools.httpClient;
 
 
 import javax.persistence.Entity;
@@ -25,4 +25,5 @@ class Student {
   private Long id;
   private String name;
   private int age;
+  private String source;
 }

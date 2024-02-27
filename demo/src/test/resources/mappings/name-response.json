@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/api/name/resources"
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {
+      "name": "resources"
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

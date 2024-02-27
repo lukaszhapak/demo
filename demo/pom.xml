@@ -36,16 +36,18 @@
 		<pitest-maven.version>1.11.0</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.1.2</pitest-junit5-plugin.version>
 		<wiremock.version>3.0.1</wiremock.version>
+		<spring-cloud-starter-contract-stub-runner.version>3.1.7
+		</spring-cloud-starter-contract-stub-runner.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 			<groupId>org.springframework.boot</groupId>
 			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<groupId>org.springframework.boot</groupId>
 			<version>${spring-boot.version}</version>
 		</dependency>
@@ -89,6 +91,7 @@
 			<version>${flyway.version}</version>
 		</dependency>
 		<dependency>
+			<!--	jdbc interceptor for logging executed sql, spy.properties		-->
 			<groupId>p6spy</groupId>
 			<artifactId>p6spy</artifactId>
 			<version>${p6spy.version}</version>
@@ -98,6 +101,17 @@
 			<artifactId>rest-assured</artifactId>
 			<groupId>io.rest-assured</groupId>
 			<version>${rest-assured.version}</version>
+			<exclusions>
+				<!-- Exclude Groovy because of classpath issue, collision with spring-cloud-starter-contract-stub-runner -->
+				<exclusion>
+					<groupId>org.apache.groovy</groupId>
+					<artifactId>groovy-xml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.groovy</groupId>
+					<artifactId>groovy-json</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -119,9 +133,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.github.tomakehurst</groupId>
-			<artifactId>wiremock-standalone</artifactId>
-			<version>2.23.2</version>
+<!--			@AutoConfigureWireMock(port = 0)-->
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
+			<version>${spring-cloud-starter-contract-stub-runner.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

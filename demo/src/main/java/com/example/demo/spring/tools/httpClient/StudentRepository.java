@@ -1,4 +1,4 @@
-package com.example.demo.spring.tools.restClient;
+package com.example.demo.spring.tools.httpClient;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
