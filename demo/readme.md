@@ -38,3 +38,5 @@ TODO:
 * @WithMockUser, whe performing http call and when calling a bean method
 * mongodb
 * email client
+* criteria api, criteria + meta model, query dsl, specification
+* jpa lock
