@@ -1,4 +1,4 @@
-package com.example.demo.spring.web.testRestClients;
+package com.example.demo.spring.web.testHttpClients;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

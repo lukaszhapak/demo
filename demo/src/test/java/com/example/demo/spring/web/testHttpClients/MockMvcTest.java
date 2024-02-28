@@ -1,4 +1,4 @@
-package com.example.demo.spring.web.testRestClients;
+package com.example.demo.spring.web.testHttpClients;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
