@@ -1,4 +1,4 @@
-package com.example.demo.spring.test.testContainer;
+package com.example.demo.commons;
 
 import org.testcontainers.containers.PostgreSQLContainer;
 

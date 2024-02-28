@@ -1,6 +1,5 @@
-package com.example.demo.spring.test.testContainer;
+package com.example.demo.commons;
 
-import com.example.demo.commons.AbstractIntegrationTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
