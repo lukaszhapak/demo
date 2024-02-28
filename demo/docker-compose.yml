@@ -73,3 +73,9 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
+
+  mongodb:
+    image: mongo:4.2.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
