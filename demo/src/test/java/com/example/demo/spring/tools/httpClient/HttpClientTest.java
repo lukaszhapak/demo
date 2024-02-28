@@ -59,7 +59,7 @@ class HttpClientTest extends AbstractIntegrationTest {
 			.willReturn(aResponse()
 				.withStatus(status)
 				.withBody(body)
-				.withHeader("Content-Type", "application/json"))
-	);
+				.withHeader("Content-Type", "application/json")
+			));
   }
 }
