@@ -18,7 +18,6 @@ TODO:
 * spring expression language
 * conditionals on..
 * n plus one
-* reflection
 * logs to elk https://www.youtube.com/watch?v=hvYUwUmHB6M
 * metrics to elk
 * actuator
@@ -26,7 +25,6 @@ TODO:
 * db indexes, partial index (where name != null)
 * more comments with explanation
 * @Query with update (@Modifying)
-* spock tests
 * custom handler interceptor
 * arch unit
 * java streams
