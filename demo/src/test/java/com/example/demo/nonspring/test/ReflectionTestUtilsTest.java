@@ -22,9 +22,9 @@ class ReflectionTestUtilsTest {
   }
 
   static Student getStudent(Map<String, Object> fieldsValues) {
-	Student validPatientDtoIn = getStudent();
-	fieldsValues.forEach((key, value) -> ReflectionTestUtils.setField(validPatientDtoIn, key, value));
-	return validPatientDtoIn;
+	Student student = getStudent();
+	fieldsValues.forEach((key, value) -> ReflectionTestUtils.setField(student, key, value));
+	return student;
   }
 
   static Student getStudent() {
