@@ -58,6 +58,7 @@ Demo application
 * testing everything as integration tests, only happy path or only flows that bring money
 * test speed up
 * reflection test utils, method with map as argument and update given field
+* test jpa repository, extend jpa repository work on the same entity
 
 ## Integration test
 
