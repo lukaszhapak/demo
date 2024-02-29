@@ -69,7 +69,8 @@ class RecursiveComparisonTest {
 	secondList.add(new StudentDTO("John", 22));
 
 	// then
-	assertThat(firstList).hasSameSizeAs(secondList).usingRecursiveComparison().isNotEqualTo(secondList);
-	assertThat(firstList).hasSameSizeAs(secondList).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(secondList);
+	assertThat(firstList).hasSameSizeAs(secondList);
+	assertThat(firstList).usingRecursiveComparison().isNotEqualTo(secondList);
+	assertThat(firstList).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(secondList);  // it already compares size of both lists
   }
 }
