@@ -117,3 +117,7 @@ Demo application
 
 ### mocks
 * code in other jar that is already tested, like outbox or kafka publisher
+
+### speed up tests
+* put some stuff in other jar and test it there
+* -ea -noverify -mx2048m -Xverify:none -XX:TieredStopAtLevel=1
