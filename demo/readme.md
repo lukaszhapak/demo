@@ -57,6 +57,7 @@ Demo application
 * dry - wet
 * testing everything as integration tests, only happy path or only flows that bring money
 * test speed up
+* reflection test utils, method with map as argument and update given field
 
 ## Integration test
 
