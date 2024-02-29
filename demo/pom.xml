@@ -22,6 +22,7 @@
 		<spring-kafka-test.version>2.6.3</spring-kafka-test.version>
 
 		<lombok.version>1.18.24</lombok.version>
+		<rest-assured.version>5.3.1</rest-assured.version>
 
 		<h2.version>2.1.214</h2.version>
 		<postgresql.version>42.2.23</postgresql.version>
@@ -30,7 +31,6 @@
 		<shedlock.version>4.30.0</shedlock.version>
 		<p6spy.version>3.9.1</p6spy.version>
 
-		<rest-assured.version>5.3.1</rest-assured.version>
 		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
 		<pitest-maven.version>1.11.0</pitest-maven.version>
@@ -38,8 +38,10 @@
 		<wiremock.version>3.0.1</wiremock.version>
 		<spring-cloud-starter-contract-stub-runner.version>3.1.7
 		</spring-cloud-starter-contract-stub-runner.version>
+		<spock.version>2.4-M1-groovy-4.0</spock.version>
 	</properties>
 
+	<!--	SPRING	-->
 	<dependencies>
 		<dependency>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -62,13 +64,31 @@
 			<version>${spring-kafka.version}</version>
 		</dependency>
 
+		<!--	UTIL	-->
 		<dependency>
 			<artifactId>lombok</artifactId>
 			<groupId>org.projectlombok</groupId>
 			<optional>true</optional>
 			<version>${lombok.version}</version>
 		</dependency>
+		<dependency> <!--	http client	-->
+			<artifactId>rest-assured</artifactId>
+			<groupId>io.rest-assured</groupId>
+			<version>${rest-assured.version}</version>
+			<exclusions> 	<!-- Exclude Groovy because of classpath issue, collision with spring-cloud-starter-contract-stub-runner -->
+				<exclusion>
+					<groupId>org.apache.groovy</groupId>
+					<artifactId>groovy-xml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.groovy</groupId>
+					<artifactId>groovy-json</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
+
+		<!--	DATA BASE	-->
 		<dependency>
 			<artifactId>h2</artifactId>
 			<groupId>com.h2database</groupId>
@@ -90,30 +110,13 @@
 			<artifactId>flyway-core</artifactId>
 			<version>${flyway.version}</version>
 		</dependency>
-		<dependency>
-			<!--	jdbc interceptor for logging executed sql, spy.properties		-->
+		<dependency>  <!--	jdbc interceptor for logging executed sql, see spy.properties		-->
 			<groupId>p6spy</groupId>
 			<artifactId>p6spy</artifactId>
 			<version>${p6spy.version}</version>
 		</dependency>
 
-		<dependency>
-			<artifactId>rest-assured</artifactId>
-			<groupId>io.rest-assured</groupId>
-			<version>${rest-assured.version}</version>
-			<exclusions>
-				<!-- Exclude Groovy because of classpath issue, collision with spring-cloud-starter-contract-stub-runner -->
-				<exclusion>
-					<groupId>org.apache.groovy</groupId>
-					<artifactId>groovy-xml</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.groovy</groupId>
-					<artifactId>groovy-json</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
+		<!--	TEST	-->
 		<dependency>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<groupId>org.springframework.boot</groupId>
@@ -144,14 +147,29 @@
 			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-<!--			@AutoConfigureWireMock(port = 0)-->
+		<dependency> <!--			@AutoConfigureWireMock(port = 0)-->
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
 			<version>${spring-cloud-starter-contract-stub-runner.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-spring</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -166,6 +184,18 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compileTests</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
