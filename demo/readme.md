@@ -57,8 +57,15 @@ Demo application
 * dry - wet
 * testing everything as integration tests, only happy path or only flows that bring money
 * test speed up
-* reflection test utils, method with map as argument and update given field
+* reflection test utils, method with map as argument and update given field vs lombok.accessors.chain vs shared instance of dto, just use setter
 * test jpa repository, extend jpa repository work on the same entity
+* nested tests with before each
+* clean data before or after a test
+* @mockbean refreshes
+* jdbc template  test entity manager
+* maybe not clean data at all
+* created timestamp, updated timestamp in unit tests
+* methods like register student hiding url, headers, body and other stuff - copy methods from unit tests to integration tests
 
 ## Integration test
 
@@ -96,7 +103,7 @@ Demo application
 ### test data
 * sql script inserting data, need fix when tables are changing
 * test migrations with data
-* manually inserting data with method calls
+* manually inserting data with method calls, or http requests
 * test methods for more complex inserts
 
 ### dsl / test framework
