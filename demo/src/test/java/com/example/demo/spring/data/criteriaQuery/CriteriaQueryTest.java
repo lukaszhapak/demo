@@ -17,11 +17,45 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
   @Autowired
   StudentService studentService;
 
+  Student john = Student.builder()
+	  .firstName("John")
+	  .lastName("Doe")
+	  .age(24)
+	  .address(Address.builder()
+		  .streetName("Oak street")
+		  .flatNumber("51")
+		  .build())
+	  .build();
+
+  Student jim = Student.builder()
+	  .firstName("Jim")
+	  .lastName("Newman")
+	  .age(21)
+	  .address(Address.builder()
+		  .streetName("School street")
+		  .flatNumber("12")
+		  .build())
+	  .build();
+
+  Student michael = Student.builder()
+	  .firstName("Michael")
+	  .lastName("Smith")
+	  .age(27)
+	  .address(Address.builder()
+		  .streetName("Student street")
+		  .flatNumber("123")
+		  .build())
+	  .build();
+
+  StudentSearchCriteria studentSearchCriteria = StudentSearchCriteria.builder()
+	  .page(0)
+	  .size(10)
+	  .sortBy("id")
+	  .build();
+
   @BeforeEach
   void setUp() {
-	studentService.save(createStudent());
-	studentService.save(createStudent());
-	studentService.save(createStudent());
+	saveStudents(john, jim, michael);
   }
 
   @AfterEach
@@ -32,15 +66,8 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
   @Test
   @DisplayName("should get student by first name")
   void shouldGetStudentByFirstName() {
-	// given
-	Student student = createStudent();
-	student.setFirstName("Jimmy");
-	studentService.save(student);
-	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
-	studentSearchCriteria.setFirstName(student.getFirstName());
-
 	// when
-	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setFirstName("Jim"));
 
 	// then
 	assertThat(students.getTotalElements()).isEqualTo(1);
@@ -49,15 +76,8 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
   @Test
   @DisplayName("should get student by street name")
   void shouldGetStudentByStreetName() {
-	// given
-	Student student = createStudent();
-	student.getAddress().setStreetName("Ghj");
-	studentService.save(student);
-	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
-	studentSearchCriteria.setStreetName(student.getAddress().getStreetName());
-
 	// when
-	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setStreetName("Oak street"));
 
 	// then
 	assertThat(students.getTotalElements()).isEqualTo(1);
@@ -66,52 +86,28 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
   @Test
   @DisplayName("should get student by older than")
   void shouldGetStudentByOlderThan() {
-	// given
-	Student student = createStudent();
-	student.setAge(32);
-	studentService.save(student);
-	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
-	studentSearchCriteria.setOlderThan(30);
-
 	// when
-	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setOlderThan(21));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(1);
+	assertThat(students.getTotalElements()).isEqualTo(2);
   }
 
   @Test
   @DisplayName("should get student by minimal age")
   void shouldGetStudentByMinimalAge() {
-	// given
-	Student student = createStudent();
-	student.setAge(32);
-	studentService.save(student);
-	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
-	studentSearchCriteria.setMinimalAge(32);
-
 	// when
-	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setMinimalAge(24));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(1);
+	assertThat(students.getTotalElements()).isEqualTo(2);
   }
 
   @Test
   @DisplayName("should get student by last names")
   void shouldGetStudentByLastNames() {
-	// given
-	Student student = createStudent();
-	student.setLastName("QWE");
-	studentService.save(student);
-	Student student2 = createStudent();
-	student2.setLastName("RTY");
-	studentService.save(student2);
-	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
-	studentSearchCriteria.setLastNames(List.of("QWE", "RTY"));
-
 	// when
-	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setLastNames(List.of("Doe", "Newman")));
 
 	// then
 	assertThat(students.getTotalElements()).isEqualTo(2);
@@ -120,39 +116,16 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
   @Test
   @DisplayName("should get all students when last names is empty list")
   void shouldGetAllStudentsWhenLastNamesIsEmptyList() {
-	// given
-	Student student = createStudent();
-	student.setLastName("QWE");
-	studentService.save(student);
-	Student student2 = createStudent();
-	student2.setLastName("RTY");
-	studentService.save(student2);
-	StudentSearchCriteria studentSearchCriteria = createStudentSearchCriteria();
-	studentSearchCriteria.setLastNames(Collections.emptyList());
-
 	// when
-	Page<Student> students = studentService.getStudents(studentSearchCriteria);
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setLastNames(Collections.emptyList()));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(5);
+	assertThat(students.getTotalElements()).isEqualTo(3);
   }
 
-  StudentSearchCriteria createStudentSearchCriteria() {
-	return StudentSearchCriteria.builder()
-		.page(0)
-		.size(10)
-		.sortBy("id")
-		.build();
-  }
-
-  Student createStudent() {
-	return Student.builder()
-		.firstName("John")
-		.lastName("Doe")
-		.age(24)
-		.address(Address.builder()
-			.streetName("Asd")
-			.build())
-		.build();
+  void saveStudents(Student... students) {
+	for (Student student : students) {
+	  studentService.save(student);
+	}
   }
 }

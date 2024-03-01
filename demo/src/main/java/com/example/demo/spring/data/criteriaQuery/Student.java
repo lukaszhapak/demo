@@ -1,5 +1,6 @@
 package com.example.demo.spring.data.criteriaQuery;
 
+import java.time.LocalDateTime;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,8 @@ class Student {
   private String firstName;
   private String lastName;
   private int age;
+
+  private LocalDateTime date;
 
   @Embedded
   private Address address;

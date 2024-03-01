@@ -37,6 +37,12 @@ class StudentSearchSpecification implements Specification<Student> {
 	if (studentSearchCriteria.getMinimalAge() != null) {
 	  predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("age"), studentSearchCriteria.getMinimalAge()));
 	}
+	if (studentSearchCriteria.getDateBefore() != null) {
+	  predicates.add(criteriaBuilder.lessThan(root.get("date"), studentSearchCriteria.getDateBefore()));
+	}
+	if (studentSearchCriteria.getDateAfter() != null) {
+	  predicates.add(criteriaBuilder.greaterThan(root.get("date"), studentSearchCriteria.getDateAfter()));
+	}
 
 	return criteriaBuilder.and(predicates.toArray(new Predicate[predicates.size()]));
   }

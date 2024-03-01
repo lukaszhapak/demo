@@ -1,5 +1,6 @@
 package com.example.demo.spring.data.criteriaQuery;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,5 +27,7 @@ class StudentSearchCriteria {
   String streetName;
   Integer olderThan;
   Integer minimalAge;
+  LocalDateTime dateBefore;
+  LocalDateTime dateAfter;
 
 }
