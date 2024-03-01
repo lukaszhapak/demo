@@ -3,6 +3,7 @@ package com.example.demo.spring.data.criteriaQuery;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.example.demo.commons.AbstractIntegrationTest;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -21,6 +22,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	  .firstName("John")
 	  .lastName("Doe")
 	  .age(24)
+	  .date(LocalDateTime.of(2024, 2, 25, 0, 0, 0))
 	  .address(Address.builder()
 		  .streetName("Oak street")
 		  .flatNumber("51")
@@ -31,6 +33,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	  .firstName("Jim")
 	  .lastName("Newman")
 	  .age(21)
+	  .date(LocalDateTime.of(2024, 2, 10, 0, 0, 0))
 	  .address(Address.builder()
 		  .streetName("School street")
 		  .flatNumber("12")
@@ -41,6 +44,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	  .firstName("Michael")
 	  .lastName("Smith")
 	  .age(27)
+	  .date(LocalDateTime.of(2024, 3, 1, 0, 0, 0))
 	  .address(Address.builder()
 		  .streetName("Student street")
 		  .flatNumber("123")
@@ -70,7 +74,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	Page<Student> students = studentService.getStudents(studentSearchCriteria.setFirstName("Jim"));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(1);
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(jim));
   }
 
   @Test
@@ -80,7 +84,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	Page<Student> students = studentService.getStudents(studentSearchCriteria.setStreetName("Oak street"));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(1);
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john));
   }
 
   @Test
@@ -90,7 +94,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	Page<Student> students = studentService.getStudents(studentSearchCriteria.setOlderThan(21));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(2);
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, michael));
   }
 
   @Test
@@ -100,7 +104,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	Page<Student> students = studentService.getStudents(studentSearchCriteria.setMinimalAge(24));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(2);
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, michael));
   }
 
   @Test
@@ -110,7 +114,7 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	Page<Student> students = studentService.getStudents(studentSearchCriteria.setLastNames(List.of("Doe", "Newman")));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(2);
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, jim));
   }
 
   @Test
@@ -120,7 +124,27 @@ class CriteriaQueryTest extends AbstractIntegrationTest {
 	Page<Student> students = studentService.getStudents(studentSearchCriteria.setLastNames(Collections.emptyList()));
 
 	// then
-	assertThat(students.getTotalElements()).isEqualTo(3);
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, jim, michael));
+  }
+
+  @Test
+  @DisplayName("should get student by date before")
+  void shouldGetStudentDateBefore() {
+	// when
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setDateBefore(LocalDateTime.of(2024, 2, 25, 0, 0, 0)));
+
+	// then
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(jim));
+  }
+
+  @Test
+  @DisplayName("should get student by date after")
+  void shouldGetStudentDateAfter() {
+	// when
+	Page<Student> students = studentService.getStudents(studentSearchCriteria.setDateAfter(LocalDateTime.of(2024, 2, 25, 0, 0, 0)));
+
+	// then
+	assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(michael));
   }
 
   void saveStudents(Student... students) {
