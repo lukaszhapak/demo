@@ -1,4 +1,4 @@
-package com.example.demo.pitest.modules.student;
+package com.example.demo.test.pitest.student;
 
 class StudentValidator {
 

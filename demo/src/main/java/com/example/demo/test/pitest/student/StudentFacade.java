@@ -1,4 +1,4 @@
-package com.example.demo.pitest.modules.student;
+package com.example.demo.test.pitest.student;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class StudentFacade {
+class StudentFacade {
 
   private final StudentRepository studentRepository;
   private final MessagePublisher messagePublisher;
   private final StudentValidator studentValidator;
 
-  public Student save(Student student) {
+  Student save(Student student) {
 	log.debug("saving student={}", student);
 	studentValidator.validate(student);
 	messagePublisher.publishStudentSavedEvent(student);

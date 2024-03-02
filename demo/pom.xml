@@ -17,13 +17,16 @@
 	<properties>
 		<java.version>11</java.version>
 
+		<!--		Spring  -->
 		<spring-boot.version>2.7.10</spring-boot.version>
 		<spring-kafka.version>2.8.11</spring-kafka.version>
 		<spring-kafka-test.version>2.6.3</spring-kafka-test.version>
 
+		<!--		Util -->
 		<lombok.version>1.18.24</lombok.version>
 		<rest-assured.version>5.3.1</rest-assured.version>
 
+		<!--		Data base -->
 		<h2.version>2.1.214</h2.version>
 		<postgresql.version>42.2.23</postgresql.version>
 		<mysql.version>8.0.33</mysql.version>
@@ -31,9 +34,10 @@
 		<shedlock.version>4.30.0</shedlock.version>
 		<p6spy.version>3.9.1</p6spy.version>
 
+		<!--		Test -->
 		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
 		<testcontainers.version>1.16.3</testcontainers.version>
-		<pitest-maven.version>1.11.0</pitest-maven.version>
+		<pitest-maven.version>1.15.8</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.1.2</pitest-junit5-plugin.version>
 		<wiremock.version>3.0.1</wiremock.version>
 		<spring-cloud-starter-contract-stub-runner.version>3.1.7
@@ -80,7 +84,7 @@
 			<artifactId>rest-assured</artifactId>
 			<groupId>io.rest-assured</groupId>
 			<version>${rest-assured.version}</version>
-			<exclusions> 	<!-- Exclude Groovy because of classpath issue, collision with spring-cloud-starter-contract-stub-runner -->
+			<exclusions>  <!-- Exclude Groovy because of classpath issue, collision with spring-cloud-starter-contract-stub-runner -->
 				<exclusion>
 					<groupId>org.apache.groovy</groupId>
 					<artifactId>groovy-xml</artifactId>
@@ -110,7 +114,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<version>${mysql.version}</version>
 		</dependency>
-  	<dependency>
+		<dependency>
 			<groupId>org.flywaydb</groupId>
 			<artifactId>flyway-core</artifactId>
 			<version>${flyway.version}</version>
@@ -201,6 +205,65 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>${pitest-maven.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.pitest</groupId>
+						<artifactId>pitest-junit5-plugin</artifactId>
+						<version>${pitest-junit5-plugin.version}</version>
+					</dependency>
+				</dependencies>
+				<configuration>
+
+					<targetClasses>
+						<param>com.example.demo.test.pitest.*</param>
+					</targetClasses>
+					<targetTests>
+						<param>com.example.demo.test.pitest.*</param>
+					</targetTests>
+
+					<mutators>
+						<!--						https://pitest.org/quickstart/mutators/   -->
+						<!--						passing here name of the group activates all mutators in given group-->
+
+						<mutator>ALL</mutator>
+						<!--						<mutator>DEFAULTS</mutator>-->
+						<!--						<mutator>STRONGER</mutator>-->
+
+						<!--						alternatively you can put here list of mutators to activated them-->
+
+						<!--						<mutator>CONDITIONALS_BOUNDARY</mutator>-->
+						<!--						<mutator>CONSTRUCTOR_CALLS</mutator>-->
+						<!--						<mutator>VOID_METHOD_CALLS</mutator>-->
+						<!--						<mutator>NON_VOID_METHOD_CALLS</mutator>-->
+						<!--						<mutator>EMPTY_RETURNS</mutator>-->
+						<!--						<mutator>NULL_RETURNS</mutator>-->
+						<!--						<mutator>FALSE_RETURNS</mutator>-->
+						<!--						<mutator>PRIMITIVE_RETURNS</mutator>-->
+						<!--						<mutator>INCREMENTS</mutator>-->
+						<!--						<mutator>INVERT_NEGS</mutator>-->
+						<!--						<mutator>TRUE_RETURNS</mutator>-->
+						<!--						<mutator>INLINE_CONSTS</mutator>-->
+						<!--						<mutator>MATH</mutator>-->
+						<!--						<mutator>NEGATE_CONDITIONALS</mutator>-->
+						<!--						<mutator>REMOVE_CONDITIONALS_EQUAL_ELSE</mutator>-->
+						<!--						<mutator>REMOVE_CONDITIONALS_EQUAL_IF</mutator>-->
+						<!--						<mutator>REMOVE_CONDITIONALS_ORDER_ELSE</mutator>-->
+						<!--						<mutator>REMOVE_CONDITIONALS_ORDER_IF</mutator>-->
+						<!--						<mutator>REMOVE_INCREMENTS</mutator>-->
+						<!--						<mutator>EXPERIMENTAL_ARGUMENT_PROPAGATION</mutator>-->
+						<!--						<mutator>EXPERIMENTAL_BIG_DECIMAL</mutator>-->
+						<!--						<mutator>EXPERIMENTAL_BIG_INTEGER</mutator>-->
+						<!--						<mutator>EXPERIMENTAL_MEMBER_VARIABLE</mutator>-->
+						<!--						<mutator>EXPERIMENTAL_NAKED_RECEIVER</mutator>-->
+						<!--						<mutator>EXPERIMENTAL_SWITCH</mutator>-->
+
+					</mutators>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
