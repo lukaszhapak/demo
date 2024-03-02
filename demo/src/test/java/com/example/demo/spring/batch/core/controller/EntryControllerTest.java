@@ -1,5 +1,6 @@
 package com.example.demo.spring.batch.core.controller;
 
+import static com.example.demo.spring.batch.core.model.EntryStatus.REGISTERED;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,7 +46,9 @@ public class EntryControllerTest extends AbstractIntegrationTest {
 
 	// then
 	assertThat(response.statusCode()).isEqualTo(SC_OK);
-	assertThat(responseAsEntryDTO).usingRecursiveComparison().ignoringFields("id").isEqualTo(createEntryDTO());
+	assertThat(responseAsEntryDTO.getId()).isNotNull();
+	assertThat(responseAsEntryDTO.getData()).isEqualTo("test-data");
+	assertThat(responseAsEntryDTO.getStatus()).isEqualTo(REGISTERED);
   }
 
 
