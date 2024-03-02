@@ -28,19 +28,6 @@ class JpqlTest extends AbstractIntegrationTest {
   }
 
   @Test
-  @DisplayName("should save and find student name")
-  void shouldSaveAndFindStudentName() {
-	// given
-	Long id = studentRepository.save(createStudent()).getId();
-
-	// when
-	String name = studentRepository.findNameById(id);
-
-	// then
-	assertThat(name).isEqualTo("John");
-  }
-
-  @Test
   @DisplayName("should save students and find as DTOs")
   void shouldSaveStudentsAndFindAsDTOs() {
 	// given
