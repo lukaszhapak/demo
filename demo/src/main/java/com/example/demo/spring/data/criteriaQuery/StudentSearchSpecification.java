@@ -28,7 +28,7 @@ class StudentSearchSpecification implements Specification<Student> {
 	if (!CollectionUtils.isEmpty(studentSearchCriteria.getLastNames())) {
 	  predicates.add(criteriaBuilder.and(root.get("lastName").in(studentSearchCriteria.getLastNames())));
 	}
-//	if (studentSearchCriteria.getLastNames() != null) { // if it is not null but an empty list i returns no results
+//	if (studentSearchCriteria.getLastNames() != null) { // if it is not null but an empty list it returns no results
 //	  predicates.add(criteriaBuilder.and(root.get("lastName").in(studentSearchCriteria.getLastNames())));
 //	}
 	if (studentSearchCriteria.getStreetName() != null) {
