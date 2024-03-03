@@ -220,10 +220,10 @@
 				<configuration>
 
 					<targetClasses>
-						<param>com.example.demo.test.pitest.*</param>
+						<param>com.example.demo.test.refactoring.pitest.*</param>
 					</targetClasses>
 					<targetTests>
-						<param>com.example.demo.test.pitest.*</param>
+						<param>com.example.demo.test.refactoring.pitest.*</param>
 					</targetTests>
 
 					<mutators>

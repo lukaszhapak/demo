@@ -5,27 +5,26 @@
 ### basics
 
 * junit assert vs assertJ
-* tests don't share object instances - list example
 * assertJ recursive comparison
-* dry - wet
-* test speed up
-* nested tests with before each
-* @mockbean refreshes
-* created timestamp, updated timestamp in unit tests
-* methods like register product hiding url, headers, body and other stuff - copy methods from unit tests to integration tests
+* mockito, argument matcher, argument captor, stubbing with callback, mockito extension @Mock
+* prepare test data, lombok chain setter, reflection test utils, shared object instance interface
+* tests don't share object instances - list example
 
-### design
-* tests vs architecture
-* black box or white box, testing behavior / contract or implementation, tests not compiling (lot of mocks)
+
+### refactoring
+* tests vs refactoring
+* black box or white box, testing behavior or implementation
+* bugs in white box tests
+* refactoring with white box and a lot of mocks
+* repository in memory for unit tests vs mocking all repository call and setting verifies
+* hentai example
 * refactoring - coverage and mutants
 * pit framework mutation testing
-* hentai example
-* test ice cream, pyramid, honeycomb
-* repository in memory for unit tests vs mocking all repository call and setting verifies
 
 
 ## Integration test
 
+* testing ice cone, pyramid, honeycomb
 * testing everything as integration tests, only happy path or only flows that bring money
 
 ### clean test data
@@ -43,11 +42,6 @@
 * test migrations with data
 * manually inserting data with method calls, http requests, jdbc template, test entity manager
 * test methods for more complex inserts
-
-### prepare test data
-* reflection test utils method with map as argument and update given field
-* lombok.accessors.chain 
-* shared instance of dto, just use setter
 
 ### wiremock
 * @Autoconfigure annotation with random port
@@ -77,10 +71,11 @@
 
 ### dsl / test framework
 * basic example with easily readable format methods
+* methods like register product hiding url, headers, body and other stuff - copy methods from unit tests to integration tests
 
 ### context restart
 * abstract test, with common config
-* @mockbean
+* @mockbean refreshes mock
 * @dirties context
 * properties
 * different type web environment
