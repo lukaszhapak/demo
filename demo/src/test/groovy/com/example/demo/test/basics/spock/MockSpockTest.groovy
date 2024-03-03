@@ -12,6 +12,8 @@ class MockSpockTest extends Specification {
     CustomerRepository customerRepository = Mock();
     CustomerService CustomerService = new CustomerService(customerRepository);
 
+    // mock allows stubbing method and verifying executions
+
     def "should get number from mocked service"() {
         given:
         numberService.returningInt() >> 3
