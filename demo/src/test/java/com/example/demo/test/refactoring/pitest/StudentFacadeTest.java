@@ -7,11 +7,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import com.example.demo.test.refactoring.pitest.MessagePublisher;
-import com.example.demo.test.refactoring.pitest.Student;
-import com.example.demo.test.refactoring.pitest.StudentConfiguration;
-import com.example.demo.test.refactoring.pitest.StudentFacade;
-import com.example.demo.test.refactoring.pitest.StudentRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
