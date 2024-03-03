@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.example.demo.spring.batch.AbstractIntegrationTest;
+import com.example.demo.spring.batch.AbstractBatchIntegrationTest;
 import com.example.demo.spring.batch.batch.exception.BusinessProcessingException;
 import com.example.demo.spring.batch.batch.exception.SystemProcessingException;
 import com.example.demo.spring.batch.batch.starter.EntryBatchJobStarter;
@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-public class EntryJobTest extends AbstractIntegrationTest {
+public class EntryJobTest extends AbstractBatchIntegrationTest {
 
   @Autowired
   EntryBatchJobStarter entryBatchJobStarter;

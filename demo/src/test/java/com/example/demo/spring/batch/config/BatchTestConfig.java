@@ -11,7 +11,7 @@ import org.springframework.core.task.SyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 
 @TestConfiguration
-public class TestConfig {
+public class BatchTestConfig {
 
   @Bean
   public EntryResourceClient entryResourceClient() {

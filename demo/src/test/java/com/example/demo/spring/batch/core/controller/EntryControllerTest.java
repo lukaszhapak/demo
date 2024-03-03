@@ -4,7 +4,7 @@ import static com.example.demo.spring.batch.core.model.EntryStatus.REGISTERED;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.spring.batch.AbstractIntegrationTest;
+import com.example.demo.spring.batch.AbstractBatchIntegrationTest;
 import com.example.demo.spring.batch.core.model.EntryDTO;
 import com.example.demo.spring.batch.core.service.EntryService;
 import io.restassured.response.Response;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class EntryControllerTest extends AbstractIntegrationTest {
+public class EntryControllerTest extends AbstractBatchIntegrationTest {
 
   private final String URL = "/api/entry";
 

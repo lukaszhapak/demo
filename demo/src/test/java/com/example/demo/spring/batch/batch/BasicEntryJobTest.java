@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import com.example.demo.spring.batch.AbstractIntegrationTest;
+import com.example.demo.spring.batch.AbstractBatchIntegrationTest;
 import com.example.demo.spring.batch.batch.starter.BasicEntryBatchJobStarter;
 import com.example.demo.spring.batch.core.model.Entry;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-public class BasicEntryJobTest extends AbstractIntegrationTest {
+public class BasicEntryJobTest extends AbstractBatchIntegrationTest {
 
   @Autowired
   BasicEntryBatchJobStarter basicEntryBatchJobStarter;

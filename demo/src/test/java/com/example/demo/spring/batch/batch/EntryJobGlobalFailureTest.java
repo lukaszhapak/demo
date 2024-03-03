@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doThrow;
 
-import com.example.demo.spring.batch.AbstractIntegrationTest;
+import com.example.demo.spring.batch.AbstractBatchIntegrationTest;
 import com.example.demo.spring.batch.batch.exception.BatchItemReaderException;
 import com.example.demo.spring.batch.batch.starter.EntryBatchJobStarter;
 import com.example.demo.spring.batch.core.model.Entry;
@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
-public class EntryJobGlobalFailureTest extends AbstractIntegrationTest {
+public class EntryJobGlobalFailureTest extends AbstractBatchIntegrationTest {
 
   @Autowired
   EntryBatchJobStarter entryBatchJobStarter;

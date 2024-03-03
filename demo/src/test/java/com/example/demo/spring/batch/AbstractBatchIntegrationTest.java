@@ -9,7 +9,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 import com.example.demo.commons.RestClient;
 import com.example.demo.spring.batch.batch.client.EntryResourceClient;
 import com.example.demo.spring.batch.batch.processor.EntryProcessor;
-import com.example.demo.spring.batch.config.TestConfig;
+import com.example.demo.spring.batch.config.BatchTestConfig;
 import com.example.demo.spring.batch.config.TestEntryRepository;
 import com.example.demo.spring.batch.core.model.Entry;
 import com.example.demo.spring.batch.core.model.EntryStatus;
@@ -24,9 +24,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("test")
-@Import({BatchApplication.class, TestConfig.class})
+@Import({BatchApplication.class, BatchTestConfig.class})
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-public abstract class AbstractIntegrationTest implements RestClient {
+public abstract class AbstractBatchIntegrationTest implements RestClient {
 
   @LocalServerPort
   protected int port;
