@@ -46,4 +46,27 @@ class StubSpockTest extends Specification {
         customer.name == "John"
         customer.age == 23
     }
+
+    def "should throw exception from stubbed service and verify exception class"() {
+        given:
+        numberService.returningInt() >> { throw new IllegalArgumentException() }
+
+        when:
+        numberService.returningInt()
+
+        then:
+        thrown IllegalArgumentException
+    }
+
+    def "should throw exception from stubbed service and verify exception message"() {
+        given:
+        numberService.returningInt() >> { throw new IllegalArgumentException("test") }
+
+        when:
+        numberService.returningInt()
+
+        then:
+        def e = thrown(IllegalArgumentException)
+        e.getMessage() == "test"
+    }
 }
