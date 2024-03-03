@@ -71,7 +71,7 @@
 
 ### dsl / test framework
 * basic example with easily readable format methods
-* methods like register product hiding url, headers, body and other stuff - copy methods from unit tests to integration tests
+* methods like register product hiding url, headers, body, status and other stuff - copy methods from unit tests to integration tests
 
 ### context restart
 * abstract test, with common config
