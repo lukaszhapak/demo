@@ -14,17 +14,6 @@ class MockSpockTest extends Specification {
 
     // mock allows stubbing method and verifying executions
 
-    def "should get number from mocked service"() {
-        given:
-        numberService.returningInt() >> 3
-
-        when:
-        int number = numberService.returningInt()
-
-        then:
-        number == 3
-    }
-
     def "should verify call on mocked service"() {
         when:
         numberService.returningInt()
@@ -49,6 +38,6 @@ class MockSpockTest extends Specification {
         CustomerService.save(customer)
 
         then:
-        1 * customerRepository.save({ customer.name == "John" && customer.age == 24 })
+        1 * customerRepository.save({ it.name == "John" && it.age == 24 })
     }
 }

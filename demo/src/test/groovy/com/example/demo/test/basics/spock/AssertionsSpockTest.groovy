@@ -16,7 +16,7 @@ class AssertionsSpockTest extends Specification {
         numberService.returningInt() == 5
     }
 
-    def "should compare customer and customerDTO"() {
+    def "should compare customerDTO and customer"() {
         given:
         CustomerDTO CustomerDTO = new CustomerDTO("John", 24)
         Customer customer = new Customer(1, "John", 24)

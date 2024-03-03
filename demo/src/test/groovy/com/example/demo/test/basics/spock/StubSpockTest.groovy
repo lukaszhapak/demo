@@ -34,4 +34,16 @@ class StubSpockTest extends Specification {
         customer.name == "John"
         customer.age == 23
     }
+
+    def "should save and return customer stubbed with argument matcher"() {
+        given:
+        customerRepository.save({ it.name == "John" && it.age == 23 } as Customer) >> new Customer(12, "John", 23)
+
+        when:
+        Customer customer = customerService.save(new Customer("John", 23))
+
+        then:
+        customer.name == "John"
+        customer.age == 23
+    }
 }

@@ -105,3 +105,7 @@
 * show sql
 * log sql
 * p6spy
+
+### security
+* with mock user
+* principal in unit test
