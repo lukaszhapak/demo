@@ -89,7 +89,8 @@
 * testing native queries
 
 ### mocks
-* code in other jar that is already tested, like outbox or kafka publisher
+* integration: code in other jar that is already tested, like outbox or kafka publisher
+* unit: other classes, modules,  external adapters
 
 ### speed up tests
 * put some stuff in other jar and test it there
