@@ -66,7 +66,7 @@ class StubSpockTest extends Specification {
         numberService.returningInt()
 
         then:
-        def e = thrown(IllegalArgumentException)
-        e.getMessage() == "test"
+        IllegalArgumentException thrown = thrown()
+        thrown.getMessage() == "test"
     }
 }
