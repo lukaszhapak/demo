@@ -42,3 +42,10 @@ Demo application
 * test that
 # @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
 lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
+
+@AutoConfigureWebTestClient.
+webClient
+.get().uri("/")
+.exchange()
+.expectStatus().isOk()
+.expectBody(String.class).isEqualTo("Hello World");

@@ -48,13 +48,13 @@
 	<!--	SPRING	-->
 	<dependencies>
 		<dependency>
-			<artifactId>spring-boot-starter-web</artifactId>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
@@ -75,14 +75,14 @@
 
 		<!--	UTIL	-->
 		<dependency>
-			<artifactId>lombok</artifactId>
 			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 			<version>${lombok.version}</version>
 		</dependency>
 		<dependency> <!--	http client	-->
-			<artifactId>rest-assured</artifactId>
 			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
 			<version>${rest-assured.version}</version>
 			<exclusions>  <!-- Exclude Groovy because of classpath issue, collision with spring-cloud-starter-contract-stub-runner -->
 				<exclusion>
@@ -99,8 +99,8 @@
 
 		<!--	DATA BASE	-->
 		<dependency>
-			<artifactId>h2</artifactId>
 			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
 			<version>${h2.version}</version>
 		</dependency>
 		<dependency>
@@ -127,8 +127,8 @@
 
 		<!--	TEST	-->
 		<dependency>
-			<artifactId>spring-boot-starter-test</artifactId>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
 			<version>${spring-boot.version}</version>
 			<scope>test</scope>
 		</dependency>

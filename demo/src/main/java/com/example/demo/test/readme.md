@@ -59,7 +59,7 @@
 
 ### http clients
 * webEnvironment mock vs random port
-* example of mockmvc, rest assured and rest template, headers params body, authentication
+* example of mockmvc, rest assured and rest template, webclient headers params body, authentication
 
 ### search
 * jpa specification
