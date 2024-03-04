@@ -6,6 +6,8 @@ import com.example.demo.test.basics.CustomerService
 import com.example.demo.test.basics.NumberService
 import spock.lang.Specification
 
+import static org.assertj.core.api.Assertions.assertThat
+
 class MockSpockTest extends Specification {
     NumberService numberService = Mock();
 
@@ -28,7 +30,7 @@ class MockSpockTest extends Specification {
         1 * numberService.returningInt(5)
     }
 
-    def "should save customer"() {
+    def "should save customer and verify its fields"() {
         given:
         Customer customer = new Customer(1, "John", 24)
 
@@ -37,5 +39,18 @@ class MockSpockTest extends Specification {
 
         then:
         1 * customerRepository.save({ it.name == "John" && it.age == 24 })
+    }
+
+    def "should save customer and capture object"() {
+        given:
+        Customer savedCustomer
+        Customer customer = new Customer(1, "John", 24)
+
+        when:
+        CustomerService.save(customer)
+
+        then:
+        1 * customerRepository.save(_) >> {arguments -> savedCustomer = arguments[0] }
+        assertThat(customer).usingRecursiveComparison().isEqualTo(savedCustomer)
     }
 }
