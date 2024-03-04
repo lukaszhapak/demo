@@ -25,4 +25,15 @@ class ParameterizedSpockTest extends Specification {
         where:
         name << ["John", "Jim", "Michael", jamesName]
     }
+
+    def "array in data table"() {
+        expect:
+        array.contains(number)
+
+        where:
+        number | array
+        3      | [1, 3]
+        4      | [4, 2, 1]
+        6      | [6]
+    }
 }

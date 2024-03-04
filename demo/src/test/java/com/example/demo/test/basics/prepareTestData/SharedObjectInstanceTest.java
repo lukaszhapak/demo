@@ -1,7 +1,8 @@
 package com.example.demo.test.basics.prepareTestData;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.example.demo.test.basics.CustomerDTO;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +24,7 @@ class SharedObjectInstanceTest {
 	// perform some action with object instance
 
 	// then
-	Assertions.assertThat(john.getName()).isEqualTo("Invalid name");
+	assertThat(john.getName()).isEqualTo("Invalid name");
   }
 
 }
