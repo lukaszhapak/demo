@@ -109,3 +109,11 @@
 ### security
 * with mock user
 * principal in unit test
+
+### testing external libraries / modules
+* assume that they work properly
+* or verify that we configured and used them properly
+* multiple actions triggered by the same event example
+
+### tdd bdd
+* some may say bdd is tdd done right
