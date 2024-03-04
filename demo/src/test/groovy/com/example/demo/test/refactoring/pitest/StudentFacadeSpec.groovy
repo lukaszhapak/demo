@@ -20,7 +20,7 @@ class StudentFacadeSpec extends Specification {
 
         then:
         assertThat(response).usingRecursiveComparison().isEqualTo(student)
-        1 * studentRepository.save(student)
         1 * messagePublisher.publishStudentSavedEvent(student)
+        1 * studentRepository.save(student)
     }
 }
