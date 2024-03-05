@@ -66,3 +66,14 @@ public class TestConfig {
 public class TestConfig {
 
 }
+
+
+
+73.6 Configure Access Logging
+Access logs can be configured for Tomcat and Undertow via their respective namespaces.
+
+For instance, the following logs access on Tomcat with a custom pattern.
+
+server.tomcat.basedir=my-tomcat
+server.tomcat.accesslog.enabled=true
+server.tomcat.accesslog.pattern=%t %a "%r" %s (%D ms)
