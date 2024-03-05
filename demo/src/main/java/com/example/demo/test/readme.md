@@ -117,3 +117,5 @@
 
 ### tdd bdd
 * some may say bdd is tdd done right
+
+assertJ  isEqualToIgnoringNewLines
