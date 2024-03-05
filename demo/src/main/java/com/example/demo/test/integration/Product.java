@@ -1,4 +1,4 @@
-package com.example.demo.spring.test.testContainer;
+package com.example.demo.test.integration;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,11 +17,11 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class Student {
+public class Product {
 
   @Id
   @GeneratedValue
   private Long id;
   private String name;
-  private int age;
+  private int quantity;
 }
