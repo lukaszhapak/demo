@@ -1,14 +1,15 @@
-package com.example.demo.test.integration.testContainer;
+package com.example.demo.test.integration.slices;
 
-import com.example.demo.commons.AbstractTestContainerIntegrationTest;
 import com.example.demo.test.integration.Product;
 import com.example.demo.test.integration.ProductRepository;
 import com.example.demo.test.integration.SampleProducts;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-class TestContainerTest extends AbstractTestContainerIntegrationTest implements SampleProducts {
+@DataJpaTest
+class JpaTest {
 
   @Autowired
   ProductRepository productRepository;
@@ -16,6 +17,8 @@ class TestContainerTest extends AbstractTestContainerIntegrationTest implements 
   @Test
   @DisplayName("Test name")
   void testName() {
-	Product response = productRepository.save(product);
+	Product save = productRepository.save(SampleProducts.product);
+
+	productRepository.findById(save.getId());
   }
 }
