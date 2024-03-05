@@ -39,9 +39,12 @@ Demo application
 * criteria api, criteria + meta model, query dsl, specification
 * jpa lock
 
-* test that
+
+
 # @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
 lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
+
+
 
 @AutoConfigureWebTestClient.
 webClient
@@ -49,3 +52,17 @@ webClient
 .exchange()
 .expectStatus().isOk()
 .expectBody(String.class).isEqualTo("Hello World");
+
+
+
+@SpringBootApplication
+@ConfigurationPropertiesScan
+public class TestConfig {
+
+}
+
+@SpringBootApplication
+@EnableConfigurationProperties(CustomConfigPojo.class)
+public class TestConfig {
+
+}
