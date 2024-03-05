@@ -16,6 +16,6 @@ class TestContainerTest extends AbstractTestContainerIntegrationTest implements 
   @Test
   @DisplayName("Test name")
   void testName() {
-	Product response = productRepository.save(product);
+	Product response = productRepository.save(sampleProduct1);
   }
 }

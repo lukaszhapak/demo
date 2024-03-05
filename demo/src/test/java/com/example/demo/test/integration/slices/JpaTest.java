@@ -1,5 +1,8 @@
 package com.example.demo.test.integration.slices;
 
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 import com.example.demo.test.integration.Product;
 import com.example.demo.test.integration.ProductRepository;
 import com.example.demo.test.integration.SampleProducts;
@@ -9,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
-class JpaTest {
+class JpaTest implements SampleProducts {
 
   @Autowired
   ProductRepository productRepository;
@@ -17,8 +20,10 @@ class JpaTest {
   @Test
   @DisplayName("Test name")
   void testName() {
-	Product save = productRepository.save(SampleProducts.product);
+	Product save = productRepository.save(sampleProduct1);
 
-	productRepository.findById(save.getId());
+	Product find = productRepository.findById(save.getId()).get();
+
+	assertThat(find).usingRecursiveComparison().isEqualTo(sampleProduct1);
   }
 }
