@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("mysql-p6spy") // requires mysql database, can be found in docker compose
-class MysqlP6SpyTest extends AbstractIntegrationTest {
+@ActiveProfiles("postgres-flyway")
+class PostgresFlywayTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;
 
-  @Test
+//  @Test   // requires postgres database with test_flyway schema, fly way is able to create schema, can be found in docker compose
   @DisplayName("save and get student")
   void saveAndGetStudent() {
 	// given

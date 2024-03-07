@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("postgres")  // requires postgres database with test schema, can be found in docker compose
-class PostgresTest extends AbstractIntegrationTest {
+@ActiveProfiles("mysql")
+class MysqlTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;
 
-  @Test
+//  @Test   // requires mysql database, can be found in docker compose
   @DisplayName("save and get student")
   void saveAndGetStudent() {
 	// given

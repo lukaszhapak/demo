@@ -8,13 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("postgres-flyway")  // requires postgres database with test_flyway schema, fly way is able to create schema, can be found in docker compose
-class PostgresFlywayTest extends AbstractIntegrationTest {
+@ActiveProfiles("postgres")
+class PostgresTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentRepository studentRepository;
 
-  @Test
+//  @Test  // requires postgres database with test schema, can be found in docker compose
   @DisplayName("save and get student")
   void saveAndGetStudent() {
 	// given
