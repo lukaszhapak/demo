@@ -14,7 +14,7 @@ class MysqlP6SpyTest extends AbstractIntegrationTest {
   @Autowired
   StudentRepository studentRepository;
 
-  @Test   // requires mysql database, can be found in docker compose
+//  @Test   // requires mysql database, can be found in docker compose
   @DisplayName("save and get student")
   void saveAndGetStudent() {
 	// given
