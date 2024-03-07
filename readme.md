@@ -41,7 +41,7 @@ Demo application
 
 
 
-# @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
+ @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
 lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
 
 
