@@ -239,9 +239,9 @@
 						<!--						https://pitest.org/quickstart/mutators/   -->
 						<!--						passing here name of the group activates all mutators in given group-->
 
-						<mutator>ALL</mutator>
 						<!--						<mutator>DEFAULTS</mutator>-->
 						<!--						<mutator>STRONGER</mutator>-->
+						<mutator>ALL</mutator>
 
 						<!--						alternatively you can put here list of mutators to activated them-->
 
