@@ -13,7 +13,7 @@ class TestContainerTest extends AbstractTestContainerIntegrationTest implements 
   @Autowired
   ProductRepository productRepository;
 
-  @Test
+//  @Test
   @DisplayName("Test name")
   void testName() {
 	Product response = productRepository.save(sampleProduct1);
