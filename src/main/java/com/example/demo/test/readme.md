@@ -118,6 +118,10 @@
 ### tdd bdd
 * some may say bdd is tdd done right
 
+### test slices
+* data jpa
+* web mvc
+
 assertJ  isEqualToIgnoringNewLines
 
 live templates for tests

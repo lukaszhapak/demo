@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.testData;
+package com.example.demo.test.integration.testDataClean;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
