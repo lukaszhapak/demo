@@ -18,6 +18,8 @@ public class TestPostgresContainer extends PostgreSQLContainer {
   public void start() {
 	super.start();
 	System.setProperty("DB_URL", container.getJdbcUrl());
+	System.setProperty("DB_PORT", container.getMappedPort(5432).toString());
+	System.setProperty("DB_NAME", container.getDatabaseName());
 	System.setProperty("DB_USERNAME", container.getUsername());
 	System.setProperty("DB_PASSWORD", container.getPassword());
   }

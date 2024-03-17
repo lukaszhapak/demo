@@ -38,8 +38,13 @@ Demo application
 * email client
 * criteria api, criteria + meta model, query dsl, specification
 * jpa lock
-
-
+* jpa dynamic update
+* jpa dynamic insert
+* jpa get reference id
+* fetch join
+* entity graph
+* JoinColumn vs mapped by
+* quick perf: @ExpectSelect(1)
 
  @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
 lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
