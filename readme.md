@@ -45,6 +45,9 @@ Demo application
 * entity graph
 * JoinColumn vs mapped by
 * quick perf: @ExpectSelect(1)
+* jpa projection return record
+* jpa dynamic projections take class as argument and return it
+
 
  @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
 lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
