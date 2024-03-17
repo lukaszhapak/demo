@@ -43,6 +43,7 @@
 		<spring-cloud-starter-contract-stub-runner.version>3.1.7
 		</spring-cloud-starter-contract-stub-runner.version>
 		<spock.version>2.4-M1-groovy-4.0</spock.version>
+		<archunit-junit4.version>1.2.1</archunit-junit4.version>
 	</properties>
 
 	<!--	SPRING	-->
@@ -160,6 +161,12 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
 			<version>${spring-cloud-starter-contract-stub-runner.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit-junit4</artifactId>
+			<version>${archunit-junit4.version}</version>
 			<scope>test</scope>
 		</dependency>
 
