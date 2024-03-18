@@ -20,6 +20,7 @@
 * hentai example
 * refactoring - coverage and mutants
 * pit framework mutation testing
+* archunit
 
 
 ## Integration test
@@ -121,6 +122,12 @@
 ### test slices
 * data jpa
 * web mvc
+
+
+
+test implementation instead of mock, like repo, exception for given param, or kafka impl with methods like get all messages
+
+reusing unit tests, extend class and test methods will be executed, or abstract class with test scenarios
 
 assertJ  isEqualToIgnoringNewLines
 
