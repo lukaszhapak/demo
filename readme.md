@@ -47,11 +47,13 @@ Demo application
 * quick perf: @ExpectSelect(1)
 * jpa projection return record
 * jpa dynamic projections take class as argument and return it
+* jooq
+* querydsl
+
 
 
  @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
 lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
-
 
 
 @AutoConfigureWebTestClient.
@@ -62,19 +64,15 @@ webClient
 .expectBody(String.class).isEqualTo("Hello World");
 
 
-
 @SpringBootApplication
 @ConfigurationPropertiesScan
 public class TestConfig {
-
 }
 
 @SpringBootApplication
 @EnableConfigurationProperties(CustomConfigPojo.class)
 public class TestConfig {
-
 }
-
 
 
 73.6 Configure Access Logging
