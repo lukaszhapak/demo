@@ -1,5 +1,6 @@
-package com.example.demo.commons;
+package com.example.demo.commons.util;
 
+import com.example.demo.commons.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

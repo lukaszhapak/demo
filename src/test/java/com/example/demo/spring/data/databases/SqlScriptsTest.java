@@ -2,15 +2,16 @@ package com.example.demo.spring.data.databases;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 
+@SpringBootTest
 @Sql("classpath:sql/insert-student.sql")
-class SqlScriptsTest extends AbstractIntegrationTest {
+class SqlScriptsTest {
 
   @Autowired
   StudentRepository studentRepository;

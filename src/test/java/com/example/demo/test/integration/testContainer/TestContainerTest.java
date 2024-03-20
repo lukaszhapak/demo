@@ -1,6 +1,6 @@
 package com.example.demo.test.integration.testContainer;
 
-import com.example.demo.commons.AbstractTestContainerIntegrationTest;
+import com.example.demo.test.integration.AbstractTestContainerIntegrationTest;
 import com.example.demo.test.integration.Product;
 import com.example.demo.test.integration.ProductRepository;
 import com.example.demo.test.integration.SampleProducts;

@@ -1,4 +1,4 @@
-package com.example.demo.commons;
+package com.example.demo.spring.web;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

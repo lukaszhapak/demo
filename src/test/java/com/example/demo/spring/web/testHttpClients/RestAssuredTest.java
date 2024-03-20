@@ -4,7 +4,7 @@ import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
+import com.example.demo.spring.web.AbstractRestAssuredIntegrationTest;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;

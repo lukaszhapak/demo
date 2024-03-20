@@ -1,4 +1,4 @@
-package com.example.demo.commons;
+package com.example.demo.commons.util;
 
 import java.text.MessageFormat;
 import java.util.List;

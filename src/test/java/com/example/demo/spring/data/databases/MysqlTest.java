@@ -2,19 +2,19 @@ package com.example.demo.spring.data.databases;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+@SpringBootTest
 @ActiveProfiles("mysql")
-class MysqlTest extends AbstractIntegrationTest {
+class MysqlTest {
 
   @Autowired
   StudentRepository studentRepository;
 
-//  @Test   // requires mysql database, can be found in docker compose
+  //  @Test   // requires mysql database, can be found in docker compose
   @DisplayName("save and get student")
   void saveAndGetStudent() {
 	// given

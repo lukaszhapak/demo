@@ -2,7 +2,7 @@ package com.example.demo.spring.web.testHttpClients;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.commons.AbstractMockMvcIntegrationTest;
+import com.example.demo.spring.web.AbstractMockMvcIntegrationTest;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
