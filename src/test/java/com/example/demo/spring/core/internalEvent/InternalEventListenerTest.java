@@ -22,6 +22,7 @@ class InternalEventListenerTest extends AbstractIntegrationTest {
 	// given
     InternalEvent event = new InternalEvent();
     event.setBody("John");
+
     // when
     applicationEventPublisher.publishEvent(event);
 
