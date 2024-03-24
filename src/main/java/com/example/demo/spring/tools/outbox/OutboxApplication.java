@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-class Application {
+class OutboxApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(OutboxApplication.class, args);
   }
 }

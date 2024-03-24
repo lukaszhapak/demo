@@ -50,8 +50,6 @@ Demo application
 * jooq
 * querydsl
 
-
-
  @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
 lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
 
@@ -62,24 +60,3 @@ webClient
 .exchange()
 .expectStatus().isOk()
 .expectBody(String.class).isEqualTo("Hello World");
-
-
-@SpringBootApplication
-@ConfigurationPropertiesScan
-public class TestConfig {
-}
-
-@SpringBootApplication
-@EnableConfigurationProperties(CustomConfigPojo.class)
-public class TestConfig {
-}
-
-
-73.6 Configure Access Logging
-Access logs can be configured for Tomcat and Undertow via their respective namespaces.
-
-For instance, the following logs access on Tomcat with a custom pattern.
-
-server.tomcat.basedir=my-tomcat
-server.tomcat.accesslog.enabled=true
-server.tomcat.accesslog.pattern=%t %a "%r" %s (%D ms)
