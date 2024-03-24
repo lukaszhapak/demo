@@ -50,9 +50,6 @@ Demo application
 * jooq
 * querydsl
 
- @Value("${prop}") private final String prop; works with the @RequiredArgsConstructor
-lombok.copyableAnnotations+=org.springframework.beans.factory.annotation.Value
-
 
 @AutoConfigureWebTestClient.
 webClient
