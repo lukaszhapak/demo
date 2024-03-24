@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:include="fragments/student :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/student :: navbar"></nav>
+
+<div class="container my-5">
+  <table class="table table-striped mb-5">
+    <tr>
+      <td>name:</td>
+      <td th:text="${student.name}"></td>
+    </tr>
+    <tr>
+      <td>age:</td>
+      <td th:text="${student.age}"></td>
+    </tr>
+  </table>
+
+  <a class="btn btn-primary float-right" th:href="@{|/student/${student.id}/update|}">Update</a>
+
+</div>
+
+<div th:replace="fragments/student :: scripts"></div>
+
+</body>
+</html>
+

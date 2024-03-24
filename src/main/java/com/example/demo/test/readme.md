@@ -134,3 +134,5 @@ assertJ  isEqualToIgnoringNewLines
 live templates for tests
 
 chicago vs london school - unit definition
+
+don't mock 3rd party code, adapter / abstraction

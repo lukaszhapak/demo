@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <th:block th:include="fragments/generated :: header"></th:block>
+  <th:block th:include="fragments/student :: header"></th:block>
 </head>
 <body>
 
-<nav th:replace="fragments/generated :: navbar"></nav>
+<nav th:replace="fragments/student :: navbar"></nav>
 
 <div class="container my-5">
 
-  <form method="post" th:object="${generated}">
+  <form method="post" th:object="${student}">
     <div class="form-group">
       <label for=name>name:</label>
       <input class="form-control" id=name th:field="*{name}" type="text">
@@ -22,7 +22,7 @@
 
 </div>
 
-<div th:replace="fragments/generated :: scripts"></div>
+<div th:replace="fragments/student :: scripts"></div>
 
 </body>
 </html>

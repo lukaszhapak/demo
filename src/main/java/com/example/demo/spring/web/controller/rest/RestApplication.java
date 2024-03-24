@@ -1,12 +1,12 @@
-package com.example.demo.spring.web.testHttpClients;
+package com.example.demo.spring.web.controller.rest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class Application {
+class RestApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(RestApplication.class, args);
   }
 }

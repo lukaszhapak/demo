@@ -1,4 +1,4 @@
-package com.example.demo.spring.web.thymeleaf;
+package com.example.demo.spring.web.controller.thymeleaf;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

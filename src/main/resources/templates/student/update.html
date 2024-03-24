@@ -2,16 +2,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <th:block th:include="fragments/generated :: header"></th:block>
+  <th:block th:include="fragments/student :: header"></th:block>
 </head>
 <body>
 
-<nav th:replace="fragments/generated :: navbar"></nav>
+<nav th:replace="fragments/student :: navbar"></nav>
 
 <div class="container my-5">
 
 
-  <form method="post" th:object="${generated}">
+  <form method="post" th:object="${student}">
     <table class="table table-striped mb-5">
       <tr>
         <td><label for="name">name:</label></td>
@@ -24,7 +24,7 @@
     </table>
 
     <div class="float-right">
-      <a class="btn btn-danger" th:href="@{|/generated/${generated.id}}">Cancel</a>
+      <a class="btn btn-danger" th:href="@{|/student/${student.id}}">Cancel</a>
       <button class="btn btn-primary" type="submit">Update</button>
     </div>
   </form>
@@ -32,7 +32,7 @@
 
 </div>
 
-<div th:replace="fragments/generated :: scripts"></div>
+<div th:replace="fragments/student :: scripts"></div>
 
 </body>
 </html>

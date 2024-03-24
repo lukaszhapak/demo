@@ -6,20 +6,8 @@
 </head>
 <body>
 
+<div th:text="${title}">Title</div>
 <div th:text="${text}">Text</div>
-
-
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Action</th>
-    </tr>
-    <tr th:each="customer : ${list}">
-        <td th:text="${customer.name}"></td>
-        <td th:text="${customer.age}"></td>
-    </tr>
-</table>
 
 </body>
 </html>

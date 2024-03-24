@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <th:block th:include="fragments/student :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/student :: navbar"></nav>
+
+<div class="container my-5">
+  <table class="table table-striped">
+    <tr class="thead-dark">
+      <th>Name</th>
+      <th>Age</th>
+      <th>Action</th>
+    </tr>
+    <tr th:each="student : ${list}">
+      <td th:text="${student.name}"></td>
+      <td th:text="${student.age}"></td>
+      <td>
+        <a class="btn btn-primary" th:href="@{|/student/${student.id}|}">Info</a>
+        <a class="btn btn-danger" th:href="@{|/student/${student.id}/delete|}">Delete</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<div th:replace="fragments/student :: scripts"></div>
+
+</body>
+</html>
+

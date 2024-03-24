@@ -1,4 +1,4 @@
-package com.example.demo.spring.web.testHttpClients;
+package com.example.demo.spring.web.controller.thymeleaf;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,5 +23,7 @@ class Student {
   @GeneratedValue
   private Long id;
   private String name;
-  private int age;
+  private Integer age;
+
 }
+

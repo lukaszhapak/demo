@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <th:block th:fragment="header">
-    <title>generated</title>
+    <title>student</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           rel="stylesheet">
   </th:block>
@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
   <div class="container">
-    <a class="navbar-brand" th:href="@{/generated}">Generated list</a>
+    <a class="navbar-brand" th:href="@{/student}">Generated list</a>
     <button aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation"
             class="navbar-toggler"
@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" th:href="@{/generated/add}">Add</a>
+          <a class="nav-link" th:href="@{/student/add}">Add</a>
         </li>
       </ul>
     </div>

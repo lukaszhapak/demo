@@ -1,4 +1,4 @@
-package com.example.demo.spring.web.testHttpClients;
+package com.example.demo.spring.web.controller.rest;
 
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 import static javax.servlet.http.HttpServletResponse.SC_OK;
