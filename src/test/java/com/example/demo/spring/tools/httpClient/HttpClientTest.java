@@ -26,14 +26,14 @@ class HttpClientTest extends AbstractIntegrationTest {
   @DisplayName("should save student with method stubbed endpoint")
   void shouldSaveStudentWithMethodStubbedEndpoint() {
 	// given
-	stubNameService(200, "{\"name\" : \"method\"}");
+	stubNameService(200, "{\"name\" : \"name-from-method\"}");
 	Student student = new Student().setSource("method");
 
 	// when
 	Long id = studentService.save(student).getId();
 
 	// then
-	assertThat(studentRepository.findById(id).get().getName()).isEqualTo("method");
+	assertThat(studentRepository.findById(id).get().getName()).isEqualTo("name-from-method");
   }
 
   @Test
@@ -47,7 +47,7 @@ class HttpClientTest extends AbstractIntegrationTest {
 	Long id = studentService.save(student).getId();
 
 	// then
-	assertThat(studentRepository.findById(id).get().getName()).isEqualTo("resources");
+	assertThat(studentRepository.findById(id).get().getName()).isEqualTo("name-from-resources");
   }
 
   static void stubNameService(int status, String body) {

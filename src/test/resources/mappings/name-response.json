@@ -6,7 +6,7 @@
   "response": {
     "status": 200,
     "jsonBody": {
-      "name": "resources"
+      "name": "name-from-resources"
     },
     "headers": {
       "Content-Type": "application/json"
