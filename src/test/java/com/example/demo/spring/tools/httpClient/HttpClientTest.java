@@ -27,8 +27,7 @@ class HttpClientTest extends AbstractIntegrationTest {
   void shouldSaveStudentWithMethodStubbedEndpoint() {
 	// given
 	stubNameService(200, "{\"name\" : \"method\"}");
-	Student student = new Student();
-	student.setSource("method");
+	Student student = new Student().setSource("method");
 
 	// when
 	Long id = studentService.save(student).getId();
@@ -42,8 +41,7 @@ class HttpClientTest extends AbstractIntegrationTest {
   void shouldSaveStudentWithResourcesStubbedEndpoint() {
 	// given
 	// stubbed endpoint gets loaded from resources/mappings
-	Student student = new Student();
-	student.setSource("resources");
+	Student student = new Student().setSource("resources");
 
 	// when
 	Long id = studentService.save(student).getId();
