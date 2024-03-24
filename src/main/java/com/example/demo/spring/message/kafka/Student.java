@@ -1,4 +1,4 @@
-package com.example.demo.spring.tools.kafka;
+package com.example.demo.spring.message.kafka;
 
 
 import javax.persistence.Entity;

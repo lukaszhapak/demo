@@ -1,4 +1,4 @@
-package com.example.demo.spring.core.internalEvent;
+package com.example.demo.spring.message.internalEvent;
 
 import lombok.Getter;
 import lombok.Setter;

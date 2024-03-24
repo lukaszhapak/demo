@@ -1,4 +1,4 @@
-package com.example.demo.spring.core.internalEvent;
+package com.example.demo.spring.message.internalEvent;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

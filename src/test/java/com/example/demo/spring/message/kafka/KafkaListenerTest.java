@@ -1,4 +1,4 @@
-package com.example.demo.spring.tools.kafka;
+package com.example.demo.spring.message.kafka;
 
 
 import static java.time.Duration.ofMillis;

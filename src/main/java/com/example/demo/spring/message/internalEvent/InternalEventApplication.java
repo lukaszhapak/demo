@@ -1,4 +1,4 @@
-package com.example.demo.spring.tools.kafka;
+package com.example.demo.spring.message.internalEvent;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,9 +6,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-class Application {
+class InternalEventApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(InternalEventApplication.class, args);
   }
 }
