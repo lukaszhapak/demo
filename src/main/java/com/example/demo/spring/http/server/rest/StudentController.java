@@ -19,8 +19,13 @@ class StudentController {
 
   private final StudentService studentService;
 
-  @GetMapping("/api/single/param")
+  @GetMapping("/api/param/single")
   public String singleParam(@RequestParam(required = true) String name) {
+	return name;
+  }
+
+  @GetMapping("/api/header/single")
+  public String singleHeader(@RequestHeader(required = true) String name) {
 	return name;
   }
 

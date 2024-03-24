@@ -1,6 +1,10 @@
 package com.example.demo.spring.http.server.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.demo.spring.http.AbstractMockMvcIntegrationTest;
 import java.util.List;
@@ -10,6 +14,32 @@ import org.junit.jupiter.api.Test;
 class MockMvcTest extends AbstractMockMvcIntegrationTest {
 
   static final String URL = "/api/student/";
+
+  @Test
+  @DisplayName("should send request with single param")
+  void shouldSendRequestWithSingleParam() throws Exception {
+	mockMvc.perform(get("/api/param/single")
+			.param("name", "John"))
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("John")));
+  }
+
+  @Test
+  @DisplayName("should send request with single param in url")
+  void shouldSendRequestWithParamSingleInUrl() throws Exception {
+	mockMvc.perform(get("/api/param/single?name=John"))
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("John")));
+  }
+
+  @Test
+  @DisplayName("should send request with single header")
+  void shouldSendRequestWithSingleHeader() throws Exception {
+	mockMvc.perform(get("/api/header/single")
+			.header("name", "John"))
+		.andExpect(status().isOk())
+		.andExpect(content().string(containsString("John")));
+  }
 
   @Test
   @DisplayName("should post get and delete student")
@@ -42,8 +72,8 @@ class MockMvcTest extends AbstractMockMvcIntegrationTest {
   }
 
   @Test
-  @DisplayName("should post update get and delete student")
-  void shouldPostUpdateGetAndDeleteStudent() {
+  @DisplayName("should post update get student")
+  void shouldPostUpdateGetStudent() {
 	// given
 	Student student = getStudent();
 	Long id = postHttpCall(URL, student, Student.class, 200).getId();
@@ -52,7 +82,6 @@ class MockMvcTest extends AbstractMockMvcIntegrationTest {
 	student.setName("Jim");
 	putHttpCall(URL + id, student, Student.class, 200);
 	Student response = getHttpCall(URL + id, Student.class, 200);
-	deleteHttpCall(URL + id, 200);
 
 	// then
 	assertThat(response.getName()).isEqualTo(student.getName());

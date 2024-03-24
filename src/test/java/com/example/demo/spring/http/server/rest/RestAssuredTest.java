@@ -37,7 +37,7 @@ class RestAssuredTest extends AbstractRestAssuredIntegrationTest {
   @DisplayName("single param")
   void singleParam() {
 	// given
-	String url = "/api/single/param?name=asd";
+	String url = "/api/param/single?name=asd";
 
 	// when
 	Response httpResponse = getHttpCall(url, port);
@@ -50,7 +50,7 @@ class RestAssuredTest extends AbstractRestAssuredIntegrationTest {
   @DisplayName("single param empty")
   void singleParamEmpty() {
 	// given
-	String url = "/api/single/param";
+	String url = "/api/param/single";
 
 	// when
 	Response httpResponse = getHttpCall(url, port);
