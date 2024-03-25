@@ -30,7 +30,7 @@ class StudentController {
   }
 
   @PostMapping("/api/all")
-  public ResponseDTO post(ParamsDTO paramsDTO, @RequestHeader("user-id") String userId, @RequestBody Student student) {
+  public ResponseDTO all(ParamsDTO paramsDTO, @RequestHeader("user-id") String userId, @RequestBody Student student) {
 	return new ResponseDTO(paramsDTO, student, userId);
   }
 
