@@ -20,18 +20,18 @@ class StudentController {
   private final StudentService studentService;
 
   @GetMapping("/api/param/single")
-  public String singleParam(@RequestParam(required = true) String name) {
-	return name;
+  public ResponseDTO singleParam(@RequestParam(required = true) String name) {
+	return new ResponseDTO().setSingleParam(name);
   }
 
   @GetMapping("/api/header/single")
-  public String singleHeader(@RequestHeader(required = true) String name) {
-	return name;
+  public ResponseDTO singleHeader(@RequestHeader(required = true) String name) {
+	return new ResponseDTO().setSingleHeader(name);
   }
 
   @PostMapping("/api/all")
   public ResponseDTO all(ParamsDTO paramsDTO, @RequestHeader("user-id") String userId, @RequestBody Student student) {
-	return new ResponseDTO(paramsDTO, student, userId);
+	return new ResponseDTO().setParams(paramsDTO).setSingleHeader(userId).setBody(student);
   }
 
   @GetMapping("/api/student/{id}")

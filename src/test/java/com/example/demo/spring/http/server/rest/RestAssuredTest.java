@@ -24,9 +24,9 @@ class RestAssuredTest extends AbstractRestAssuredIntegrationTest {
 
 	assertThat(httpResponse.statusCode()).isEqualTo(SC_OK);
 	ResponseDTO responseDTO = httpResponse.as(ResponseDTO.class);
-	assertThat(responseDTO.getUserId()).isEqualTo("12344");
-	assertThat(responseDTO.getStudent().getName()).isEqualTo("John");
-	assertThat(responseDTO.getParamsDTO().getName()).isEqualTo("Jim");
+	assertThat(responseDTO.getSingleHeader()).isEqualTo("12344");
+	assertThat(responseDTO.getBody().getName()).isEqualTo("John");
+	assertThat(responseDTO.getParams().getName()).isEqualTo("Jim");
   }
 
   Headers getHeaders() {
