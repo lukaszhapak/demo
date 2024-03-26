@@ -1,6 +1,5 @@
 package com.example.demo.test.refactoring.pitest
 
-
 import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.assertThat

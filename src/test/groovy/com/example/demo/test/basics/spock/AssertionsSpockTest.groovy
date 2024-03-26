@@ -1,4 +1,3 @@
-// https://spockframework.org/spock/docs
 package com.example.demo.test.basics.spock
 
 import com.example.demo.test.basics.Customer

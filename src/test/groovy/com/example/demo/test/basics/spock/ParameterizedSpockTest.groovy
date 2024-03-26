@@ -1,6 +1,5 @@
 package com.example.demo.test.basics.spock
 
-
 import spock.lang.Specification
 
 class ParameterizedSpockTest extends Specification {

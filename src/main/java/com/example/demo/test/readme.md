@@ -136,3 +136,7 @@ live templates for tests
 chicago vs london school - unit definition
 
 don't mock 3rd party code, adapter / abstraction
+
+temporary test for some class, to verify some logic works (regexp, calculation etc..) can be deleted during refactoring
+
+cucumber, gherkin or some other tools
