@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.criteriaQuery;
+package com.example.demo.spring.data.specification;
 
 import java.time.LocalDateTime;
 import java.util.List;

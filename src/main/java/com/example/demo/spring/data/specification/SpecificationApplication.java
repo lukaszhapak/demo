@@ -1,12 +1,12 @@
-package com.example.demo.spring.data.criteriaQuery;
+package com.example.demo.spring.data.specification;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class Application {
+class SpecificationApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(SpecificationApplication.class, args);
   }
 }

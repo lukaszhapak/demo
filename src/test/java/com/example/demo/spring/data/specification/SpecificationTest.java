@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.criteriaQuery;
+package com.example.demo.spring.data.specification;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 
-class CriteriaQueryTest extends AbstractIntegrationTest {
+class SpecificationTest extends AbstractIntegrationTest {
 
   @Autowired
   StudentService studentService;

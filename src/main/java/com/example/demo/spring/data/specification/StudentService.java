@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.criteriaQuery;
+package com.example.demo.spring.data.specification;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
