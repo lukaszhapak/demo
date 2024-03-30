@@ -1,5 +1,6 @@
 package com.example.demo.spring.data.specification
 
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.domain.Page
@@ -15,11 +16,11 @@ class SpecificationSpec extends Specification implements SampleData {
     @Autowired
     StudentService studentService
 
-    void setup() {
+    def setup() {
         saveStudents(john, jim, michael)
     }
 
-    void cleanup() {
+    def cleanup() {
         studentService.deleteAll()
     }
 
@@ -31,7 +32,7 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(jim))
+        assertPageContains(students, jim)
     }
 
     def "should get student by street name"() {
@@ -42,7 +43,7 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john))
+        assertPageContains(students, john)
     }
 
     def "should get student by older than"() {
@@ -53,7 +54,7 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, michael))
+        assertPageContains(students, List.of(john, michael))
     }
 
     def "should get student by minimal age"() {
@@ -64,7 +65,7 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, michael));
+        assertPageContains(students, List.of(john, michael))
     }
 
     def "should get student by last names"() {
@@ -74,7 +75,7 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria.setLastNames(List.of("Doe", "Newman")))
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, jim))
+        assertPageContains(students, List.of(john, jim))
     }
 
     def "should get all students when last names is empty list"() {
@@ -85,7 +86,7 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(john, jim, michael))
+        assertPageContains(students, List.of(john, jim, michael))
     }
 
     def "should get student by date before"() {
@@ -96,7 +97,7 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(jim));
+        assertPageContains(students, jim)
     }
 
     def "should get student by date after"() {
@@ -107,10 +108,18 @@ class SpecificationSpec extends Specification implements SampleData {
         Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
-        assertThat(students.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(michael))
+        assertPageContains(students, michael)
     }
 
-    void saveStudents(Student... students) {
+    def assertPageContains(Page<Student> page, List<Student> students) {
+        assertThat(page.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(students)
+    }
+
+    def assertPageContains(Page<Student> page, Student student) {
+        assertThat(page.getContent()).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(List.of(student))
+    }
+
+    def saveStudents(Student... students) {
         for (Student student : students) {
             studentService.save(student);
         }
