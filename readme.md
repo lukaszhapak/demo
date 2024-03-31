@@ -41,7 +41,7 @@ Demo application
 * jpa dynamic update
 * jpa dynamic insert
 * jpa get reference id
-* fetch join
+* left join fetch
 * entity graph
 * JoinColumn vs mapped by
 * quick perf: @ExpectSelect(1)
@@ -49,7 +49,9 @@ Demo application
 * jpa dynamic projections take class as argument and return it
 * jooq
 * querydsl
-
+* jpa inheritance: discriminator column single table, table per class, joined tables
+* create exception and print stack trace
+* test containers
 
 @AutoConfigureWebTestClient.
 webClient
