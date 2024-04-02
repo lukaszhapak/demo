@@ -78,7 +78,7 @@ class SpecificationSpec extends Specification implements SampleData {
         assertPageContains(students, List.of(john, jim))
     }
 
-    def "should get all students when last names is empty list"() {
+    def "should get all students when last names list is empty"() {
         given:
         studentSearchCriteria.setLastNames(Collections.emptyList())
 
