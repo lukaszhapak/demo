@@ -70,9 +70,10 @@ class SpecificationSpec extends Specification implements SampleData {
 
     def "should get student by last names"() {
         given:
+        studentSearchCriteria.setLastNames(List.of("Doe", "Newman"))
 
         when:
-        Page<Student> students = studentService.getStudents(studentSearchCriteria.setLastNames(List.of("Doe", "Newman")))
+        Page<Student> students = studentService.getStudents(studentSearchCriteria)
 
         then:
         assertPageContains(students, List.of(john, jim))
