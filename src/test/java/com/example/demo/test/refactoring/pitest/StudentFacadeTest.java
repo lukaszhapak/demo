@@ -14,9 +14,9 @@ class StudentFacadeTest {
 
   StudentRepository studentRepository = mock(StudentRepository.class);
 
-  MessagePublisher messagePublisher = mock(MessagePublisher.class);
+  StudentEventPublisher studentEventPublisher = mock(StudentEventPublisher.class);
 
-  StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher);
+  StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, studentEventPublisher);
 
   @Test
   @DisplayName("should save student")
@@ -30,7 +30,7 @@ class StudentFacadeTest {
 	// then
 	assertThat(response).usingRecursiveComparison().isEqualTo(student);
 	verify(studentRepository).save(student);
-	verify(messagePublisher).publishStudentSavedEvent(student);
+	verify(studentEventPublisher).publishStudentSavedEvent(student);
   }
 
   @Test
@@ -45,7 +45,7 @@ class StudentFacadeTest {
 	// then
 	assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
 	verify(studentRepository, times(0)).save(any());
-	verify(messagePublisher, times(0)).publishStudentSavedEvent(any());
+	verify(studentEventPublisher, times(0)).publishStudentSavedEvent(any());
   }
 
   @Test
@@ -60,6 +60,6 @@ class StudentFacadeTest {
 	// then
 	assertThat(thrown).isInstanceOf(IllegalArgumentException.class);
 	verify(studentRepository, times(0)).save(any());
-	verify(messagePublisher, times(0)).publishStudentSavedEvent(any());
+	verify(studentEventPublisher, times(0)).publishStudentSavedEvent(any());
   }
 }

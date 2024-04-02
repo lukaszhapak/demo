@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 class StudentFacade {
 
   private final StudentRepository studentRepository;
-  private final MessagePublisher messagePublisher;
+  private final StudentEventPublisher studentEventPublisher;
   private final StudentValidator studentValidator;
 
   Student save(Student student) {
 	log.debug("saving student={}", student);
 	studentValidator.validate(student);
-	messagePublisher.publishStudentSavedEvent(student);
+	studentEventPublisher.publishStudentSavedEvent(student);
 	studentRepository.save(student);
 	return student;
   }

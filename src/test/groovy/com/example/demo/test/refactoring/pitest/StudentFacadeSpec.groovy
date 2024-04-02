@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat
 class StudentFacadeSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
-    MessagePublisher messagePublisher = Mock()
+    StudentEventPublisher messagePublisher = Mock()
     StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
     Student student = new Student("John", 24)
 

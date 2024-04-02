@@ -1,6 +1,6 @@
 package com.example.demo.test.refactoring.archunit.movie.domain;
 
-public interface MovieCreatedPublisher {
+public interface MovieEventPublisher {
 
   void publishMovieCreatedEvent(Movie movie);
 

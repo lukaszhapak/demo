@@ -124,7 +124,6 @@
 * web mvc
 
 
-
 test implementation instead of mock, like repo, exception for given param, or kafka impl with methods like get all messages
 
 reusing unit tests, extend class and test methods will be executed, or abstract class with test scenarios
@@ -140,3 +139,5 @@ don't mock 3rd party code, adapter / abstraction
 temporary test for some class, to verify some logic works (regexp, calculation etc..) can be deleted during refactoring
 
 cucumber, gherkin or some other tools
+
+methods hiding assertions

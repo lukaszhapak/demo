@@ -1,5 +1,6 @@
 package com.example.demo.commons.util;
 
+import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 public class TestPostgresContainer extends PostgreSQLContainer {
@@ -22,9 +23,5 @@ public class TestPostgresContainer extends PostgreSQLContainer {
 	System.setProperty("DB_NAME", container.getDatabaseName());
 	System.setProperty("DB_USERNAME", container.getUsername());
 	System.setProperty("DB_PASSWORD", container.getPassword());
-  }
-
-  @Override
-  public void stop() {
   }
 }
