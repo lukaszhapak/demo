@@ -21,12 +21,12 @@ import org.springframework.test.context.ActiveProfiles;
 
 @EmbeddedKafka(topics = "test-topic")
 @ActiveProfiles("kafka-embedded")
-class KafkaSenderTest extends AbstractIntegrationTest {
+class KafkaPublisherTest extends AbstractIntegrationTest {
 
   @Autowired
-  KafkaMessageSender kafkaMessageSender;
+  KafkaEventPublisher kafkaEventPublisher;
   @Autowired
-  KafkaTestConsumer testConsumer;
+  KafkaTestListener testListener;
 
   @Test
   @DisplayName("should send message")
@@ -34,23 +34,23 @@ class KafkaSenderTest extends AbstractIntegrationTest {
 	// given
 
 	// when
-	kafkaMessageSender.sendEvent();
+	kafkaEventPublisher.publishEvent();
 
 	// then
 	await().atMost(ofSeconds(2)).pollInterval(ofMillis(20)).untilAsserted(() ->
-		assertThat(testConsumer.receivedRecords.size()).describedAs("Message was received").isEqualTo(1));
+		assertThat(testListener.receivedRecords.size()).describedAs("Event was received").isEqualTo(1));
   }
 
   @TestConfiguration
   static class KafkaTestConfig {
 
 	@Bean
-	KafkaTestConsumer testConsumer() {
-	  return new KafkaTestConsumer();
+	KafkaTestListener testListener() {
+	  return new KafkaTestListener();
 	}
   }
 
-  static class KafkaTestConsumer {
+  static class KafkaTestListener {
 
 	List<KafkaEvent> receivedRecords = new LinkedList<>();
 

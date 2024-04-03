@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-class KafkaClassListener {
+class KafkaEventListener {
 
   private final StudentRepository studentRepository;
 

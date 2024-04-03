@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-class KafkaMessageSender {
+class KafkaEventPublisher {
 
   private final KafkaTemplate<String, KafkaEvent> kafkaTemplate;
 
-  @Scheduled(cron = "${kafka.sender.cron}")
-  public void sendEvent() {
+  @Scheduled(cron = "${kafka.publisher.cron}")
+  public void publishEvent() {
 	KafkaEvent kafkaEvent = new KafkaEvent("John", 24);
-	log.debug("Sending event sampleEvent={}", kafkaEvent);
+	log.debug("Publishing event sampleEvent={}", kafkaEvent);
 	kafkaTemplate.send("test-topic", kafkaEvent);
   }
 }
