@@ -21,7 +21,7 @@ class JpaDataTypesSpec extends Specification implements SampleData {
 
     def "should fetch table names"() {
         expect:
-        fetchTables().size() == 4
+        fetchTables().size() == 421
     }
 
     def "should save and find student"() {
