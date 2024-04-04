@@ -1,6 +1,6 @@
 package com.example.demo.spring.data.jpaDataTypes
 
-import com.example.demo.spring.data.specification.SampleData
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.jdbc.core.JdbcOperations
@@ -11,7 +11,7 @@ import java.util.stream.Collectors
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
 @SpringBootTest
-class JpaDataTypesSpec extends Specification implements SampleData {
+class JpaDataTypesSpec extends Specification {
 
     @Autowired
     JdbcOperations jdbcOperations
