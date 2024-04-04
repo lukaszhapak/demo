@@ -7,10 +7,10 @@ import com.example.demo.test.basics.NumberService
 import spock.lang.Specification
 
 class StubSpockTest extends Specification {
-    NumberService numberService = Stub();
+    NumberService numberService = Stub()
 
-    CustomerRepository customerRepository = Stub();
-    CustomerService customerService = new CustomerService(customerRepository);
+    CustomerRepository customerRepository = Stub()
+    CustomerService customerService = new CustomerService(customerRepository)
 
     def "should get number from stubbed service"() {
         given:

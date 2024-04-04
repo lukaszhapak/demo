@@ -9,10 +9,10 @@ import spock.lang.Specification
 import static org.assertj.core.api.Assertions.assertThat
 
 class MockSpockTest extends Specification {
-    NumberService numberService = Mock();
+    NumberService numberService = Mock()
 
-    CustomerRepository customerRepository = Mock();
-    CustomerService CustomerService = new CustomerService(customerRepository);
+    CustomerRepository customerRepository = Mock()
+    CustomerService CustomerService = new CustomerService(customerRepository)
 
     def "should verify call on mocked service"() {
         when:
