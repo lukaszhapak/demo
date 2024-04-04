@@ -32,7 +32,7 @@ class JpaDataTypesSpec extends Specification implements SampleData {
         Student student = studentService.findById(id)
 
         then:
-        assertThat(student).usingRecursiveComparison().ignoringFields("id", "oneToOne.id", "oneToMany.id").isEqualTo(createStudent())
+        assertThat(student).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(createStudent())
     }
 
     List<String> fetchTables() {
