@@ -19,9 +19,9 @@ class JpaDataTypesSpec extends Specification implements SampleData {
     @Autowired
     StudentService studentService
 
-    def "should fetch table names"() {
+    def "should fetch table"() {
         expect:
-        fetchTables().size() == 421
+        fetchTables() == ["STUDENT", "STUDENT_GRADES_LIST", "STUDENT_ONE_TO_MANY", "STUDENT_ONE_TO_ONE"]
     }
 
     def "should save and find student"() {
@@ -36,10 +36,11 @@ class JpaDataTypesSpec extends Specification implements SampleData {
     }
 
     List<String> fetchTables() {
-        def tables = jdbcOperations.queryForList("SHOW TABLES").stream().map(Map::values)
-                .map(x -> x.stream().findFirst().get()).collect(Collectors.toList())
-        println(tables)
-        return tables as List<String>
+        jdbcOperations.queryForList("SHOW TABLES")
+                .stream()
+                .map(Map::values)
+                .map(x -> x.stream().findFirst().get())
+                .collect(Collectors.toList())
     }
 
     Student createStudent() {
