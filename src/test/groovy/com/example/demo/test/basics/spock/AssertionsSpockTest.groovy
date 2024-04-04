@@ -17,11 +17,11 @@ class AssertionsSpockTest extends Specification {
 
     def "should compare customerDTO and customer"() {
         given:
-        CustomerDTO CustomerDTO = new CustomerDTO("John", 24)
+        CustomerDTO customerDTO = new CustomerDTO("John", 24)
         Customer customer = new Customer(1, "John", 24)
 
         expect:
         // not found recursive comparison in spock so using assertJ here
-        assertThat(CustomerDTO).usingRecursiveComparison().isEqualTo(customer)
+        assertThat(customerDTO).usingRecursiveComparison().isEqualTo(customer)
     }
 }

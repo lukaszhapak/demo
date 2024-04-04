@@ -49,5 +49,4 @@ class Student {
 
   @ElementCollection(fetch = FetchType.EAGER)
   private List<Integer> gradesList;
-
 }

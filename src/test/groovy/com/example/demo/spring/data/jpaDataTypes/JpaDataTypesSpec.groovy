@@ -17,7 +17,7 @@ class JpaDataTypesSpec extends Specification implements SampleData {
     JdbcOperations jdbcOperations
 
     @Autowired
-    StudentService studentService
+    StudentRepository studentRepository
 
     def "should fetch table"() {
         expect:
@@ -26,10 +26,10 @@ class JpaDataTypesSpec extends Specification implements SampleData {
 
     def "should save and find student"() {
         given:
-        Long id = studentService.save(createStudent()).getId()
+        Long id = studentRepository.save(createStudent()).getId()
 
         when:
-        Student student = studentService.findById(id)
+        Student student = studentRepository.findByIdFetchingOneToMany(id).get()
 
         then:
         assertThat(student).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(createStudent())
