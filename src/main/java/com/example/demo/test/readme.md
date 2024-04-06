@@ -141,3 +141,5 @@ temporary test for some class, to verify some logic works (regexp, calculation e
 cucumber, gherkin or some other tools
 
 methods hiding assertions
+
+spock multi line string, for example mock mvc json response
