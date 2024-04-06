@@ -25,12 +25,12 @@ class ParameterizedSpockTest extends Specification {
         name << ["John", "Jim", "Michael", jamesName]
     }
 
-    def "array in data table"() {
+    def "should contain #number in #list"() {
         expect:
-        array.contains(number)
+        list.contains(number)
 
         where:
-        number | array
+        number | list
         3      | [1, 3]
         4      | [4, 2, 1]
         6      | [6]
