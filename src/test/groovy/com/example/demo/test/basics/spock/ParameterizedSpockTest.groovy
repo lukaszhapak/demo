@@ -6,6 +6,14 @@ class ParameterizedSpockTest extends Specification {
 
     static String jamesName = "James"
 
+    def "single argument data table"() {
+        expect:
+        name.size() > 2
+
+        where:
+        name << ["John", "Jim", "Michael", jamesName]
+    }
+
     def "data table example"() {
         expect:
         a + b == c
@@ -15,14 +23,6 @@ class ParameterizedSpockTest extends Specification {
         1 | 3 | 4
         3 | 4 | 7
         0 | 6 | 6
-    }
-
-    def "single argument data table"() {
-        expect:
-        name.size() > 2
-
-        where:
-        name << ["John", "Jim", "Michael", jamesName]
     }
 
     def "should contain #number in #list"() {
