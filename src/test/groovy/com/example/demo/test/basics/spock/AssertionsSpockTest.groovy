@@ -24,4 +24,12 @@ class AssertionsSpockTest extends Specification {
         // not found recursive comparison in spock so using assertJ here
         assertThat(customerDTO).usingRecursiveComparison().isEqualTo(customer)
     }
+
+    def "verify all example"() {
+        expect:
+        verifyAll {
+            numberService.returningInt() == 5
+            numberService.returningInt(23) == 23
+        }
+    }
 }
