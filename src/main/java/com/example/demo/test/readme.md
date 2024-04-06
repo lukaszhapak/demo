@@ -143,3 +143,8 @@ cucumber, gherkin or some other tools
 methods hiding assertions
 
 spock multi line string, for example mock mvc json response
+
+spock polling conditions
+spock old
+spock timeout
+spock stepwise
