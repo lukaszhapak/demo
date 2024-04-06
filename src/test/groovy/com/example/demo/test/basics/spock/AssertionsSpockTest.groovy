@@ -32,4 +32,21 @@ class AssertionsSpockTest extends Specification {
             numberService.returningInt(23) == 23
         }
     }
+
+    def "multiple when then blocks"() {
+        given:
+        CustomerDTO customerDTO = new CustomerDTO("John", 24)
+
+        when:
+        customerDTO.setName("123")
+
+        then:
+        customerDTO.getName() == "123"
+
+        when:
+        customerDTO.setName("321")
+
+        then:
+        customerDTO.getName() == "321"
+    }
 }
