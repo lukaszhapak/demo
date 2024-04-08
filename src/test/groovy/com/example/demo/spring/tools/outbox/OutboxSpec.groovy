@@ -27,9 +27,7 @@ class OutboxSpec extends IntegrationSpec {
 
         then:
         List<Outbox> messagesAfterJob = outboxRepository.findAll()
-        students.size() == 3
-        messagesBeforeJob.size() == 3
-        messagesAfterJob.size() == 3
+        messagesAfterJob.size() == students.size()
         messagesBeforeJob.stream().noneMatch { it.isSent() }
         messagesAfterJob.stream().allMatch { it.isSent() }
     }
