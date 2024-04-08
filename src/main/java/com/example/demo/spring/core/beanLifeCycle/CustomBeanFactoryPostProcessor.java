@@ -19,7 +19,7 @@ class CustomBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 		.map(beanFactory::getBeanDefinition)
 		.filter(beanDefinition -> beanClassNameContains(beanDefinition, "beanLifeCycle"))
 		.map(BeanDefinition::getBeanClassName).collect(Collectors.toList());
-	stringStream.forEach(System.out::println);
+	System.out.println("Bean factory post processor");
   }
 
   private boolean beanClassNameContains(BeanDefinition beanDefinition, String subString) {

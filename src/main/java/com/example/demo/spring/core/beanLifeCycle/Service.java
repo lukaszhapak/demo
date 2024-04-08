@@ -7,23 +7,29 @@ import org.springframework.beans.factory.InitializingBean;
 
 class Service implements InitializingBean, DisposableBean {
 
-  public Service() {
+  private final OrderService orderService;
+
+  public Service(OrderService orderService) {
+	this.orderService = orderService;
 	System.out.println("constructor");
+	orderService.store("constructor");
   }
 
   @Override
-  public void destroy() throws Exception {
+  public void destroy() {
 	System.out.println("destroy from disposable bean");
   }
 
   @Override
-  public void afterPropertiesSet() throws Exception {
+  public void afterPropertiesSet() {
 	System.out.println("after properties set from initializing bean");
+	orderService.store("after properties set from initializing bean");
   }
 
   @PostConstruct
   public void postConstruct() {
 	System.out.println("post construct annotation");
+	orderService.store("post construct annotation");
   }
 
   @PreDestroy
@@ -33,6 +39,7 @@ class Service implements InitializingBean, DisposableBean {
 
   public void initMethod() {
 	System.out.println("init method");
+	orderService.store("init method");
   }
 
   public void destroyMethod() {

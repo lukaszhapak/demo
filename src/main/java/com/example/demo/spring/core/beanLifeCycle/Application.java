@@ -12,8 +12,8 @@ class Application {
   }
 
   @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
-  Service service() {
-	return new Service();
+  Service service(OrderService orderService) {
+	return new Service(orderService);
   }
 
 }
