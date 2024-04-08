@@ -19,6 +19,11 @@ class StudentController {
 
   private final StudentService studentService;
 
+  @GetMapping("/api/string")
+  public String string() {
+	return "Student";
+  }
+
   @GetMapping("/api/param/single")
   public ResponseDTO singleParam(@RequestParam(required = true) String name) {
 	return new ResponseDTO().setSingleParam(name);
@@ -32,11 +37,6 @@ class StudentController {
   @PostMapping("/api/all")
   public ResponseDTO all(ParamsDTO paramsDTO, @RequestHeader("user-id") String userId, @RequestBody Student student) {
 	return new ResponseDTO().setParams(paramsDTO).setSingleHeader(userId).setBody(student);
-  }
-
-  @GetMapping("/api/string")
-  public String string() {
-	return "Student";
   }
 
   @GetMapping("/api/student/{id}")
