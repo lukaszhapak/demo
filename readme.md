@@ -59,3 +59,5 @@ webClient
 .exchange()
 .expectStatus().isOk()
 .expectBody(String.class).isEqualTo("Hello World");
+
+https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
