@@ -15,13 +15,13 @@ class OutboxJob {
   private final OutboxPublisher outboxPublisher;
 
   @Scheduled(cron = "${outbox.cron}")
-    void sendMessages(){
+  void sendMessages() {
 	log.debug("Sending messages");
 	List<Outbox> unSentMessages = outboxService.getUnsentMessages();
 	unSentMessages.forEach(this::sendMessage);
   }
 
-  private void sendMessage(Outbox message){
+  private void sendMessage(Outbox message) {
 	log.debug("Sending message={}", message);
 	try {
 	  outboxPublisher.publish(message);
