@@ -16,19 +16,20 @@ class MockMvcTest extends AbstractMockMvcIntegrationTest {
   static final String URL = "/api/student/";
 
   @Test
+  @DisplayName("should get string")
+  void shouldGetString() throws Exception {
+	mockMvc.perform(get("/api/string"))
+		.andExpect(status().isOk())
+		.andExpect(content().string("Student"));
+  }
+
+  @Test
   @DisplayName("should send request with single param")
   void shouldSendRequestWithSingleParam() throws Exception {
 	mockMvc.perform(get("/api/param/single")
 			.param("name", "John"))
 		.andExpect(status().isOk())
 		.andExpect(content().string(containsString("John")));
-  }
-  @Test
-  @DisplayName("should get string")
-  void shouldGetString() throws Exception {
-	mockMvc.perform(get("/api/string"))
-		.andExpect(status().isOk())
-		.andExpect(content().string("Student"));
   }
 
   @Test
