@@ -16,9 +16,6 @@ class KafkaEventListener {
   @KafkaListener(id = "demo-application", topics = "test-topic")
   void listen(ConsumerRecord<String, KafkaEvent> kafkaEvent) {
 	log.debug("Event received kafkaEvent={}", kafkaEvent);
-	studentRepository.save(Student.builder()
-		.name(kafkaEvent.value().getName())
-		.age(kafkaEvent.value().getAge())
-		.build());
+	studentRepository.save(new Student().setName(kafkaEvent.value().getBody()));
   }
 }

@@ -14,7 +14,7 @@ class InternalEventListenerSpec extends IntegrationSpec {
 
     def "should receive event"() {
         given:
-        InternalEvent event = new InternalEvent().setBody("Test name 123")
+        InternalEvent event = new InternalEvent("Test name 123")
 
         when:
         applicationEventPublisher.publishEvent(event)

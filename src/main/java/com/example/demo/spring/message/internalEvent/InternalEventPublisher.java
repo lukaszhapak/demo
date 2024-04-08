@@ -16,8 +16,7 @@ class InternalEventPublisher {
 
   @Scheduled(cron = "${internal.publisher.cron}")
   void publish() {
-	InternalEvent event = new InternalEvent();
-	event.setBody(UUID.randomUUID().toString());
+	InternalEvent event = new InternalEvent(UUID.randomUUID().toString());
 	log.debug("Publishing InternalEvent={}", event);
 	applicationEventPublisher.publishEvent(event);
   }
