@@ -12,17 +12,17 @@ import spock.util.concurrent.PollingConditions
 class KafkaListenerSpec extends IntegrationSpec {
 
     @Autowired
-    KafkaTemplate<String, KafkaEvent> kafkaTemplate;
+    KafkaTemplate<String, KafkaEvent> kafkaTemplate
     @Autowired
-    StudentRepository studentRepository;
+    StudentRepository studentRepository
 
     def "should receive message"() {
         given:
         PollingConditions conditions = new PollingConditions(timeout: 2)
-        KafkaEvent event = new KafkaEvent("Test name 123");
+        KafkaEvent event = new KafkaEvent("Test name 123")
 
         when:
-        kafkaTemplate.send("test-topic", event);
+        kafkaTemplate.send("test-topic", event)
 
         then:
         conditions.eventually {
