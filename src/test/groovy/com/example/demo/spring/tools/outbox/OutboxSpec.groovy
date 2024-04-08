@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired
 class OutboxSpec extends IntegrationSpec {
 
     @Autowired
-    StudentService studentService;
+    StudentService studentService
     @Autowired
-    OutboxJob outboxJob;
+    OutboxJob outboxJob
     @Autowired
-    OutboxRepository outboxRepository;
+    OutboxRepository outboxRepository
     @Autowired
-    StudentRepository studentRepository;
+    StudentRepository studentRepository
 
     def "should send message"() {
         given:

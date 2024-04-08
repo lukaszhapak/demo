@@ -7,10 +7,10 @@ import org.springframework.context.ApplicationEventPublisher
 class InternalEventListenerSpec extends IntegrationSpec {
 
     @Autowired
-    ApplicationEventPublisher applicationEventPublisher;
+    ApplicationEventPublisher applicationEventPublisher
 
     @Autowired
-    StudentRepository studentRepository;
+    StudentRepository studentRepository
 
     def "should receive event"() {
         given:
