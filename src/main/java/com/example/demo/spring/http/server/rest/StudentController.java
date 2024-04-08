@@ -34,6 +34,11 @@ class StudentController {
 	return new ResponseDTO().setParams(paramsDTO).setSingleHeader(userId).setBody(student);
   }
 
+  @GetMapping("/api/string")
+  public String string() {
+	return "Student";
+  }
+
   @GetMapping("/api/student/{id}")
   public Student findById(@PathVariable Long id) {
 	return studentService.findById(id);
