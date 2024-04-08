@@ -1,16 +1,14 @@
 package com.example.demo.spring.data.specification
 
+import com.example.demo.commons.IntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.domain.Page
-import spock.lang.Specification
 
 import java.time.LocalDateTime
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
-@SpringBootTest
-class SpecificationSpec extends Specification {
+class SpecificationSpec extends IntegrationSpec {
 
     @Autowired
     StudentService studentService

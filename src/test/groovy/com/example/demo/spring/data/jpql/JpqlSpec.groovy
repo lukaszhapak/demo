@@ -1,12 +1,9 @@
 package com.example.demo.spring.data.jpql
 
-
+import com.example.demo.commons.IntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import spock.lang.Specification
 
-@SpringBootTest
-class JpqlSpec extends Specification {
+class JpqlSpec extends IntegrationSpec {
 
     @Autowired
     StudentRepository studentRepository
