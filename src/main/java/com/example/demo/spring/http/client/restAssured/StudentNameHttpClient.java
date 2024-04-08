@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 class StudentNameHttpClient {
 
   @Value("${nameService.url}")
-  private String url;
+  private final String url;
 
   String getName(String source) {
 	Response response = getHttpCall(url + "/api/name/" + source);
