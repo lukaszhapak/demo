@@ -1,6 +1,6 @@
 package com.example.demo.spring.data.specification
 
-import com.example.demo.commons.IntegrationSpec
+import com.example.demo.common.IntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 

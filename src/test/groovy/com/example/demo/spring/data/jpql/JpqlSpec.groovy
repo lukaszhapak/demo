@@ -1,6 +1,6 @@
 package com.example.demo.spring.data.jpql
 
-import com.example.demo.commons.IntegrationSpec
+import com.example.demo.common.IntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 
 class JpqlSpec extends IntegrationSpec {

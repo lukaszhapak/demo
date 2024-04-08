@@ -1,6 +1,6 @@
 package com.example.demo.spring.message.internalEvent
 
-import com.example.demo.commons.IntegrationSpec
+import com.example.demo.common.IntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.ApplicationEventPublisher
 

@@ -1,4 +1,4 @@
-package com.example.demo.commons;
+package com.example.demo.common;
 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
