@@ -52,12 +52,5 @@ Demo application
 * jpa inheritance: discriminator column single table, table per class, joined tables
 * create exception and print stack trace
 * test containers
-
-@AutoConfigureWebTestClient.
-webClient
-.get().uri("/")
-.exchange()
-.expectStatus().isOk()
-.expectBody(String.class).isEqualTo("Hello World");
-
-https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
+* https://c4model.com/
+* https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
