@@ -5,9 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import com.example.demo.test.unit.Customer;
-import com.example.demo.test.unit.CustomerRepository;
-import com.example.demo.test.unit.CustomerService;
+import com.example.demo.test.unit.basics.customer.Customer;
+import com.example.demo.test.unit.basics.customer.CustomerRepository;
+import com.example.demo.test.unit.basics.customer.CustomerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

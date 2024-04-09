@@ -4,8 +4,8 @@ import static com.example.demo.test.unit.TestData.getCustomer;
 import static com.example.demo.test.unit.TestData.getCustomerDTO;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.test.unit.Customer;
-import com.example.demo.test.unit.CustomerDTO;
+import com.example.demo.test.unit.basics.customer.Customer;
+import com.example.demo.test.unit.basics.customer.CustomerDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

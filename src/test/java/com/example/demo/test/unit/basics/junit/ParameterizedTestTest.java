@@ -2,8 +2,8 @@ package com.example.demo.test.unit.basics.junit;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.example.demo.test.unit.Customer;
-import com.example.demo.test.unit.CustomerValidator;
+import com.example.demo.test.unit.basics.customer.Customer;
+import com.example.demo.test.unit.basics.customer.CustomerValidator;
 import java.util.List;
 import java.util.stream.Stream;
 import org.apache.logging.log4j.util.Strings;

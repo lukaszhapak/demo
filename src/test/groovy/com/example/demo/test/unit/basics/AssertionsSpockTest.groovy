@@ -1,8 +1,8 @@
-package com.example.demo.test.unit.spock
+package com.example.demo.test.unit.basics
 
-import com.example.demo.test.unit.Customer
-import com.example.demo.test.unit.CustomerDTO
-import com.example.demo.test.unit.NumberService
+import com.example.demo.test.unit.basics.customer.Customer
+import com.example.demo.test.unit.basics.customer.CustomerDTO
+import com.example.demo.test.unit.basics.number.NumberService
 import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.assertThat

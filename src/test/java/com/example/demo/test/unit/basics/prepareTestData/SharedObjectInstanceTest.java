@@ -2,7 +2,7 @@ package com.example.demo.test.unit.basics.prepareTestData;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.example.demo.test.unit.CustomerDTO;
+import com.example.demo.test.unit.basics.customer.CustomerDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

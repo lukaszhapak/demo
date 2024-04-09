@@ -4,9 +4,9 @@ import static com.example.demo.test.unit.TestData.getCustomer;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-import com.example.demo.test.unit.Customer;
-import com.example.demo.test.unit.CustomerRepository;
-import com.example.demo.test.unit.CustomerService;
+import com.example.demo.test.unit.basics.customer.Customer;
+import com.example.demo.test.unit.basics.customer.CustomerRepository;
+import com.example.demo.test.unit.basics.customer.CustomerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

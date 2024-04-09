@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.archunit.hexagonal.movie.domain;
+package com.example.demo.test.unit.archunit.hexagonal.domain;
 
 import lombok.RequiredArgsConstructor;
 

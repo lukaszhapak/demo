@@ -1,5 +1,7 @@
 package com.example.demo.test.unit;
 
+import com.example.demo.test.unit.basics.customer.CustomerDTO;
+
 public interface SampleCustomers {
 
   // by name

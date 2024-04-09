@@ -1,4 +1,4 @@
-package com.example.demo.test.unit;
+package com.example.demo.test.unit.basics.customer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -16,4 +16,23 @@ class ArchUnitTest {
         .should().dependOnClassesThat().resideInAPackage("..adapter..")
         .check(allProjectClasses);
   }
+
+  @Test
+  void layeredTest() {
+    noClasses().that().resideInAPackage("..controller..")
+        .should().dependOnClassesThat().resideInAPackage("..repository..")
+        .check(allProjectClasses);
+
+    noClasses().that().resideInAPackage("..service..")
+        .should().dependOnClassesThat().resideInAPackage("..controller..")
+        .check(allProjectClasses);
+
+    noClasses().that().resideInAPackage("..repository..")
+        .should().dependOnClassesThat().resideInAPackage("..controller..")
+        .check(allProjectClasses);
+
+    noClasses().that().resideInAPackage("..repository..")
+        .should().dependOnClassesThat().resideInAPackage("..service..")
+        .check(allProjectClasses);
+  }
 }

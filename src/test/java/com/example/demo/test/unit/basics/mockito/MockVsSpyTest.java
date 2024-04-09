@@ -10,9 +10,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
-import com.example.demo.test.unit.NumberRepository;
-import com.example.demo.test.unit.NumberService;
-import com.example.demo.test.unit.NumberServiceWithDependency;
+import com.example.demo.test.unit.basics.number.NumberRepository;
+import com.example.demo.test.unit.basics.number.NumberService;
+import com.example.demo.test.unit.basics.number.NumberServiceWithDependency;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
