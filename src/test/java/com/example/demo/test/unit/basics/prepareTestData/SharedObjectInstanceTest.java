@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.prepareTestData;
+package com.example.demo.test.unit.basics.prepareTestData;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

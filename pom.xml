@@ -250,10 +250,10 @@
 				<configuration>
 
 					<targetClasses>
-						<param>com.example.demo.test.refactoring.pitest.*</param>
+						<param>com.example.demo.test.unit.pitest.*</param>
 					</targetClasses>
 					<targetTests>
-						<param>com.example.demo.test.refactoring.pitest.*</param>
+						<param>com.example.demo.test.unit.pitest.*</param>
 					</targetTests>
 
 					<mutators>

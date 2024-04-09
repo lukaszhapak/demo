@@ -8,11 +8,10 @@ import org.junit.jupiter.api.Test;
 
 class ArchUnitTest {
   private final JavaClasses allProjectClasses = new ClassFileImporter()
-      .importPackages("com.example.demo.test.unit.archunit.hexagonal");
+      .importPackages("com.example.demo.test.unit.archunit");
 
   @Test
-  void layerTest() {
-    // todo
+  void hexagonalTest() {
     noClasses().that().resideInAPackage("..domain..")
         .should().dependOnClassesThat().resideInAPackage("..adapter..")
         .check(allProjectClasses);

@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.mockito;
+package com.example.demo.test.unit.basics.mockito;
 
 import static com.example.demo.test.unit.TestData.getCustomer;
 import static org.mockito.ArgumentMatchers.any;
