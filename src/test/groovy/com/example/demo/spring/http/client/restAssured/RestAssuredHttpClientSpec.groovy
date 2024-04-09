@@ -39,7 +39,7 @@ class RestAssuredHttpClientSpec extends IntegrationSpec {
         studentRepository.findById(id).get().getName() == "name-from-resources"
     }
 
-    static void stubNameService(int status, String body) {
+    void stubNameService(int status, String body) {
         stubFor(get(urlEqualTo("/api/name/method"))
                 .willReturn(aResponse()
                         .withStatus(status)
