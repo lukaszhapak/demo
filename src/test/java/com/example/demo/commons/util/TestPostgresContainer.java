@@ -1,6 +1,5 @@
 package com.example.demo.commons.util;
 
-import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 public class TestPostgresContainer extends PostgreSQLContainer {
