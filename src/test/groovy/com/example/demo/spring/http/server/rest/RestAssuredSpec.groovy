@@ -77,5 +77,34 @@ class RestAssuredSpec extends AbstractRestAssuredIntegrationSpec {
         then:
         responseDTO.getPathVariable() == "321"
     }
+
+    def "should get list of students"() {
+        when:
+        List<Student> list = getHttpCall("/api/student", 200).as(Student[])
+
+        then:
+        list.size() == 2
+    }
+
+    def "should post student"() {
+        when:
+        Student student = postHttpCall("/api/student", 200, new Student(2, "Jim", 42)).as(Student)
+
+        then:
+        student.getId() == 2
+    }
+
+    def "should put student"() {
+        when:
+        Student student = putHttpCall("/api/student/2", 200, new Student(2, "Jim", 42)).as(Student)
+
+        then:
+        student.getId() == 2
+    }
+
+    def "should delete student"() {
+        expect:
+        deleteHttpCall("/api/student/2", 200)
+    }
 }
 

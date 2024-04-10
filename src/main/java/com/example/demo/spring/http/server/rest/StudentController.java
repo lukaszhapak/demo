@@ -44,28 +44,24 @@ class StudentController {
 	return new ResponseDTO().setParams(paramsDTO).setSingleHeader(singleHeader).setBody(student).setPathVariable(pathVariable);
   }
 
-  @GetMapping("/api/student/{id}")
-  public Student findById(@PathVariable Long id) {
-	return studentService.findById(id);
-  }
-
   @GetMapping("/api/student")
   public List<Student> findAll() {
-	return studentService.findAll();
-  }
-
-  @PutMapping("/api/student/{id}")
-  public Student update(@PathVariable Long id, @RequestBody Student student) {
-	return studentService.update(id, student);
+	return List.of(new Student().setName("John").setAge(23),
+		new Student().setName("Jim").setAge(31));
   }
 
   @PostMapping("/api/student")
   public Student save(@RequestBody Student student) {
-	return studentService.save(student);
+	return student;
+  }
+
+  @PutMapping("/api/student/{id}")
+  public Student update(@PathVariable Long id, @RequestBody Student student) {
+	return student;
   }
 
   @DeleteMapping("/api/student/{id}")
   public void delete(@PathVariable Long id) {
-	studentService.deleteById(id);
+
   }
 }

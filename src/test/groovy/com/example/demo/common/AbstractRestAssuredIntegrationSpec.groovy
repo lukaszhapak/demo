@@ -4,6 +4,8 @@ import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.http.Headers
 import io.restassured.response.Response
+import io.restassured.specification.RequestSender
+import io.restassured.specification.RequestSpecification
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.server.LocalServerPort
 import org.springframework.test.context.ActiveProfiles
@@ -19,44 +21,62 @@ abstract class AbstractRestAssuredIntegrationSpec extends Specification {
     int port
 
     Response getHttpCall(String url, int expectedStatusCode) {
-        RestAssured.given()
-                .port(port)
-                .log().all()
-                .expect().statusCode(expectedStatusCode)
-                .when()
-                .get(url)
+        get(requestSpecification(), expectedStatusCode, url)
     }
 
     Response getHttpCall(String url, int expectedStatusCode, Headers headers) {
-        RestAssured.given()
-                .port(port)
-                .headers(headers)
-                .log().all()
-                .expect().statusCode(expectedStatusCode)
-                .when()
-                .get(url)
+        get(requestSpecification().headers(headers), expectedStatusCode, url)
     }
 
     Response getHttpCall(String url, int expectedStatusCode, Map<String, Object> params) {
-        RestAssured.given()
-                .port(port)
-                .params(params)
-                .log().all()
-                .expect().statusCode(expectedStatusCode)
-                .when()
-                .get(url)
+        get(requestSpecification().params(params), expectedStatusCode, url)
     }
 
     Response getHttpCall(String url, int expectedStatusCode, Headers headers, Map<String, Object> params, Object body) {
-        RestAssured.given()
-                .port(port)
-                .headers(headers)
+        get(requestSpecification().headers(headers)
                 .params(params)
                 .body(body)
-                .contentType(ContentType.JSON)
+                .contentType(ContentType.JSON), expectedStatusCode, url)
+    }
+
+    Response postHttpCall(String url, int expectedStatusCode, Object body) {
+        post(requestSpecification().body(body)
+                .contentType(ContentType.JSON), expectedStatusCode, url)
+    }
+
+    Response putHttpCall(String url, int expectedStatusCode, Object body) {
+        put(requestSpecification().body(body)
+                .contentType(ContentType.JSON), expectedStatusCode, url)
+    }
+
+    Response deleteHttpCall(String url, int expectedStatusCode) {
+        delete(requestSpecification(), expectedStatusCode, url)
+    }
+
+    private Response get(RequestSpecification type, int expectedStatusCode, String url) {
+        requestSender(type, expectedStatusCode).get(url)
+    }
+
+    private Response post(RequestSpecification type, int expectedStatusCode, String url) {
+        requestSender(type, expectedStatusCode).post(url)
+    }
+
+    private Response put(RequestSpecification type, int expectedStatusCode, String url) {
+        requestSender(type, expectedStatusCode).put(url)
+    }
+
+    private Response delete(RequestSpecification type, int expectedStatusCode, String url) {
+        requestSender(type, expectedStatusCode).delete(url)
+    }
+
+    private RequestSpecification requestSpecification() {
+        RestAssured.given()
+                .port(port)
                 .log().all()
-                .expect().statusCode(expectedStatusCode)
+    }
+
+    private RequestSender requestSender(RequestSpecification type, int expectedStatusCode) {
+        type.expect().statusCode(expectedStatusCode)
                 .when()
-                .get(url)
     }
 }
