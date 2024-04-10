@@ -1,9 +1,9 @@
 package com.example.demo.spring.tools.outbox
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 
-class OutboxSpec extends IntegrationSpec {
+class OutboxSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService

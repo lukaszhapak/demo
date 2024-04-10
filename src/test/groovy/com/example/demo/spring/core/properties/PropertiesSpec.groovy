@@ -1,9 +1,9 @@
 package com.example.demo.spring.core.properties
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 
-class PropertiesSpec extends IntegrationSpec {
+class PropertiesSpec extends AbstractIntegrationSpec {
 
     @Autowired
     PropertiesService propertiesService

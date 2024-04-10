@@ -1,6 +1,6 @@
 package com.example.demo.spring.data.jpaDataTypes
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcOperations
 
@@ -8,7 +8,7 @@ import java.util.stream.Collectors
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
-class JpaDataTypesSpec extends IntegrationSpec {
+class JpaDataTypesSpec extends AbstractIntegrationSpec {
 
     @Autowired
     JdbcOperations jdbcOperations

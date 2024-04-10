@@ -1,6 +1,6 @@
 package com.example.demo.spring.message.kafka
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.test.context.EmbeddedKafka
@@ -9,7 +9,7 @@ import spock.util.concurrent.PollingConditions
 
 @EmbeddedKafka(topics = "test-topic")
 @ActiveProfiles("kafka-embedded")
-class KafkaListenerSpec extends IntegrationSpec {
+class KafkaListenerSpec extends AbstractIntegrationSpec {
 
     @Autowired
     KafkaTemplate<String, KafkaEvent> kafkaTemplate

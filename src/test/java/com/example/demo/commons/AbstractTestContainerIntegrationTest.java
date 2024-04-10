@@ -1,6 +1,5 @@
-package com.example.demo.test.integration;
+package com.example.demo.commons;
 
-import com.example.demo.commons.AbstractIntegrationTest;
 import com.example.demo.commons.util.TestPostgresContainer;
 import org.springframework.test.context.ActiveProfiles;
 import org.testcontainers.junit.jupiter.Container;

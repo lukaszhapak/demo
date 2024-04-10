@@ -1,6 +1,6 @@
 package com.example.demo.spring.http.client.restAssured
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.test.context.ActiveProfiles
@@ -9,7 +9,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*
 
 @AutoConfigureWireMock(port = 0)
 @ActiveProfiles("wiremock")
-class RestAssuredHttpClientSpec extends IntegrationSpec {
+class RestAssuredHttpClientSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService

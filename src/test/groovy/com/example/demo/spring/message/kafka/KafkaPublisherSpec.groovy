@@ -1,6 +1,6 @@
 package com.example.demo.spring.message.kafka
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.TestConfiguration
@@ -14,7 +14,7 @@ import spock.util.concurrent.PollingConditions
 @EmbeddedKafka(topics = "test-topic")
 @ActiveProfiles("kafka-embedded")
 @Import(KafkaTestConfig)
-class KafkaPublisherSpec extends IntegrationSpec {
+class KafkaPublisherSpec extends AbstractIntegrationSpec {
 
     @Autowired
     KafkaEventPublisher kafkaEventPublisher

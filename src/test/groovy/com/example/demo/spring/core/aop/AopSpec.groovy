@@ -1,9 +1,9 @@
 package com.example.demo.spring.core.aop
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 
-class AopSpec extends IntegrationSpec {
+class AopSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService;

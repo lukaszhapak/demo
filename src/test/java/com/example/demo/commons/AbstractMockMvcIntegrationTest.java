@@ -1,4 +1,4 @@
-package com.example.demo.spring.http;
+package com.example.demo.commons;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

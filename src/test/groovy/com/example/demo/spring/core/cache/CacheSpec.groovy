@@ -1,10 +1,10 @@
 package com.example.demo.spring.core.cache
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 
-class CacheSpec extends IntegrationSpec {
+class CacheSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService

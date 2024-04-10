@@ -1,9 +1,9 @@
 package com.example.demo.spring.core.beanLifeCycle
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 
-class BeanLifeCycleSpec extends IntegrationSpec {
+class BeanLifeCycleSpec extends AbstractIntegrationSpec {
 
     @Autowired
     OrderService orderService;

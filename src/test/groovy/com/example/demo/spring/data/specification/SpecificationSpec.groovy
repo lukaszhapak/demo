@@ -1,6 +1,6 @@
 package com.example.demo.spring.data.specification
 
-import com.example.demo.common.IntegrationSpec
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 
@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
-class SpecificationSpec extends IntegrationSpec {
+class SpecificationSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService
