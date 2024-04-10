@@ -13,9 +13,11 @@ import lombok.ToString;
 @NoArgsConstructor
 class ResponseDTO {
 
-  private ParamsDTO params;
   private String singleParam;
+  private ParamsDTO params;
   private String singleHeader;
+  private HeadersDTO headers;
   private Student body;
+  private String pathVariable;
 
 }

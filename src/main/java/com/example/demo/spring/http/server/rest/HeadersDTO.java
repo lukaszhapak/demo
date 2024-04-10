@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-class ParamsDTO {
+class HeadersDTO {
 
   private String name;
   private int age;

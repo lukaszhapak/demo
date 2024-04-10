@@ -25,18 +25,23 @@ class StudentController {
   }
 
   @GetMapping("/api/param/single")
-  public ResponseDTO singleParam(@RequestParam(required = true) String name) {
-	return new ResponseDTO().setSingleParam(name);
+  public ResponseDTO singleParam(@RequestParam String singleParam) {
+	return new ResponseDTO().setSingleParam(singleParam);
   }
 
-  @GetMapping("/api/header/single")
-  public ResponseDTO singleHeader(@RequestHeader(required = true) String name) {
-	return new ResponseDTO().setSingleHeader(name);
+  @GetMapping("/api/param/multi")
+  public ResponseDTO multipleParams(ParamsDTO paramsDTO) {
+	return new ResponseDTO().setParams(paramsDTO);
   }
 
-  @PostMapping("/api/all")
-  public ResponseDTO all(ParamsDTO paramsDTO, @RequestHeader("user-id") String userId, @RequestBody Student student) {
-	return new ResponseDTO().setParams(paramsDTO).setSingleHeader(userId).setBody(student);
+  @GetMapping("/api/header/multi")
+  public ResponseDTO multipleHeaders(@RequestHeader String name, @RequestHeader int age, @RequestHeader List<Integer> ids) {
+	return new ResponseDTO().setHeaders(new HeadersDTO().setName(name).setAge(age).setIds(ids));
+  }
+
+  @GetMapping("/api/all/{pathVariable}")
+  public ResponseDTO all(ParamsDTO paramsDTO, @RequestHeader("singleHeader") String singleHeader, @RequestBody Student student, @PathVariable String pathVariable) {
+	return new ResponseDTO().setParams(paramsDTO).setSingleHeader(singleHeader).setBody(student).setPathVariable(pathVariable);
   }
 
   @GetMapping("/api/student/{id}")
