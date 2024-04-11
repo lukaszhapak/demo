@@ -49,4 +49,15 @@ class AssertionsSpockTest extends Specification {
         then:
         customerDTO.getName() == "321"
     }
+
+    def "all match assertion"() {
+        when:
+        List<CustomerDTO> customers = [new CustomerDTO("John", 22),
+                                       new CustomerDTO("Jim", 21),
+                                       new CustomerDTO("Michael", 27)]
+
+        then:
+        customers.stream().allMatch {it.getAge() < 30}
+        customers.stream().noneMatch {it.getName().size() > 12}
+    }
 }
