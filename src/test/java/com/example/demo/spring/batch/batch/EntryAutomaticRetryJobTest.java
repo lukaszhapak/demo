@@ -27,6 +27,9 @@ public class EntryAutomaticRetryJobTest extends AbstractBatchIntegrationTest {
 	// given
 	when(entryResourceClient.processEntry(any())).thenAnswer(invocation -> processEntry(invocation.getArgument(0)));
 	List<Long> ids = saveEntries(10, FAILED);
+	// todo failed entries with business error type
+	// todo not failed entries, processed, or registered
+	// todo failed entries with processing attempts above the limit
 
 	// when
 	entryAutomaticRetryBatchJobStarter.startBatch();
