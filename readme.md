@@ -54,3 +54,4 @@ Demo application
 * test containers
 * https://c4model.com/
 * https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
+* optionals
