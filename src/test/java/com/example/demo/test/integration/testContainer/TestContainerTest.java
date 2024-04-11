@@ -3,19 +3,17 @@ package com.example.demo.test.integration.testContainer;
 import com.example.demo.commons.AbstractTestContainerIntegrationTest;
 import com.example.demo.test.integration.Product;
 import com.example.demo.test.integration.ProductRepository;
-import com.example.demo.test.integration.SampleProducts;
-import org.junit.jupiter.api.DisplayName;
+import com.example.demo.test.integration.TestData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-class TestContainerTest extends AbstractTestContainerIntegrationTest implements SampleProducts {
+class TestContainerTest extends AbstractTestContainerIntegrationTest {
 
   @Autowired
   ProductRepository productRepository;
 
   @Test
-  @DisplayName("Test name")
-  void testName() {
-	Product response = productRepository.save(sampleProduct1);
+  void shouldSaveProduct() {
+	Product response = productRepository.save(TestData.getSampleProduct());
   }
 }

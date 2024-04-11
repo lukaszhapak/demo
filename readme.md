@@ -26,7 +26,6 @@ Demo application
 * more comments with explanation
 * @Query with update (@Modifying)
 * custom handler interceptor
-* arch unit
 * java streams
 * clean test data: @sql with delete script  @before each with repo.delete(), @transactional on test class
 * test jpa repository, extend jpa repository work on the same entity
@@ -41,7 +40,6 @@ Demo application
 * jpa dynamic update
 * jpa dynamic insert
 * jpa get reference id
-* left join fetch
 * entity graph
 * JoinColumn vs mapped by
 * quick perf: @ExpectSelect(1)
@@ -51,7 +49,6 @@ Demo application
 * querydsl
 * jpa inheritance: discriminator column single table, table per class, joined tables
 * create exception and print stack trace
-* test containers
 * https://c4model.com/
 * https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
 * optionals

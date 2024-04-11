@@ -1,7 +1,9 @@
-package com.example.demo.test.integration.testContainer.properties;
+package com.example.demo.test.integration.testContainer;
 
+import com.example.demo.test.integration.Product;
 import com.example.demo.test.integration.ProductRepository;
-import com.example.demo.test.integration.SampleProducts;
+import com.example.demo.test.integration.TestData;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,8 +12,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(properties = {
 	"spring.datasource.url=jdbc:tc:postgresql:14.0://demo"
 })
-abstract class AbstractTestContainerFromPropertiesTest implements SampleProducts {
+class TestContainerFromPropertiesTest {
 
   @Autowired
   ProductRepository productRepository;
+
+  @Test
+  void shouldSaveProduct() {
+	Product response = productRepository.save(TestData.getSampleProduct());
+  }
 }
