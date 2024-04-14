@@ -46,7 +46,7 @@ class JpaDataTypesSpec extends AbstractIntegrationSpec {
                 .lastName("Doe")
                 .age(24)
                 .gradesArray(new Integer[]{1, 2, 3, 4, 5, 6})
-                .gradesList(List.of(6, 5, 4, 3, 2, 1))
+                .gradesList([6, 5, 4, 3, 2, 1])
                 .address(Address.builder()
                         .streetName("Street")
                         .flatNumber("22")
@@ -54,11 +54,11 @@ class JpaDataTypesSpec extends AbstractIntegrationSpec {
                 .oneToOne(StudentOneToOne.builder()
                         .name("159")
                         .build())
-                .oneToMany(List.of(
+                .oneToMany([
                         StudentOneToMany.builder().name("123").build(),
                         StudentOneToMany.builder().name("456").build(),
                         StudentOneToMany.builder().name("789").build()
-                ))
+                ])
                 .build()
     }
 }

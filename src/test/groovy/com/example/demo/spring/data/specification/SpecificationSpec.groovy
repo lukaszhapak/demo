@@ -31,7 +31,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
         getCriteria().setStreetName("Oak street")                           | [john]
         getCriteria().setOlderThan(21)                                      | [john, michael]
         getCriteria().setMinimalAge(24)                                     | [john, michael]
-        getCriteria().setLastNames(List.of("Doe", "Newman"))                | [john, jim]
+        getCriteria().setLastNames(["Doe", "Newman"])                       | [john, jim]
         getCriteria().setLastNames(Collections.emptyList())                 | [john, jim, michael]
         getCriteria().setDateBefore(LocalDateTime.of(2024, 2, 25, 0, 0, 0)) | [jim]
         getCriteria().setDateAfter(LocalDateTime.of(2024, 2, 25, 0, 0, 0))  | [michael]

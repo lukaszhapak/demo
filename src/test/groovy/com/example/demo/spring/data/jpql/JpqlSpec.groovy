@@ -9,7 +9,7 @@ class JpqlSpec extends AbstractIntegrationSpec {
     StudentRepository studentRepository
 
     def setup() {
-        studentRepository.saveAll(List.of(john, jim, michael))
+        studentRepository.saveAll([john, jim, michael])
     }
 
     def cleanup() {
