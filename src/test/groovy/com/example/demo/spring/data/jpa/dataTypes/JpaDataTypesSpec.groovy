@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpaDataTypes
+package com.example.demo.spring.data.jpa.dataTypes
 
 import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired

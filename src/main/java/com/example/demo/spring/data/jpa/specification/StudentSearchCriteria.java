@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.specification;
+package com.example.demo.spring.data.jpa.specification;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpaDataTypes;
+package com.example.demo.spring.data.jpa.dataTypes;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

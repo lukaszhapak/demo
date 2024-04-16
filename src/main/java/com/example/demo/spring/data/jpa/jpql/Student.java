@@ -1,6 +1,5 @@
-package com.example.demo.spring.data.specification;
+package com.example.demo.spring.data.jpa.jpql;
 
-import java.time.LocalDateTime;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,11 +23,8 @@ class Student {
   @Id
   @GeneratedValue
   private Long id;
-  private String firstName;
-  private String lastName;
+  private String name;
   private int age;
-
-  private LocalDateTime date;
 
   @Embedded
   private Address address;

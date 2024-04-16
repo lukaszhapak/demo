@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.specification;
+package com.example.demo.spring.data.jpa.specification;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

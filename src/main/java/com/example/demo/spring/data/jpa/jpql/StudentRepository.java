@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpql;
+package com.example.demo.spring.data.jpa.jpql;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,10 +8,10 @@ interface StudentRepository extends JpaRepository<Student, Long> {
 
   // find {limit} By {property / properties expression} {comparison} {ordering operator}
 
-  @Query("SELECT NEW com.example.demo.spring.data.jpql.StudentDTO(s.name, s.age) FROM Student s")
+  @Query("SELECT NEW com.example.demo.spring.data.jpa.jpql.StudentDTO(s.name, s.age) FROM Student s")
   List<StudentDTO> findAllAsDTOs();
 
-  @Query("SELECT NEW com.example.demo.spring.data.jpql.StudentDTO(s.name, s.age) FROM Student s where s.id = :id")
+  @Query("SELECT NEW com.example.demo.spring.data.jpa.jpql.StudentDTO(s.name, s.age) FROM Student s where s.id = :id")
   StudentDTO findByIdAsDTOs(Long id);
 
   @Query("Select s.name from Student s where s.id = :id")

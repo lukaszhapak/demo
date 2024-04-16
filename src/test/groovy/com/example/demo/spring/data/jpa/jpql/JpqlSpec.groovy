@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpql
+package com.example.demo.spring.data.jpa.jpql
 
 import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpaDataTypes;
+package com.example.demo.spring.data.jpa.dataTypes;
 
 import static javax.persistence.CascadeType.PERSIST;
 

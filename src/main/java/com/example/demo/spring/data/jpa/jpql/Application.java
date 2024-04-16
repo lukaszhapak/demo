@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpaDataTypes;
+package com.example.demo.spring.data.jpa.jpql;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
