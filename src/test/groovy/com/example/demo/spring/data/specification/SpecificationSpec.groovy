@@ -13,28 +13,19 @@ class SpecificationSpec extends AbstractIntegrationSpec {
     @Autowired
     StudentService studentService
 
-    def setup() {
-        saveStudents(john, jim, michael)
-    }
-
-    def cleanup() {
-        studentService.deleteAll()
-    }
-
     def "should test search"() {
-        expect:
-        assertPageContains(studentService.getStudents(criteria), students)
+        given:
+        saveStudents(john, jim, michael)
 
-        where:
-        criteria                                                            | students
-        getCriteria().setFirstName("Jim")                                   | [jim]
-        getCriteria().setStreetName("Oak street")                           | [john]
-        getCriteria().setOlderThan(21)                                      | [john, michael]
-        getCriteria().setMinimalAge(24)                                     | [john, michael]
-        getCriteria().setLastNames(["Doe", "Newman"])                       | [john, jim]
-        getCriteria().setLastNames(Collections.emptyList())                 | [john, jim, michael]
-        getCriteria().setDateBefore(LocalDateTime.of(2024, 2, 25, 0, 0, 0)) | [jim]
-        getCriteria().setDateAfter(LocalDateTime.of(2024, 2, 25, 0, 0, 0))  | [michael]
+        expect:
+        assertPageContains(studentService.getStudents(getCriteria().setFirstName("Jim")), [jim])
+        assertPageContains(studentService.getStudents(getCriteria().setStreetName("Oak street")), [john])
+        assertPageContains(studentService.getStudents(getCriteria().setOlderThan(21)), [john, michael])
+        assertPageContains(studentService.getStudents(getCriteria().setMinimalAge(24)), [john, michael])
+        assertPageContains(studentService.getStudents(getCriteria().setLastNames(["Doe", "Newman"])), [john, jim])
+        assertPageContains(studentService.getStudents(getCriteria().setLastNames(Collections.emptyList())), [john, jim, michael])
+        assertPageContains(studentService.getStudents(getCriteria().setDateBefore(LocalDateTime.of(2024, 2, 25, 0, 0, 0))), [jim])
+        assertPageContains(studentService.getStudents(getCriteria().setDateAfter(LocalDateTime.of(2024, 2, 25, 0, 0, 0))), [michael])
     }
 
     def assertPageContains(Page<Student> page, List<Student> students) {
@@ -47,7 +38,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
         }
     }
 
-    static Student john = Student.builder()
+    Student john = Student.builder()
             .firstName("John")
             .lastName("Doe")
             .age(24)
@@ -58,7 +49,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
                     .build())
             .build()
 
-    static Student jim = Student.builder()
+    Student jim = Student.builder()
             .firstName("Jim")
             .lastName("Newman")
             .age(21)
@@ -69,7 +60,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
                     .build())
             .build()
 
-    static Student michael = Student.builder()
+    Student michael = Student.builder()
             .firstName("Michael")
             .lastName("Smith")
             .age(27)
@@ -80,7 +71,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
                     .build())
             .build()
 
-    def static getCriteria() {
+    def getCriteria() {
         StudentSearchCriteria.builder()
                 .page(0)
                 .size(10)

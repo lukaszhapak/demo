@@ -8,41 +8,16 @@ class JpqlSpec extends AbstractIntegrationSpec {
     @Autowired
     StudentRepository studentRepository
 
-    def setup() {
+    def "should test search"() {
+        given:
         studentRepository.saveAll([john, jim, michael])
-    }
 
-    def cleanup() {
-        studentRepository.deleteAll()
-    }
-
-    def "should fetch name"() {
         expect:
         studentRepository.findNameById(john.getId()) == "John"
-    }
-
-    def "should find as DTOs"() {
-        expect:
         studentRepository.findAllAsDTOs().size() == 3
-    }
-
-    def "should find by id as DTOs"() {
-        expect:
         studentRepository.findByIdAsDTOs(jim.getId()).getName() == "Jim"
-    }
-
-    def "should find by street name"() {
-        expect:
         studentRepository.findByAddressStreetName(john.getAddress().getStreetName()).get(0).getName() == "John"
-    }
-
-    def "should get name and age"() {
-        expect:
         studentRepository.findNameAndAgeById(jim.getId()) == "Jim,21"
-    }
-
-    def "should get student by street name and flat number"() {
-        expect:
         studentRepository.findByAddressStreetNameAndFlatNumber(michael.getAddress().getStreetName(), michael.getAddress().getFlatNumber()).get(0).getName() == "Michael"
     }
 

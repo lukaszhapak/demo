@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class BeanLifeCycleSpec extends AbstractIntegrationSpec {
 
     @Autowired
-    OrderService orderService;
+    OrderService orderService
 
     def "should start context"() {
         expect:

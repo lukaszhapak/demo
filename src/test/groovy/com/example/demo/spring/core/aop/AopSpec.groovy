@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired
 class AopSpec extends AbstractIntegrationSpec {
 
     @Autowired
-    StudentService studentService;
+    StudentService studentService
 
     def "should execute aspect methods"() {
         expect:
