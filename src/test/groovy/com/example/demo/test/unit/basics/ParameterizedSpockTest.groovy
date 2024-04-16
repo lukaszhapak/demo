@@ -35,4 +35,16 @@ class ParameterizedSpockTest extends Specification {
         4      | [4, 2, 1]
         6      | [6]
     }
+
+    def "should get data from method"() {
+        expect:
+        name.size() > 2
+
+        where:
+        name << getNames()
+    }
+
+    List<String> getNames(){
+        ["John", "Jim", "Michael", jamesName]
+    }
 }
