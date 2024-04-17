@@ -18,14 +18,14 @@ class KafkaListenerSpec extends AbstractIntegrationSpec {
 
     def "should receive message"() {
         given:
-        PollingConditions conditions = new PollingConditions(timeout: 2)
+        PollingConditions pollingConditions = new PollingConditions(timeout: 2)
         KafkaEvent event = new KafkaEvent("Test name 123")
 
         when:
         kafkaTemplate.send("test-topic", event)
 
         then:
-        conditions.eventually {
+        pollingConditions.eventually {
             studentRepository.existsByName(event.getBody())
         }
     }

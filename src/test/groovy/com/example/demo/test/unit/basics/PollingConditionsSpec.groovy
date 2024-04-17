@@ -12,14 +12,14 @@ class PollingConditionsSpec extends Specification {
 
     def "should save customer"() {
         given:
-        PollingConditions conditions = new PollingConditions(timeout: 0.2)
+        PollingConditions pollingConditions = new PollingConditions(timeout: 0.2)
         Customer customer = new Customer("John", 24)
 
         when:
         customerService.saveInNewThread(customer)
 
         then:
-        conditions.eventually {
+        pollingConditions.eventually {
             customerService.getCustomerByName("John") != null
         }
     }

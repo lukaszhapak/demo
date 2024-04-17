@@ -23,13 +23,13 @@ class KafkaPublisherSpec extends AbstractIntegrationSpec {
 
     def "should send message"() {
         given:
-        PollingConditions conditions = new PollingConditions(timeout: 2)
+        PollingConditions pollingConditions = new PollingConditions(timeout: 2)
 
         when:
         kafkaEventPublisher.publishEvent()
 
         then:
-        conditions.eventually {
+        pollingConditions.eventually {
             testListener.receivedRecords.size() == 1
         }
     }
