@@ -23,7 +23,6 @@ Demo application
 * actuator
 * design patterns
 * db indexes, partial index (where name != null)
-* more comments with explanation
 * @Query with update (@Modifying)
 * custom handler interceptor
 * java streams
@@ -52,3 +51,5 @@ Demo application
 * https://c4model.com/
 * https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
 * optionals
+* thymeleaf tests
+* transactions in jpa, what causes rollback, checked unchecked (also in try block)
