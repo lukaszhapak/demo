@@ -2,7 +2,7 @@ package com.example.demo.test.unit.basics
 
 import spock.lang.Specification
 
-class ParameterizedSpockTest extends Specification {
+class ParameterizedSpockSpec extends Specification {
 
     static String jamesName = "James"
 

@@ -3,7 +3,7 @@ package com.example.demo.test.unit.basics
 import com.example.demo.test.unit.SampleCustomers
 import spock.lang.Specification
 
-class TraitSpockTest extends Specification implements SampleCustomers {
+class TraitSpockSpec extends Specification implements SampleCustomers {
 
     def "should get customer from trait and change his name to Michael"() {
         expect:

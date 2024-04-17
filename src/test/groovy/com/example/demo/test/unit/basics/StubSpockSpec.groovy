@@ -6,7 +6,7 @@ import com.example.demo.test.unit.basics.customer.CustomerService
 import com.example.demo.test.unit.basics.number.NumberService
 import spock.lang.Specification
 
-class StubSpockTest extends Specification {
+class StubSpockSpec extends Specification {
     NumberService numberService = Stub()
 
     CustomerRepository customerRepository = Stub()

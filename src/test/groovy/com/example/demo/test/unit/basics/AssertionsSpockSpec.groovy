@@ -7,7 +7,7 @@ import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.assertThat
 
-class AssertionsSpockTest extends Specification {
+class AssertionsSpockSpec extends Specification {
     NumberService numberService = new NumberService()
 
     def "should get number from service"() {

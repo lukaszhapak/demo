@@ -8,7 +8,7 @@ import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.assertThat
 
-class MockSpockTest extends Specification {
+class MockSpockSpec extends Specification {
     NumberService numberService = Mock()
 
     CustomerRepository customerRepository = Mock()
