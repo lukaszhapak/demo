@@ -14,26 +14,19 @@ public class CustomerService {
   }
 
   public void saveInNewThread(Customer customer) {
-	Thread thread = new Thread(() -> {
-	  try {
-		Thread.sleep(5);
-	  } catch (InterruptedException e) {
-		throw new RuntimeException(e);
-	  }
-	  customerRepository.save(customer);
-	});
+	Thread thread = new Thread(() -> customerRepository.save(customer));
 	thread.start();
   }
 
-  public Customer getCustomerByName(String name) {
-	return customerRepository.getCustomerByName(name);
+  public Customer findByName(String name) {
+	return customerRepository.findByName(name);
   }
 
-  public Customer getCustomerById(Long id) {
-	return customerRepository.getCustomerById(id);
+  public Customer findById(Long id) {
+	return customerRepository.findById(id);
   }
 
-  public Customer getCustomerByNameAndId(String name, Long id) {
-	return customerRepository.getCustomerByNameAndId(name, id);
+  public Customer findByNameAndId(String name, Long id) {
+	return customerRepository.findByNameAndId(name, id);
   }
 }

@@ -26,10 +26,10 @@ class StubSpockSpec extends Specification {
 
     def "should get customer from stubbed repository"() {
         given:
-        customerRepository.getCustomerById(12) >> new Customer(12, "John", 23)
+        customerRepository.findById(12) >> new Customer(12, "John", 23)
 
         when:
-        Customer customer = customerService.getCustomerById(12)
+        Customer customer = customerService.findById(12)
 
         then:
         customer.name == "John"

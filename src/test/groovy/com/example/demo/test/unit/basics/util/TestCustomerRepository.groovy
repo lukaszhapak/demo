@@ -18,19 +18,19 @@ class TestCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    Customer getCustomerByName(String name) {
+    Customer findByName(String name) {
         map.values().stream()
                 .filter { it -> it.getName() == name }
                 .findFirst().get()
     }
 
     @Override
-    Customer getCustomerById(Long id) {
+    Customer findById(Long id) {
         map.get(id)
     }
 
     @Override
-    Customer getCustomerByNameAndId(String name, Long id) {
+    Customer findByNameAndId(String name, Long id) {
         map.values().stream()
                 .filter { it -> it.getName() == name && it.getId() == id }
                 .findFirst().get()

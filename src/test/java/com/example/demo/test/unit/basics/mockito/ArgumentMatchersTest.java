@@ -67,10 +67,10 @@ class ArgumentMatchersTest {
   @DisplayName("should get customer by name")
   void shouldGetCustomerByName() {
 	// given
-	when(customerRepository.getCustomerByName("John")).thenReturn(getCustomer());
+	when(customerRepository.findByName("John")).thenReturn(getCustomer());
 
 	// when
-	Customer response = customerService.getCustomerByName("John");
+	Customer response = customerService.findByName("John");
 
 	// then
 	assertThat(response.getName()).isEqualTo("John");
@@ -80,10 +80,10 @@ class ArgumentMatchersTest {
   @DisplayName("should get customer by id")
   void shouldGetCustomerById() {
 	// given
-	when(customerRepository.getCustomerById(12L)).thenReturn(getCustomer());
+	when(customerRepository.findById(12L)).thenReturn(getCustomer());
 
 	// when
-	Customer response = customerService.getCustomerById(12L);
+	Customer response = customerService.findById(12L);
 
 	// then
 	assertThat(response.getName()).isEqualTo("John");
@@ -93,10 +93,10 @@ class ArgumentMatchersTest {
   @DisplayName("should get customer by name and id")
   void shouldGetCustomerByNameAndId() {
 	// given
-	when(customerRepository.getCustomerByNameAndId(any(), eq(12L))).thenReturn(getCustomer());  // eq() required here because other argument uses any()
+	when(customerRepository.findByNameAndId(any(), eq(12L))).thenReturn(getCustomer());  // eq() required here because other argument uses any()
 
 	// when
-	Customer response = customerService.getCustomerByNameAndId("John", 12L);
+	Customer response = customerService.findByNameAndId("John", 12L);
 
 	// then
 	assertThat(response.getName()).isEqualTo("John");

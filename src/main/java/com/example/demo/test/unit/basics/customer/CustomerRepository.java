@@ -5,9 +5,9 @@ public interface CustomerRepository {
 
   Customer save(Customer customer);
 
-  Customer getCustomerByName(String name);
+  Customer findByName(String name);
 
-  Customer getCustomerById(Long id);
+  Customer findById(Long id);
 
-  Customer getCustomerByNameAndId(String name, Long id);
+  Customer findByNameAndId(String name, Long id);
 }
