@@ -61,5 +61,16 @@ Demo application
 * https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
 
 
+### test
+* spock multi line string, for example mock mvc json response
+* spock polling conditions
+* spock old
+* spock timeout
+* spock stepwise
+* live templates for tests
+* cucumber, gherkin or some other tools
+* assertJ  isEqualToIgnoringNewLines
+
+
 ### other
 * https://c4model.com/

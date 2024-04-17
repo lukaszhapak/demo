@@ -21,6 +21,12 @@
 * refactoring - coverage and mutants
 * pit framework mutation testing
 * archunit
+* test implementation instead of mock, like repo, exception for given param, or kafka impl with methods like get all messages
+* reusing unit tests, extend class and test methods will be executed, or abstract class with test scenarios
+* don't mock 3rd party code, adapter / abstraction
+* temporary test for some class, to verify some logic works (regexp, calculation etc..) can be deleted during refactoring
+* methods hiding assertions
+* mock application context to get prototype scope bean in unit test
 
 
 ## Integration test
@@ -88,6 +94,7 @@
 * embedded database vs container
 * testing migrations 
 * testing native queries
+* toxiproxy - connection errors or something
 
 ### mocks
 * integration: code in other jar that is already tested, like outbox or kafka publisher
@@ -122,21 +129,3 @@
 ### test slices
 * data jpa
 * web mvc
-
-
-test implementation instead of mock, like repo, exception for given param, or kafka impl with methods like get all messages
-reusing unit tests, extend class and test methods will be executed, or abstract class with test scenarios
-assertJ  isEqualToIgnoringNewLines
-live templates for tests
-chicago vs london school - unit definition
-don't mock 3rd party code, adapter / abstraction
-temporary test for some class, to verify some logic works (regexp, calculation etc..) can be deleted during refactoring
-cucumber, gherkin or some other tools
-methods hiding assertions
-spock multi line string, for example mock mvc json response
-spock polling conditions
-spock old
-spock timeout
-spock stepwise
-toxiproxy - connection errors or something
-mock application context to get prototype scope bean in unit test
