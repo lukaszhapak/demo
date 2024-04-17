@@ -9,10 +9,11 @@ import spock.lang.Specification
 import static org.assertj.core.api.Assertions.assertThat
 
 class MockSpockSpec extends Specification {
+
     NumberService numberService = Mock()
 
     CustomerRepository customerRepository = Mock()
-    CustomerService CustomerService = new CustomerService(customerRepository)
+    CustomerService customerService = new CustomerService(customerRepository)
 
     def "should verify call on mocked service"() {
         when:
@@ -35,7 +36,7 @@ class MockSpockSpec extends Specification {
         Customer customer = new Customer(1, "John", 24)
 
         when:
-        CustomerService.save(customer)
+        customerService.save(customer)
 
         then:
         1 * customerRepository.save({ it.name == "John" && it.age == 24 })
@@ -47,7 +48,7 @@ class MockSpockSpec extends Specification {
         Customer customer = new Customer(1, "John", 24)
 
         when:
-        CustomerService.save(customer)
+        customerService.save(customer)
 
         then:
         1 * customerRepository.save(_) >> {arguments -> savedCustomer = arguments[0] }

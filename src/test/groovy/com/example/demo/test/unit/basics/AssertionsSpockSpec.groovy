@@ -8,6 +8,7 @@ import spock.lang.Specification
 import static org.assertj.core.api.Assertions.assertThat
 
 class AssertionsSpockSpec extends Specification {
+
     NumberService numberService = new NumberService()
 
     def "should get number from service"() {
@@ -57,7 +58,7 @@ class AssertionsSpockSpec extends Specification {
                                        new CustomerDTO("Michael", 27)]
 
         then:
-        customers.stream().allMatch {it.getAge() < 30}
-        customers.stream().noneMatch {it.getName().size() > 12}
+        customers.stream().allMatch { it.getAge() < 30 }
+        customers.stream().noneMatch { it.getName().size() > 12 }
     }
 }

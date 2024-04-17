@@ -1,6 +1,6 @@
 package com.example.demo.test.unit.basics
 
-import com.example.demo.test.unit.SampleCustomers
+import com.example.demo.test.unit.basics.util.SampleCustomers
 import spock.lang.Specification
 
 class TraitSpockSpec extends Specification implements SampleCustomers {

@@ -13,6 +13,18 @@ public class CustomerService {
 	return customerRepository.save(customer);
   }
 
+  public void saveInNewThread(Customer customer) {
+	Thread thread = new Thread(() -> {
+	  try {
+		Thread.sleep(5);
+	  } catch (InterruptedException e) {
+		throw new RuntimeException(e);
+	  }
+	  customerRepository.save(customer);
+	});
+	thread.start();
+  }
+
   public Customer getCustomerByName(String name) {
 	return customerRepository.getCustomerByName(name);
   }

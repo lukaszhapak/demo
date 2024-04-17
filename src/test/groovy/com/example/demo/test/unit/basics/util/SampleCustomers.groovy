@@ -1,4 +1,4 @@
-package com.example.demo.test.unit
+package com.example.demo.test.unit.basics.util
 
 import com.example.demo.test.unit.basics.customer.CustomerDTO
 
