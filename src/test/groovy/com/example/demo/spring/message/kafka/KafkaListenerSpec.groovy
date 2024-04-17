@@ -7,7 +7,7 @@ import org.springframework.kafka.test.context.EmbeddedKafka
 import org.springframework.test.context.ActiveProfiles
 import spock.util.concurrent.PollingConditions
 
-@EmbeddedKafka(topics = "test-topic")
+@EmbeddedKafka(topics = "test-topic", partitions = 1)
 @ActiveProfiles("kafka-embedded")
 class KafkaListenerSpec extends AbstractIntegrationSpec {
 
@@ -28,5 +28,10 @@ class KafkaListenerSpec extends AbstractIntegrationSpec {
         conditions.eventually {
             studentRepository.existsByName(event.getBody())
         }
+    }
+
+    def "should get number of partitions"() {
+        expect:
+        kafkaTemplate.partitionsFor("test-topic").size() == 1
     }
 }
