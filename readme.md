@@ -4,37 +4,39 @@ Demo application
 
 --- 
 
-### TODO:
+## TODO:
 
-* entity manager
-* jdbc spring / non spring
-* hibernate with no spring
-* sequences
-* procedures
-* test entity manager
-* rest template
-* open feign
+### java
+* design patterns
+* java streams
+* optionals
+* create exception and print stack trace
+
+
+### groovy
+* list, map initialization
+
+
+### spring
+* email client
 * property source
 * spring expression language
 * conditionals on..
-* n plus one
 * logs to elk https://www.youtube.com/watch?v=hvYUwUmHB6M
 * metrics to elk
 * actuator
-* design patterns
-* db indexes, partial index (where name != null)
-* @Query with update (@Modifying)
 * custom handler interceptor
-* java streams
-* clean test data: @sql with delete script  @before each with repo.delete(), @transactional on test class
-* test jpa repository, extend jpa repository work on the same entity
-* Domain Specific Language for test scenarios, like givenUserIsSaved()   whenUserNameIsUpdated(String name)    thenUser
-* mock application context to get prototype scope bean in unit test
-* @Scheduled tests, override test cron to run every second, or disable cron and manually start bean method   cron="-" means 'DISABLE'
-* @WithMockUser, whe performing http call and when calling a bean method
+
+
+### db
+* entity manager
+* jdbc spring
+* sequences
+* procedures
+* db indexes, partial index (where name != null)
+* @Query with update (@Modifying) 
+* test entity manager
 * mongodb, embedded for tests
-* email client
-* criteria api, criteria + meta model, query dsl, specification
 * jpa lock
 * jpa dynamic update
 * jpa dynamic insert
@@ -47,9 +49,17 @@ Demo application
 * jooq
 * querydsl
 * jpa inheritance: discriminator column single table, table per class, joined tables
-* create exception and print stack trace
-* https://c4model.com/
-* https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
-* optionals
-* thymeleaf tests
 * transactions in jpa, what causes rollback, checked unchecked (also in try block)
+* n plus one
+* criteria api, criteria + meta model, query dsl, specification
+
+
+### http
+* rest template
+* open feign
+* thymeleaf tests
+* https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
+
+
+### other
+* https://c4model.com/
