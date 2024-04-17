@@ -20,7 +20,7 @@ class PollingConditionsSpec extends Specification {
 
         then:
         conditions.eventually {
-            customerService.getCustomerByName("John2") != null
+            customerService.getCustomerByName("John") != null
         }
     }
 }
