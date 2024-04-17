@@ -14,8 +14,7 @@ public class CustomerService {
   }
 
   public void saveInNewThread(Customer customer) {
-	Thread thread = new Thread(() -> customerRepository.save(customer));
-	thread.start();
+	new Thread(() -> customerRepository.save(customer)).start();
   }
 
   public Customer findByName(String name) {
