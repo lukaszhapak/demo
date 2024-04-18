@@ -3,7 +3,14 @@ package com.example.demo.test.unit.pitest;
 class StudentConfiguration {
 
   StudentFacade studentFacade(StudentRepository studentRepository, StudentEventPublisher studentEventPublisher) {
-	StudentValidator studentValidator = new StudentValidator();
-	return new StudentFacade(studentRepository, studentEventPublisher, studentValidator);
+	return new StudentFacade(studentRepository, studentEventPublisher, studentValidator(), studentMapper());
+  }
+
+  StudentValidator studentValidator() {
+	return new StudentValidator();
+  }
+
+  StudentMapper studentMapper() {
+	return new StudentMapper();
   }
 }

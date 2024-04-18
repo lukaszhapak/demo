@@ -1,7 +1,7 @@
 package com.example.demo.test.unit.basics.assertJ;
 
-import static com.example.demo.test.unit.TestData.getCustomer;
-import static com.example.demo.test.unit.TestData.getCustomerDTO;
+import static com.example.demo.test.unit.basics.TestData.getCustomer;
+import static com.example.demo.test.unit.basics.TestData.getCustomerDTO;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.example.demo.test.unit.basics.customer.Customer;

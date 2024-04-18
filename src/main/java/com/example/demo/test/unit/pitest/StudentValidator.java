@@ -3,10 +3,10 @@ package com.example.demo.test.unit.pitest;
 class StudentValidator {
 
   void validate(Student student) {
-	if (student.name.length() < 2) {
+	if (student.getName().length() < 2) {
 	  throw new IllegalArgumentException("name is too short");
 	}
-	if (student.age > 125) {
+	if (student.getAge() > 125) {
 	  throw new IllegalArgumentException("age is too high");
 	}
   }

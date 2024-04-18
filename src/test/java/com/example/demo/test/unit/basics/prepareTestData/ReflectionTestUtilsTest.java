@@ -3,7 +3,7 @@ package com.example.demo.test.unit.basics.prepareTestData;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.example.demo.test.unit.basics.customer.Customer;
-import com.example.demo.test.unit.TestData;
+import com.example.demo.test.unit.basics.TestData;
 import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

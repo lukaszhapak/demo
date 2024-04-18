@@ -17,27 +17,25 @@ class StudentFacadeTest {
   StudentEventPublisher studentEventPublisher = mock(StudentEventPublisher.class);
 
   StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, studentEventPublisher);
+  StudentDTO student = new StudentDTO("John", 21);
 
   @Test
   @DisplayName("should save student")
   void shouldSaveStudent() {
-	// given
-	Student student = new Student("John", 21);
-
 	// when
-	Student response = studentFacade.save(student);
+	StudentDTO response = studentFacade.save(student);
 
 	// then
 	assertThat(response).usingRecursiveComparison().isEqualTo(student);
-	verify(studentRepository).save(student);
-	verify(studentEventPublisher).publishStudentSavedEvent(student);
+	verify(studentRepository).save(any());
+	verify(studentEventPublisher).publishStudentSavedEvent(any());
   }
 
   @Test
   @DisplayName("should throw exception if name is too short")
   void shouldThrowExceptionIfNameIsTooShort() {
 	// given
-	Student student = new Student("J", 21);
+	student.setName("J");
 
 	// when
 	Throwable thrown = catchThrowable(() -> studentFacade.save(student));
@@ -52,7 +50,7 @@ class StudentFacadeTest {
   @DisplayName("should throw exception if age is too high")
   void shouldThrowExceptionIfAgeIsTooHigh() {
 	// given
-	Student student = new Student("John", 187);
+	student.setAge(187);
 
 	// when
 	Throwable thrown = catchThrowable(() -> studentFacade.save(student));

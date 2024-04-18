@@ -14,12 +14,14 @@ class StudentFacade {
   private final StudentRepository studentRepository;
   private final StudentEventPublisher studentEventPublisher;
   private final StudentValidator studentValidator;
+  private final StudentMapper studentMapper;
 
-  Student save(Student student) {
-	log.debug("saving student={}", student);
+  StudentDTO save(StudentDTO studentDTO) {
+	log.debug("saving studentDTO={}", studentDTO);
+	Student student = studentMapper.toDomain(studentDTO);
 	studentValidator.validate(student);
 	studentEventPublisher.publishStudentSavedEvent(student);
 	studentRepository.save(student);
-	return student;
+	return studentMapper.toDTO(student);
   }
 }

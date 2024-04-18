@@ -16,7 +16,7 @@
 * black box or white box, testing behavior or implementation
 * bugs in white box tests
 * refactoring with white box and a lot of mocks
-* repository in memory for unit tests vs mocking all repository call and setting verifies
+* repository in memory for unit tests vs mocking all repository call and setting verifies, example with reflection
 * hentai example
 * refactoring - coverage and mutants
 * pit framework mutation testing

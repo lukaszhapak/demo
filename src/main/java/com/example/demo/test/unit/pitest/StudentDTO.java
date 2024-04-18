@@ -11,7 +11,12 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class Student {
+class StudentDTO {
+
+  public StudentDTO(String name, int age) {
+    this.name = name;
+    this.age = age;
+  }
 
   private Long id;
   private String name;

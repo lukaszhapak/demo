@@ -1,6 +1,6 @@
 package com.example.demo.test.unit.basics.mockito;
 
-import static com.example.demo.test.unit.TestData.getCustomer;
+import static com.example.demo.test.unit.basics.TestData.getCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

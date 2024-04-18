@@ -1,6 +1,6 @@
 package com.example.demo.test.unit.basics.mockito;
 
-import static com.example.demo.test.unit.TestData.getCustomer;
+import static com.example.demo.test.unit.basics.TestData.getCustomer;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 

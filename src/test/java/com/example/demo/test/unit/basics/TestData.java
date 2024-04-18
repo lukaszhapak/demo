@@ -1,4 +1,4 @@
-package com.example.demo.test.unit;
+package com.example.demo.test.unit.basics;
 
 import com.example.demo.test.unit.basics.customer.Customer;
 import com.example.demo.test.unit.basics.customer.CustomerDTO;
