@@ -48,6 +48,7 @@
 * sql script inserting data, need fix when tables are changing
 * test migrations with data
 * manually inserting data with method calls, http requests, jdbc template, test entity manager
+* application runner inserting objects in db
 * test methods for more complex inserts
 
 ### wiremock
