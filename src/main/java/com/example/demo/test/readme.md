@@ -44,7 +44,7 @@
 * clean data in unit test (repository in memory)
 * get table names via script
 
-### add test data
+### insert test data
 * sql script inserting data, need fix when tables are changing
 * test migrations with data
 * manually inserting data with method calls, http requests, jdbc template, test entity manager
