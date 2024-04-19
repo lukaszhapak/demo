@@ -3,34 +3,38 @@
 ## Unit test
 
 ### basics
-
 * junit assert vs assertJ
 * assertJ recursive comparison
 * mockito, argument matcher, argument captor, stubbing with callback, mockito extension @Mock
 * prepare test data, lombok chain setter, reflection test utils, shared object instance interface
 * tests don't share object instances - list example
+* mock application context to get prototype scope bean in unit test
+* methods hiding assertions
+* reusing unit tests, extend class and test methods will be executed, or abstract class with test scenarios
 
-
-### refactoring
+### black box
 * tests vs refactoring
 * black box or white box, testing behavior or implementation
 * bugs in white box tests
 * refactoring with white box and a lot of mocks
-* repository in memory for unit tests vs mocking all repository call and setting verifies, example with reflection
-* hentai example
-* refactoring - coverage and mutants
-* pit framework mutation testing
-* archunit
-* test implementation instead of mock, like repo, exception for given param, or kafka impl with methods like get all messages
-* reusing unit tests, extend class and test methods will be executed, or abstract class with test scenarios
 * don't mock 3rd party code, adapter / abstraction
 * temporary test for some class, to verify some logic works (regexp, calculation etc..) can be deleted during refactoring
-* methods hiding assertions
-* mock application context to get prototype scope bean in unit test
+* configuration examples building beans with dependencies
+
+### in memory implementation
+* repository in memory for unit tests vs mocking all repository call and setting verifies, example with reflection
+* test implementation instead of mock, like repo, exception for given param, or kafka impl with methods like get all messages
+
+### pitest
+* refactoring - coverage and mutants
+* pit framework mutation testing
+
+### archunit
+* layered
+* hexagonal
 
 
 ## Integration test
-
 * testing ice cone, pyramid, honeycomb
 * testing everything as integration tests, only happy path or only flows that bring money
 
