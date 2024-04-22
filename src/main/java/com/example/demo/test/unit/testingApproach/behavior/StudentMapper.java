@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.blackBox.blackBox;
+package com.example.demo.test.unit.testingApproach.behavior;
 
 
 class StudentMapper {

@@ -1,10 +1,8 @@
-package com.example.demo.test.unit.blackBox.blackBox;
+package com.example.demo.test.unit.testingApproach.behavior;
 
 interface StudentRepository {
 
   Student save(Student student);
-
-  Student findByName(String name);
 
   boolean existsByName(String name);
 }

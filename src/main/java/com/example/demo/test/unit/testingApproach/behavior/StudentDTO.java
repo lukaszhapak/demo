@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.blackBox.grayBox;
+package com.example.demo.test.unit.testingApproach.behavior;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

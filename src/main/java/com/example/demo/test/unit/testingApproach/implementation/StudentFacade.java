@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.blackBox.blackBox;
+package com.example.demo.test.unit.testingApproach.implementation;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,10 +23,5 @@ class StudentFacade {
 	studentEventPublisher.publishStudentSavedEvent(student);
 	studentRepository.save(student);
 	return studentMapper.toDTO(student);
-  }
-
-  StudentDTO findByName(String name) {
-	log.debug("getting by name={}", name);
-	return studentMapper.toDTO(studentRepository.findByName(name));
   }
 }

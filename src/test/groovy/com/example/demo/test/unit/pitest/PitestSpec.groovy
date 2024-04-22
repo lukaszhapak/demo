@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.assertThat
 
-class StudentFacadeSpec extends Specification {
+class PitestSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
     StudentEventPublisher messagePublisher = Mock()
@@ -17,7 +17,7 @@ class StudentFacadeSpec extends Specification {
         Student response = studentFacade.save(student)
 
         then:
-        assertThat(response).usingRecursiveComparison().isEqualTo(student)
+        assertThat(student).usingRecursiveComparison().isEqualTo(student)
         1 * messagePublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }
