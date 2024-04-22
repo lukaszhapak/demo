@@ -9,25 +9,25 @@ class StudentFacadeSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
     StudentEventPublisher messagePublisher = Mock()
-    StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
-    StudentDTO validStudent = new StudentDTO("John", 24)
+    StudentFacade studentFacade = new StudentFacade(studentRepository, messagePublisher)
+    Student student = new Student("John", 21);
 
     def "should save valid student"() {
         when:
-        StudentDTO response = studentFacade.save(validStudent)
+        Student response = studentFacade.save(student)
 
         then:
-        assertThat(response).usingRecursiveComparison().isEqualTo(validStudent)
+        assertThat(response).usingRecursiveComparison().isEqualTo(student)
         1 * messagePublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }
 
     def "should throw exception when name is too short"() {
         given:
-        validStudent.setName("J")
+        student.setName("J")
 
         when:
-        studentFacade.save(validStudent)
+        studentFacade.save(student)
 
         then:
         thrown IllegalArgumentException
@@ -37,10 +37,10 @@ class StudentFacadeSpec extends Specification {
 
     def "should throw exception when age is too high"() {
         given:
-        validStudent.setAge(131)
+        student.setAge(131)
 
         when:
-        studentFacade.save(validStudent)
+        studentFacade.save(student)
 
         then:
         thrown IllegalArgumentException

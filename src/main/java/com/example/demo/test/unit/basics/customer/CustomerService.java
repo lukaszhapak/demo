@@ -13,10 +13,6 @@ public class CustomerService {
 	return customerRepository.save(customer);
   }
 
-  public void saveInNewThread(Customer customer) {
-	new Thread(() -> customerRepository.save(customer)).start();
-  }
-
   public Customer findByName(String name) {
 	return customerRepository.findByName(name);
   }

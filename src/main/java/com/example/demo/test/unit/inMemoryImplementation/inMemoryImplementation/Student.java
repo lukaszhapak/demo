@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.pitest;
+package com.example.demo.test.unit.inMemoryImplementation.inMemoryImplementation;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,12 +11,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class StudentDTO {
-
-  public StudentDTO(String name, int age) {
-    this.name = name;
-    this.age = age;
-  }
+class Student {
 
   private Long id;
   private String name;

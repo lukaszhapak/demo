@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.pitest;
+package com.example.demo.test.unit.inMemoryImplementation.mock;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,21 +13,15 @@ class StudentFacade {
 
   private final StudentRepository studentRepository;
   private final StudentEventPublisher studentEventPublisher;
+  private final StudentValidator studentValidator;
+  private final StudentMapper studentMapper;
 
-  Student save(Student student) {
-	log.debug("saving student={}", student);
-	validate(student);
+  StudentDTO save(StudentDTO studentDTO) {
+	log.debug("saving studentDTO={}", studentDTO);
+	Student student = studentMapper.toDomain(studentDTO);
+	studentValidator.validate(student);
 	studentEventPublisher.publishStudentSavedEvent(student);
 	studentRepository.save(student);
-	return student;
-  }
-
-  void validate(Student student) {
-	if (student.getName().length() < 2) {
-	  throw new IllegalArgumentException("name is too short");
-	}
-	if (student.getAge() > 125) {
-	  throw new IllegalArgumentException("age is too high");
-	}
+	return studentMapper.toDTO(student);
   }
 }

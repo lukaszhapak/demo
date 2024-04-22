@@ -16,14 +16,14 @@ class StudentFacadeTest {
 
   StudentEventPublisher studentEventPublisher = mock(StudentEventPublisher.class);
 
-  StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, studentEventPublisher);
-  StudentDTO student = new StudentDTO("John", 21);
+  StudentFacade studentFacade = new StudentFacade(studentRepository, studentEventPublisher);
+  Student student = new Student("John", 21);
 
   @Test
   @DisplayName("should save student")
   void shouldSaveStudent() {
 	// when
-	StudentDTO response = studentFacade.save(student);
+	Student response = studentFacade.save(student);
 
 	// then
 	assertThat(response).usingRecursiveComparison().isEqualTo(student);

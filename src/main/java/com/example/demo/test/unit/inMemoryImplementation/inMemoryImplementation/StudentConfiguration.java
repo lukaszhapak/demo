@@ -1,4 +1,4 @@
-package com.example.demo.test.unit.pitest;
+package com.example.demo.test.unit.inMemoryImplementation.inMemoryImplementation;
 
 class StudentConfiguration {
 
