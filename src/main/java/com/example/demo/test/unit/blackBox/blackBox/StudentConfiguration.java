@@ -3,11 +3,11 @@ package com.example.demo.test.unit.blackBox.blackBox;
 class StudentConfiguration {
 
   StudentFacade studentFacade(StudentRepository studentRepository, StudentEventPublisher studentEventPublisher) {
-	return new StudentFacade(studentRepository, studentEventPublisher, studentValidator(), studentMapper());
+	return new StudentFacade(studentRepository, studentEventPublisher, studentValidator(studentRepository), studentMapper());
   }
 
-  StudentValidator studentValidator() {
-	return new StudentValidator();
+  StudentValidator studentValidator(StudentRepository studentRepository) {
+	return new StudentValidator(studentRepository);
   }
 
   StudentMapper studentMapper() {

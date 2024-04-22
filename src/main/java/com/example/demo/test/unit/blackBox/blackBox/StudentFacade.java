@@ -24,4 +24,9 @@ class StudentFacade {
 	studentRepository.save(student);
 	return studentMapper.toDTO(student);
   }
+
+  StudentDTO findByName(String name) {
+	log.debug("getting by name={}", name);
+	return studentMapper.toDTO(studentRepository.findByName(name));
+  }
 }
