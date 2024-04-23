@@ -14,8 +14,5 @@ class StudentValidator {
 	if (student.getAge() > 125) {
 	  throw new IllegalArgumentException("age is too high");
 	}
-	if (studentRepository.existsByName(student.getName())) {
-	  throw new IllegalArgumentException("name already exists");
-	}
   }
 }
