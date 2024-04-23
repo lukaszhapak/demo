@@ -10,14 +10,14 @@ class PitestSpec extends Specification {
     StudentRepository studentRepository = Mock()
     StudentEventPublisher messagePublisher = Mock()
     StudentFacade studentFacade = new StudentFacade(studentRepository, messagePublisher)
-    Student student = new Student("John", 21);
+    Student student = new Student("John", 21)
 
     def "should save valid student"() {
         when:
         Student response = studentFacade.save(student)
 
         then:
-        assertThat(student).usingRecursiveComparison().isEqualTo(student)
+        assertThat(response).usingRecursiveComparison().isEqualTo(student)
         1 * messagePublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }

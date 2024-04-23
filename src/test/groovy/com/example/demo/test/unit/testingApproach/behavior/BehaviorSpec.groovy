@@ -5,12 +5,12 @@ import spock.lang.Specification
 
 import static org.assertj.core.api.Assertions.assertThat
 
-class BlackBoxSpec extends Specification {
+class BehaviorSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
     StudentEventPublisher messagePublisher = Mock()
     StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
-    StudentDTO student = new StudentDTO("John", 21);
+    StudentDTO student = new StudentDTO("John", 21)
 
     def "should save valid student"() {
         when:
