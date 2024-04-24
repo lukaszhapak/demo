@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat
 class InMemoryImplementationSpec extends Specification {
 
     StudentEventPublisher messagePublisher = Mock()
-    StudentRepository studentRepository = new StudentInMemoryRepository()
+    StudentRepository studentRepository = new InMemoryStudentRepository()
     StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
     StudentDTO student = new StudentDTO("John", 21)
 

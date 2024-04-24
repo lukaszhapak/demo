@@ -1,6 +1,6 @@
 package com.example.demo.test.unit.inMemoryImplementation.inMemoryImplementation
 
-class StudentInMemoryRepository implements StudentRepository {
+class InMemoryStudentRepository implements StudentRepository {
 
     private Map<Long, Student> map = new HashMap<>()
     private Long id = 0L
