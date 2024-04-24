@@ -18,8 +18,15 @@ class InMemoryImplementationSpec extends Specification {
 
         then:
         assertThat(studentFacade.findById(response.getId())).usingRecursiveComparison().ignoringFields("id").isEqualTo(student)
-        assertThat(studentFacade.findByName(student.getName())).usingRecursiveComparison().ignoringFields("id").isEqualTo(student)
         1 * messagePublisher.publishStudentSavedEvent(_)
+    }
+
+    def "should get by name"() {
+        given:
+        studentFacade.save(student)
+
+        expect:
+        assertThat(studentFacade.findByName(student.getName())).usingRecursiveComparison().ignoringFields("id").isEqualTo(student)
     }
 
     def "should throw exception when name is too short"() {
