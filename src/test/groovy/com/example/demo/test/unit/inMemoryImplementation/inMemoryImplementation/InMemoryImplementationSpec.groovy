@@ -10,7 +10,7 @@ class InMemoryImplementationSpec extends Specification {
     StudentEventPublisher messagePublisher = Mock()
     StudentRepository studentRepository = new InMemoryStudentRepository()
     StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
-    StudentDTO student = new StudentDTO("John", 21)
+    StudentDTO student = new StudentDTO("John", 22)
 
     def "should save and get valid student"() {
         when:
