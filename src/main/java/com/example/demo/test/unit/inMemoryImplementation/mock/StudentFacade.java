@@ -24,4 +24,14 @@ class StudentFacade {
 	studentRepository.save(student);
 	return studentMapper.toDTO(student);
   }
+
+  StudentDTO findById(Long id) {
+	log.debug("getting by id={}", id);
+	return studentMapper.toDTO(studentRepository.findById(id));
+  }
+
+  StudentDTO findByName(String name) {
+	log.debug("getting by name={}", name);
+	return studentMapper.toDTO(studentRepository.findByName(name));
+  }
 }
