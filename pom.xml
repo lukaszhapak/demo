@@ -44,6 +44,7 @@
 		</spring-cloud-starter-contract-stub-runner.version>
 		<spock.version>2.4-M1-groovy-4.0</spock.version>
 		<archunit-junit4.version>1.2.1</archunit-junit4.version>
+		<quick-perf.version>1.1.0</quick-perf.version>
 	</properties>
 
 	<!--	SPRING	-->
@@ -167,6 +168,19 @@
 			<groupId>com.tngtech.archunit</groupId>
 			<artifactId>archunit-junit4</artifactId>
 			<version>${archunit-junit4.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>   <!--		 @ExpectSelect(1) -->
+			<groupId>org.quickperf</groupId>
+			<artifactId>quick-perf-junit5</artifactId>
+			<version>${quick-perf.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.quickperf</groupId>
+			<artifactId>quick-perf-springboot2-sql-starter</artifactId>
+			<version>${quick-perf.version}</version>
 			<scope>test</scope>
 		</dependency>
 
