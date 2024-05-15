@@ -134,3 +134,8 @@
 ### test slices
 * data jpa
 * web mvc
+
+### quick perf
+* testing cache
+* n + 1 problem
+* any other unexpected db calls

@@ -22,8 +22,8 @@ class QuickPerfTest {
   ProductRepository productRepository;
 
   @Test
-  @ExpectSelect(0)
   @ExpectInsert(1)
+  @ExpectSelect(0)
   @ExpectUpdate(0)
   @ExpectDelete(0)
   void shouldSaveProduct() {
