@@ -45,6 +45,9 @@
 		<spock.version>2.4-M1-groovy-4.0</spock.version>
 		<archunit-junit4.version>1.2.1</archunit-junit4.version>
 		<quick-perf.version>1.1.0</quick-perf.version>
+		<datasource-proxy-spring-boot-starter.version>1.9.1
+		</datasource-proxy-spring-boot-starter.version>
+		<flexy-pool-spring-boot-starter.version>1.9.1</flexy-pool-spring-boot-starter.version>
 	</properties>
 
 	<!--	SPRING	-->
@@ -183,6 +186,17 @@
 			<version>${quick-perf.version}</version>
 			<scope>test</scope>
 		</dependency>
+
+<!--		<dependency>    &lt;!&ndash;		logging connection details &ndash;&gt;-->
+<!--			<groupId>com.github.gavlyukovskiy</groupId>-->
+<!--			<artifactId>datasource-proxy-spring-boot-starter</artifactId>-->
+<!--			<version>${datasource-proxy-spring-boot-starter.version}</version>-->
+<!--		</dependency>-->
+<!--		<dependency>-->
+<!--			<groupId>com.github.gavlyukovskiy</groupId>-->
+<!--			<artifactId>flexy-pool-spring-boot-starter</artifactId>-->
+<!--			<version>${flexy-pool-spring-boot-starter.version}</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.spockframework</groupId>
