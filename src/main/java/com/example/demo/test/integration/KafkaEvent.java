@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class KafkaEvent {
+public class KafkaEvent {
 
   private String body;
 }
