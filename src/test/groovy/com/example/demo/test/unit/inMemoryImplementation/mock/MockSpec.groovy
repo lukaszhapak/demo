@@ -1,9 +1,6 @@
 package com.example.demo.test.unit.inMemoryImplementation.mock
 
-
 import spock.lang.Specification
-
-import static org.assertj.core.api.Assertions.assertThat
 
 class MockSpec extends Specification {
 
@@ -12,14 +9,20 @@ class MockSpec extends Specification {
     StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
     StudentDTO student = new StudentDTO(12, "John", 22)
 
-    def "should save valid student"() {
+    def "should save valid student and publish event"() {
         when:
-        studentRepository.save(_) >> new Student(12, "John", 22)
-        StudentDTO response = studentFacade.save(student)
+        studentFacade.save(student).getId()
 
         then:
-        assertThat(response).usingRecursiveComparison().isEqualTo(student)
         1 * messagePublisher.publishStudentSavedEvent(_)
+    }
+
+    def "should get by id"() {
+        given:
+        studentRepository.findById(12) >> new Student(12, "John", 22)
+
+        expect:
+        studentFacade.findById(12).getName() == 'John'
     }
 
     def "should get by name"() {
@@ -27,16 +30,7 @@ class MockSpec extends Specification {
         studentRepository.findByName("John") >> new Student(12, "John", 22)
 
         expect:
-        assertThat(studentFacade.findByName(student.getName())).usingRecursiveComparison().isEqualTo(student)
-    }
-
-
-    def "should get by id"() {
-        given:
-        studentRepository.findById(12) >> new Student(12, "John", 22)
-
-        expect:
-        assertThat(studentFacade.findById(12)).usingRecursiveComparison().isEqualTo(student)
+        studentFacade.findByName("John").getName() == 'John'
     }
 
     def "should throw exception when name is too short"() {

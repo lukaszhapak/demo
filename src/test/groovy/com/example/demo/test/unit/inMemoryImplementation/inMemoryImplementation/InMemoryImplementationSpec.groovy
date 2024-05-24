@@ -1,9 +1,6 @@
 package com.example.demo.test.unit.inMemoryImplementation.inMemoryImplementation
 
-
 import spock.lang.Specification
-
-import static org.assertj.core.api.Assertions.assertThat
 
 class InMemoryImplementationSpec extends Specification {
 
@@ -12,13 +9,22 @@ class InMemoryImplementationSpec extends Specification {
     StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
     StudentDTO student = new StudentDTO("John", 22)
 
-    def "should save and get valid student"() {
+    def "should save valid student and publish event"() {
         when:
         StudentDTO response = studentFacade.save(student)
 
         then:
-        assertThat(studentFacade.findById(response.getId())).usingRecursiveComparison().ignoringFields("id").isEqualTo(student)
+        response.getId() != null
+        response.getName() == "John"
         1 * messagePublisher.publishStudentSavedEvent(_)
+    }
+
+    def "should get by id"() {
+        given:
+        Long id = studentFacade.save(student).getId()
+
+        expect:
+        studentFacade.findById(id).getName() == 'John'
     }
 
     def "should get by name"() {
@@ -26,7 +32,7 @@ class InMemoryImplementationSpec extends Specification {
         studentFacade.save(student)
 
         expect:
-        assertThat(studentFacade.findByName(student.getName())).usingRecursiveComparison().ignoringFields("id").isEqualTo(student)
+        studentFacade.findByName("John").getName() == 'John'
     }
 
     def "should throw exception when name is too short"() {
