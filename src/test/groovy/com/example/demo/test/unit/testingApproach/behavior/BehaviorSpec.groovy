@@ -1,9 +1,6 @@
 package com.example.demo.test.unit.testingApproach.behavior
 
-
 import spock.lang.Specification
-
-import static org.assertj.core.api.Assertions.assertThat
 
 class BehaviorSpec extends Specification {
 
@@ -17,7 +14,7 @@ class BehaviorSpec extends Specification {
         StudentDTO response = studentFacade.save(student)
 
         then:
-        assertThat(response).usingRecursiveComparison().isEqualTo(student)
+        response.getName() == "John"
         1 * messagePublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }

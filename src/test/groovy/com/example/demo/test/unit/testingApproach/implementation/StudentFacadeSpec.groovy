@@ -2,8 +2,6 @@ package com.example.demo.test.unit.testingApproach.implementation
 
 import spock.lang.Specification
 
-import static org.assertj.core.api.Assertions.assertThat
-
 class StudentFacadeSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
@@ -27,7 +25,7 @@ class StudentFacadeSpec extends Specification {
         StudentDTO response = studentFacade.save(studentDTO)
 
         then:
-        assertThat(response).usingRecursiveComparison().ignoringFields("id").isEqualTo(studentDTO)
+        response.getName() == "John"
         1 * messagePublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }

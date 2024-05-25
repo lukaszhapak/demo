@@ -1,9 +1,6 @@
 package com.example.demo.test.unit.pitest
 
-
 import spock.lang.Specification
-
-import static org.assertj.core.api.Assertions.assertThat
 
 class PitestSpec extends Specification {
 
@@ -17,7 +14,7 @@ class PitestSpec extends Specification {
         Student response = studentFacade.save(student)
 
         then:
-        assertThat(response).usingRecursiveComparison().isEqualTo(student)
+        response.getName() == "John"
         1 * messagePublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }

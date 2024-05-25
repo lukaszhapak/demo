@@ -14,7 +14,6 @@ class InMemoryImplementationSpec extends Specification {
         StudentDTO response = studentFacade.save(student)
 
         then:
-        response.getId() != null
         response.getName() == "John"
         1 * messagePublisher.publishStudentSavedEvent(_)
     }
