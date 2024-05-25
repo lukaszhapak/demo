@@ -1,4 +1,4 @@
-package com.example.demo.test.integration;
+package com.example.demo.test.integration.data;
 
 import java.util.Optional;
 import org.springframework.data.repository.Repository;

@@ -1,5 +1,7 @@
-package com.example.demo.test.integration;
+package com.example.demo.test.integration.message;
 
+import com.example.demo.test.integration.data.Product;
+import com.example.demo.test.integration.data.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;

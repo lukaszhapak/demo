@@ -1,4 +1,4 @@
-package com.example.demo.test.integration;
+package com.example.demo.test.integration.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

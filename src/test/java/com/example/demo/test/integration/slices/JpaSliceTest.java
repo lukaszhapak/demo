@@ -1,8 +1,8 @@
 package com.example.demo.test.integration.slices;
 
 
-import com.example.demo.test.integration.Product;
-import com.example.demo.test.integration.ProductRepository;
+import com.example.demo.test.integration.data.Product;
+import com.example.demo.test.integration.data.ProductRepository;
 import com.example.demo.test.integration.TestData;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

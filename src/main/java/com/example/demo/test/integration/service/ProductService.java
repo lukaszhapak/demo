@@ -1,5 +1,7 @@
-package com.example.demo.test.integration;
+package com.example.demo.test.integration.service;
 
+import com.example.demo.test.integration.data.Product;
+import com.example.demo.test.integration.data.ProductRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
