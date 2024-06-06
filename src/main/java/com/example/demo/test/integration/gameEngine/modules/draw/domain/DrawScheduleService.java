@@ -16,11 +16,11 @@ class DrawScheduleService {
 	validate(productId, requestedNumberOfDrawsToSchedule);
 	int numberOfDrawsToSchedule = calculateNumberOfDrawsToSchedule(productId, requestedNumberOfDrawsToSchedule);
 	Draw lastDraw = drawRepository.findLastByProductIdAndStatus(productId, OPEN);
-	for (int i = 0; i < numberOfDrawsToSchedule; i++) {
-	  Draw draw = createDraw(productId, lastDraw);
-	  drawRepository.save(draw);
-	  lastDraw = draw;
-	}
+	scheduleDraws(productId, numberOfDrawsToSchedule, lastDraw);
+  }
+
+  int getCountOfScheduledDraws(int productId) {
+	return drawRepository.countByProductId(productId);
   }
 
   private void validate(int productId, int numberOfDrawsToSchedule) {
@@ -39,8 +39,12 @@ class DrawScheduleService {
 	return numberOfDrawsToSchedule;
   }
 
-  int getCountOfScheduledDraws(int productId) {
-	return drawRepository.countByProductId(productId);
+  private void scheduleDraws(int productId, int numberOfDrawsToSchedule, Draw lastDraw) {
+	for (int i = 0; i < numberOfDrawsToSchedule; i++) {
+	  Draw draw = createDraw(productId, lastDraw);
+	  drawRepository.save(draw);
+	  lastDraw = draw;
+	}
   }
 
   private Draw createDraw(int productId, Draw lastDraw) {
