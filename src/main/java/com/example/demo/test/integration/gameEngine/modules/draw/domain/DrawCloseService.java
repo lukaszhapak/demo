@@ -18,7 +18,7 @@ class DrawCloseService {
   }
 
   private Draw getFirstOpenDraw(int productId) {
-	Draw draw = drawRepository.findFirstByProductIdAndStatus(productId, OPEN);
+	Draw draw = drawRepository.findFirstByProductIdAndStatusOrderByDrawNumberAsc(productId, OPEN);
 	if (draw == null) {
 	  throw new DrawNotFoundException("Cannot close draw because there is no scheduled draws");
 	}

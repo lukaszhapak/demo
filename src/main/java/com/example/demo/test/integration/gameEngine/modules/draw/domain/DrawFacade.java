@@ -2,7 +2,9 @@ package com.example.demo.test.integration.gameEngine.modules.draw.domain;
 
 import com.example.demo.test.integration.gameEngine.modules.draw.dto.DrawDTO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @RequiredArgsConstructor
 public class DrawFacade {
 

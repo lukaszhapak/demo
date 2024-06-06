@@ -15,7 +15,7 @@ class DrawScheduleService {
   void scheduleDraws(int productId, int requestedNumberOfDrawsToSchedule) {
 	validate(productId, requestedNumberOfDrawsToSchedule);
 	int numberOfDrawsToSchedule = calculateNumberOfDrawsToSchedule(productId, requestedNumberOfDrawsToSchedule);
-	Draw lastDraw = drawRepository.findLastByProductIdAndStatus(productId, OPEN);
+	Draw lastDraw = drawRepository.findFirstByProductIdAndStatusOrderByDrawNumberDesc(productId, OPEN);
 	scheduleDraws(productId, numberOfDrawsToSchedule, lastDraw);
   }
 
