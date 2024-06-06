@@ -1,10 +1,12 @@
 package com.example.demo.test.integration.gameEngine.modules.draw.domain;
 
+import java.util.Map;
+
 class DrawConfiguration {
 
-  DrawFacade drawFacade(DrawRepository drawRepository) {
+  DrawFacade drawFacade(DrawRepository drawRepository, Map<Integer, Integer> scheduledDrawsPerGame) {
 	return new DrawFacade(drawCloseService(drawRepository),
-		drawScheduleService(drawRepository),
+		drawScheduleService(drawRepository, scheduledDrawsPerGame),
 		drawFindService(drawRepository),
 		drawMapper());
   }
@@ -13,8 +15,8 @@ class DrawConfiguration {
 	return new DrawCloseService(drawRepository);
   }
 
-  DrawScheduleService drawScheduleService(DrawRepository drawRepository) {
-	return new DrawScheduleService(drawRepository);
+  DrawScheduleService drawScheduleService(DrawRepository drawRepository, Map<Integer, Integer> scheduledDrawsPerGame) {
+	return new DrawScheduleService(drawRepository, scheduledDrawsPerGame);
   }
 
   DrawFindService drawFindService(DrawRepository drawRepository) {

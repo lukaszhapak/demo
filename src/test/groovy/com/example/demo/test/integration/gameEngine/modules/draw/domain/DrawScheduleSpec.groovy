@@ -1,6 +1,6 @@
 package com.example.demo.test.integration.gameEngine.modules.draw.domain
 
-
+import com.example.demo.test.integration.gameEngine.modules.draw.dto.DrawLimitExceededException
 import com.example.demo.test.integration.gameEngine.modules.draw.dto.DrawStatus
 
 class DrawScheduleSpec extends AbstractDrawSpec {
@@ -17,5 +17,31 @@ class DrawScheduleSpec extends AbstractDrawSpec {
         drawFacade.getCountOfScheduledDraws(productId) == numberOfDrawsToSchedule
         drawFacade.findDraw(productId, 1).getStatus() == DrawStatus.OPEN
         drawFacade.findDraw(productId, 20).getStatus() == DrawStatus.OPEN
+    }
+
+    def "should not schedule any draws if there are already enough scheduled"() {
+        given:
+        int productId = 8
+
+        when:
+        drawFacade.scheduleDraws(productId, 30)
+        drawFacade.scheduleDraws(productId, 30)
+        drawFacade.scheduleDraws(productId, 20)
+
+        then:
+        drawFacade.getCountOfScheduledDraws(productId) == scheduledDrawsLimit
+    }
+
+    def "should throw exception if number of draws to schedule is above limit"() {
+        given:
+        int productId = 8
+
+        when:
+        drawFacade.scheduleDraws(productId, scheduledDrawsLimit + 1)
+
+        then:
+        drawFacade.getCountOfScheduledDraws(productId) == 0
+        DrawLimitExceededException thrown = thrown()
+        thrown.getMessage() == "Requested number of draws is above the limit"
     }
 }
