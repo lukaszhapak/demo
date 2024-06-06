@@ -15,10 +15,11 @@ class DrawScheduleService {
   void scheduleDraws(int productId, int requestedNumberOfDrawsToSchedule) {
 	validate(productId, requestedNumberOfDrawsToSchedule);
 	int numberOfDrawsToSchedule = calculateNumberOfDrawsToSchedule(productId, requestedNumberOfDrawsToSchedule);
-
+	Draw lastDraw = drawRepository.findLastByProductIdAndStatus(productId, OPEN);
 	for (int i = 0; i < numberOfDrawsToSchedule; i++) {
-	  Draw draw = createDraw(productId, i);
+	  Draw draw = createDraw(productId, lastDraw);
 	  drawRepository.save(draw);
+	  lastDraw = draw;
 	}
   }
 
@@ -32,8 +33,8 @@ class DrawScheduleService {
 	int alreadyScheduledDraws = getCountOfScheduledDraws(productId);
 	int numberOfDrawsToSchedule = requestedNumberOfDrawsToSchedule;
 	int drawsLimit = scheduledDrawsPerGame.get(productId);
-	  while (numberOfDrawsToSchedule + alreadyScheduledDraws > drawsLimit) {
-		numberOfDrawsToSchedule--;
+	while (numberOfDrawsToSchedule + alreadyScheduledDraws > drawsLimit) {
+	  numberOfDrawsToSchedule--;
 	}
 	return numberOfDrawsToSchedule;
   }
@@ -42,10 +43,10 @@ class DrawScheduleService {
 	return drawRepository.countByProductId(productId);
   }
 
-  private Draw createDraw(int productId, int i) {
+  private Draw createDraw(int productId, Draw lastDraw) {
 	return new Draw()
 		.setProductId(productId)
-		.setDrawNumber(i + 1)
+		.setDrawNumber(lastDraw == null ? 1 : lastDraw.getDrawNumber() + 1)
 		.setStatus(OPEN);
   }
 }

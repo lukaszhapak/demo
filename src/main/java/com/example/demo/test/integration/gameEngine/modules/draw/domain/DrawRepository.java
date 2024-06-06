@@ -12,4 +12,6 @@ interface DrawRepository {
   Draw findFirstByProductIdAndStatus(int productId, DrawStatus drawStatus);
 
   Draw findByProductIdAndDrawNumber(int productId, int drawNumber);
+
+  Draw findLastByProductIdAndStatus(int productId, DrawStatus open);
 }

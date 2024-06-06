@@ -35,6 +35,14 @@ class InMemoryDrawRepository implements DrawRepository {
                 .findFirst().orElse(null)
     }
 
+    Draw findLastByProductIdAndStatus(int productId, DrawStatus drawStatus) {
+        map.values().stream()
+                .filter { it -> it.getProductId() == productId }
+                .filter { it -> it.getStatus() == drawStatus }
+                .sorted((o1, o2) -> o2.getDrawNumber() <=> o1.getDrawNumber()).
+                findFirst().orElse(null)
+    }
+
     Draw findById(Long id) {
         map.get(id)
     }
