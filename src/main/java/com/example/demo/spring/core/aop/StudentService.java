@@ -8,20 +8,15 @@ import org.springframework.stereotype.Service;
 class StudentService {
 
   @Cacheable
-  String getStudentCacheableAspect(Integer id) {
+  Student get(Integer id) {
 	if (id % 2 == 0) {
-	  return "John";
+	  return new Student().setName("John");
 	}
-	return "Brian";
+	return new Student().setName("Brian");
   }
 
   @Logging
-  String getStudentLoggingAspect(Integer id) {
-	try {
-	  Thread.sleep(154);
-	} catch (InterruptedException e) {
-	  throw new RuntimeException(e);
-	}
-	return "John";
+  Student save(Student student) {
+	return student;
   }
 }
