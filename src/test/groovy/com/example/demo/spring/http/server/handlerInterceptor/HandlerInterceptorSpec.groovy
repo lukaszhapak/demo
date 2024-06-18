@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 class HandlerInterceptorSpec extends AbstractMockMvcIntegrationSpec {
 
-    def "should get string"() {
+    def "should get string and trigger handler interceptor"() {
         expect:
         mockMvc.perform(get("/api/string"))
                 .andExpect(status().is(200))
