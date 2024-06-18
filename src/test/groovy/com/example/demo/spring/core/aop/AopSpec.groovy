@@ -8,11 +8,16 @@ class AopSpec extends AbstractIntegrationSpec {
     @Autowired
     StudentService studentService
 
-    def "should execute aspect methods"() {
+    def "should execute cacheable aspect methods"() {
         expect:
-        studentService.getStudent(1)
-        studentService.getStudent(2)
-        studentService.getStudent(2)
-        studentService.getStudent(3)
+        studentService.getStudentCacheableAspect(1)
+        studentService.getStudentCacheableAspect(2)
+        studentService.getStudentCacheableAspect(2)
+        studentService.getStudentCacheableAspect(3)
+    }
+
+    def "should execute logging aspect methods"() {
+        expect:
+        studentService.getStudentLoggingAspect(1)
     }
 }
