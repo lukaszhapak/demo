@@ -9,7 +9,7 @@
 * prepare test data, lombok chain setter, reflection test utils, shared object instance interface
 * tests don't share object instances - list example
 * mock application context to get prototype scope bean in unit test
-* methods hiding assertions
+* methods hiding assertions, model refactoring
 * reusing unit tests, extend class and test methods will be executed, or abstract class with test scenarios
 
 ### black box
