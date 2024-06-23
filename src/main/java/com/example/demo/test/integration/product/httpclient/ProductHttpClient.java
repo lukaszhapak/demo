@@ -13,7 +13,7 @@ public class ProductHttpClient {
   @Value("${product.externalService.url}")
   private final String url;
 
-  String getValue() {
+  public String getValue() {
 	Response response = getHttpCall(url + "/api/value/");
 	return response.as(ValueResponse.class).getValue();
   }
