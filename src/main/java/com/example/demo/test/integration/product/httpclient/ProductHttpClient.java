@@ -14,7 +14,7 @@ public class ProductHttpClient {
   private final String url;
 
   public String getValue() {
-	Response response = getHttpCall(url + "/api/value/");
+	Response response = getHttpCall(url + "/api/value");
 	return response.as(ValueResponse.class).getValue();
   }
 

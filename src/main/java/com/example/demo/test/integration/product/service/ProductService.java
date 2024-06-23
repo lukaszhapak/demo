@@ -18,14 +18,16 @@ public class ProductService {
 	return productRepository.save(product);
   }
 
-  public Product assignValueFromExternalServiceAndSave(Product product) {
-	product.setClientValue(product.getClientValue());
-	return productRepository.save(product);
+  public void assignValueFromExternalService(Long id) {
+	Product product = getById(id);
+	product.setClientValue(productHttpClient.getValue());
+	productRepository.save(product);
   }
 
   public List<Product> getByCronValue(boolean cronValue) {
 	return productRepository.findByCronValue(cronValue);
   }
+
   public Product getById(Long id) {
 	return productRepository.findById(id).get();
   }
