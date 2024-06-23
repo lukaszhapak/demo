@@ -2,7 +2,7 @@ package com.example.demo.test.integration.product.message;
 
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
-import com.example.demo.test.integration.product.data.Product;
+import com.example.demo.test.integration.product.TestData;
 import com.example.demo.test.integration.product.service.ProductService;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,7 @@ class ProductKafkaListenerTest {
   @DisplayName("should handle kafka event")
   void shouldHandleKafkaEvent() {
 	// given
-	Long id = productService.save(new Product().setName("asd")).getId();
+	Long id = productService.save(TestData.getSampleProduct()).getId();
 	KafkaEvent event = new KafkaEvent().setProductId(id).setValue("value from kafka");
 
 	// when

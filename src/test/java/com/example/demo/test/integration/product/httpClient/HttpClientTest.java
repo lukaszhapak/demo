@@ -6,6 +6,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import com.example.demo.test.integration.product.TestData;
 import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.service.ProductService;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +27,7 @@ class HttpClientTest {
   void shouldGetValueFromExternalService() {
 	// given
 	stubExternalService(200, "{\"value\" : \"test-value\"}");
-	Long id = productService.save(new Product().setName("asd")).getId();
+	Long id = productService.save(TestData.getSampleProduct()).getId();
 
 	// when
 	productService.assignValueFromExternalService(id);

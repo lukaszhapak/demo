@@ -2,7 +2,7 @@ package com.example.demo.test.integration.product.cron;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.example.demo.test.integration.product.data.Product;
+import com.example.demo.test.integration.product.TestData;
 import com.example.demo.test.integration.product.service.ProductService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ class FirstCronTest {
   @DisplayName("should save product and run job")
   void shouldSaveProductAndRunJob() {
 	// given
-	Long id = productService.save(new Product().setName("asd")).getId();
+	Long id = productService.save(TestData.getSampleProduct()).getId();
 
 	// when
 	productJob.setSomeValue();
