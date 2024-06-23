@@ -1,7 +1,7 @@
 package com.example.demo.test.integration.product.message;
 
 import com.example.demo.test.integration.product.data.Product;
-import com.example.demo.test.integration.product.data.ProductRepository;
+import com.example.demo.test.integration.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -13,11 +13,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProductListener {
 
-  private final ProductRepository productRepository;
+  private final ProductService productService;
 
   @KafkaListener(id = "demo-application", topics = "test-topic")
   void listen(ConsumerRecord<String, KafkaEvent> kafkaEvent) {
 	log.debug("Event received kafkaEvent={}", kafkaEvent);
-	productRepository.save(new Product().setName(kafkaEvent.value().getBody()));
+	Product product = productService.getById(kafkaEvent.value().getProductId());
+	product.setKafkaValue(kafkaEvent.value().getValue());
+	productService.save(product);
   }
 }

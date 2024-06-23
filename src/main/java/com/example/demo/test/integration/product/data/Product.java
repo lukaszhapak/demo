@@ -25,4 +25,6 @@ public class Product {
   private String name;
   private int quantity;
   private boolean cronValue;
+  private String clientValue;
+  private String kafkaValue;
 }
