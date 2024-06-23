@@ -1,1 +1,1 @@
-insert into product (name, quantity, id) values ('Product2', 21, 1001);
+insert into product (name, quantity, cron_value, id) values ('Product2', 21, false, 1001);
