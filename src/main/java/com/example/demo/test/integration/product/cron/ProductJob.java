@@ -17,7 +17,6 @@ public class ProductJob {
 
   @Scheduled(cron = "${product.cron}")
   public void setSomeValue() {
-	log.debug("test product job");
 	List<Product> products = productService.getByCronValue(false);
 	for (Product product : products) {
 	  product.setCronValue(true);

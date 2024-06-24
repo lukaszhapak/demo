@@ -17,7 +17,6 @@ public class ProductListener {
 
   @KafkaListener(id = "demo-application", topics = "test-product-topic")
   void listen(ConsumerRecord<String, KafkaEvent> kafkaEvent) {
-	log.debug("Event received kafkaEvent={}", kafkaEvent);
 	Product product = productService.getById(kafkaEvent.value().getProductId());
 	product.setKafkaValue(kafkaEvent.value().getValue());
 	productService.save(product);

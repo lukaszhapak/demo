@@ -14,7 +14,8 @@ import org.springframework.kafka.test.context.EmbeddedKafka;
 
 @EmbeddedKafka(topics = "test-product-topic", partitions = 1)
 @SpringBootTest(properties = {"spring.kafka.producer.bootstrap-servers=${spring.embedded.kafka.brokers}",
-	"spring.kafka.consumer.bootstrap-servers=${spring.embedded.kafka.brokers}"})
+	"spring.kafka.consumer.bootstrap-servers=${spring.embedded.kafka.brokers}",
+	"spring.kafka.consumer.auto-offset-reset=earliest"})
 class ProductKafkaListenerTest {
 
   @Autowired

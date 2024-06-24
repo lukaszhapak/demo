@@ -23,7 +23,8 @@ import org.springframework.kafka.test.context.EmbeddedKafka;
 @Import(KafkaTestConfig.class)
 @EmbeddedKafka(topics = "test-product-added-topic", partitions = 1)
 @SpringBootTest(properties = {"spring.kafka.producer.bootstrap-servers=${spring.embedded.kafka.brokers}",
-	"spring.kafka.consumer.bootstrap-servers=${spring.embedded.kafka.brokers}"})
+	"spring.kafka.consumer.bootstrap-servers=${spring.embedded.kafka.brokers}",
+	"spring.kafka.consumer.auto-offset-reset=earliest"})
 class ProductKafkaPublisherTest {
 
   @Autowired
