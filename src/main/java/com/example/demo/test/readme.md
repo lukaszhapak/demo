@@ -55,10 +55,11 @@
 * application runner inserting objects in db
 * test methods for more complex inserts
 
-### wiremock
-* @Autoconfigure annotation with random port
-* port in properties
-* method stub and resources stub
+### http client
+* wiremock @Autoconfigure annotation with random port
+* wiremock port in properties
+* wiremock method stub and resources stub
+* some different tool for that
 
 ### kafka
 * embedded kafka vs container
@@ -69,7 +70,7 @@
 * overriding cron '-' disable and manually call method
 * overriding cron '0/3 sec' and use awaitility / PollingConditions in spock
 
-### http clients
+### http server
 * webEnvironment mock vs random port
 * example of mockmvc, rest assured and rest template, webclient headers params body, authentication
 
