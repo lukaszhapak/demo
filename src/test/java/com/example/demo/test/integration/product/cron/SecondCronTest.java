@@ -3,7 +3,6 @@ package com.example.demo.test.integration.product.cron;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import com.example.demo.test.integration.product.TestData;
-import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.service.ProductService;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;

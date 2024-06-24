@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.message;
+package com.example.demo.test.integration.product.message.listener;
 
 import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.service.ProductService;

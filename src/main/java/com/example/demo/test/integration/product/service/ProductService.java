@@ -2,7 +2,7 @@ package com.example.demo.test.integration.product.service;
 
 import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.data.ProductRepository;
-import com.example.demo.test.integration.product.httpclient.ProductHttpClient;
+import com.example.demo.test.integration.product.http.client.ProductHttpClient;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

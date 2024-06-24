@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.httpserver;
+package com.example.demo.test.integration.product.http.server;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

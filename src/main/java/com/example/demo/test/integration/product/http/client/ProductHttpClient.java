@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.httpclient;
+package com.example.demo.test.integration.product.http.client;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;

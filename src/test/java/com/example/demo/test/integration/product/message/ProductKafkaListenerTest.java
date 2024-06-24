@@ -3,6 +3,7 @@ package com.example.demo.test.integration.product.message;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import com.example.demo.test.integration.product.TestData;
+import com.example.demo.test.integration.product.message.listener.KafkaEvent;
 import com.example.demo.test.integration.product.service.ProductService;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;

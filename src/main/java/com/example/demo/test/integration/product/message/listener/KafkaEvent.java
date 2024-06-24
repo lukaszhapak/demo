@@ -1,15 +1,18 @@
-package com.example.demo.test.integration.product.httpclient;
+package com.example.demo.test.integration.product.message.listener;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-@AllArgsConstructor
+@ToString
 @NoArgsConstructor
-class ValueResponse {
+@AllArgsConstructor
+public class KafkaEvent {
 
+  private Long productId;
   private String value;
 }
