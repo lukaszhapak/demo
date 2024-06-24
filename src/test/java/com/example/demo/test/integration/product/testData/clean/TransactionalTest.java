@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.cleanTestData;
+package com.example.demo.test.integration.product.testData.clean;
 
 import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.data.ProductRepository;

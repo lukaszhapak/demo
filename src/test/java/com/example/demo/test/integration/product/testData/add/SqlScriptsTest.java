@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.addTestData;
+package com.example.demo.test.integration.product.testData.add;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.httpClient;
+package com.example.demo.test.integration.product.http.client;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
 import static com.github.tomakehurst.wiremock.client.WireMock.get;
