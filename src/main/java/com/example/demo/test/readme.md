@@ -64,7 +64,7 @@
 ### kafka
 * embedded kafka vs container
 * listener test
-* sender test
+* sender test, reminder about: outbox pattern, saga choreography, 2 phase commit 
 
 ### cron
 * overriding cron '-' disable and manually call method
