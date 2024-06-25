@@ -101,6 +101,7 @@
 * testing migrations 
 * testing native queries
 * toxiproxy - connection errors or something
+* @service connection  new integration with containers in spring boot 3.1
 
 ### mocks
 * integration: code in other jar that is already tested, like outbox or kafka publisher
