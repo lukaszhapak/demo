@@ -8,11 +8,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -36,12 +38,20 @@ public abstract class AbstractMockMvcIntegrationTest {
 
   protected <T> T postHttpCall(String url, Object body, Class<T> returnType, int expectedStatusCode) {
 	try {
-	  return objectMapper.readValue(mockMvc.perform(post(url)
-			  .content(objectMapper.writeValueAsString(body))
-			  .contentType(MediaType.APPLICATION_JSON))
-		  .andExpect(status().is(expectedStatusCode))
+	  return objectMapper.readValue(postHttpCall(url, body, expectedStatusCode)
 		  .andReturn().getResponse()
 		  .getContentAsString(), returnType);
+	} catch (Exception e) {
+	  throw new RuntimeException(e);
+	}
+  }
+
+  protected ResultActions postHttpCall(String url, Object body, int expectedStatusCode) {
+	try {
+	  return mockMvc.perform(post(url)
+			  .content(objectMapper.writeValueAsString(body))
+			  .contentType(MediaType.APPLICATION_JSON))
+		  .andExpect(status().is(expectedStatusCode));
 	} catch (Exception e) {
 	  throw new RuntimeException(e);
 	}

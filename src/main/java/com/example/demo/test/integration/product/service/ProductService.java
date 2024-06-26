@@ -6,8 +6,10 @@ import com.example.demo.test.integration.product.http.client.ProductHttpClient;
 import com.example.demo.test.integration.product.message.publisher.ProductEventPublisher;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ProductService {
@@ -17,6 +19,10 @@ public class ProductService {
   private final ProductEventPublisher productEventPublisher;
 
   public Product save(Product product) {
+	log.debug("Saving product={}", product);
+	if (product.getQuantity() >= 50) {
+	  throw new IllegalArgumentException("quantity too high");
+	}
 	return productRepository.save(product);
   }
 

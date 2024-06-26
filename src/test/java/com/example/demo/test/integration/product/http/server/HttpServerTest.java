@@ -5,13 +5,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import com.example.demo.commons.AbstractMockMvcIntegrationTest;
 import com.example.demo.test.integration.product.TestData;
 import com.example.demo.test.integration.product.data.Product;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class HttpServerTest extends AbstractMockMvcIntegrationTest {
 
   @Test
-  @DisplayName("should post product")
   void shouldPostProduct() {
 	// given
 	Product request = TestData.getSampleProduct();

@@ -9,4 +9,10 @@ public interface TestData {
 		.setName("Phone")
 		.setQuantity(21);
   }
+
+  static Product getInvalidProduct() {
+	return new Product()
+		.setName("Phone")
+		.setQuantity(123);
+  }
 }
