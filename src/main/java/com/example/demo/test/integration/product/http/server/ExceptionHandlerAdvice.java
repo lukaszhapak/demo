@@ -14,6 +14,6 @@ public class ExceptionHandlerAdvice {
   @ExceptionHandler(ValidationException.class)
   public ResponseEntity<String> exception(ValidationException e) {
 	log.error("Exception caught ={}", e.getMessage(), e);
-	return new ResponseEntity<>("System error", HttpStatus.INTERNAL_SERVER_ERROR);
+	return new ResponseEntity<>("System error", HttpStatus.BAD_REQUEST);
   }
 }
