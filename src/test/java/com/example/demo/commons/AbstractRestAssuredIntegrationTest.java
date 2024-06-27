@@ -29,6 +29,17 @@ public abstract class AbstractRestAssuredIntegrationTest {
 		.get(url);
   }
 
+  protected <T> T getHttpCall(String url, Class<T> returnType, int expectedStatusCode) {
+	return RestAssured.given()
+		.port(port)
+		.log().all()
+		.expect()
+		.statusCode(expectedStatusCode)
+		.when()
+		.get(url)
+		.as(returnType);
+  }
+
   protected Response postHttpCall(Object body, String url, int port) {
 	return RestAssured.given()
 		.port(port)
@@ -48,6 +59,19 @@ public abstract class AbstractRestAssuredIntegrationTest {
 		.log().all()
 		.when()
 		.post(url);
+  }
+
+  protected <T> T postHttpCall(String url, Object body, Class<T> returnType, int expectedStatusCode) {
+	return RestAssured.given()
+		.port(port)
+		.body(body)
+		.contentType(ContentType.JSON)
+		.log().all()
+		.expect()
+		.statusCode(expectedStatusCode)
+		.when()
+		.post(url)
+		.as(returnType);
   }
 
   protected Response deleteHttpCall(String url, int port) {

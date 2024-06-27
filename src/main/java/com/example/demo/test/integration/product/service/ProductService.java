@@ -21,7 +21,7 @@ public class ProductService {
   public Product save(Product product) {
 	log.debug("Saving product={}", product);
 	if (product.getQuantity() >= 50) {
-	  throw new IllegalArgumentException("quantity too high");
+	  throw new ValidationException("quantity too high");
 	}
 	return productRepository.save(product);
   }

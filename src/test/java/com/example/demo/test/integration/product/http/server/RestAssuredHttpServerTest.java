@@ -2,12 +2,12 @@ package com.example.demo.test.integration.product.http.server;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-import com.example.demo.commons.AbstractMockMvcIntegrationTest;
+import com.example.demo.commons.AbstractRestAssuredIntegrationTest;
 import com.example.demo.test.integration.product.TestData;
 import com.example.demo.test.integration.product.data.Product;
 import org.junit.jupiter.api.Test;
 
-class HttpServerTest extends AbstractMockMvcIntegrationTest {
+class RestAssuredHttpServerTest extends AbstractRestAssuredIntegrationTest {
 
   @Test
   void shouldPostProduct() {
