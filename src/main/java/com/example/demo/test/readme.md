@@ -71,8 +71,9 @@
 * overriding cron '0/3 sec' and use awaitility / PollingConditions in spock
 
 ### http server
-* webEnvironment mock vs random port, different thread - rollback  or exception stack trace
+* webEnvironment mock vs random port, different thread - rollback
 * example of mockmvc, rest assured and rest template, webclient headers params body, authentication
+* logging requests and responses
 
 ### search
 * jpa specification

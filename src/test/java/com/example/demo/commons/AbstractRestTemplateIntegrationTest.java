@@ -8,7 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.ResponseEntity;
 
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT,
+	properties = {"logging.level.org.springframework.web.client.RestTemplate=DEBUG"})
 public abstract class AbstractRestTemplateIntegrationTest {
 
   @Autowired

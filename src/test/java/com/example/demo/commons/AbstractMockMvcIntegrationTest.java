@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,6 +28,7 @@ public abstract class AbstractMockMvcIntegrationTest {
   protected <T> T getHttpCall(String url, Class<T> returnType, int expectedStatusCode) {
 	try {
 	  return objectMapper.readValue(mockMvc.perform(get(url))
+		  .andDo(print())
 		  .andExpect(status().is(expectedStatusCode))
 		  .andReturn().getResponse()
 		  .getContentAsString(), returnType);
@@ -38,6 +40,7 @@ public abstract class AbstractMockMvcIntegrationTest {
   protected <T> T postHttpCall(String url, Object body, Class<T> returnType, int expectedStatusCode) {
 	try {
 	  return objectMapper.readValue(postHttpCall(url, body, expectedStatusCode)
+			  .andDo(print())
 		  .andReturn().getResponse()
 		  .getContentAsString(), returnType);
 	} catch (Exception e) {

@@ -42,6 +42,7 @@ public class ProductService {
   }
 
   public Product getById(Long id) {
+	log.debug("Getting product with id={}", id);
 	return productRepository.findById(id).get();
   }
 }
