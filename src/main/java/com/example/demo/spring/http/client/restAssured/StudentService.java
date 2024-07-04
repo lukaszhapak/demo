@@ -11,7 +11,7 @@ class StudentService {
   private final StudentNameHttpClient studentNameHttpClient;
 
   Student save(Student student) {
-	student.setName(studentNameHttpClient.getName(student.getSource()));
+	student.setName(studentNameHttpClient.getName());
 	return studentRepository.save(student);
   }
 }

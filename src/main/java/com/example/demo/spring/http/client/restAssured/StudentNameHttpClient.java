@@ -13,8 +13,8 @@ class StudentNameHttpClient {
   @Value("${nameService.url}")
   private final String url;
 
-  String getName(String source) {
-	Response response = getHttpCall(url + "/api/name/" + source);
+  String getName() {
+	Response response = getHttpCall(url + "/api/name");
 	int statusCode = response.getStatusCode();
 	if (statusCode >= 500 && statusCode < 600) {
 	  throw new RuntimeException();

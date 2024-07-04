@@ -1,12 +1,12 @@
 {
   "request": {
     "method": "GET",
-    "url": "/api/name/resources"
+    "url": "/api/value"
   },
   "response": {
     "status": 200,
     "jsonBody": {
-      "name": "name-from-resources"
+      "value": "value-from-resources"
     },
     "headers": {
       "Content-Type": "application/json"

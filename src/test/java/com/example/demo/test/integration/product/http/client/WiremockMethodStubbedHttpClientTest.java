@@ -16,7 +16,7 @@ import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 
 @AutoConfigureWireMock(port = 0)
 @SpringBootTest(properties = {"product.externalService.url=http://localhost:${wiremock.server.port}"})
-class HttpClientTest {
+class WiremockMethodStubbedHttpClientTest {
 
   @Autowired
   ProductService productService;
@@ -25,14 +25,14 @@ class HttpClientTest {
   @DisplayName("should get value from external service")
   void shouldGetValueFromExternalService() {
 	// given
-	stubExternalService(200, "{\"value\" : \"test-value\"}");
+	stubExternalService(200, "{\"value\" : \"value-from-method\"}");
 	Long id = productService.save(TestData.getSampleProduct()).getId();
 
 	// when
 	productService.assignValueFromExternalService(id);
 
 	// then
-	assertThat(productService.getById(id).getClientValue()).isEqualTo("test-value");
+	assertThat(productService.getById(id).getClientValue()).isEqualTo("value-from-method");
   }
 
   void stubExternalService(int status, String body) {
