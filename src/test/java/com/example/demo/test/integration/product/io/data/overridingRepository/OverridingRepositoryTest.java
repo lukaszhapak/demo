@@ -20,11 +20,10 @@ class OverridingRepositoryTest {
   @DisplayName("should get product by quantity")
   void shouldGetProductByQuantity() {
 	// given
-	Product product = TestData.getSampleProduct();
-	productRepository.save(product);
+	productRepository.save(TestData.getSampleProduct().setQuantity(42));
 
 	// then
-	assertThat(productRepository.findByQuantity(21)).isNotEmpty();
+	assertThat(productRepository.findByQuantity(42)).isNotEmpty();
 	assertThat(productRepository.count()).isGreaterThanOrEqualTo(1);
 	List<Product> all = productRepository.findAll();
   }
