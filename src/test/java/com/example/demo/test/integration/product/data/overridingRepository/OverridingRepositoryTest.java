@@ -1,0 +1,31 @@
+package com.example.demo.test.integration.product.data.overridingRepository;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import com.example.demo.test.integration.product.TestData;
+import com.example.demo.test.integration.product.data.Product;
+import java.util.List;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class OverridingRepositoryTest {
+
+  @Autowired
+  TestProductRepository productRepository;
+
+  @Test
+  @DisplayName("should get product by quantity")
+  void shouldGetProductByQuantity() {
+	// given
+	Product product = TestData.getSampleProduct();
+	productRepository.save(product);
+
+	// then
+	assertThat(productRepository.findByQuantity(21)).isNotEmpty();
+	assertThat(productRepository.count()).isEqualTo(1);
+	List<Product> all = productRepository.findAll();
+  }
+}
