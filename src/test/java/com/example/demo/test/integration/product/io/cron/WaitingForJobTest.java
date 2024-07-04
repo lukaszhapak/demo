@@ -1,20 +1,17 @@
 package com.example.demo.test.integration.product.io.cron;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import com.example.demo.test.integration.product.TestData;
-import com.example.demo.test.integration.product.cron.ProductJob;
 import com.example.demo.test.integration.product.service.ProductService;
+import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(properties = {"product.cron=-"})
-class FirstCronTest {
-
-  @Autowired
-  ProductJob productJob;
+@SpringBootTest(properties = {"product.cron=* * * ? * *"})
+class WaitingForJobTest {
 
   @Autowired
   ProductService productService;
@@ -26,9 +23,13 @@ class FirstCronTest {
 	Long id = productService.save(TestData.getSampleProduct()).getId();
 
 	// when
-	productJob.setSomeValue();
+	// job is running in the background
 
 	// then
-	assertThat(productService.getById(id).isCronValue()).isTrue();
+	await()
+		.atMost(Duration.ofMillis(1500))
+		.with()
+		.pollInterval(Duration.ofMillis(10))
+		.until(() -> productService.getById(id).isCronValue());
   }
 }

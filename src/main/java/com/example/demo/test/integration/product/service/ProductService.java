@@ -5,7 +5,6 @@ import com.example.demo.test.integration.product.data.ProductRepository;
 import com.example.demo.test.integration.product.http.client.ProductHttpClient;
 import com.example.demo.test.integration.product.message.publisher.ProductEventPublisher;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
