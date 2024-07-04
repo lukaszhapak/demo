@@ -12,13 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.kafka.test.context.EmbeddedKafka;
+import org.springframework.test.context.ActiveProfiles;
 
+@SpringBootTest
+@ActiveProfiles("kafka-embedded")
 @Import(TestKafkaPublisherConfig.class)
 @EmbeddedKafka(topics = "test-product-added-topic", partitions = 1)
-@SpringBootTest(properties =
-	{"spring.kafka.producer.bootstrap-servers=${spring.embedded.kafka.brokers}",
-		"spring.kafka.consumer.bootstrap-servers=${spring.embedded.kafka.brokers}",
-		"spring.kafka.consumer.auto-offset-reset=earliest"})
 class ProductKafkaPublisherTest {
 
   @Autowired
