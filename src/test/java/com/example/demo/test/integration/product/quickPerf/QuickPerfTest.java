@@ -1,8 +1,8 @@
 package com.example.demo.test.integration.product.quickPerf;
 
-import com.example.demo.test.integration.product.data.Product;
-import com.example.demo.test.integration.product.data.ProductRepository;
 import com.example.demo.test.integration.product.TestData;
+import com.example.demo.test.integration.product.data.Product;
+import com.example.demo.test.integration.product.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.quickperf.sql.annotation.ExpectDelete;
 import org.quickperf.sql.annotation.ExpectInsert;
@@ -16,7 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class QuickPerfTest {
 
   @Autowired
-  ProductRepository productRepository;
+  ProductService productService;
 
   @Test
   @ExpectInsert(1)
@@ -24,6 +24,6 @@ class QuickPerfTest {
   @ExpectUpdate(0)
   @ExpectDelete(0)
   void shouldSaveProduct() {
-	Product response = productRepository.save(TestData.getSampleProduct());
+	Product response = productService.save(TestData.getSampleProduct());
   }
 }

@@ -1,8 +1,8 @@
 package com.example.demo.test.integration.product.databaseConnections;
 
-import com.example.demo.test.integration.product.data.Product;
-import com.example.demo.test.integration.product.data.ProductRepository;
 import com.example.demo.test.integration.product.TestData;
+import com.example.demo.test.integration.product.data.Product;
+import com.example.demo.test.integration.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -12,10 +12,10 @@ import org.springframework.test.context.ActiveProfiles;
 class MysqlP6SpyTest {
 
   @Autowired
-  ProductRepository productRepository;
+  ProductService productService;
 
   //@Test // requires mysql database, can be found in docker compose
   void shouldSaveProduct() {
-	Product response = productRepository.save(TestData.getSampleProduct());
+	Product response = productService.save(TestData.getSampleProduct());
   }
 }

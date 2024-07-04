@@ -5,6 +5,7 @@ import com.example.demo.test.integration.product.data.ProductRepository;
 import com.example.demo.test.integration.product.http.client.ProductHttpClient;
 import com.example.demo.test.integration.product.message.publisher.ProductEventPublisher;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,10 @@ public class ProductService {
   public Product getById(Long id) {
 	log.debug("Getting product with id={}", id);
 	return productRepository.findById(id).get();
+  }
+
+  public Product findByName(String name) {
+	log.debug("Getting product with name={}", name);
+	return productRepository.findByName(name).get();
   }
 }

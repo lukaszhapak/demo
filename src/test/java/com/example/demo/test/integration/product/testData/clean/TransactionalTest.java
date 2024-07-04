@@ -1,8 +1,8 @@
 package com.example.demo.test.integration.product.testData.clean;
 
-import com.example.demo.test.integration.product.data.Product;
-import com.example.demo.test.integration.product.data.ProductRepository;
 import com.example.demo.test.integration.product.TestData;
+import com.example.demo.test.integration.product.data.Product;
+import com.example.demo.test.integration.product.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,10 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 class TransactionalTest {
 
   @Autowired
-  ProductRepository productRepository;
+  ProductService productService;
 
   @Test
   void shouldSaveProduct() {
-	Product response = productRepository.save(TestData.getSampleProduct());
+	Product response = productService.save(TestData.getSampleProduct());
   }
 }
