@@ -1,10 +1,9 @@
 package com.example.demo.test.integration.product.http.client;
 
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
 @Component
 @RequiredArgsConstructor
@@ -12,16 +11,13 @@ public class ProductHttpClient {
 
   @Value("${product.externalService.url}")
   private final String url;
+  private final RestTemplate restTemplate;
 
   public String getValue() {
-	Response response = getHttpCall(url + "/api/value");
-	return response.as(ValueResponse.class).getValue();
+	return getHttpCall(url + "/api/value").getValue();
   }
 
-  private Response getHttpCall(String url) {
-	return RestAssured.given()
-		.log().all()
-		.when()
-		.get(url);
+  private ValueResponse getHttpCall(String url) {
+	return restTemplate.getForEntity(url, ValueResponse.class).getBody();
   }
 }
