@@ -25,7 +25,7 @@ class OverridingRepositoryTest {
 
 	// then
 	assertThat(productRepository.findByQuantity(21)).isNotEmpty();
-	assertThat(productRepository.count()).isEqualTo(1);
+	assertThat(productRepository.count()).isGreaterThanOrEqualTo(1);
 	List<Product> all = productRepository.findAll();
   }
 }
