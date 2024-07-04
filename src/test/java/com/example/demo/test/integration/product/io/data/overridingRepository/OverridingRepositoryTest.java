@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.data.overridingRepository;
+package com.example.demo.test.integration.product.io.data.overridingRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

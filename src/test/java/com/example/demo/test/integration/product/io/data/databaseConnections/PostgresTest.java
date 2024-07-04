@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.data.databaseConnections;
+package com.example.demo.test.integration.product.io.data.databaseConnections;
 
 import com.example.demo.test.integration.product.TestData;
 import com.example.demo.test.integration.product.data.Product;
@@ -8,13 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ActiveProfiles("postgres-flyway")
-class PostgresFlywayTest {
+@ActiveProfiles("postgres")
+class PostgresTest {
 
   @Autowired
   ProductService productService;
 
-  //@Test // requires postgres database with test_flyway schema, fly way is able to create schema, can be found in docker compose
+  //@Test  // requires postgres database with test schema, can be found in docker compose
   void shouldSaveProduct() {
 	Product response = productService.save(TestData.getSampleProduct());
   }

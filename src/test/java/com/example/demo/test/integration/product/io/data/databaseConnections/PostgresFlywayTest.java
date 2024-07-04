@@ -1,23 +1,20 @@
-package com.example.demo.test.integration.product.data.testData.clean;
+package com.example.demo.test.integration.product.io.data.databaseConnections;
 
 import com.example.demo.test.integration.product.TestData;
 import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.service.ProductService;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.ActiveProfiles;
 
-@Transactional
-//@Rollback(value = false)
-//@Commit
 @SpringBootTest
-class TransactionalTest {
+@ActiveProfiles("postgres-flyway")
+class PostgresFlywayTest {
 
   @Autowired
   ProductService productService;
 
-  @Test
+  //@Test // requires postgres database with test_flyway schema, fly way is able to create schema, can be found in docker compose
   void shouldSaveProduct() {
 	Product response = productService.save(TestData.getSampleProduct());
   }

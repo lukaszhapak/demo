@@ -1,4 +1,4 @@
-package com.example.demo.test.integration.product.data.overridingRepository;
+package com.example.demo.test.integration.product.io.data.overridingRepository;
 
 import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.data.ProductRepository;
