@@ -1,4 +1,4 @@
-package com.example.demo.spring.http.client.restAssured;
+package com.example.demo.spring.http.client.httpClient;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

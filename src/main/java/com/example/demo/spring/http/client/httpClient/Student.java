@@ -1,4 +1,4 @@
-package com.example.demo.spring.http.client.restAssured;
+package com.example.demo.spring.http.client.httpClient;
 
 
 import javax.persistence.Entity;
@@ -23,6 +23,7 @@ class Student {
   @Id
   @GeneratedValue
   private Long id;
-  private String name;
+  private String valueFromRestAssured;
+  private String valueFromRestTemplate;
   private int age;
 }

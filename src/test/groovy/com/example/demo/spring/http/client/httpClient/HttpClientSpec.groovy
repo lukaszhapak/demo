@@ -1,4 +1,4 @@
-package com.example.demo.spring.http.client.restAssured
+package com.example.demo.spring.http.client.httpClient
 
 import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,7 +9,7 @@ import static com.github.tomakehurst.wiremock.client.WireMock.*
 
 @AutoConfigureWireMock(port = 0)
 @ActiveProfiles("wiremock")
-class RestAssuredHttpClientSpec extends AbstractIntegrationSpec {
+class HttpClientSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService
@@ -18,18 +18,21 @@ class RestAssuredHttpClientSpec extends AbstractIntegrationSpec {
 
     def "should save student with method stubbed endpoint"() {
         given:
-        stubNameService(200, '{"name" : "name-from-method"}')
+        stubExternalService(200, '{"value" : "test-rest-assured-value"}', "/api/rest-assured")
+        stubExternalService(200, '{"value" : "test-rest-template-value"}', "/api/rest-template")
         Student student = new Student()
 
         when:
         Long id = studentService.save(student).getId()
 
         then:
-        studentRepository.findById(id).get().getName() == "name-from-method"
+        def savedStudent = studentRepository.findById(id).get()
+        savedStudent.getValueFromRestAssured() == "test-rest-assured-value"
+        savedStudent.getValueFromRestTemplate() == "test-rest-template-value"
     }
 
-    void stubNameService(int status, String body) {
-        stubFor(get(urlEqualTo("/api/name"))
+    void stubExternalService(int status, String body, String url) {
+        stubFor(get(urlEqualTo(url))
                 .willReturn(aResponse()
                         .withStatus(status)
                         .withBody(body)

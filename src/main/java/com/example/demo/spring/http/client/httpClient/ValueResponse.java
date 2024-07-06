@@ -1,4 +1,4 @@
-package com.example.demo.spring.http.client.restAssured;
+package com.example.demo.spring.http.client.httpClient;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-class NameResponse {
+class ValueResponse {
 
-  private String name;
+  private String value;
 }

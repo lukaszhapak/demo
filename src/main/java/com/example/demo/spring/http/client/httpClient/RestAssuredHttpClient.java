@@ -1,4 +1,4 @@
-package com.example.demo.spring.http.client.restAssured;
+package com.example.demo.spring.http.client.httpClient;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -8,20 +8,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class StudentNameHttpClient {
+class RestAssuredHttpClient {
 
-  @Value("${nameService.url}")
+  @Value("${external.service.url}")
   private final String url;
 
-  String getName() {
-	Response response = getHttpCall(url + "/api/name");
+  String getValue() {
+	Response response = getHttpCall(url + "/api/rest-assured");
 	int statusCode = response.getStatusCode();
 	if (statusCode >= 500 && statusCode < 600) {
 	  throw new RuntimeException();
 	} else if (statusCode >= 400 && statusCode < 500) {
 	  throw new RuntimeException();
 	}
-	return response.as(NameResponse.class).getName();
+	return response.as(ValueResponse.class).getValue();
   }
 
   private Response getHttpCall(String url) {
