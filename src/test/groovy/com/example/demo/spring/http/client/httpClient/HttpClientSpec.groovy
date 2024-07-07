@@ -20,6 +20,7 @@ class HttpClientSpec extends AbstractIntegrationSpec {
         given:
         stubExternalService(200, '{"value" : "test-rest-assured-value"}', "/api/rest-assured")
         stubExternalService(200, '{"value" : "test-rest-template-value"}', "/api/rest-template")
+        stubExternalService(200, '{"value" : "test-feign-value"}', "/api/feign")
         Student student = new Student()
 
         when:
@@ -29,6 +30,7 @@ class HttpClientSpec extends AbstractIntegrationSpec {
         def savedStudent = studentRepository.findById(id).get()
         savedStudent.getValueFromRestAssured() == "test-rest-assured-value"
         savedStudent.getValueFromRestTemplate() == "test-rest-template-value"
+        savedStudent.getValueFromFeign() == "test-feign-value"
     }
 
     void stubExternalService(int status, String body, String url) {

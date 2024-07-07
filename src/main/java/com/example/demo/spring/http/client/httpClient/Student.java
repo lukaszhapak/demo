@@ -25,5 +25,6 @@ class Student {
   private Long id;
   private String valueFromRestAssured;
   private String valueFromRestTemplate;
+  private String valueFromFeign;
   private int age;
 }
