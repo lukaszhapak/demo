@@ -1,0 +1,1 @@
+insert into product (name, quantity, id) values ('flyway-product', 13, 1000001)

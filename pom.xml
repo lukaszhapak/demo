@@ -31,7 +31,7 @@
 		<h2.version>2.1.214</h2.version>
 		<postgresql.version>42.2.23</postgresql.version>
 		<mysql.version>8.0.33</mysql.version>
-		<flyway.version>8.2.0</flyway.version>
+		<flyway.version>9.4.0</flyway.version>
 		<shedlock.version>4.30.0</shedlock.version>
 		<p6spy.version>3.9.1</p6spy.version>
 
