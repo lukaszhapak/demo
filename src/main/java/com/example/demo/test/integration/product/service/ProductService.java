@@ -19,7 +19,7 @@ public class ProductService {
   private final ProductEventPublisher productEventPublisher;
 
   public Product save(Product product) {
-	log.debug("Saving product={}", product);
+//	log.debug("Saving product={}", product);
 	if (product.getQuantity() >= 50) {
 	  throw new ValidationException("quantity too high");
 	}
@@ -42,12 +42,12 @@ public class ProductService {
   }
 
   public Product findById(Long id) {
-	log.debug("Getting product with id={}", id);
+//	log.debug("Getting product with id={}", id);
 	return productRepository.findById(id).orElse(null);
   }
 
   public Product findByName(String name) {
-	log.debug("Getting product with name={}", name);
+//	log.debug("Getting product with name={}", name);
 	return productRepository.findByName(name).orElse(null);
   }
 }

@@ -11,6 +11,7 @@ import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 @SpringBootTest
@@ -26,6 +27,7 @@ abstract class AbstractMockMvcIntegrationSpec extends Specification {
     <T> T getHttpCall(String url, int expectedStatusCode, Class<T> returnType) {
         try {
             return objectMapper.readValue(mockMvc.perform(get(url))
+                    .andDo(print())
                     .andExpect(status().is(expectedStatusCode))
                     .andReturn().getResponse()
                     .getContentAsString(), returnType)
@@ -39,6 +41,7 @@ abstract class AbstractMockMvcIntegrationSpec extends Specification {
             return objectMapper.readValue(mockMvc.perform(post(url)
                     .content(objectMapper.writeValueAsString(body))
                     .contentType(MediaType.APPLICATION_JSON))
+                    .andDo(print())
                     .andExpect(status().is(expectedStatusCode))
                     .andReturn().getResponse()
                     .getContentAsString(), returnType)
@@ -52,6 +55,7 @@ abstract class AbstractMockMvcIntegrationSpec extends Specification {
             return objectMapper.readValue(mockMvc.perform(put(url)
                     .content(objectMapper.writeValueAsString(body))
                     .contentType(MediaType.APPLICATION_JSON))
+                    .andDo(print())
                     .andExpect(status().is(expectedStatusCode))
                     .andReturn().getResponse()
                     .getContentAsString(), returnType)
@@ -63,6 +67,7 @@ abstract class AbstractMockMvcIntegrationSpec extends Specification {
     void deleteHttpCall(String url, int expectedStatusCode) {
         try {
             mockMvc.perform(delete(url))
+                    .andDo(print())
                     .andExpect(status().is(expectedStatusCode))
         } catch (Exception e) {
             throw new RuntimeException(e)
