@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class KafkaEvent {
+public class IncomingKafkaEvent {
 
   private Long productId;
   private String value;

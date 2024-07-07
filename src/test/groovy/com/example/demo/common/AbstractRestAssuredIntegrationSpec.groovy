@@ -1,5 +1,6 @@
 package com.example.demo.common
 
+
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.http.Headers
@@ -20,6 +21,11 @@ abstract class AbstractRestAssuredIntegrationSpec extends Specification {
     @LocalServerPort
     int port
 
+    <T> T getHttpCall(String url, int expectedStatusCode, Class<T> returnType) {
+        get(requestSpecification(), expectedStatusCode, url)
+                .as(returnType)
+    }
+
     Response getHttpCall(String url, int expectedStatusCode) {
         get(requestSpecification(), expectedStatusCode, url)
     }
@@ -37,6 +43,12 @@ abstract class AbstractRestAssuredIntegrationSpec extends Specification {
                 .params(params)
                 .body(body)
                 .contentType(ContentType.JSON), expectedStatusCode, url)
+    }
+
+    <T> T postHttpCall(String url, int expectedStatusCode, Object body, Class<T> returnType) {
+        post(requestSpecification().body(body)
+                .contentType(ContentType.JSON), expectedStatusCode, url)
+                .as(returnType)
     }
 
     Response postHttpCall(String url, int expectedStatusCode, Object body) {

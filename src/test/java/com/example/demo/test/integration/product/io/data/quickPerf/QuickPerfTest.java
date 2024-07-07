@@ -1,7 +1,8 @@
+// https://github.com/quick-perf/quickperf
+
 package com.example.demo.test.integration.product.io.data.quickPerf;
 
 import com.example.demo.test.integration.product.TestData;
-import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.service.ProductService;
 import org.junit.jupiter.api.Test;
 import org.quickperf.sql.annotation.ExpectDelete;
@@ -20,10 +21,12 @@ class QuickPerfTest {
 
   @Test
   @ExpectInsert(1)
-  @ExpectSelect(0)
+  @ExpectSelect(1)
   @ExpectUpdate(0)
   @ExpectDelete(0)
   void shouldSaveProduct() {
-	Product response = productService.save(TestData.getSampleProduct());
+	Long id = productService.save(TestData.getSampleProduct()).getId();
+
+	productService.getById(id);
   }
 }

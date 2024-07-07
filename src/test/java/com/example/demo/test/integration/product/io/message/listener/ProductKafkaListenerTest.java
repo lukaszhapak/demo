@@ -3,7 +3,7 @@ package com.example.demo.test.integration.product.io.message.listener;
 import static org.testcontainers.shaded.org.awaitility.Awaitility.await;
 
 import com.example.demo.test.integration.product.TestData;
-import com.example.demo.test.integration.product.message.listener.KafkaEvent;
+import com.example.demo.test.integration.product.message.listener.IncomingKafkaEvent;
 import com.example.demo.test.integration.product.service.ProductService;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayName;
@@ -23,14 +23,14 @@ class ProductKafkaListenerTest {
   ProductService productService;
 
   @Autowired
-  KafkaTemplate<String, KafkaEvent> kafkaTemplate;
+  KafkaTemplate<String, IncomingKafkaEvent> kafkaTemplate;
 
   @Test
   @DisplayName("should handle kafka event")
   void shouldHandleKafkaEvent() {
 	// given
 	Long id = productService.save(TestData.getSampleProduct()).getId();
-	KafkaEvent event = new KafkaEvent().setProductId(id).setValue("value from kafka");
+	IncomingKafkaEvent event = new IncomingKafkaEvent().setProductId(id).setValue("value from kafka");
 
 	// when
 	kafkaTemplate.send("test-product-topic", event);
