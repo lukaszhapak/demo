@@ -16,9 +16,9 @@ class TransactionalRestTemplateSpec extends AbstractRestTemplateIntegrationSpec 
 
     void cleanup() {
         println("product by service1=" + productService.findByName("product by service#1"))
-        println("product by http1=" + productService.findByName("product by http#1"))
+        println("product by http1=" + productService.findByName("product by resttamplate http#1"))
         println("product by service2=" + productService.findByName("product by service#2"))
-        println("product by http2=" + productService.findByName("product by http#2"))
+        println("product by http2=" + productService.findByName("product by resttamplate http#2"))
     }
 
     def "should save first product via service"() {
@@ -28,7 +28,7 @@ class TransactionalRestTemplateSpec extends AbstractRestTemplateIntegrationSpec 
 
     def "should save first product via http"() {
         expect:
-        postHttpCall("/api/product", 200, sampleProduct.setName("product by http#1"), Product.class)
+        postHttpCall("/api/product", 200, sampleProduct.setName("product by resttamplate http#1"), Product.class)
     }
 
     def "should save second product via service"() {
@@ -38,6 +38,6 @@ class TransactionalRestTemplateSpec extends AbstractRestTemplateIntegrationSpec 
 
     def "should save second product via http"() {
         expect:
-        postHttpCall("/api/product", 200, sampleProduct.setName("product by http#2"), Product.class)
+        postHttpCall("/api/product", 200, sampleProduct.setName("product by resttamplate http#2"), Product.class)
     }
 }
