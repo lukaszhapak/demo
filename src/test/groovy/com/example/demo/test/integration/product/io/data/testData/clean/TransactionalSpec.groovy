@@ -16,19 +16,19 @@ class TransactionalSpec extends Specification implements SampleProducts {
 
     def "should save first product"() {
         expect:
-        productService.findByName("TestName#2") == null
+        productService.getByName("TestName#2") == null
         productService.save(sampleProduct.setName("TestName#2"))
     }
 
     def "should save second product"() {
         expect:
-        productService.findByName("TestName#2") == null
+        productService.getByName("TestName#2") == null
         productService.save(sampleProduct.setName("TestName#2"))
     }
 
     def "should save third product"() {
         expect:
-        productService.findByName("TestName#2") == null
+        productService.getByName("TestName#2") == null
         productService.save(sampleProduct.setName("TestName#2"))
     }
 }

@@ -40,6 +40,6 @@ class ProductKafkaListenerTest {
 		.atMost(Duration.ofMillis(3000))
 		.with()
 		.pollInterval(Duration.ofMillis(10))
-		.until(() -> "value from kafka".equals(productService.findById(id).getKafkaValue()));
+		.until(() -> "value from kafka".equals(productService.getById(id).getKafkaValue()));
   }
 }

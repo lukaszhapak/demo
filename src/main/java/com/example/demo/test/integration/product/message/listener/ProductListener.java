@@ -19,7 +19,7 @@ public class ProductListener {
 
   @KafkaListener(id = "demo-application", topics = "test-product-topic")
   void listen(ConsumerRecord<String, IncomingKafkaEvent> kafkaEvent) {
-	Product product = productService.findById(kafkaEvent.value().getProductId());
+	Product product = productService.getById(kafkaEvent.value().getProductId());
 	product.setKafkaValue(kafkaEvent.value().getValue());
 	productService.save(product);
   }

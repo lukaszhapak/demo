@@ -34,7 +34,7 @@ class ProductKafkaListenerSpec extends Specification implements SampleProducts {
 
         then:
         pollingConditions.eventually {
-            productService.findById(id).getKafkaValue() == "value from kafka"
+            productService.getById(id).getKafkaValue() == "value from kafka"
         }
     }
 }

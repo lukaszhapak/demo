@@ -8,6 +8,6 @@ class SpecKafkaPublisherConfig {
 
     @Bean
     static SpecKafkaListener specKafkaListener() {
-        return new SpecKafkaListener()
+        new SpecKafkaListener()
     }
 }

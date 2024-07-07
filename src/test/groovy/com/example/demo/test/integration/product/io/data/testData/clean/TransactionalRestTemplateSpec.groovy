@@ -15,10 +15,10 @@ class TransactionalRestTemplateSpec extends AbstractRestTemplateIntegrationSpec 
     ProductService productService
 
     void cleanup() {
-        println("product by service1=" + productService.findByName("product by service#1"))
-        println("product by http1=" + productService.findByName("product by resttamplate http#1"))
-        println("product by service2=" + productService.findByName("product by service#2"))
-        println("product by http2=" + productService.findByName("product by resttamplate http#2"))
+        println("product by service1=" + productService.getByName("product by service#1"))
+        println("product by http1=" + productService.getByName("product by resttamplate http#1"))
+        println("product by service2=" + productService.getByName("product by service#2"))
+        println("product by http2=" + productService.getByName("product by resttamplate http#2"))
     }
 
     def "should save first product via service"() {

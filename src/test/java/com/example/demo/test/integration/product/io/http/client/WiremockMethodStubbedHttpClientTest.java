@@ -32,7 +32,7 @@ class WiremockMethodStubbedHttpClientTest {
 	productService.assignValueFromExternalService(id);
 
 	// then
-	assertThat(productService.findById(id).getClientValue()).isEqualTo("value-from-method");
+	assertThat(productService.getById(id).getClientValue()).isEqualTo("value-from-method");
   }
 
   void stubExternalService(int status, String body) {

@@ -27,6 +27,6 @@ class QuickPerfTest {
   void shouldSaveProduct() {
 	Long id = productService.save(TestData.getSampleProduct()).getId();
 
-	productService.findById(id);
+	productService.getById(id);
   }
 }

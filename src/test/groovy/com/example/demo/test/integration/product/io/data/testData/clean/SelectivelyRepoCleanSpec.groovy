@@ -19,7 +19,7 @@ class SelectivelyRepoCleanSpec extends Specification implements SampleProducts {
 
     def "should save first product"() {
         expect:
-        productService.findByName("TestName#6") == null
+        productService.getByName("TestName#6") == null
         productService.save(sampleProduct.setName("TestName#6"))
 
         cleanup:
@@ -28,12 +28,12 @@ class SelectivelyRepoCleanSpec extends Specification implements SampleProducts {
 
     def "should not find product"() {
         expect:
-        productService.findByName("TestName#6") == null
+        productService.getByName("TestName#6") == null
     }
 
     def "should save second product"() {
         expect:
-        productService.findByName("TestName#6") == null
+        productService.getByName("TestName#6") == null
         productService.save(sampleProduct.setName("TestName#6"))
 
         cleanup:

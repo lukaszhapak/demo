@@ -24,6 +24,6 @@ class ManuallyExecutingJobSpec extends Specification {
         productJob.setSomeValue()
 
         then:
-        productService.findById(id).isCronValue()
+        productService.getById(id).isCronValue()
     }
 }

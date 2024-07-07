@@ -17,12 +17,12 @@ class SqlScriptsTest {
 
   @Test
   void shouldExecuteClassAnnotatedSqlFile() {
-	assertThat(productService.findByName("Product1")).isNotNull();
+	assertThat(productService.getByName("Product1")).isNotNull();
   }
 
   @Test
   @Sql("classpath:sql/insert-additional-product.sql")
   void shouldExecuteMethodAnnotatedSqlFile() {
-	assertThat(productService.findByName("Product2")).isNotNull();
+	assertThat(productService.getByName("Product2")).isNotNull();
   }
 }

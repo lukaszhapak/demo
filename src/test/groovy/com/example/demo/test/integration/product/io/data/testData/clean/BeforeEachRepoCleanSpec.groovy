@@ -22,19 +22,19 @@ class BeforeEachRepoCleanSpec extends Specification implements SampleProducts {
 
     def "should save first product"() {
         expect:
-        productService.findByName("TestName#3") == null
+        productService.getByName("TestName#3") == null
         productService.save(sampleProduct.setName("TestName#3"))
     }
 
     def "should save second product"() {
         expect:
-        productService.findByName("TestName#3") == null
+        productService.getByName("TestName#3") == null
         productService.save(sampleProduct.setName("TestName#3"))
     }
 
     def "should save third product"() {
         expect:
-        productService.findByName("TestName#3") == null
+        productService.getByName("TestName#3") == null
         productService.save(sampleProduct.setName("TestName#3"))
     }
 }

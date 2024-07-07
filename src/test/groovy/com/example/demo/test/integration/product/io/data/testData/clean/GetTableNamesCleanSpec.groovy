@@ -24,19 +24,19 @@ class GetTableNamesCleanSpec extends Specification implements SampleProducts {
 
     def "should save first product"() {
         expect:
-        productService.findByName("TestName#7") == null
+        productService.getByName("TestName#7") == null
         productService.save(sampleProduct.setName("TestName#7"))
     }
 
     def "should save second product"() {
         expect:
-        productService.findByName("TestName#7") == null
+        productService.getByName("TestName#7") == null
         productService.save(sampleProduct.setName("TestName#7"))
     }
 
     def "should save third product"() {
         expect:
-        productService.findByName("TestName#7") == null
+        productService.getByName("TestName#7") == null
         productService.save(sampleProduct.setName("TestName#7"))
     }
 

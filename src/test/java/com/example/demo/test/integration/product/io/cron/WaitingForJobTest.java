@@ -30,6 +30,6 @@ class WaitingForJobTest {
 		.atMost(Duration.ofMillis(1500))
 		.with()
 		.pollInterval(Duration.ofMillis(10))
-		.until(() -> productService.findById(id).isCronValue());
+		.until(() -> productService.getById(id).isCronValue());
   }
 }

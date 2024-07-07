@@ -27,6 +27,6 @@ class WiremockResourcesStubbedHttpClientTest {
 	productService.assignValueFromExternalService(id);
 
 	// then
-	assertThat(productService.findById(id).getClientValue()).isEqualTo("value-from-resources");
+	assertThat(productService.getById(id).getClientValue()).isEqualTo("value-from-resources");
   }
 }

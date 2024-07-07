@@ -22,19 +22,19 @@ class JdbcTemplateSpec extends Specification implements SampleProducts {
 
     def "should save first product"() {
         expect:
-        productService.findByName("TestName#5") == null
+        productService.getByName("TestName#5") == null
         productService.save(sampleProduct.setName("TestName#5"))
     }
 
     def "should save second product"() {
         expect:
-        productService.findByName("TestName#5") == null
+        productService.getByName("TestName#5") == null
         productService.save(sampleProduct.setName("TestName#5"))
     }
 
     def "should save third product"() {
         expect:
-        productService.findByName("TestName#5") == null
+        productService.getByName("TestName#5") == null
         productService.save(sampleProduct.setName("TestName#5"))
     }
 }
