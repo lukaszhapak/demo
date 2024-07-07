@@ -32,7 +32,7 @@ public class ProductService {
   }
 
   public void assignValueFromExternalService(Long id) {
-	Product product = getById(id);
+	Product product = findById(id);
 	product.setClientValue(productHttpClient.getValue());
 	productRepository.save(product);
   }
@@ -41,13 +41,13 @@ public class ProductService {
 	return productRepository.findByCronValue(cronValue);
   }
 
-  public Product getById(Long id) {
+  public Product findById(Long id) {
 	log.debug("Getting product with id={}", id);
-	return productRepository.findById(id).get();
+	return productRepository.findById(id).orElse(null);
   }
 
   public Product findByName(String name) {
 	log.debug("Getting product with name={}", name);
-	return productRepository.findByName(name).get();
+	return productRepository.findByName(name).orElse(null);
   }
 }

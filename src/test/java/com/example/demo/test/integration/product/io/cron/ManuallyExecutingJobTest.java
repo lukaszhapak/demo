@@ -29,6 +29,6 @@ class ManuallyExecutingJobTest {
 	productJob.setSomeValue();
 
 	// then
-	assertThat(productService.getById(id).isCronValue()).isTrue();
+	assertThat(productService.findById(id).isCronValue()).isTrue();
   }
 }

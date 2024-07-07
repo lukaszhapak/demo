@@ -14,4 +14,5 @@ public interface ProductRepository extends Repository<Product, Long> {
 
   List<Product> findByCronValue(boolean cronValue);
 
+  void deleteAll();
 }

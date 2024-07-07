@@ -20,7 +20,7 @@ class WaitingForJobSpec extends Specification {
 
         expect:
         pollingConditions.eventually {
-            productService.getById(id).isCronValue()
+            productService.findById(id).isCronValue()
         }
     }
 }

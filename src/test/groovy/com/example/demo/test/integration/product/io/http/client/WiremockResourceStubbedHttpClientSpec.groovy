@@ -22,6 +22,6 @@ class WiremockResourceStubbedHttpClientSpec extends Specification implements Sam
         productService.assignValueFromExternalService(id)
 
         then:
-        productService.getById(id).getClientValue() == "value-from-resources"
+        productService.findById(id).getClientValue() == "value-from-resources"
     }
 }

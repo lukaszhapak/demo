@@ -19,6 +19,6 @@ class H2ShowSqlSpec extends Specification implements SampleProducts {
         Long id = productService.save(sampleProduct).getId()
 
         then:
-        productService.getById(id) != null
+        productService.findById(id) != null
     }
 }

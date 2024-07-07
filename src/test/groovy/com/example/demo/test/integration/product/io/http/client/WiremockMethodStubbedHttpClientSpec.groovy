@@ -26,7 +26,7 @@ class WiremockMethodStubbedHttpClientSpec extends Specification implements Sampl
         productService.assignValueFromExternalService(id)
 
         then:
-        productService.getById(id).getClientValue() == "value-from-method"
+        productService.findById(id).getClientValue() == "value-from-method"
     }
 
     void stubExternalService(int status, String body) {
