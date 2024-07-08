@@ -34,11 +34,11 @@ class InsertTwoSearchSpec extends Specification implements SampleProducts {
 
     def "should get by min integer value"() {
         expect:
-        productService.getProducts(searchCriteria.setMinIntegerValue(10)).stream().allMatch { it -> it.getIntegerValue() >= 10 }
+        productService.getProducts(searchCriteria.setMinIntegerValue(20)).stream().allMatch { it -> it.getName() == "Second" }
     }
 
     def "should get by max integer value"() {
         expect:
-        productService.getProducts(searchCriteria.setMaxIntegerValue(15)).stream().allMatch { it -> it.getIntegerValue() <= 15 }
+        productService.getProducts(searchCriteria.setMaxIntegerValue(15)).stream().allMatch { it -> it.getName() == "First" }
     }
 }

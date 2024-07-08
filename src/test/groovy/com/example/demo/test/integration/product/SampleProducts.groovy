@@ -30,4 +30,12 @@ trait SampleProducts {
             .setSize(10)
             .setSortBy("id")
             .setSortAscending(true)
+
+    ProductSearchCriteria getSearchCriteria() {
+        new ProductSearchCriteria()
+                .setPage(0)
+                .setSize(10)
+                .setSortBy("id")
+                .setSortAscending(true)
+    }
 }
