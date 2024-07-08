@@ -7,7 +7,7 @@ import java.util.Optional;
 
 interface TestProductRepository extends ProductRepository {
 
-  Optional<Product> findByQuantity(int quantity);
+  Optional<Product> findByIntegerValue(int integerValue);
 
   Long count();
 

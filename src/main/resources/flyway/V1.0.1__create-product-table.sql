@@ -1,1 +1,0 @@
-create table product (id int8 not null, name varchar(255), quantity int4 not null, primary key (id));

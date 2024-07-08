@@ -11,12 +11,12 @@ class OverridingRepositorySpec extends Specification implements SampleProducts {
     @Autowired
     SpecProductRepository productRepository
 
-    def "should get product by quantity"() {
+    def "should get product by integer value"() {
         given:
-        productRepository.save(sampleProduct.setQuantity(47))
+        productRepository.save(sampleProduct.setIntegerValue(47))
 
         expect:
-        productRepository.findByQuantity(47).isPresent()
+        productRepository.findByIntegerValue(47).isPresent()
         productRepository.count() >= 1
         productRepository.findAll() != null
     }

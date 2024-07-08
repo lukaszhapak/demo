@@ -23,7 +23,9 @@ public class Product {
   @GeneratedValue
   private Long id;
   private String name;
-  private int quantity;
+  private int integerValue;
+
+
   private boolean cronValue;
   private String clientValue;
   private String kafkaValue;

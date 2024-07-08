@@ -1,1 +1,1 @@
-insert into product (name, quantity, id) values ('flyway-product', 13, 1000001)
+insert into product (name, integer_value, id) values ('flyway-product', 13, 1000001)

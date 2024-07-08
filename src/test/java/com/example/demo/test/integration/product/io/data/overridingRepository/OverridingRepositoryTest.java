@@ -17,13 +17,13 @@ class OverridingRepositoryTest {
   TestProductRepository productRepository;
 
   @Test
-  @DisplayName("should get product by quantity")
-  void shouldGetProductByQuantity() {
+  @DisplayName("should get product by integer value")
+  void shouldGetProductByIntegerValue() {
 	// given
-	productRepository.save(TestData.getSampleProduct().setQuantity(42));
+	productRepository.save(TestData.getSampleProduct().setIntegerValue(42));
 
 	// then
-	assertThat(productRepository.findByQuantity(42)).isNotEmpty();
+	assertThat(productRepository.findByIntegerValue(42)).isNotEmpty();
 	assertThat(productRepository.count()).isGreaterThanOrEqualTo(1);
 	List<Product> all = productRepository.findAll();
   }

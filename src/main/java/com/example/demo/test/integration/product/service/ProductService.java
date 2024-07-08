@@ -2,11 +2,17 @@ package com.example.demo.test.integration.product.service;
 
 import com.example.demo.test.integration.product.data.Product;
 import com.example.demo.test.integration.product.data.ProductRepository;
+import com.example.demo.test.integration.product.data.ProductSearchCriteria;
+import com.example.demo.test.integration.product.data.ProductSearchSpecification;
 import com.example.demo.test.integration.product.http.client.ProductHttpClient;
 import com.example.demo.test.integration.product.message.publisher.ProductEventPublisher;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -19,9 +25,8 @@ public class ProductService {
   private final ProductEventPublisher productEventPublisher;
 
   public Product save(Product product) {
-//	log.debug("Saving product={}", product);
-	if (product.getQuantity() >= 50) {
-	  throw new ValidationException("quantity too high");
+	if (product.getIntegerValue() >= 50) {
+	  throw new ValidationException("integer value too high");
 	}
 	return productRepository.save(product);
   }
@@ -42,12 +47,15 @@ public class ProductService {
   }
 
   public Product getById(Long id) {
-//	log.debug("Getting product with id={}", id);
 	return productRepository.findById(id).orElse(null);
   }
 
   public Product getByName(String name) {
-//	log.debug("Getting product with name={}", name);
 	return productRepository.findByName(name).orElse(null);
+  }
+
+  public List<Product> getProducts(ProductSearchCriteria productSearchCriteria) {
+	Pageable pageRequest = PageRequest.of(productSearchCriteria.getPage(), productSearchCriteria.getSize(), Sort.by(productSearchCriteria.getSortBy()));
+	return productRepository.findAll(new ProductSearchSpecification(productSearchCriteria), pageRequest).toList();
   }
 }
