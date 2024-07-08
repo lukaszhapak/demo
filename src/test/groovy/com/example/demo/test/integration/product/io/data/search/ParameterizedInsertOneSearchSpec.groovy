@@ -28,7 +28,8 @@ class ParameterizedInsertOneSearchSpec extends Specification implements SamplePr
         productService.getProducts(criteria).size() == size
 
         where:
-        criteria                              | size
+        criteria                                   | size
+        getSearchCriteria()                        | 1
         getSearchCriteria().setName("First")       | 1
         getSearchCriteria().setName("Second")      | 0
         getSearchCriteria().setMinIntegerValue(10) | 1
