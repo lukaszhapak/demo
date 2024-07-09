@@ -7,7 +7,9 @@ class ThirdBehaviorSpec extends Specification {
     StudentRepository studentRepository = Mock()
     StudentEventPublisher studentEvenPublisher = Mock()
 
-    StudentFacade studentFacade = new StudentConfigurationWithFields(studentRepository, studentEvenPublisher).studentFacade()
+    StudentConfigurationWithFields studentConfig = new StudentConfigurationWithFields(studentRepository, studentEvenPublisher)
+
+    StudentFacade studentFacade = studentConfig.studentFacade()
     StudentDTO student = new StudentDTO("John", 21)
 
     def "should save valid student"() {
