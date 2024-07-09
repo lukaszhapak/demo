@@ -9,7 +9,6 @@ interface DrawRepository extends Repository<Draw, Long> {
 
   Draw save(Draw draw);
 
-
   Draw findFirstByProductIdAndStatusOrderByDrawNumberAsc(int productId, DrawStatus drawStatus);
 
   Draw findFirstByProductIdAndStatusOrderByDrawNumberDesc(int productId, DrawStatus open);
