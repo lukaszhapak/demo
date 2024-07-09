@@ -2,11 +2,12 @@ package com.example.demo.test.unit.testingApproach.behavior
 
 import spock.lang.Specification
 
-class BehaviorSpec extends Specification {
+class ThirdBehaviorSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
-    StudentEventPublisher messagePublisher = Mock()
-    StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
+    StudentEventPublisher studentEvenPublisher = Mock()
+
+    StudentFacade studentFacade = new StudentConfigurationWithFields(studentRepository, studentEvenPublisher).studentFacade()
     StudentDTO student = new StudentDTO("John", 21)
 
     def "should save valid student"() {
@@ -15,7 +16,7 @@ class BehaviorSpec extends Specification {
 
         then:
         response.getName() == "John"
-        1 * messagePublisher.publishStudentSavedEvent(_)
+        1 * studentEvenPublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }
 
@@ -28,7 +29,7 @@ class BehaviorSpec extends Specification {
 
         then:
         thrown IllegalArgumentException
-        0 * messagePublisher.publishStudentSavedEvent(_)
+        0 * studentEvenPublisher.publishStudentSavedEvent(_)
         0 * studentRepository.save(_)
     }
 
@@ -41,7 +42,7 @@ class BehaviorSpec extends Specification {
 
         then:
         thrown IllegalArgumentException
-        0 * messagePublisher.publishStudentSavedEvent(_)
+        0 * studentEvenPublisher.publishStudentSavedEvent(_)
         0 * studentRepository.save(_)
     }
 }

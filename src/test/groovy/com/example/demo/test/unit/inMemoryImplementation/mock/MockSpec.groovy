@@ -4,9 +4,9 @@ import spock.lang.Specification
 
 class MockSpec extends Specification {
 
-    StudentEventPublisher messagePublisher = Mock()
+    StudentEventPublisher studentEventPublisher = Mock()
     StudentRepository studentRepository = Mock()
-    StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
+    StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, studentEventPublisher)
     StudentDTO student = new StudentDTO(12, "John", 22)
 
     def "should save valid student and publish event"() {
@@ -14,7 +14,7 @@ class MockSpec extends Specification {
         studentFacade.save(student).getId()
 
         then:
-        1 * messagePublisher.publishStudentSavedEvent(_)
+        1 * studentEventPublisher.publishStudentSavedEvent(_)
     }
 
     def "should get by id"() {
@@ -42,7 +42,7 @@ class MockSpec extends Specification {
 
         then:
         thrown IllegalArgumentException
-        0 * messagePublisher.publishStudentSavedEvent(_)
+        0 * studentEventPublisher.publishStudentSavedEvent(_)
     }
 
     def "should throw exception when age is too high"() {
@@ -54,6 +54,6 @@ class MockSpec extends Specification {
 
         then:
         thrown IllegalArgumentException
-        0 * messagePublisher.publishStudentSavedEvent(_)
+        0 * studentEventPublisher.publishStudentSavedEvent(_)
     }
 }

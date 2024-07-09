@@ -1,17 +1,21 @@
-package com.example.demo.test.unit.pitest
+package com.example.demo.test.unit.testingApproach.behavior
 
 import spock.lang.Specification
 
-class PitestSpec extends Specification {
+class FirstBehaviorSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
     StudentEventPublisher studentEventPublisher = Mock()
-    StudentFacade studentFacade = new StudentFacade(studentRepository, studentEventPublisher)
-    Student student = new Student("John", 21)
+
+    StudentMapper studentMapper = new StudentMapper()
+    StudentValidator studentValidator = new StudentValidator(studentRepository)
+
+    StudentFacade studentFacade = new StudentFacade(studentRepository, studentEventPublisher, studentValidator, studentMapper)
+    StudentDTO student = new StudentDTO("John", 21)
 
     def "should save valid student"() {
         when:
-        Student response = studentFacade.save(student)
+        StudentDTO response = studentFacade.save(student)
 
         then:
         response.getName() == "John"

@@ -5,10 +5,10 @@ import spock.lang.Specification
 class StudentFacadeSpec extends Specification {
 
     StudentRepository studentRepository = Mock()
-    StudentEventPublisher messagePublisher = Mock()
+    StudentEventPublisher studentEventPublisher = Mock()
     StudentValidator studentValidator = Mock()
     StudentMapper studentMapper = Mock()
-    StudentFacade studentFacade = new StudentFacade(studentRepository, messagePublisher, studentValidator, studentMapper)
+    StudentFacade studentFacade = new StudentFacade(studentRepository, studentEventPublisher, studentValidator, studentMapper)
     StudentDTO studentDTO = new StudentDTO("John", 21)
     Student student = new Student(1, "John", 21)
 
@@ -26,7 +26,7 @@ class StudentFacadeSpec extends Specification {
 
         then:
         response.getName() == "John"
-        1 * messagePublisher.publishStudentSavedEvent(_)
+        1 * studentEventPublisher.publishStudentSavedEvent(_)
         1 * studentRepository.save(_)
     }
 
@@ -39,7 +39,7 @@ class StudentFacadeSpec extends Specification {
 
         then:
         thrown IllegalArgumentException
-        0 * messagePublisher.publishStudentSavedEvent(_)
+        0 * studentEventPublisher.publishStudentSavedEvent(_)
         0 * studentRepository.save(_)
     }
 }

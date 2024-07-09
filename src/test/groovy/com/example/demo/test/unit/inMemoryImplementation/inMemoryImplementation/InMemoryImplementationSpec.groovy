@@ -4,9 +4,9 @@ import spock.lang.Specification
 
 class InMemoryImplementationSpec extends Specification {
 
-    StudentEventPublisher messagePublisher = Mock()
+    StudentEventPublisher studentEventPublisher = Mock()
     StudentRepository studentRepository = new InMemoryStudentRepository()
-    StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, messagePublisher)
+    StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, studentEventPublisher)
     StudentDTO student = new StudentDTO("John", 22)
 
     def "should save valid student and publish event"() {
@@ -15,7 +15,7 @@ class InMemoryImplementationSpec extends Specification {
 
         then:
         response.getName() == "John"
-        1 * messagePublisher.publishStudentSavedEvent(_)
+        1 * studentEventPublisher.publishStudentSavedEvent(_)
     }
 
     def "should get by id"() {
@@ -43,7 +43,7 @@ class InMemoryImplementationSpec extends Specification {
 
         then:
         thrown IllegalArgumentException
-        0 * messagePublisher.publishStudentSavedEvent(_)
+        0 * studentEventPublisher.publishStudentSavedEvent(_)
     }
 
     def "should throw exception when age is too high"() {
@@ -55,6 +55,6 @@ class InMemoryImplementationSpec extends Specification {
 
         then:
         thrown IllegalArgumentException
-        0 * messagePublisher.publishStudentSavedEvent(_)
+        0 * studentEventPublisher.publishStudentSavedEvent(_)
     }
 }
