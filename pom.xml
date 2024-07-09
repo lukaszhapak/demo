@@ -49,6 +49,8 @@
 		<datasource-proxy-spring-boot-starter.version>1.9.1
 		</datasource-proxy-spring-boot-starter.version>
 		<flexy-pool-spring-boot-starter.version>1.9.1</flexy-pool-spring-boot-starter.version>
+		<mockserver-netty.version>5.11.2</mockserver-netty.version>
+		<restito.version>0.9.3</restito.version>
 	</properties>
 
 	<!--	SPRING	-->
@@ -178,7 +180,6 @@
 			<version>${archunit-junit4.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>   <!--		 @ExpectSelect(1) -->
 			<groupId>org.quickperf</groupId>
 			<artifactId>quick-perf-junit5</artifactId>
@@ -189,6 +190,18 @@
 			<groupId>org.quickperf</groupId>
 			<artifactId>quick-perf-springboot2-sql-starter</artifactId>
 			<version>${quick-perf.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mock-server</groupId>
+			<artifactId>mockserver-netty</artifactId>
+			<version>${mockserver-netty.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.xebialabs.restito</groupId>
+			<artifactId>restito</artifactId>
+			<version>${restito.version}</version>
 			<scope>test</scope>
 		</dependency>
 
