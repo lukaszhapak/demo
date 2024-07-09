@@ -21,7 +21,7 @@ class ManuallyExecutingJobSpec extends Specification {
         Long id = productService.save(TestData.getSampleProduct()).getId()
 
         when:
-        productJob.setSomeValue()
+        productJob.setCronValue()
 
         then:
         productService.getById(id).isCronValue()

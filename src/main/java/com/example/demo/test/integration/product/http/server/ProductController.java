@@ -15,11 +15,6 @@ public class ProductController {
 
   private final ProductService productService;
 
-  @GetMapping("/api/product/string")
-  public String string() {
-	return "Product controller response";
-  }
-
   @PostMapping("/api/product")
   public Product save(@RequestBody Product product) {
  	return productService.save(product);

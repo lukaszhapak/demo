@@ -26,7 +26,7 @@ class ManuallyExecutingJobTest {
 	Long id = productService.save(TestData.getSampleProduct()).getId();
 
 	// when
-	productJob.setSomeValue();
+	productJob.setCronValue();
 
 	// then
 	assertThat(productService.getById(id).isCronValue()).isTrue();

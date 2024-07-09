@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @ConditionalOnProperty("product.listener.enabled")
-public class ProductListener {
+public class ProductEventListener {
 
   private final ProductService productService;
 
