@@ -8,23 +8,25 @@ import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 
 @SpringBootTest
-class ProductSpec extends Specification implements SampleProducts {
+class ProductSpec extends Specification implements SampleProducts, DslSpec {
 
     @Autowired
     ProductService productService
 
     def "should save product"() {
         when:
-        Long id = saveProduct(sampleProduct)
+        Long id = saveProduct(sampleProduct).getId()
 
         then:
         getProduct(id) != null
     }
 
-    long saveProduct(Product product) {
-        productService.save(product).getId()
+    @Override
+    Product saveProduct(Product product) {
+        productService.save(product)
     }
 
+    @Override
     Product getProduct(long id) {
         productService.getById(id)
     }

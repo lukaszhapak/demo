@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionHandlerAdvice {
 
   @ExceptionHandler(ValidationException.class)
-  public ResponseEntity<String> exception(ValidationException e) {
-	log.error("Exception caught ={}", e.getMessage(), e);
-	return new ResponseEntity<>("System error", HttpStatus.BAD_REQUEST);
+  public ResponseEntity<ErrorDTO> exception(ValidationException exception) {
+	log.error("Exception caught ={}", exception.getMessage(), exception);
+	return new ResponseEntity<>(new ErrorDTO(exception), HttpStatus.BAD_REQUEST);
   }
 }

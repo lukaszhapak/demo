@@ -8,20 +8,22 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class HttpProductSpec extends AbstractMockMvcIntegrationSpec implements SampleProducts {
+class HttpProductSpec extends AbstractMockMvcIntegrationSpec implements SampleProducts, DslSpec {
 
     def "should save product"() {
         when:
-        Long id = saveProduct(sampleProduct)
+        Long id = saveProduct(sampleProduct).getId()
 
         then:
         getProduct(id) != null
     }
 
-    long saveProduct(Product product) {
-        postHttpCall("/api/product", 200, product, Product.class).getId()
+    @Override
+    Product saveProduct(Product product) {
+        postHttpCall("/api/product", 200, product, Product.class)
     }
 
+    @Override
     Product getProduct(long id) {
         getHttpCall("/api/product/" + id, 200, Product.class)
     }
