@@ -18,11 +18,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class IntegrationProductSpec extends AbstractProductSpec {
 
-    ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
-
-    @Autowired
-    MockMvc mockMvc
-
     @Override
     Product saveProduct(Product product) {
         /// using http or message queue or whatever
@@ -34,6 +29,48 @@ class IntegrationProductSpec extends AbstractProductSpec {
     Product getProduct(long id) {
         getHttpCall("/api/product/" + id, 200, Product.class)
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
+
+    @Autowired
+    MockMvc mockMvc
+
 
     <T> T getHttpCall(String url, int expectedStatusCode, Class<T> returnType) {
         try {
