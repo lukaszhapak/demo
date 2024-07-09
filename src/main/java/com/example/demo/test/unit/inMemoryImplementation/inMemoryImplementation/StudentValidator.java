@@ -1,6 +1,11 @@
 package com.example.demo.test.unit.inMemoryImplementation.inMemoryImplementation;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 class StudentValidator {
+
+  private final StudentRepository studentRepository;
 
   void validate(Student student) {
 	if (student.getName().length() < 2) {
