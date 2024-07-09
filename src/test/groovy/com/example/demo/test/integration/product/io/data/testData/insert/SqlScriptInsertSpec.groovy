@@ -11,6 +11,8 @@ import spock.lang.Specification
 @Sql("classpath:sql/insert-product.sql")
 class SqlScriptInsertSpec extends Specification implements SampleProducts {
 
+    /// refactoring table will require changes in scripts
+
     @Autowired
     ProductService productService
 
