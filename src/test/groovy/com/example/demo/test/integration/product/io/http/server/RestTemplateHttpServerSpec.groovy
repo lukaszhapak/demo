@@ -1,7 +1,7 @@
 package com.example.demo.test.integration.product.io.http.server
 
 
-import com.example.demo.common.AbstractRestTemplateIntegrationSpec
+import com.example.demo.common.httpClientTest.AbstractRestTemplateIntegrationSpec
 import com.example.demo.test.integration.product.SampleProducts
 import com.example.demo.test.integration.product.data.Product
 

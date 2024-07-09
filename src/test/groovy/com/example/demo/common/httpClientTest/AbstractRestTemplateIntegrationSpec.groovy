@@ -1,4 +1,4 @@
-package com.example.demo.common
+package com.example.demo.common.httpClientTest
 
 
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,6 +1,6 @@
 package com.example.demo.spring.http.server.rest
 
-import com.example.demo.common.AbstractRestAssuredIntegrationSpec
+import com.example.demo.common.httpClientTest.AbstractRestAssuredIntegrationSpec
 import io.restassured.http.Header
 import io.restassured.http.Headers
 

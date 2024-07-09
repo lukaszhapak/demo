@@ -1,7 +1,7 @@
 package com.example.demo.test.integration.product.io.http.server
 
 
-import com.example.demo.common.AbstractRestAssuredIntegrationSpec
+import com.example.demo.common.httpClientTest.AbstractRestAssuredIntegrationSpec
 import com.example.demo.test.integration.product.SampleProducts
 import com.example.demo.test.integration.product.data.Product
 

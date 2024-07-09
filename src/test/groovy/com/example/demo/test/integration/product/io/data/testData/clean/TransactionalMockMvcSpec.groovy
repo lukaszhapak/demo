@@ -1,6 +1,6 @@
 package com.example.demo.test.integration.product.io.data.testData.clean
 
-import com.example.demo.common.AbstractMockMvcIntegrationSpec
+import com.example.demo.common.httpClientTest.AbstractMockMvcIntegrationSpec
 import com.example.demo.test.integration.product.SampleProducts
 import com.example.demo.test.integration.product.data.Product
 import com.example.demo.test.integration.product.service.ProductService

@@ -1,6 +1,6 @@
 package com.example.demo.test.integration.product.dsl
 
-import com.example.demo.common.AbstractMockMvcIntegrationSpec
+import com.example.demo.common.httpClientTest.AbstractMockMvcIntegrationSpec
 import com.example.demo.test.integration.product.SampleProducts
 import com.example.demo.test.integration.product.data.Product
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc

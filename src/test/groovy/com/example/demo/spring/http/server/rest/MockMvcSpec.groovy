@@ -1,6 +1,6 @@
 package com.example.demo.spring.http.server.rest
 
-import com.example.demo.common.AbstractMockMvcIntegrationSpec
+import com.example.demo.common.httpClientTest.AbstractMockMvcIntegrationSpec
 
 class MockMvcSpec extends AbstractMockMvcIntegrationSpec {
 
