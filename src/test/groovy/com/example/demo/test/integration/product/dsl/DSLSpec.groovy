@@ -15,7 +15,7 @@ class DSLSpec extends AbstractMockMvcIntegrationSpec implements SampleProducts {
         Long id = saveProduct(sampleProduct).getId()
 
         then:
-        getProduct(id) != null
+        assertProductsHaveSameFields(getProduct(id), sampleProduct)
     }
 
     Product saveProduct(Product product) {
@@ -24,6 +24,11 @@ class DSLSpec extends AbstractMockMvcIntegrationSpec implements SampleProducts {
 
     Product getProduct(long id) {
         getHttpCall("/api/product/" + id, 200, Product.class)
+    }
+
+    void assertProductsHaveSameFields(Product first, Product second) {
+        assert first.getName() == second.getName()
+        assert first.getIntegerValue() == second.getIntegerValue()
     }
 
     void complexSave(Object object) {
