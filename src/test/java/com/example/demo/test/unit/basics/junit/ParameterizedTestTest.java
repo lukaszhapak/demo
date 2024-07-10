@@ -3,6 +3,7 @@ package com.example.demo.test.unit.basics.junit;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import com.example.demo.test.unit.basics.customer.Customer;
+import com.example.demo.test.unit.basics.customer.CustomerDTO;
 import com.example.demo.test.unit.basics.customer.CustomerValidator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -54,7 +55,7 @@ class ParameterizedTestTest {
   @DisplayName("value source")
   void valueSource(String name) {
 	// given
-	Customer customer = Customer.builder().name(name).age(24).build();
+	CustomerDTO customer = CustomerDTO.builder().name(name).age(24).build();
 
 	// when
 	boolean response = customerValidator.validate(customer);

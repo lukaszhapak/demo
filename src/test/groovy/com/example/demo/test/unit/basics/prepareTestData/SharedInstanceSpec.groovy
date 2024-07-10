@@ -1,9 +1,11 @@
-package com.example.demo.test.unit.basics
+package com.example.demo.test.unit.basics.prepareTestData
 
-import com.example.demo.test.unit.basics.util.SampleCustomers
+import com.example.demo.test.unit.basics.customer.CustomerDTO
 import spock.lang.Specification
 
-class TraitSpockSpec extends Specification implements SampleCustomers {
+class SharedInstanceSpec extends Specification {
+
+    CustomerDTO john = new CustomerDTO("John", 22)
 
     def "should get customer from trait and change his name to Michael"() {
         expect:
