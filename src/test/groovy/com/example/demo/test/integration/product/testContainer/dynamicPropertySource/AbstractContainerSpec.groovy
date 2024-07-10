@@ -20,6 +20,8 @@ abstract class AbstractContainerSpec extends Specification implements SampleProd
 //            .withPassword("postgres")
             .withReuse(true)
 
+    // from spring boot 3.1 it can be replaced with  @ServiceConnection
+    // https://spring.io/blog/2023/06/23/improved-testcontainers-support-in-spring-boot-3-1
     @DynamicPropertySource
     static void getContainerConfig(DynamicPropertyRegistry registry) {
         postgres.start()

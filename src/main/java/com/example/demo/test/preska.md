@@ -125,7 +125,7 @@
 * listener test, kafka template and some kind of assertion
 * polling conditions, in base class to make less mess
 * awaitility from test containers in junit
-* publisher test
+* publisher test, reminder about outbox pattern, 2 phase commit and saga choreography
 * test listener and config to get messages
 
 ### cron
@@ -139,6 +139,7 @@
 * reuse container
 * container have to be static to not restart context
 * toxi proxy
+* service connection from spring boot 3.1
 
 ### context restart
 * base class with mocks or configurations
