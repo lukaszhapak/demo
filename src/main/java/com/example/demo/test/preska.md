@@ -37,7 +37,7 @@
 * test code, in memory repository implementation
 * reflection and abstract entity example
 * easier than mocking?
-* hentai example, repo in production code, not touched in tests, tests base on facade only, black box is bigger, diagram
+* hentai example, repo in production code, not touched in tests, tests base on facade only, black box is bigger, diagram, config creates instance of in memory repo
 * not only repo but also message queue, with methods to get list of published messages, or some complex processing based on some property like ID
 * example with unique value in db
 * shared instance so the db or message queue will get erased automatically
