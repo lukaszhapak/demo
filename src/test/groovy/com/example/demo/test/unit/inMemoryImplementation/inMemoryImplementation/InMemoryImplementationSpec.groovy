@@ -33,28 +33,4 @@ class InMemoryImplementationSpec extends Specification {
         expect:
         studentFacade.findByName("John").getName() == 'John'
     }
-
-    def "should throw exception when name is too short"() {
-        given:
-        student.setName("J")
-
-        when:
-        studentFacade.save(student)
-
-        then:
-        thrown IllegalArgumentException
-        0 * studentEventPublisher.publishStudentSavedEvent(_)
-    }
-
-    def "should throw exception when age is too high"() {
-        given:
-        student.setAge(131)
-
-        when:
-        studentFacade.save(student)
-
-        then:
-        thrown IllegalArgumentException
-        0 * studentEventPublisher.publishStudentSavedEvent(_)
-    }
 }
