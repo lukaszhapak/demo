@@ -17,4 +17,11 @@ public class CustomerDTO {
 
   private String name;
   private Integer age;
+  private boolean booleanValue;
+
+  public CustomerDTO(String name, Integer age) {
+	this.name = name;
+	this.age = age;
+	booleanValue = false;
+  }
 }

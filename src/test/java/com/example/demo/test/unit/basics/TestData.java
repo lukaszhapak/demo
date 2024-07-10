@@ -17,6 +17,7 @@ public interface TestData {
 	return CustomerDTO.builder()
 		.name("John")
 		.age(22)
+		.booleanValue(false)
 		.build();
   }
 }
