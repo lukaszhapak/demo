@@ -22,6 +22,7 @@ class AssertionsWithHelperMethodSpec extends Specification {
     }
 
     // some more complex logic than in recursive comparison
+    // but maybe this can be placed in one specific test
     void compareRequestAndResponse(CustomerDTO request, CustomerDTO response) {
 //        if (request.someField == null) {
 //            assert response.category == UNKNOWN
