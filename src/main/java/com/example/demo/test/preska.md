@@ -41,6 +41,8 @@
 * not only repo but also message queue, with methods to get list of published messages, or some complex processing based on some property like ID
 * example with unique value in db
 * shared instance so the db or message queue will get erased automatically
+* method in repo to populate data, maybe i constructor
+* log in constructor
 
 ### refactoring
 * test coverage don't go too high on that
@@ -80,7 +82,7 @@
 * manual insert with method call, http request or queue message,   can hide more complex inserts in helper methods
 * sql scripts, table refactor requires a lot of changes in scripts
 * flyway migrations, create table, add test data then refactor table add column or something
-* command line runner inserting given java objects, we have pointer to those values in db but not to the exact record
+* command line runner inserting given java objects, we have pointer to those values in db but not to the exact record, can reuse code that populates in memory repository in unit tests
 
 ### clean test data
 * in unit tests repo will be cleaned for each test
