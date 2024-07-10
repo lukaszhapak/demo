@@ -5,8 +5,7 @@ import spock.lang.Specification
 class InMemoryImplementationSpec extends Specification {
 
     StudentEventPublisher studentEventPublisher = new InMemoryStudentEventPublisher()
-    StudentRepository studentRepository = new InMemoryStudentRepository()
-    StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, studentEventPublisher)
+    StudentFacade studentFacade = new StudentConfiguration().studentFacade(new InMemoryStudentRepository(), studentEventPublisher)
     StudentDTO student = new StudentDTO("John", 22)
 
     def "should save valid student and publish event"() {
