@@ -138,12 +138,27 @@
 * dynamic property source
 * reuse container
 * container have to be static to not restart context
+* toxi proxy
 
 ### context restart
 * base class with mocks or configurations
 
 ### dsl
+* hiding implementation details in one place, url, status code and other stuff
+* methods for assertions as mentioned
+* complex methods like login or payment operations, we can set in db by script that something is already logged or paid 
+* tests are much easier to read
 
 ### slices
+* temporary test for time of development to check some db method or http mapping
+* starts faster since it not loads whole context
+* but whole context should be started to test whole app
+* any ideas how to use it?
 
 ### reusing tests
+* base class with test methods
+* unit and integration test extending base and overriding operation methods
+
+### others
+* one assertion per test or fit multiple asserts on one operation to save time
+* one assertion show exactly what is not working but we can use verify all
