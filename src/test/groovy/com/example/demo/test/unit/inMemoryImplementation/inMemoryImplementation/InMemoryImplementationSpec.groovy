@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class InMemoryImplementationSpec extends Specification {
 
-    StudentEventPublisher studentEventPublisher = Mock()
+    StudentEventPublisher studentEventPublisher = new InMemoryStudentEventPublisher()
     StudentRepository studentRepository = new InMemoryStudentRepository()
     StudentFacade studentFacade = new StudentConfiguration().studentFacade(studentRepository, studentEventPublisher)
     StudentDTO student = new StudentDTO("John", 22)
@@ -15,7 +15,8 @@ class InMemoryImplementationSpec extends Specification {
 
         then:
         response.getName() == "John"
-        1 * studentEventPublisher.publishStudentSavedEvent(_)
+        studentEventPublisher.events.size() == 1
+        studentEventPublisher.events.get(0).getName() == "John"
     }
 
     def "should get by id"() {

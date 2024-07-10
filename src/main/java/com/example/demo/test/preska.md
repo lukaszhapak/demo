@@ -13,6 +13,10 @@
 * test code
 * manual initialization of tested classes, lots of not needed code in tests, that touches implementation
 * configuration class giving build module, most of the classes are not spring beans, two examples
+* refactoring, extracting services, keep the api stable don't break the contract and refactor whatever you want in the inside, private methods just for one public method
+* base test with created instances
+* in memory implementation can hold some complex logic based on some value like id
+* works like a mock
 
 ### prepare test data
 * shared list instance

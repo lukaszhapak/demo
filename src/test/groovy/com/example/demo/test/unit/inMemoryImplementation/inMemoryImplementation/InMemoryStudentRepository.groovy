@@ -5,6 +5,7 @@ class InMemoryStudentRepository implements StudentRepository {
     private Map<Long, Student> map = new HashMap<>()
     private Long id = 0L
 
+    @Override
     Student save(Student student) {
         if (student.getId() == null || !map.containsKey(student.getId())) {
             setId(student)
@@ -13,10 +14,12 @@ class InMemoryStudentRepository implements StudentRepository {
         return student
     }
 
+    @Override
     Student findById(Long id) {
         map.get(id)
     }
 
+    @Override
     Student findByName(String name) {
         map.values().stream()
                 .filter { it -> it.getName() == name }
