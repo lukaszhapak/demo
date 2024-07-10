@@ -26,5 +26,4 @@ class SharedObjectInstanceTest {
 	// then
 	assertThat(john.getName()).isEqualTo("Invalid name");
   }
-
 }
