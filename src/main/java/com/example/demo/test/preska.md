@@ -27,7 +27,7 @@
 * personas, name give us info
 
 ### unit test tools
-* 3 types of test methods: return value, interaction with something, or state change
+* 3 types of test methods: return value or exception, interaction with something, or state change
 * argument captor and argument matcher, diagram
 * assertJ recursive comparison
 * helper method with assertions, refactoring model
