@@ -15,6 +15,8 @@ abstract class AbstractProductSpec extends Specification implements SampleProduc
         getProduct(id) != null
     }
 
+    // verify event was sent
+
     abstract Product saveProduct(Product product)
 
     abstract Product getProduct(long id)

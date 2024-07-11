@@ -167,6 +167,7 @@
 ### reusing tests
 * base class with test methods
 * unit and integration test extending base and overriding operation methods
+* verify event was sent
 
 ### others
 * one assertion per test or fit multiple asserts on one operation to save time
