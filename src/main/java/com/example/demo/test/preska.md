@@ -24,6 +24,7 @@
 * trait in spock, or field of abstract class in junit, interface does not work because of static
 * lombok chained setter
 * reflection test utils 
+* personas, name give us info
 
 ### unit test tools
 * 3 types of test methods: return value, interaction with something, or state change
@@ -41,8 +42,9 @@
 * not only repo but also message queue, with methods to get list of published messages, or some complex processing based on some property like ID
 * example with unique value in db
 * shared instance so the db or message queue will get erased automatically
-* method in repo to populate data, maybe i constructor
+* method in repo to populate data, maybe i constructor, can be reused later in data insert runner
 * log in constructor
+* having this repository make those tests more similar to integration test, reusing tests
 
 ### refactoring
 * test coverage don't go too high on that
