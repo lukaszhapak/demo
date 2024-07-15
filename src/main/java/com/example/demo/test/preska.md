@@ -6,6 +6,7 @@
 * architecture diagram
 * test code
 * mock and objects initialization are blocking refactoring
+* some kind of string generator, mock requires that this class and that method returns that value, requires that given class is using this generator
 
 ### behavior test
 * architecture diagram, black box
