@@ -4,6 +4,7 @@
 
 ### implementation test
 * architecture diagram
+* facade - everything is encapsulated but test are breaking it
 * test code
 * mock and objects initialization are blocking refactoring
 * mock requires that this class and that method returns that value, requires that given class is using this mock
