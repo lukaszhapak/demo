@@ -6,7 +6,7 @@
 * architecture diagram
 * test code
 * mock and objects initialization are blocking refactoring
-* some kind of string generator, mock requires that this class and that method returns that value, requires that given class is using this generator
+* mock requires that this class and that method returns that value, requires that given class is using this mock
 
 ### behavior test
 * architecture diagram, black box
@@ -28,7 +28,7 @@
 * personas, name give us info
 
 ### unit test tools
-* 3 types of test methods: return value or exception, interaction with something, or state change
+* 3 types of assertions: return value or exception, interaction with something, or state change
 * argument captor and argument matcher, diagram
 * assertJ recursive comparison
 * helper method with assertions, refactoring model
