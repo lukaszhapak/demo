@@ -79,7 +79,7 @@
 
 ## Integration test
 * diagram
-* ice cone vs honeycomb
+* pyramid vs honeycomb
 * testing everything as integration tests, only happy path or only flows that bring money
 * later we will talk about reusing tests
 
@@ -155,17 +155,17 @@
 ### context restart
 * base class with mocks or configurations
 
-### dsl
-* hiding implementation details in one place, url, status code and other stuff
-* methods for assertions as mentioned
-* complex methods like login or payment operations, we can set in db by script that something is already logged or paid 
-* tests are much easier to read
-
 ### slices
 * temporary test for time of development to check some db method or http mapping
 * starts faster since it not loads whole context
 * but whole context should be started to test whole app
 * any ideas how to use it?
+
+### dsl
+* hiding implementation details in one place, url, status code and other stuff
+* methods for assertions as mentioned
+* complex methods like login or payment operations, we can set in db by script that something is already logged or paid 
+* tests are much easier to read
 
 ### reusing tests
 * base class with test methods

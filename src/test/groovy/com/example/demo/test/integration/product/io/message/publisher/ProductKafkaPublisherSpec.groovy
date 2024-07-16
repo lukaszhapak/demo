@@ -32,6 +32,7 @@ class ProductKafkaPublisherSpec extends Specification implements SampleProducts 
         then:
         pollingConditions.eventually {
             specKafkaListener.receivedRecords.size() == 1
+            // additional assertions to verify exact values
         }
     }
 }

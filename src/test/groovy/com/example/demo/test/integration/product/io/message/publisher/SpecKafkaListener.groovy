@@ -6,7 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener
 
 class SpecKafkaListener {
 
-    List<ProductAddedEvent> receivedRecords = new LinkedList<>()
+    List<ProductAddedEvent> receivedRecords = []
 
     @KafkaListener(id = "test-demo-application", topics = "test-product-added-topic")
     void listen(ConsumerRecord<String, ProductAddedEvent> kafkaEvent) {

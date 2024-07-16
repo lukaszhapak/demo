@@ -24,6 +24,7 @@ class SelectivelyRepoCleanSpec extends Specification implements SampleProducts {
 
         cleanup:
         productRepository.deleteAll()
+        // or delete by id or some other field
     }
 
     def "should not find product"() {

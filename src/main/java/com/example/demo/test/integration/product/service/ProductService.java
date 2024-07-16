@@ -31,6 +31,7 @@ public class ProductService {
   }
 
   public Product saveAndPublishEvent(Product product) {
+	// outbox pattern, saga choreography, 2 phase commit
 	productEventPublisher.publishProductAddedEvent(product);
 	return productRepository.save(product);
   }

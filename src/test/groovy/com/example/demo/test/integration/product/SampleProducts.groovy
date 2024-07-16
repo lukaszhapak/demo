@@ -5,6 +5,8 @@ import com.example.demo.test.integration.product.data.ProductSearchCriteria
 
 trait SampleProducts {
 
+    // some base product with defaults values in required fields can be created
+
     Product sampleProduct = new Product()
             .setName("Phone")
             .setIntegerValue(21)
