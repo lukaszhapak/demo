@@ -16,7 +16,7 @@ class JunitFailingAssertionsTest {
 //
 //  @Test
 //  void shouldAssertListSizeJunit() {
-//	assertEquals(list.size(), 2);
+//	assertEquals(2, list.size());
 //  }
 //
 //  @Test
@@ -26,7 +26,7 @@ class JunitFailingAssertionsTest {
 //
 //  @Test
 //  void shouldAssertNameJunit() {
-//	assertEquals(customerDTO.getName(), "Michael");
+//	assertEquals("Michael", customerDTO.getName());
 //  }
 //
 //  @Test

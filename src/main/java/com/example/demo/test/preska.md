@@ -53,6 +53,7 @@
 * pitest, config in pom
 * target classes target tests, mutators groups or single mutator list 
 * pit report
+* test strength vs mutation coverage
 * don't chase 100% usually not worth it
 * can be connected to pull request
 
@@ -68,7 +69,8 @@
 * green, implement the code to get the test pass
 * refactor the code and run tests
 * in behavior test red is design of api, interface, facade and refactor is design of internal classes
-* in implementations tests refactor allows to extract methods inside of a class
+* in implementations tests refactor allows to extract methods inside a class
+* why some say that tdd is bad, slows development, hard to refactor, generally it is harder
 
 ### archunit
 * layered
