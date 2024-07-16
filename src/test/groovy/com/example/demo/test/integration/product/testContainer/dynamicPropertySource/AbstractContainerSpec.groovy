@@ -6,14 +6,12 @@ import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.spock.Testcontainers
-import spock.lang.Shared
 import spock.lang.Specification
 
 @Testcontainers
 @SpringBootTest
 abstract class AbstractContainerSpec extends Specification implements SampleProducts {
 
-    @Shared
     public static PostgreSQLContainer postgres = new PostgreSQLContainer<>("postgres:14.0")
 //            .withDatabaseName("postgres")
 //            .withUsername("postgres")
