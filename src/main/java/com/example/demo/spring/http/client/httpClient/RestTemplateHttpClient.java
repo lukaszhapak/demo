@@ -1,6 +1,5 @@
 package com.example.demo.spring.http.client.httpClient;
 
-import com.example.demo.test.integration.product.http.client.ValueResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

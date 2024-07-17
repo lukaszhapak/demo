@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 class DrawConfiguration {
 
   @Bean
-  DrawFacade drawFacade(DrawRepository drawRepository, @Value("#{${game.engine.maxScheduledDrawsPerGame}}") Map<Integer, Integer> scheduledDrawsPerGame) {
+  DrawFacade drawFacade(DrawRepository drawRepository,
+	  @Value("#{${game.engine.maxScheduledDrawsPerGame}}") Map<Integer, Integer> scheduledDrawsPerGame) {
 	return new DrawFacade(drawCloseService(drawRepository),
 		drawScheduleService(drawRepository, scheduledDrawsPerGame),
 		drawFindService(drawRepository),

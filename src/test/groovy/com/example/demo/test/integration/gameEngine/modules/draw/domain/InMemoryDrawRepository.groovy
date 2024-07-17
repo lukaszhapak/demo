@@ -4,7 +4,7 @@ import com.example.demo.test.integration.gameEngine.modules.draw.dto.DrawStatus
 
 class InMemoryDrawRepository implements DrawRepository {
 
-    private Map<Long, Draw> map = new HashMap<>()
+    private Map<Long, Draw> map = [:]
     private Long id = 0L
 
     int countByProductId(int productId) {

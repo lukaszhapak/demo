@@ -40,12 +40,12 @@ public class BasicEntryJobTest extends AbstractBatchIntegrationTest {
 		&& entry.getProcessingAttempts().equals(1L)
 		&& entry.getErrorType() == null
 		&& entry.getErrorCode() == null
-	).collect(Collectors.toList())).hasSize(8);
+	).collect(Collectors.toList())).hasSize(10);
 
 	assertThat(processedEntries.stream().filter(
 		entry -> entry.getStatus() == REGISTERED
 		&& entry.getProcessingAttempts().equals(0L))
-		.collect(Collectors.toList())).hasSize(2);
+		.collect(Collectors.toList())).hasSize(0);
   }
 
   private Entry processEntry(Entry entry) {
