@@ -8,24 +8,16 @@ Demo application
 
 ### java
 * design patterns
-* java streams
+* streams
 * optionals
 * create exception and print stack trace
 
 
-### groovy
-* list, map initialization
-
-
 ### spring
 * email client
-* property source
-* spring expression language
-* conditionals on..
 * logs to elk https://www.youtube.com/watch?v=hvYUwUmHB6M
 * metrics to elk
 * actuator
-* custom handler interceptor
 
 
 ### db
@@ -55,21 +47,6 @@ Demo application
 
 
 ### http
-* rest template
-* open feign
 * thymeleaf tests
 * https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
 
-
-### test
-* spock multi line string, for example mock mvc json response
-* spock old
-* spock timeout
-* spock stepwise
-* live templates for tests
-* cucumber, gherkin or some other tools
-* assertJ  isEqualToIgnoringNewLines
-
-
-### other
-* https://c4model.com/
