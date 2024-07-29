@@ -11,6 +11,6 @@ class BatchSpecConfig {
 
     @Bean
     TaskExecutor asyncJobLauncherTaskExecutor() {
-        return new SyncTaskExecutor();
+        return new SyncTaskExecutor()
     }
 }

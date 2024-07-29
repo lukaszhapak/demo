@@ -13,24 +13,24 @@ import static com.example.demo.spring.batch.core.model.EntryStatus.REGISTERED
 class EntryJobGlobalFailureSpec extends AbstractBatchSpec {
 
     @Autowired
-    EntryBatchJobStarter entryBatchJobStarter;
+    EntryBatchJobStarter entryBatchJobStarter
 
     def "should start batch job and process entries"() {
         given:
         entryProcessor.process(_) >> { throw new BatchItemReaderException() }
-        List<Long> ids = saveEntries(10, REGISTERED);
+        List<Long> ids = saveEntries(10, REGISTERED)
 
         when:
-        entryBatchJobStarter.startBatch();
+        entryBatchJobStarter.startBatch()
 
         then:
-        List<Entry> processedEntries = entryRepository.findAllById(ids);
+        List<Entry> processedEntries = entryRepository.findAllById(ids)
 
         processedEntries.stream().allMatch {
             it.getStatus() == FAILED
                     && it.getErrorCode() == "Batch global failure"
                     && it.getErrorType() == SYSTEM
-                    && it.getProcessingAttempts() == 1L;
+                    && it.getProcessingAttempts() == 1L
 
         }
     }

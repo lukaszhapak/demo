@@ -11,21 +11,21 @@ import static com.example.demo.spring.batch.core.model.EntryStatus.FAILED
 class EntryAutomaticJobSpec extends AbstractBatchSpec {
 
     @Autowired
-    EntryAutomaticRetryBatchJobStarter entryAutomaticRetryBatchJobStarter;
+    EntryAutomaticRetryBatchJobStarter entryAutomaticRetryBatchJobStarter
 
     def "should start batch job and process entries"() {
         given:
         entryResourceClient.processEntry(_) >> { args -> processEntry(args[0]) }
-        List<Long> ids = saveEntries(10, FAILED);
+        List<Long> ids = saveEntries(10, FAILED)
         // todo failed entries with business error type
         // todo not failed entries, processed, or registered
         // todo failed entries with processing attempts above the limit
 
         when:
-        entryAutomaticRetryBatchJobStarter.startBatch();
+        entryAutomaticRetryBatchJobStarter.startBatch()
 
         then:
-        List<Entry> processedEntries = entryRepository.findAllById(ids);
+        List<Entry> processedEntries = entryRepository.findAllById(ids)
 
         processedEntries.stream().allMatch {
             it.getStatus() == COMPLETED
@@ -36,6 +36,6 @@ class EntryAutomaticJobSpec extends AbstractBatchSpec {
     }
 
     private Entry processEntry(Entry entry) {
-        return entry;
+        return entry
     }
 }

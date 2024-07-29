@@ -41,7 +41,7 @@ abstract class AbstractBatchSpec extends Specification implements RestClient {
     EntryProcessor entryProcessor = Spy(new EntryProcessor(entryResourceClient))
 
     protected List<Long> saveEntries(int count, EntryStatus status) {
-        return IntStream.range(0, count).mapToObj(i -> entryRepository.save(createEntry(status)).getId()).collect(Collectors.toList());
+        return IntStream.range(0, count).mapToObj(i -> entryRepository.save(createEntry(status)).getId()).collect(Collectors.toList())
     }
 
     protected Entry createEntry(EntryStatus status) {
@@ -51,6 +51,6 @@ abstract class AbstractBatchSpec extends Specification implements RestClient {
                 .errorType(status == FAILED ? SYSTEM : null)
                 .processingAttemptsLimit(5L)
                 .processingAttempts(status == REGISTERED ? 0L : 1L)
-                .build();
+                .build()
     }
 }

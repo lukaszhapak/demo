@@ -11,18 +11,18 @@ import static com.example.demo.spring.batch.core.model.EntryStatus.FAILED
 class EntryManualJobSpec extends AbstractBatchSpec {
 
     @Autowired
-    EntryManualRetryBatchJobStarter entryManualRetryBatchJobStarter;
+    EntryManualRetryBatchJobStarter entryManualRetryBatchJobStarter
 
     def "should start batch job and process entries"() {
         given:
         entryResourceClient.processEntry(_) >> { args -> processEntry(args[0]) }
-        Long id = saveEntries(1, FAILED).get(0);
+        Long id = saveEntries(1, FAILED).get(0)
 
         when:
-        entryManualRetryBatchJobStarter.startBatch(id);
+        entryManualRetryBatchJobStarter.startBatch(id)
 
         then:
-        Entry processedEntry = entryRepository.findById(id).get();
+        Entry processedEntry = entryRepository.findById(id).get()
 
         processedEntry.getStatus() == COMPLETED
         processedEntry.getErrorCode() == null
@@ -31,6 +31,6 @@ class EntryManualJobSpec extends AbstractBatchSpec {
     }
 
     protected Entry processEntry(Entry entry) {
-        return entry;
+        return entry
     }
 }

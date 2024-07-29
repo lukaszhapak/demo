@@ -14,18 +14,18 @@ import static com.example.demo.spring.batch.core.model.EntryStatus.*
 class EntryJobSpec extends AbstractBatchSpec {
 
     @Autowired
-    EntryBatchJobStarter entryBatchJobStarter;
+    EntryBatchJobStarter entryBatchJobStarter
 
     def "should start batch job and process entries"() {
         given:
         entryResourceClient.processEntry(_) >> { args -> processEntry(args[0]) }
-        List<Long> ids = saveEntries(10, REGISTERED);
+        List<Long> ids = saveEntries(10, REGISTERED)
 
         when:
-        entryBatchJobStarter.startBatch();
+        entryBatchJobStarter.startBatch()
 
         then:
-        List<Entry> processedEntries = entryRepository.findAllById(ids);
+        List<Entry> processedEntries = entryRepository.findAllById(ids)
 
         processedEntries.stream().filter(entry -> entry.getId() % 4 == 0)
                 .allMatch {
@@ -62,12 +62,12 @@ class EntryJobSpec extends AbstractBatchSpec {
 
     private Entry processEntry(Entry entry) {
         if (entry.getId() % 4 == 3) {
-            throw new RuntimeException("Test exception");
+            throw new RuntimeException("Test exception")
         } else if (entry.getId() % 4 == 2) {
-            throw new SystemProcessingException();
+            throw new SystemProcessingException()
         } else if (entry.getId() % 4 == 1) {
-            throw new BusinessProcessingException();
+            throw new BusinessProcessingException()
         }
-        return entry;
+        return entry
     }
 }
