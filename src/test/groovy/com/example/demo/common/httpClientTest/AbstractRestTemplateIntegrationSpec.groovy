@@ -17,7 +17,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 abstract class AbstractRestTemplateIntegrationSpec extends Specification {
 
     @Autowired
-    protected TestRestTemplate restTemplate;
+    protected TestRestTemplate restTemplate
 
     protected <T> T postHttpCall(String url, int expectedStatusCode, Object body, Class<T> returnType) {
         ResponseEntity<T> responseEntity = restTemplate.postForEntity(url, body, returnType)
