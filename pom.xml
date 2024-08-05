@@ -34,6 +34,7 @@
 		<flyway.version>9.4.0</flyway.version>
 		<shedlock.version>4.30.0</shedlock.version>
 		<p6spy.version>3.9.1</p6spy.version>
+		<flapdoodle.version>4.6.1</flapdoodle.version>
 
 		<!--		Test -->
 		<junit-jupiter-engine.version>5.5.2</junit-jupiter-engine.version>
@@ -73,6 +74,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 			<version>${spring-boot.version}</version>
 		</dependency>
 		<dependency>
@@ -135,6 +141,11 @@
 			<groupId>p6spy</groupId>
 			<artifactId>p6spy</artifactId>
 			<version>${p6spy.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>de.flapdoodle.embed</groupId>
+			<artifactId>de.flapdoodle.embed.mongo.spring27x</artifactId>
+			<version>${flapdoodle.version}</version>
 		</dependency>
 
 		<!--	TEST	-->
@@ -211,16 +222,16 @@
 			<scope>test</scope>
 		</dependency>
 
-<!--		<dependency>    &lt;!&ndash;		logging connection details &ndash;&gt;-->
-<!--			<groupId>com.github.gavlyukovskiy</groupId>-->
-<!--			<artifactId>datasource-proxy-spring-boot-starter</artifactId>-->
-<!--			<version>${datasource-proxy-spring-boot-starter.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.github.gavlyukovskiy</groupId>-->
-<!--			<artifactId>flexy-pool-spring-boot-starter</artifactId>-->
-<!--			<version>${flexy-pool-spring-boot-starter.version}</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>    &lt;!&ndash;		logging connection details &ndash;&gt;-->
+		<!--			<groupId>com.github.gavlyukovskiy</groupId>-->
+		<!--			<artifactId>datasource-proxy-spring-boot-starter</artifactId>-->
+		<!--			<version>${datasource-proxy-spring-boot-starter.version}</version>-->
+		<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.github.gavlyukovskiy</groupId>-->
+		<!--			<artifactId>flexy-pool-spring-boot-starter</artifactId>-->
+		<!--			<version>${flexy-pool-spring-boot-starter.version}</version>-->
+		<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.spockframework</groupId>
@@ -242,7 +253,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-								<version>3.0.0</version>
+				<version>3.0.0</version>
 				<configuration>
 					<includes>
 						<include>**/*Test.*</include>
