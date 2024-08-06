@@ -20,15 +20,14 @@ class MongoSpec extends Specification {
         studentRepository.save(student)
 
         then:
-        studentRepository.findAll().size() >= 1
+        studentRepository.findById(student.id).get().name == student.name
     }
 
     Student createStudent() {
-        Student.builder()
-                .id(UUID.randomUUID().toString())
-                .name("John")
-                .age(20)
-                .created(LocalDateTime.now())
-                .build()
+        new Student()
+                .setId(UUID.randomUUID().toString())
+                .setName("John")
+                .setAge(20)
+                .setCreated(LocalDateTime.now())
     }
 }
