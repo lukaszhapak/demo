@@ -1,12 +1,9 @@
 package com.example.demo.spring.data.mongo.mongoTemplate
 
-
+import com.example.demo.common.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import spock.lang.Specification
 
-@SpringBootTest
-class MongoTemplateSpec extends Specification {
+class MongoTemplateSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService
