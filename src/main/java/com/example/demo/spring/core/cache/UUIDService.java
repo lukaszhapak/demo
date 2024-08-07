@@ -10,13 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 class UUIDService {
 
-  @Cacheable("UUID")
+  @Cacheable(value = "uuid", cacheManager = "uuidCacheManager")
   public String getCached() {
 	log.debug("Get cached uuid value");
 	return UUID.randomUUID().toString();
   }
 
-  @CacheEvict("UUID")
+//  manual cache eviction no ttl is defined
+  @CacheEvict(value = "uuid", cacheManager = "uuidCacheManager")
   public String evictCached() {
 	log.debug("Evict uuid cache");
 	return "Cache uuid evicted";

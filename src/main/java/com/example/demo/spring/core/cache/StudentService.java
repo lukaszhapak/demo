@@ -17,6 +17,8 @@ class StudentService {
 
   private final StudentRepository studentRepository;
 
+  // by default key will be generated based on parameters but this way it is easier to evict given cache on other operation
+
   @Cacheable(value = "student", key = "'student' +#id")
   public Student findById(Long id) {
 	log.debug("get student id={}", id);
