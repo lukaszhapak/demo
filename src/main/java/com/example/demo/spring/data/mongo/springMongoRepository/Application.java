@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.mongo;
+package com.example.demo.spring.data.mongo.springMongoRepository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

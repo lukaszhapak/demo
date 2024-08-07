@@ -1,6 +1,5 @@
-package com.example.demo.spring.data.mongo;
+package com.example.demo.spring.data.mongo.springMongoRepository;
 
-import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,5 +16,4 @@ class Student {
   private String id;
   private String name;
   private int age;
-  private LocalDateTime created;
 }
