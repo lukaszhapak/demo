@@ -13,8 +13,9 @@ class MongoTemplateSpec extends AbstractIntegrationSpec {
         String id = studentService.save(createStudent()).id
 
         then:
-        studentService.findById(id).name == "John"
-        studentService.findByName("John").name == "John"
+        studentService.findById(id).age == 20
+        studentService.updateAge(id, 32)
+        studentService.findByName("John").age == 32
     }
 
     Student createStudent() {
