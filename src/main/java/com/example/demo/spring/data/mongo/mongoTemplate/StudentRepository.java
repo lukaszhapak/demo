@@ -6,11 +6,11 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-@Service
+@Repository
 @RequiredArgsConstructor
-class StudentService {
+class StudentRepository {
 
   private final MongoTemplate mongoTemplate;
 
@@ -32,5 +32,10 @@ class StudentService {
 	Update update = new Update();
 	update.set("age", age);
 	UpdateResult result = mongoTemplate.updateFirst(query, update, Student.class);
+  }
+
+  Student findByAgeGreaterThan(int age) {
+	Query query = new Query(Criteria.where("age").gt(age));
+	return mongoTemplate.findOne(query, Student.class);
   }
 }

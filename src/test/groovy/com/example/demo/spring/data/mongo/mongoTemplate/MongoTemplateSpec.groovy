@@ -6,16 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired
 class MongoTemplateSpec extends AbstractIntegrationSpec {
 
     @Autowired
-    StudentService studentService
+    StudentRepository studentRepository
 
     def "should save and fetch student"() {
         when:
-        String id = studentService.save(createStudent()).id
+        String id = studentRepository.save(createStudent()).id
 
         then:
-        studentService.findById(id).age == 20
-        studentService.updateAge(id, 32)
-        studentService.findByName("John").age == 32
+        studentRepository.findById(id).age == 20
+        studentRepository.updateAge(id, 32)
+        studentRepository.findByName("John").age == 32
+        studentRepository.findByAgeGreaterThan(18).name == "John"
+        studentRepository.findByAgeGreaterThan(50) == null
     }
 
     Student createStudent() {
