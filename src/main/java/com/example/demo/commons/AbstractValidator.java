@@ -35,7 +35,7 @@ public abstract class AbstractValidator {
   }
 
   protected void throwException(String objectName) {
-	if (invalidFields.size() > 0) {
+	if (!invalidFields.isEmpty()) {
 	  throw new ValidationException(objectName + " is invalid", invalidFields);
 	}
   }

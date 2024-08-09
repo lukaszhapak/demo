@@ -6,7 +6,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public interface JsonMapper {
 
-  ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule());
+  ObjectMapper objectMapper = new ObjectMapper()
+	  .registerModule(new JavaTimeModule());
 
   default String serialize(Object object) {
 	String result;
