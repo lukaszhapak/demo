@@ -1,6 +1,6 @@
 package com.example.demo.spring.http.server.handlerInterceptor
 
-import com.example.demo.common.httpClientTest.AbstractMockMvcIntegrationSpec
+import com.example.demo.commons.httpClientTest.AbstractMockMvcIntegrationSpec
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status

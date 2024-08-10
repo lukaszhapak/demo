@@ -1,6 +1,6 @@
 package com.example.demo.spring.message.kafka
 
-import com.example.demo.common.AbstractIntegrationSpec
+import com.example.demo.commons.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.test.context.EmbeddedKafka

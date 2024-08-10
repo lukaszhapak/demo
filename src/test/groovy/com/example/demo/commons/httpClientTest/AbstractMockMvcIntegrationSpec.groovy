@@ -1,4 +1,4 @@
-package com.example.demo.common.httpClientTest
+package com.example.demo.commons.httpClientTest
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule

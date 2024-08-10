@@ -1,6 +1,6 @@
 package com.example.demo.spring.http.client.httpClient
 
-import com.example.demo.common.AbstractIntegrationSpec
+import com.example.demo.commons.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
 import org.springframework.test.context.ActiveProfiles

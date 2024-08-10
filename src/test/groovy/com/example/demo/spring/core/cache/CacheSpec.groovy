@@ -1,6 +1,6 @@
 package com.example.demo.spring.core.cache
 
-import com.example.demo.common.AbstractIntegrationSpec
+import com.example.demo.commons.AbstractIntegrationSpec
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 

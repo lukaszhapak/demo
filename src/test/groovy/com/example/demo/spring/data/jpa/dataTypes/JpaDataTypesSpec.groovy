@@ -1,6 +1,6 @@
 package com.example.demo.spring.data.jpa.dataTypes
 
-import com.example.demo.common.AbstractIntegrationSpec
+import com.example.demo.commons.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcOperations
 
