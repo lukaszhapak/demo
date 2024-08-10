@@ -1,4 +1,4 @@
-package com.example.demo.nonspring.util.threads;
+package com.example.demo.nonspring.threads;
 
 import lombok.AllArgsConstructor;
 

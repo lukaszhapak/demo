@@ -11,6 +11,7 @@ Demo application
 * streams
 * optionals
 * create exception and print stack trace
+* threads, sync example and more stuff
 
 
 ### spring
@@ -49,4 +50,5 @@ Demo application
 ### http
 * thymeleaf tests
 * https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
+* http clients examples of fetching list, posting some data, etc.
 
