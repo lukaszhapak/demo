@@ -1,7 +1,6 @@
 package com.example.demo.commons.httpClientTest
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.example.demo.commons.JsonMapper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,60 +16,42 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-abstract class AbstractMockMvcIntegrationSpec extends Specification {
-
-    ObjectMapper objectMapper = new ObjectMapper().registerModule(new JavaTimeModule())
+abstract class AbstractMockMvcIntegrationSpec extends Specification implements JsonMapper {
 
     @Autowired
     MockMvc mockMvc
 
     <T> T getHttpCall(String url, int expectedStatusCode, Class<T> returnType) {
-        try {
-            return objectMapper.readValue(mockMvc.perform(get(url))
-                    .andDo(print())
-                    .andExpect(status().is(expectedStatusCode))
-                    .andReturn().getResponse()
-                    .getContentAsString(), returnType)
-        } catch (Exception e) {
-            throw new RuntimeException(e)
-        }
+        return deserialize(mockMvc.perform(get(url))
+                .andDo(print())
+                .andExpect(status().is(expectedStatusCode))
+                .andReturn().getResponse()
+                .getContentAsString(), returnType)
     }
 
     <T> T postHttpCall(String url, int expectedStatusCode, Object body, Class<T> returnType) {
-        try {
-            return objectMapper.readValue(mockMvc.perform(post(url)
-                    .content(objectMapper.writeValueAsString(body))
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andDo(print())
-                    .andExpect(status().is(expectedStatusCode))
-                    .andReturn().getResponse()
-                    .getContentAsString(), returnType)
-        } catch (Exception e) {
-            throw new RuntimeException(e)
-        }
+        return deserialize(mockMvc.perform(post(url)
+                .content(serialize(body))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is(expectedStatusCode))
+                .andReturn().getResponse()
+                .getContentAsString(), returnType)
     }
 
     <T> T putHttpCall(String url, int expectedStatusCode, Object body, Class<T> returnType) {
-        try {
-            return objectMapper.readValue(mockMvc.perform(put(url)
-                    .content(objectMapper.writeValueAsString(body))
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andDo(print())
-                    .andExpect(status().is(expectedStatusCode))
-                    .andReturn().getResponse()
-                    .getContentAsString(), returnType)
-        } catch (Exception e) {
-            throw new RuntimeException(e)
-        }
+        return deserialize(mockMvc.perform(put(url)
+                .content(serialize(body))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is(expectedStatusCode))
+                .andReturn().getResponse()
+                .getContentAsString(), returnType)
     }
 
     void deleteHttpCall(String url, int expectedStatusCode) {
-        try {
-            mockMvc.perform(delete(url))
-                    .andDo(print())
-                    .andExpect(status().is(expectedStatusCode))
-        } catch (Exception e) {
-            throw new RuntimeException(e)
-        }
+        mockMvc.perform(delete(url))
+                .andDo(print())
+                .andExpect(status().is(expectedStatusCode))
     }
 }
