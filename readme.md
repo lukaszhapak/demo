@@ -21,6 +21,15 @@ Demo application
 * actuator
 
 
+### http
+* thymeleaf tests
+* https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
+* http clients examples of fetching list, posting some data, etc.
+* rest server tests for all methods
+* exception handler returning exception dto
+* handler interceptor doing some stuff
+
+
 ### db
 * entity manager
 * jdbc spring
@@ -45,10 +54,4 @@ Demo application
 * transactions in jpa, what causes rollback, checked unchecked (also in try block)
 * n plus one
 * criteria api, criteria + meta model, query dsl, specification
-
-
-### http
-* thymeleaf tests
-* https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
-* http clients examples of fetching list, posting some data, etc.
-
+* disable embedded mongo in most of tests
