@@ -19,6 +19,8 @@ Demo application
 * logs to elk https://www.youtube.com/watch?v=hvYUwUmHB6M
 * metrics to elk
 * actuator
+* aop logging with execution time, logging before execution logging after execution plus execution time
+* aop logging in commons
 
 
 ### http
