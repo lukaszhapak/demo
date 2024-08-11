@@ -12,6 +12,7 @@ Demo application
 * optionals
 * create exception and print stack trace
 * threads, sync example and more stuff
+* memory leak
 
 
 ### spring
