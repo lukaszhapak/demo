@@ -1,12 +1,12 @@
-package com.example.demo.spring.data.jpa.dataTypes;
+package com.example.demo.spring.data.mongo.springMongoRepository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class Application {
+class SpringMongoApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(SpringMongoApplication.class, args);
   }
 }

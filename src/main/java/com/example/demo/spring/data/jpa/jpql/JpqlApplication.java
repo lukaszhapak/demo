@@ -1,12 +1,12 @@
-package com.example.demo.spring.data.mongo.springMongoRepository;
+package com.example.demo.spring.data.jpa.jpql;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class Application {
+class JpqlApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(JpqlApplication.class, args);
   }
 }

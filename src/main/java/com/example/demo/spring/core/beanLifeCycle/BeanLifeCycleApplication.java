@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-class Application {
+class BeanLifeCycleApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(BeanLifeCycleApplication.class, args);
   }
 
   @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")

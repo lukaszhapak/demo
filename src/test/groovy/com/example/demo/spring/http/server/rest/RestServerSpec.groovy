@@ -2,7 +2,7 @@ package com.example.demo.spring.http.server.rest
 
 import com.example.demo.commons.httpClientTest.AbstractMockMvcIntegrationSpec
 
-class RestSpec extends AbstractMockMvcIntegrationSpec {
+class RestServerSpec extends AbstractMockMvcIntegrationSpec {
 
     def "should get with single param in url"() {
         expect:

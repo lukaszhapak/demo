@@ -14,10 +14,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableCaching
 @EnableScheduling
 @SpringBootApplication
-class Application {
+class CacheApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(CacheApplication.class, args);
   }
 
   // when using third party cache provider more options are available to configure

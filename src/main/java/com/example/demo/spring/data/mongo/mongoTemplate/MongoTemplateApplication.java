@@ -1,12 +1,12 @@
-package com.example.demo.spring.core.aop;
+package com.example.demo.spring.data.mongo.mongoTemplate;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class Application {
+class MongoTemplateApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(Application.class, args);
+	SpringApplication.run(MongoTemplateApplication.class, args);
   }
 }
