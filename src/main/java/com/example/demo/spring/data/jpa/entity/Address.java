@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.dataTypes;
+package com.example.demo.spring.data.jpa.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

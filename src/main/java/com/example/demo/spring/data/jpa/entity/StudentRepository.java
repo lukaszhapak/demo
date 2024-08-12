@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.dataTypes;
+package com.example.demo.spring.data.jpa.entity;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

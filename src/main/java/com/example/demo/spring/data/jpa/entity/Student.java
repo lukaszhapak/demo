@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.dataTypes;
+package com.example.demo.spring.data.jpa.entity;
 
 import static javax.persistence.CascadeType.PERSIST;
 
@@ -10,10 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,7 +28,11 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SequenceGenerator(name = "student_id_seq", sequenceName = "student_id_seq", allocationSize = 100)
+@Table(name = "Student", indexes = {
+    @Index(name = "idx_student_age", columnList = "age"),
+    @Index(name = "idx_student_first_name_last_name", columnList = "firstName, lastName", unique = true)
+})
+@SequenceGenerator(name = "student_id_seq", sequenceName = "student_id_seq", allocationSize = 100, initialValue = 1)
 class Student {
 
   @Id
@@ -40,7 +46,7 @@ class Student {
   private StudentOneToOne oneToOne;
 
   @OneToMany(cascade = PERSIST)
-  @JoinColumn(name = "Student_id", nullable = false)
+  @JoinColumn(name = "student_id", nullable = false)
   private List<StudentOneToMany> oneToMany;
 
   @Embedded

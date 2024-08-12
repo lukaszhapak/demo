@@ -1,12 +1,12 @@
-package com.example.demo.spring.data.jpa.dataTypes;
+package com.example.demo.spring.data.jpa.entity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class JpaDataTypesApplication {
+class JpaEntityApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(JpaDataTypesApplication.class, args);
+	SpringApplication.run(JpaEntityApplication.class, args);
   }
 }

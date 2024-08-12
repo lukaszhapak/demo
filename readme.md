@@ -36,12 +36,9 @@ Demo application
 ### db
 * entity manager
 * jdbc spring
-* sequences
 * procedures
-* db indexes, partial index (where name != null)
+* partial index (where name != null)
 * @Query with update (@Modifying) 
-* test entity manager
-* mongodb, embedded for tests
 * jpa lock
 * jpa dynamic update
 * jpa dynamic insert
