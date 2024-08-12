@@ -57,4 +57,5 @@ Demo application
 * transactions in jpa, what causes rollback, checked unchecked (also in try block)
 * n plus one
 * criteria api, criteria + meta model, query dsl, specification
-* disable embedded mongo in most of tests
+* disable embedded mongo in most of the tests
+* create / update timestamp
