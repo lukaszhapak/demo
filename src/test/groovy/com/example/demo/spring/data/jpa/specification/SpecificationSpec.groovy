@@ -18,6 +18,12 @@ class SpecificationSpec extends AbstractIntegrationSpec {
         saveStudents(john, jim, michael)
 
         expect:
+        studentService.getStudents(getCriteria().setSize(1)).content.size() == 1
+        studentService.getStudents(getCriteria().setSize(2)).content.size() == 2
+        studentService.getStudents(getCriteria().setSortBy("age")).content.get(0).firstName == "Jim"
+        studentService.getStudents(getCriteria().setSortBy("age")).content.get(1).firstName == "John"
+        studentService.getStudents(getCriteria().setSortBy("age").setSortAscending(false)).content.get(0).firstName == "Michael"
+        studentService.getStudents(getCriteria().setSize(1).setPage(2).setSortBy("age").setSortAscending(false)).content.get(0).firstName == "John"
         assertPageContains(studentService.getStudents(getCriteria().setFirstName("Jim")), [jim])
         assertPageContains(studentService.getStudents(getCriteria().setStreetName("Oak street")), [john])
         assertPageContains(studentService.getStudents(getCriteria().setOlderThan(21)), [john, michael])
@@ -73,7 +79,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
 
     def getCriteria() {
         StudentSearchCriteria.builder()
-                .page(0)
+                .page(1)
                 .size(10)
                 .sortBy("id")
                 .build()

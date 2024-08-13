@@ -3,13 +3,11 @@ package com.example.demo.spring.data.jpa.entity
 import com.example.demo.commons.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcOperations
-import org.springframework.test.context.ActiveProfiles
 
 import java.util.stream.Collectors
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
-@ActiveProfiles("h2-p6spy")
 class JpaEntitySpec extends AbstractIntegrationSpec {
 
     @Autowired
