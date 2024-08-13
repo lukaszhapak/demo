@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.specification;
+package com.example.demo.spring.data.jpa.search.specification;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

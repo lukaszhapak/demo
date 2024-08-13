@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.specification
+package com.example.demo.spring.data.jpa.search.specification
 
 import com.example.demo.commons.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired

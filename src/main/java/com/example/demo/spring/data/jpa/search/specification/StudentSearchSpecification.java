@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.specification;
+package com.example.demo.spring.data.jpa.search.specification;
 
 import java.util.LinkedList;
 import java.util.List;
