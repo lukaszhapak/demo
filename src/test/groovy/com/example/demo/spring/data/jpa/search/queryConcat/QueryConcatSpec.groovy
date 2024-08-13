@@ -1,14 +1,13 @@
-package com.example.demo.spring.data.jpa.search.specification
+package com.example.demo.spring.data.jpa.search.queryConcat
 
 import com.example.demo.commons.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.domain.Page
 
 import java.time.LocalDateTime
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
-class SpecificationSpec extends AbstractIntegrationSpec {
+class QueryConcatSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentService studentService
@@ -18,13 +17,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
         saveStudents(john, jim, michael)
 
         expect:
-        studentService.getStudents(getCriteria().setSize(1)).content.size() == 1
-        studentService.getStudents(getCriteria().setSize(2)).content.size() == 2
-        studentService.getStudents(getCriteria().setSortBy("age")).content.get(0).firstName == "Jim"
-        studentService.getStudents(getCriteria().setSortBy("age")).content.get(1).firstName == "John"
-        studentService.getStudents(getCriteria().setSortBy("age").setSortAscending(false)).content.get(0).firstName == "Michael"
-        studentService.getStudents(getCriteria().setSize(1).setPage(1).setSortBy("age").setSortAscending(false)).content.get(0).firstName == "John"
-        assertPageContains(studentService.getStudents(getCriteria().setFirstName("Jim")), [jim])
+        assertPageContains(studentService.getStudents(getCriteria().setFirstName("ji")), [jim])
         assertPageContains(studentService.getStudents(getCriteria().setStreetName("Oak street")), [john])
         assertPageContains(studentService.getStudents(getCriteria().setOlderThan(21)), [john, michael])
         assertPageContains(studentService.getStudents(getCriteria().setMinimalAge(24)), [john, michael])
@@ -34,8 +27,8 @@ class SpecificationSpec extends AbstractIntegrationSpec {
         assertPageContains(studentService.getStudents(getCriteria().setDateAfter(LocalDateTime.of(2024, 2, 25, 0, 0, 0))), [michael])
     }
 
-    def assertPageContains(Page<Student> page, List<Student> students) {
-        assertThat(page.getContent()).usingRecursiveComparison().ignoringCollectionOrder().ignoringFields("id").isEqualTo(students)
+    def assertPageContains(List<Student> page, List<Student> students) {
+        assertThat(page).usingRecursiveComparison().ignoringCollectionOrder().ignoringFields("id").isEqualTo(students)
     }
 
     def saveStudents(Student... students) {

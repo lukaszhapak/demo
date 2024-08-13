@@ -19,7 +19,7 @@ class StudentService {
   Page<Student> getStudents(StudentSearchCriteria studentSearchCriteria) {
 	log.debug("getting students studentSearchCriteria={}", studentSearchCriteria);
 	Pageable pageRequest = PageRequest.of(
-		studentSearchCriteria.getPage() - 1,
+		studentSearchCriteria.getPage(),
 		studentSearchCriteria.getSize(),
 		Sort.by(studentSearchCriteria.sortAscending == null || studentSearchCriteria.sortAscending ? Direction.ASC : Direction.DESC,
 			studentSearchCriteria.getSortBy()));

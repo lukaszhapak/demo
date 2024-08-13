@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.search.specification;
+package com.example.demo.spring.data.jpa.search.queryConcat;
 
 import lombok.Getter;
 import lombok.Setter;
