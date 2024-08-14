@@ -75,6 +75,5 @@ class SpecificationSpec extends AbstractIntegrationSpec {
         new StudentSearchCriteria()
                 .setPage(0)
                 .setSize(10)
-                .setSortBy("id")
     }
 }

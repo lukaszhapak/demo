@@ -16,14 +16,14 @@ class StudentService {
 
   private final StudentRepository studentRepository;
 
-  Page<Student> getStudents(StudentSearchCriteria studentSearchCriteria) {
-	log.debug("getting students studentSearchCriteria={}", studentSearchCriteria);
+  Page<Student> getStudents(StudentSearchCriteria criteria) {
+	log.debug("getting students criteria={}", criteria);
 	Pageable pageRequest = PageRequest.of(
-		studentSearchCriteria.getPage(),
-		studentSearchCriteria.getSize(),
-		Sort.by(studentSearchCriteria.sortAscending == null || studentSearchCriteria.sortAscending ? Direction.ASC : Direction.DESC,
-			studentSearchCriteria.getSortBy()));
-	return studentRepository.findAll(new StudentSearchSpecification(studentSearchCriteria), pageRequest);
+		criteria.getPage(),
+		criteria.getSize(),
+		Sort.by(criteria.sortAscending == null || criteria.sortAscending ? Direction.ASC : Direction.DESC,
+			criteria.getSortBy() == null ? "id" : criteria.getSortBy()));
+	return studentRepository.findAll(new StudentSearchSpecification(criteria), pageRequest);
   }
 
   Student save(Student student) {
