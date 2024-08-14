@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 
 import java.time.LocalDateTime
 
+import static com.example.demo.spring.data.jpa.search.queryConcat.StudentSearchCriteriaSortBy.AGE
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
 class QueryConcatSpec extends AbstractIntegrationSpec {
@@ -17,6 +18,12 @@ class QueryConcatSpec extends AbstractIntegrationSpec {
         saveStudents(john, jim, michael)
 
         expect:
+        studentService.getStudents(getCriteria().setSize(1)).size() == 1
+        studentService.getStudents(getCriteria().setSize(2)).size() == 2
+        studentService.getStudents(getCriteria().setSortBy(AGE)).get(0).firstName == "Jim"
+        studentService.getStudents(getCriteria().setSortBy(AGE)).get(1).firstName == "John"
+        studentService.getStudents(getCriteria().setSortBy(AGE).setSortAscending(false)).get(0).firstName == "Michael"
+        studentService.getStudents(getCriteria().setSize(1).setPage(1).setSortBy(AGE).setSortAscending(false)).get(0).firstName == "John"
         assertPageContains(studentService.getStudents(getCriteria().setFirstName("ji")), [jim])
         assertPageContains(studentService.getStudents(getCriteria().setStreetName("Oak street")), [john])
         assertPageContains(studentService.getStudents(getCriteria().setOlderThan(21)), [john, michael])
@@ -68,6 +75,5 @@ class QueryConcatSpec extends AbstractIntegrationSpec {
         new StudentSearchCriteria()
                 .setPage(0)
                 .setSize(10)
-                .setSortBy("id")
     }
 }

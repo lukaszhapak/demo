@@ -17,24 +17,22 @@ class StudentRepository {
 
   private final EntityManager em;
 
-
   public List<Student> findAll(StudentSearchCriteria criteria) {
 
-	// todo page request
-//	Pageable pageRequest = PageRequest.of(
-//		criteria.getPage(),
-//		criteria.getSize(),
-//		Sort.by(criteria.sortAscending == null || criteria.sortAscending ? Direction.ASC : Direction.DESC,
-//			criteria.getSortBy()));
-
-	// it can fetch dto from db, with specification it ss not possible
-
 	List<String> jpqlParts = new ArrayList<>();
-	jpqlParts.add("SELECT s" +
-		" FROM Student s " +
-		" WHERE 1=1");
+//	jpqlParts.add("SELECT NEW com.example.demo.spring.data.jpa.search.queryConcat.StudentDTO(s.id, s.firstName, s.lastName, s.age)");
+	jpqlParts.add("SELECT s");
+
+	jpqlParts.add("FROM Student s WHERE 1=1");
 
 	Map<String, Object> paramMap = new HashMap<>();
+
+	if (StringUtils.isNotEmpty(criteria.getSearch())) {
+	  jpqlParts.add("AND ( UPPER(s.firstName) LIKE UPPER('%' || :search || '%')");
+	  jpqlParts.add("OR UPPER(s.lastName) LIKE UPPER('%' || :search || '%')");
+	  jpqlParts.add("OR UPPER(s.address.streetName) LIKE UPPER('%' || :search || '%'))");
+	  paramMap.put("search", criteria.getSearch());
+	}
 
 	if (StringUtils.isNotEmpty(criteria.getFirstName())) {
 	  jpqlParts.add("AND UPPER(s.firstName) LIKE UPPER('%' || :firstName || '%')");
@@ -64,8 +62,14 @@ class StudentRepository {
 	  jpqlParts.add("AND s.date > :dateAfter");
 	  paramMap.put("dateAfter", criteria.getDateAfter());
 	}
+	if (criteria.getSortBy() != null) {
+	  jpqlParts.add("ORDER BY " + criteria.getSortBy());
+	  jpqlParts.add(criteria.sortAscending == null || criteria.sortAscending ? "ASC" : "DESC");
+	}
 	String jqpl = String.join(" ", jpqlParts);
-	TypedQuery<Student> query = em.createQuery(jqpl, Student.class);
+	TypedQuery<Student> query = em.createQuery(jqpl, Student.class)
+		.setFirstResult(criteria.getPage() * criteria.getSize())
+		.setMaxResults(criteria.getSize());
 	for (String paramName : paramMap.keySet()) {
 	  query.setParameter(paramName, paramMap.get(paramName));
 	}

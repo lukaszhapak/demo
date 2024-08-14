@@ -16,11 +16,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 class StudentSearchCriteria {
-  String sortBy;
+  StudentSearchCriteriaSortBy sortBy;
   Boolean sortAscending;
   Integer page;
   Integer size;
 
+  String search;
   Integer id;
   String firstName;
   List<String> lastNames;
