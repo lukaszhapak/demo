@@ -56,3 +56,4 @@ Demo application
 * criteria api, criteria + meta model, query dsl, specification
 * disable embedded mongo in most of the tests
 * create / update timestamp
+* count / findFirst / exists - performance
