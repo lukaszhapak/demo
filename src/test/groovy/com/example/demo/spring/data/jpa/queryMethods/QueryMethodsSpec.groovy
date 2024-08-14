@@ -47,6 +47,4 @@ class QueryMethodsSpec extends AbstractIntegrationSpec {
                     .flatNumber("123")
                     .build())
             .build()
-
-
 }
