@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.jpql;
+package com.example.demo.spring.data.jpa.derivedMethods;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,8 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-class StudentDTO {
+class Address {
 
-    private String name;
-    private int age;
+  private String streetName;
+  private String flatNumber;
 }

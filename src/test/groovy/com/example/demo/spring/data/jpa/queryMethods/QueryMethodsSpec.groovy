@@ -1,9 +1,9 @@
-package com.example.demo.spring.data.jpa.jpql
+package com.example.demo.spring.data.jpa.queryMethods
 
 import com.example.demo.commons.AbstractIntegrationSpec
 import org.springframework.beans.factory.annotation.Autowired
 
-class JpqlSpec extends AbstractIntegrationSpec {
+class QueryMethodsSpec extends AbstractIntegrationSpec {
 
     @Autowired
     StudentRepository studentRepository

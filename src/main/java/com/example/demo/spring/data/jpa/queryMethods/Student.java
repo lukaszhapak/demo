@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.jpql;
+package com.example.demo.spring.data.jpa.queryMethods;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

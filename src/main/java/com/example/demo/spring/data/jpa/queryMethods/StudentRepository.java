@@ -1,4 +1,4 @@
-package com.example.demo.spring.data.jpa.jpql;
+package com.example.demo.spring.data.jpa.queryMethods;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -6,9 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 
 interface StudentRepository extends JpaRepository<Student, Long> {
 
-  // find {limit} By {property / properties expression} {comparison} {ordering operator}
-
-  @Query("SELECT NEW com.example.demo.spring.data.jpa.jpql.StudentDTO(s.name, s.age) FROM Student s")
+  // when class dto have fields with same names and single constructor this is not needed
+  @Query("SELECT NEW com.example.demo.spring.data.jpa.queryMethods.StudentDTO(s.name, s.age) FROM Student s")
   List<StudentDTO> findAllAsDTOs();
 
   @Query("SELECT NEW com.example.demo.spring.data.jpa.jpql.StudentDTO(s.name, s.age) FROM Student s where s.id = :id")

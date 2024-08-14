@@ -1,12 +1,12 @@
-package com.example.demo.spring.data.jpa.jpql;
+package com.example.demo.spring.data.jpa.queryMethods;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class JpqlApplication {
+class QueryMethodsApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(JpqlApplication.class, args);
+	SpringApplication.run(QueryMethodsApplication.class, args);
   }
 }
