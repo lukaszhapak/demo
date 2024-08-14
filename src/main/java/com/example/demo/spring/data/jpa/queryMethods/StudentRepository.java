@@ -10,7 +10,7 @@ interface StudentRepository extends JpaRepository<Student, Long> {
   @Query("SELECT NEW com.example.demo.spring.data.jpa.queryMethods.StudentDTO(s.name, s.age) FROM Student s")
   List<StudentDTO> findAllAsDTOs();
 
-  @Query("SELECT NEW com.example.demo.spring.data.jpa.jpql.StudentDTO(s.name, s.age) FROM Student s where s.id = :id")
+  @Query("SELECT NEW com.example.demo.spring.data.jpa.queryMethods.StudentDTO(s.name, s.age) FROM Student s where s.id = :id")
   StudentDTO findByIdAsDTOs(Long id);
 
   @Query("Select s.name from Student s where s.id = :id")
