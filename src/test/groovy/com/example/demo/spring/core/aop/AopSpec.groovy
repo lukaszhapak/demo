@@ -10,14 +10,15 @@ class AopSpec extends AbstractIntegrationSpec {
 
     def "should execute cacheable aspect methods"() {
         expect:
-        studentService.get(1)
-        studentService.get(2)
-        studentService.get(2)
-        studentService.get(3)
+        studentService.findById(1)
+        studentService.findById(2)
+        studentService.findById(2)
+        studentService.findById(3)
     }
 
     def "should execute logging aspect methods"() {
         expect:
         studentService.save(new Student().setId(21).setName("Jim"))
+        studentService.findByNameAndAge("John", 25)
     }
 }
