@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
+@LoggingBeforeExecution
+@LoggingAfterExecution
 class StudentService {
 
   @Cacheable
@@ -15,13 +17,18 @@ class StudentService {
 	return new Student().setName("Brian");
   }
 
-  @LoggingBeforeExecution
   Student save(Student student) {
 	return student;
   }
 
-  @LoggingBeforeExecution
   Student findByNameAndAge(String name, int age) {
 	return new Student();
+  }
+
+  void publishEvent(Student student) {
+  }
+
+  String noArgumentsMethod() {
+	return "student";
   }
 }

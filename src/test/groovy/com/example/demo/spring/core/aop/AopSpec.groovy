@@ -20,5 +20,7 @@ class AopSpec extends AbstractIntegrationSpec {
         expect:
         studentService.save(new Student().setId(21).setName("Jim"))
         studentService.findByNameAndAge("John", 25)
+        studentService.publishEvent(new Student().setId(32).setName("Michael"))
+        studentService.noArgumentsMethod()
     }
 }
