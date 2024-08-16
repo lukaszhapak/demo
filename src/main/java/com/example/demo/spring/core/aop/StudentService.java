@@ -1,5 +1,6 @@
 package com.example.demo.spring.core.aop;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -7,7 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 @LoggingBeforeExecution
 @LoggingAfterExecution
+@RequiredArgsConstructor
 class StudentService {
+
+  private final StudentRepository studentRepository;
 
   @Cacheable
   Student findById(Integer id) {
@@ -18,11 +22,15 @@ class StudentService {
   }
 
   Student save(Student student) {
-	return student;
+	return studentRepository.save(student);
+  }
+
+  Student findByName(String name) {
+	return studentRepository.findByName(name);
   }
 
   Student findByNameAndAge(String name, int age) {
-	return new Student();
+	return studentRepository.findByNameAndAge(name, age);
   }
 
   void publishEvent(Student student) {

@@ -34,7 +34,7 @@ class LoggingAspect {
 	return joinPoint.proceed();
   }
 
-  @Around("logAfterExecutionAnnotation() || allRepositories() ")
+  @Around("logAfterExecutionAnnotation() || allRepositories()")
   Object logAfterExecution(ProceedingJoinPoint joinPoint) throws Throwable {
 	StopWatch stopWatch = new StopWatch();
 	stopWatch.start();
@@ -74,12 +74,12 @@ class LoggingAspect {
   }
 
   private List<String> getParametersWithNames(ProceedingJoinPoint proceedingJoinPoint) {
-	MethodSignature methodSig = (MethodSignature) proceedingJoinPoint.getSignature();
-	Object[] args = proceedingJoinPoint.getArgs();
-	String[] parametersName = methodSig.getParameterNames();
+	MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+	Object[] parameterValues = proceedingJoinPoint.getArgs();
+	String[] parameterNames = methodSignature.getParameterNames();
 	List<String> result = new ArrayList<>();
-	for (int i = 0; i < args.length; i++) {
-	  result.add(parametersName[i] + "=" + args[i]);
+	for (int i = 0; i < parameterValues.length; i++) {
+	  result.add(parameterNames[i] + "=" + parameterValues[i]);
 	}
 	return result;
   }

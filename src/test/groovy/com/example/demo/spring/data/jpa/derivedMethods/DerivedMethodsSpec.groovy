@@ -10,14 +10,25 @@ class DerivedMethodsSpec extends AbstractIntegrationSpec {
 
     def "should test search"() {
         given:
-        studentRepository.saveAll([john, jim, michael])
+        saveAll([john, jim, michael])
 
         expect:
+        studentRepository.findById(2L)
+
         studentRepository.findById(2L, Student.class).name == "Jim"
         studentRepository.findById(2L, StudentDTO.class).name == "Jim"
         studentRepository.findById(2L, StudentInterfaceDTO.class).name == "Jim"
+
+        studentRepository.findByName("John", Student.class).size() == 1
+        studentRepository.findByName("John", StudentDTO.class).size() == 1
+        studentRepository.findByName("John", StudentInterfaceDTO.class).size() == 1
+
         studentRepository.findByAge(21).name == "Jim"
+        studentRepository.findByAge(21, Student.class).name == "Jim"
+
+        studentRepository.findByAddressStreetName("Oak street", StudentDTO.class).get(0).getName() == "John"
         studentRepository.findByAddressStreetName("Oak street").get(0).getName() == "John"
+
         studentRepository.findByAddressStreetNameAndAddressFlatNumber("Student street", "123").get(0).getName() == "Michael"
     }
 
@@ -48,4 +59,7 @@ class DerivedMethodsSpec extends AbstractIntegrationSpec {
                     .build())
             .build()
 
+    void saveAll(List<Student> students) {
+        students.forEach(studentRepository::save)
+    }
 }

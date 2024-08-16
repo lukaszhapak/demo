@@ -18,8 +18,10 @@ class AopSpec extends AbstractIntegrationSpec {
 
     def "should execute logging aspect methods"() {
         expect:
-        studentService.save(new Student().setId(21).setName("Jim"))
-        studentService.findByNameAndAge("John", 25)
+        studentService.save(new Student().setName("John").setAge(25)).id != null
+        studentService.findByName("John").name == "John"
+        studentService.findByNameAndAge("John", 25).name == "John"
+
         studentService.publishEvent(new Student().setId(32).setName("Michael"))
         studentService.noArgumentsMethod()
     }
