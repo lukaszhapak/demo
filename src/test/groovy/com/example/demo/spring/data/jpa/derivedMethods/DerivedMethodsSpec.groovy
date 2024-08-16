@@ -30,6 +30,14 @@ class DerivedMethodsSpec extends AbstractIntegrationSpec {
         studentRepository.findByAddressStreetName("Oak street").get(0).getName() == "John"
 
         studentRepository.findByAddressStreetNameAndAddressFlatNumber("Student street", "123").get(0).getName() == "Michael"
+
+        studentRepository.existsByName("John")
+        !studentRepository.existsByName("Adrian")
+
+        studentRepository.findFirst10ByOrderByAgeAsc().get(0).name == "Jim"
+        studentRepository.findFirstByOrderByAgeAsc().name == "Jim"
+
+        studentRepository.count() == 3
     }
 
     Student john = Student.builder()

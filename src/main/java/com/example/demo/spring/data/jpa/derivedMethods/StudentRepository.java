@@ -25,4 +25,11 @@ interface StudentRepository extends Repository<Student, Long> {
 
   List<Student> findByAddressStreetNameAndAddressFlatNumber(String StreetNumber, String flatNumber);
 
+  boolean existsByName(String name);
+
+  Student findFirstByOrderByAgeAsc();
+
+  List<Student> findFirst10ByOrderByAgeAsc();
+
+  Long count();
 }
