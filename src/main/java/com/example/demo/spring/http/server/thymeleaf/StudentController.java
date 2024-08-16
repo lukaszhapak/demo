@@ -25,7 +25,7 @@ class StudentController {
   @GetMapping("/{id}")
   String student(Model model, @PathVariable int id) {
 	model.addAttribute("student", studentService.findById(id));
-	return "/student/student";
+	return "/student/details";
   }
 
   @GetMapping("/add")
