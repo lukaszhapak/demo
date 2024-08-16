@@ -40,8 +40,6 @@ Demo application
 * partial index (where name != null)
 * @Query with update (@Modifying) 
 * jpa lock
-* jpa dynamic update
-* jpa dynamic insert
 * jpa get reference id
 * entity graph
 * JoinColumn vs mapped by

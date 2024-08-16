@@ -21,7 +21,7 @@ class JpaEntitySpec extends AbstractIntegrationSpec {
         fetchTables() == ["STUDENT", "STUDENT_GRADES_LIST", "STUDENT_ONE_TO_MANY", "STUDENT_ONE_TO_ONE"]
     }
 
-    def "should save and find student"() {
+    def "should save and find student with all fields"() {
         given:
         Long id = studentRepository.save(createStudent()).getId()
 
@@ -30,6 +30,27 @@ class JpaEntitySpec extends AbstractIntegrationSpec {
 
         then:
         assertThat(student).usingRecursiveComparison().ignoringExpectedNullFields().isEqualTo(createStudent())
+    }
+
+    def "should save and find student with min fields"() {
+        given:
+        Long id = studentRepository.save(new Student().setFirstName("Jim").setAge(22)).getId()
+
+        expect:
+        studentRepository.findById(id).get()
+    }
+
+
+    def "should save and update student with min fields"() {
+        given:
+        Student student = studentRepository.save(new Student().setFirstName("Jim").setAge(22))
+
+        when:
+        student.setFirstName("Michael")
+        studentRepository.save(student)
+
+        then:
+        studentRepository.findById(student.id).get().firstName == "Michael"
     }
 
     List<String> fetchTables() {
