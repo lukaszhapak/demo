@@ -13,7 +13,7 @@ class InternalEventListener {
   private final StudentRepository studentRepository;
 
   @EventListener
-  void listen(InternalEvent event) {
+  void handleInternalEvent(InternalEvent event) {
 	log.debug("Event received InternalEvent={}", event);
 	Student student = new Student().setName(event.getBody());
 	studentRepository.save(student);
