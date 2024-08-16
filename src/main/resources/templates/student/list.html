@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <th:block th:include="fragments/student :: header"></th:block>
+  <th:block th:include="student/fragments :: header"></th:block>
 </head>
 <body>
 
-<nav th:replace="fragments/student :: navbar"></nav>
+<nav th:replace="student/fragments :: navbar"></nav>
 
 <div class="container my-5">
   <table class="table table-striped">
@@ -27,7 +27,7 @@
 </div>
 
 
-<div th:replace="fragments/student :: scripts"></div>
+<div th:replace="student/fragments :: scripts"></div>
 
 </body>
 </html>
