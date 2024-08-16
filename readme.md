@@ -22,6 +22,7 @@ Demo application
 * actuator
 * aop logging with execution time, logging before execution logging after execution plus execution time
 * aop logging in commons
+* kafka properties and check if message was sent
 
 
 ### http
