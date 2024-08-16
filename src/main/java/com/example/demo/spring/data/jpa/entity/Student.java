@@ -29,8 +29,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Student", indexes = {
-    @Index(name = "idx_student_age", columnList = "age"),
-    @Index(name = "idx_student_first_name_last_name", columnList = "firstName, lastName", unique = true)
+	@Index(name = "idx_student_age", columnList = "age"),
+	@Index(name = "idx_student_first_name_last_name", columnList = "firstName, lastName", unique = true)
 })
 @SequenceGenerator(name = "student_id_seq", sequenceName = "student_id_seq", allocationSize = 100, initialValue = 1)
 class Student {
