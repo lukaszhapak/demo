@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class SpecificationApplication {
+class QueryConcatApplication {
 
   public static void main(String[] args) {
-	SpringApplication.run(SpecificationApplication.class, args);
+	SpringApplication.run(QueryConcatApplication.class, args);
   }
 }
