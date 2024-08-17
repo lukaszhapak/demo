@@ -44,9 +44,6 @@ Demo application
 * jpa get reference id
 * entity graph
 * JoinColumn vs mapped by
-* quick perf: @ExpectSelect(1)
-* jpa projection return record
-* jpa dynamic projections take class as argument and return it
 * jooq
 * querydsl
 * jpa inheritance: discriminator column single table, table per class, joined tables
