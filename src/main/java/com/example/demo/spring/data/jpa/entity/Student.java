@@ -36,11 +36,18 @@ import org.hibernate.annotations.DynamicUpdate;
 	@Index(name = "idx_student_age", columnList = "age"),
 	@Index(name = "idx_student_first_name_last_name", columnList = "firstName, lastName", unique = true)
 })
-@SequenceGenerator(name = "student_id_seq", sequenceName = "student_id_seq", allocationSize = 100, initialValue = 1)
 class Student {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_id_seq")
+  @GeneratedValue(
+	  strategy = GenerationType.SEQUENCE,
+	  generator = "student_id_seq"
+  )
+  @SequenceGenerator(
+	  name = "student_id_seq",
+	  sequenceName = "student_id_seq",
+	  allocationSize = 100
+  )
   private Long id;
   private String firstName;
   private String lastName;
