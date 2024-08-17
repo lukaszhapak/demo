@@ -32,6 +32,7 @@ Demo application
 * rest server tests for all methods
 * exception handler returning exception dto
 * handler interceptor doing some stuff
+* http clients properties, like timeout
 
 
 ### db
@@ -53,3 +54,4 @@ Demo application
 * disable embedded mongo in most of the tests
 * create / update timestamp
 * count / findFirst / exists - performance
+* properties
