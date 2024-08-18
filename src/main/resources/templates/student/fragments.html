@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
+
   <th:block th:fragment="header">
     <title>student</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           rel="stylesheet">
   </th:block>
+
 </head>
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
   <div class="container">
@@ -30,6 +34,19 @@
   </div>
 </nav>
 
+
+<table class="table table-striped mb-5" th:fragment="form">
+  <tr>
+    <td><label for="name">name:</label></td>
+    <td><input class="form-control" id="name" th:field="*{name}" type="text"></td>
+  </tr>
+  <tr>
+    <td><label for="age">age:</label></td>
+    <td><input class="form-control" id="age" th:field="*{age}" type="text"></td>
+  </tr>
+</table>
+
+
 <div th:fragment="scripts">
   <script crossorigin="anonymous"
           integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -41,5 +58,6 @@
           integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
           src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </div>
+
 </html>
 

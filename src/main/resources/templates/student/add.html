@@ -12,16 +12,7 @@
 
 
   <form method="post" th:object="${student}">
-    <table class="table table-striped mb-5">
-      <tr>
-        <td><label for="name">name:</label></td>
-        <td><input class="form-control" id="name" th:field="*{name}" type="text"></td>
-      </tr>
-      <tr>
-        <td><label for="age">age:</label></td>
-        <td><input class="form-control" id="age" th:field="*{age}" type="text"></td>
-      </tr>
-    </table>
+    <table th:replace="student/fragments :: form"></table>
 
     <div class="float-right">
       <button class="btn btn-primary" type="submit">Add</button>
