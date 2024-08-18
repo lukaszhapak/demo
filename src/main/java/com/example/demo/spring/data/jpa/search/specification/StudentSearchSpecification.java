@@ -23,7 +23,7 @@ class StudentSearchSpecification implements Specification<Student> {
 	  predicates.add(criteriaBuilder.equal(root.get("id"), studentSearchCriteria.getId()));
 	}
 	if (studentSearchCriteria.getFirstName() != null) {
-	  predicates.add(criteriaBuilder.like(root.get("firstName"), studentSearchCriteria.getFirstName()));
+	  predicates.add(criteriaBuilder.like(root.get("firstName"), "%" + studentSearchCriteria.getFirstName() + "%"));
 	}
 	if (!CollectionUtils.isEmpty(studentSearchCriteria.getLastNames())) {
 	  predicates.add(criteriaBuilder.and(root.get("lastName").in(studentSearchCriteria.getLastNames())));

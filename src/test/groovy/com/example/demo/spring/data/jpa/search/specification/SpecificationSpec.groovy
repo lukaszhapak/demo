@@ -24,7 +24,7 @@ class SpecificationSpec extends AbstractIntegrationSpec {
         studentService.getStudents(getCriteria().setSortBy("age")).content.get(1).firstName == "John"
         studentService.getStudents(getCriteria().setSortBy("age").setSortAscending(false)).content.get(0).firstName == "Michael"
         studentService.getStudents(getCriteria().setSize(1).setPage(1).setSortBy("age").setSortAscending(false)).content.get(0).firstName == "John"
-        assertPageContains(studentService.getStudents(getCriteria().setFirstName("Jim")), [jim])
+        assertPageContains(studentService.getStudents(getCriteria().setFirstName("Ji")), [jim])
         assertPageContains(studentService.getStudents(getCriteria().setStreetName("Oak street")), [john])
         assertPageContains(studentService.getStudents(getCriteria().setOlderThan(21)), [john, michael])
         assertPageContains(studentService.getStudents(getCriteria().setMinimalAge(24)), [john, michael])
