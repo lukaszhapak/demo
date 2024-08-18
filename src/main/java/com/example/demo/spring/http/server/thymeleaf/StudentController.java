@@ -1,13 +1,13 @@
 package com.example.demo.spring.http.server.thymeleaf;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import lombok.RequiredArgsConstructor;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/student")
@@ -16,12 +16,15 @@ class StudentController {
 
   private final StudentService studentService;
 
+  // i can return model and view
   @GetMapping
-  String list(Model model) {
-	model.addAttribute("list", studentService.findAll());
-	return "/student/list";
+  ModelAndView list() {
+	ModelAndView modelAndView = new ModelAndView("/student/list");
+	modelAndView.addObject("list", studentService.findAll());
+	return modelAndView;
   }
 
+  // or just a string as a template and receive model as a parameter
   @GetMapping("/{id}")
   String student(Model model, @PathVariable int id) {
 	model.addAttribute("student", studentService.findById(id));
