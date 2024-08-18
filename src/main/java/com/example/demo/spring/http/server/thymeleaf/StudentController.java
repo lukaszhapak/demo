@@ -28,12 +28,14 @@ class StudentController {
   @GetMapping("/{id}")
   String student(Model model, @PathVariable int id) {
 	model.addAttribute("student", studentService.findById(id));
+	model.addAttribute("title", "details of student " + id);
 	return "/student/details";
   }
 
   @GetMapping("/add")
   String addForm(Model model) {
 	model.addAttribute("student", new Student());
+	model.addAttribute("title", "add new student");
 	return "/student/add";
   }
 

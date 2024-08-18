@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
 
   <th:block th:fragment="header">
-    <title>student</title>
+    <title th:text="${title != null} ? ${title} : 'student'"></title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           rel="stylesheet">
   </th:block>
