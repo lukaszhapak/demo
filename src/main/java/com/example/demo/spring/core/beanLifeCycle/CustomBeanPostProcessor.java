@@ -15,7 +15,7 @@ class CustomBeanPostProcessor implements BeanPostProcessor {
 
   @Override
   public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-	if (bean instanceof Service) {
+	if (bean instanceof BeanLifeCycleService) {
 	  System.out.println("bean post processor before initialization");
 	  orderService.store("bean post processor before initialization");
 	}
@@ -24,7 +24,7 @@ class CustomBeanPostProcessor implements BeanPostProcessor {
 
   @Override
   public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-	if (bean instanceof Service) {
+	if (bean instanceof BeanLifeCycleService) {
 	  System.out.println("bean post processor after initialization");
 	  orderService.store("bean post processor after initialization");
 	}

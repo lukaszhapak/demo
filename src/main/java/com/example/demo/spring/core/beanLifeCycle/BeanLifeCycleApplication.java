@@ -12,8 +12,8 @@ class BeanLifeCycleApplication {
   }
 
   @Bean(initMethod = "initMethod", destroyMethod = "destroyMethod")
-  Service service(OrderService orderService) {
-	return new Service(orderService);
+  BeanLifeCycleService service(OrderService orderService) {
+	return new BeanLifeCycleService(orderService);
   }
 
 }

@@ -5,11 +5,11 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-class Service implements InitializingBean, DisposableBean {
+class BeanLifeCycleService implements InitializingBean, DisposableBean {
 
   private final OrderService orderService;
 
-  public Service(OrderService orderService) {
+  public BeanLifeCycleService(OrderService orderService) {
 	this.orderService = orderService;
 	System.out.println("constructor");
 	orderService.store("constructor");
