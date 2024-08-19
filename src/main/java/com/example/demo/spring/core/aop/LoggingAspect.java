@@ -20,6 +20,10 @@ class LoggingAspect {
   void allRepositories() {
   }
 
+  @Pointcut("@within(org.springframework.stereotype.Service)")
+  void allServices() {
+  }
+
   @Pointcut("@within(com.example.demo.spring.core.aop.LoggingBeforeExecution)")
   void logBeforeExecutionAnnotation() {
   }
