@@ -24,7 +24,6 @@ Demo application
 * aop logging in commons
 * kafka properties and check if message was sent
 
-
 ### http
 * thymeleaf tests
 * https://docs.spring.io/spring-framework/reference/integration/rest-clients.html
@@ -33,6 +32,7 @@ Demo application
 * exception handler returning exception dto
 * handler interceptor doing some stuff
 * http clients properties, like timeout
+* circuit breaker
 
 
 ### db
