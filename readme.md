@@ -11,8 +11,13 @@ Demo application
 * streams
 * optionals
 * create exception and print stack trace
-* threads, sync example and more stuff
+* threads, sync example and more stuff, ExecutorService = Executors.
 * memory leak
+* comparator vs comparable
+* collections 
+* equals and hash code
+* heap
+* gc
 
 
 ### spring
