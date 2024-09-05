@@ -2,6 +2,120 @@
 
 Demo application
 
+
+## java:
+* immutable
+* kolekcje
+* dzialanie hashmap
+* w czym trzymac pieniadze
+* stream optional, filter map collect flat map / reduce group partition 
+* interfejs funkcyjny
+* wycieki pamieci
+* enum
+* equals and hashcode
+* async 
+* pule watkow
+* jak utworzyc watek, thread runnable thread pool executor
+* czekaj na rezultat asynca
+* comparator vs comparable
+* string pool
+* exceptions 
+* czy mozna catch error
+* predicate supplier function bifunction
+* debugger
+* jvm, class loader, garbage collector, heap
+* jvm , jre, jdk
+
+## spring:
+* bean, compoment, scope
+* transactional
+* proxy
+* thread safe as singletone
+* inject properties
+* primary bean
+* @resource
+* sposoby wstrzykiwania
+* aop
+
+## jpa:
+* lazy initialization
+* entity life cycle
+* dto vs entity
+* optimistic lock
+* exceptions a transactional i rollback
+* lazy eager
+* jpql
+* 1st level cache
+* search
+* dziedziczenie encji
+* cache
+
+## architecture:
+* sync vs async
+* inbox, saga, 2pc
+* cqrs
+* cap theorem, PACELC
+* acid vs base
+* solid
+* circuit breaker
+* retry
+* solid dry kiss law of demeter
+* layered arch
+* ports and adapter 
+* microservices
+* review
+* code smells
+
+## design patterns:
+* creational:
+* * singleton
+* * factory method
+* * builder
+* structural:
+* * adapter
+* * facade
+* * proxy
+* behavioral:
+* * observer
+* * strategy
+
+## sql:
+* index
+* normalizacja
+* acid
+* where vs having
+* identity vs sequence
+
+## nosql:
+* base
+* przyklady baz i do czego sa
+* base
+
+## testing:
+* FIRST
+* archunit
+* tdd 
+* spring runner
+* piramida honeycomb icecone
+
+## rest:
+* idempotency
+* status codes
+* metody http
+* biblioteki serializujace
+* key rest principles
+* projektowaniea api
+
+## message queues - kafka:
+* consumer group
+* co jesli wiecej konsumerow niz partycji - instancje aplikacji lub watki listenera
+* gwarancja kolejnosci
+* header
+* konfiguracja
+
+
+
+
 --- 
 
 ## TODO:
@@ -48,6 +162,7 @@ Demo application
 * querydsl
 * transactions, what causes rollback, checked unchecked (also in try block)
 * criteria api, criteria + meta model, query dsl, specification
+* spring.datasource.hikari.auto-commit=false
 
 #### jpa
 * entity manager

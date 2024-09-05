@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class Service {
 
-  public void execute(){
+  public void execute() {
 	log.debug("execute");
 	try {
 	  Thread.sleep(10);

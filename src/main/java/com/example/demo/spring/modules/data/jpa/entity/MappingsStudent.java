@@ -1,0 +1,70 @@
+package com.example.demo.spring.modules.data.jpa.entity;
+
+import static javax.persistence.CascadeType.PERSIST;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+@Getter
+@Setter
+@Entity
+@DynamicInsert
+@DynamicUpdate
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(indexes = {
+	@Index(name = "idx_mappings_student_age", columnList = "age"),
+	@Index(name = "idx_mappings_student_first_name_last_name", columnList = "firstName, lastName", unique = true)
+})
+class MappingsStudent {
+
+  @Id
+  @GeneratedValue(
+	  strategy = GenerationType.SEQUENCE,
+	  generator = "student_id_seq"
+  )
+  @SequenceGenerator(
+	  name = "student_id_seq",
+	  sequenceName = "student_id_seq",
+	  allocationSize = 100
+  )
+  private Long id;
+  private String firstName;
+  private String lastName;
+  private int age;
+  private LocalDateTime date;
+
+  @OneToOne(cascade = PERSIST)
+  private StudentOneToOne oneToOne;
+
+  @OneToMany(cascade = PERSIST)
+  @JoinColumn(name = "student_id", nullable = false)
+  private List<StudentOneToMany> oneToMany;
+
+  @Embedded
+  private MappingsAddress address;
+
+  private Integer[] gradesArray;
+
+  @ElementCollection(fetch = FetchType.EAGER)
+  private List<Integer> gradesList;
+}
