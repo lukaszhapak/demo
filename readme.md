@@ -17,6 +17,7 @@ Demo application
 * pule watkow
 * jak utworzyc watek, thread runnable thread pool executor
 * czekaj na rezultat asynca
+* concurrent vs parallel
 * comparator vs comparable
 * string pool
 * exceptions 

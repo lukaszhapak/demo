@@ -6,7 +6,7 @@ import org.springframework.test.context.ActiveProfiles
 import spock.lang.Specification
 
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles(["test", "h2-p6spy"])
 abstract class AbstractIntegrationSpec extends Specification {
 
 }
