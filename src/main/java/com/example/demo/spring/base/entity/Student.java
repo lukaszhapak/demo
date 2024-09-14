@@ -54,7 +54,4 @@ public class Student {
   private Address address;
 
   private Integer[] gradesArray;
-
-  @ElementCollection(fetch = FetchType.EAGER)
-  private List<Integer> gradesList;
 }
