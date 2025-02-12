@@ -25,7 +25,7 @@ interface DerivedMethodsStudentRepository extends Repository<Student, Long> {
 
   <T> List<T> findByAddressStreetName(String streetName, Class<T> type);
 
-  List<Student> findByAddressStreetNameAndAddressFlatNumber(String StreetNumber, String flatNumber);
+  List<Student> findByAddressStreetNameAndAddressFlatNumber(String streetNumber, String flatNumber);
 
   boolean existsByFirstName(String firstName);
 
