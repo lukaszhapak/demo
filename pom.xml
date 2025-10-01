@@ -44,16 +44,16 @@
 		<pitest-maven.version>1.15.8</pitest-maven.version>
 		<pitest-junit5-plugin.version>1.1.2</pitest-junit5-plugin.version>
 		<wiremock.version>3.0.1</wiremock.version>
-		<spring-cloud-starter-contract-stub-runner.version>3.1.7
-		</spring-cloud-starter-contract-stub-runner.version>
+		<spring-cloud-starter-contract-stub-runner.version>3.1.7</spring-cloud-starter-contract-stub-runner.version>
 		<spock.version>2.4-M1-groovy-4.0</spock.version>
 		<archunit-junit4.version>1.2.1</archunit-junit4.version>
 		<quick-perf.version>1.1.0</quick-perf.version>
-		<datasource-proxy-spring-boot-starter.version>1.9.1
-		</datasource-proxy-spring-boot-starter.version>
+		<datasource-proxy-spring-boot-starter.version>1.9.1</datasource-proxy-spring-boot-starter.version>
 		<flexy-pool-spring-boot-starter.version>1.9.1</flexy-pool-spring-boot-starter.version>
 		<mockserver-netty.version>5.11.2</mockserver-netty.version>
 		<restito.version>0.9.3</restito.version>
+		<spring-cloud-contract-wiremock.version>3.1.7</spring-cloud-contract-wiremock.version>
+		<wiremock-jre8-standalone.version>2.33.0</wiremock-jre8-standalone.version>
 	</properties>
 
 	<!--	SPRING	-->
@@ -99,7 +99,6 @@
 			<version>${spring.version}</version>
 		</dependency>
 
-
 		<!--	UTIL	-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -111,23 +110,12 @@
 			<groupId>io.rest-assured</groupId>
 			<artifactId>rest-assured</artifactId>
 			<version>${rest-assured.version}</version>
-			<exclusions>  <!-- Exclude Groovy because of classpath issue, collision with spring-cloud-starter-contract-stub-runner -->
-				<exclusion>
-					<groupId>org.apache.groovy</groupId>
-					<artifactId>groovy-xml</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.apache.groovy</groupId>
-					<artifactId>groovy-json</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.github.ben-manes.caffeine</groupId>
 			<artifactId>caffeine</artifactId>
 			<version>${caffeine.version}</version>
 		</dependency>
-
 
 		<!--	DATA BASE	-->
 		<dependency>
@@ -204,6 +192,27 @@
 			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
 			<version>${spring-cloud-starter-contract-stub-runner.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-contract-wiremock</artifactId>
+			<version>${spring-cloud-contract-wiremock.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.tomakehurst</groupId>
+			<artifactId>wiremock-jre8-standalone</artifactId>
+			<version>${wiremock-jre8-standalone.version}</version>
+			<scope>test</scope>
+			<exclusions>  <!-- Exclude Groovy because of classpath issue, collision with rest-assured -->
+				<exclusion>
+					<groupId>org.apache.groovy</groupId>
+					<artifactId>groovy-xml</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.groovy</groupId>
+					<artifactId>groovy-json</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>
