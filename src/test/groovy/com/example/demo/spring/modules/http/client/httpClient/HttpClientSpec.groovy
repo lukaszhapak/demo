@@ -14,7 +14,7 @@ class HttpClientSpec extends AbstractIntegrationSpec {
     @Autowired
     HttpClientService httpClientService
 
-    def "should save student with method stubbed endpoint"() {
+    def "should get response from method stubbed endpoint"() {
         given:
         stubExternalService(200, '{"value" : "test-rest-assured-value"}', "/api/rest-assured")
         stubExternalService(200, '{"value" : "test-rest-template-value"}', "/api/rest-template")

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.time.LocalDateTime
 
 import static com.example.demo.spring.base.dto.StudentSearchCriteriaSortBy.AGE
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat
 
 class QueryConcatSpec extends AbstractIntegrationSpec {
 

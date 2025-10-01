@@ -23,7 +23,7 @@ class QueryConcatStudentSearchRepositoryImpl implements QueryConcatStudentSearch
   public List<Student> findAll(StudentSearchCriteria criteria) {
 
 	List<String> jpqlParts = new ArrayList<>();
-//	jpqlParts.add("SELECT NEW com.example.demo.spring.base.dto.StudentDTO(s.id, s.firstName, s.lastName, s.age)");
+//	jpqlParts.add("SELECT NEW com.example.demo.spring.base.dto.StudentDTO(s.firstName, s.age)");
 	jpqlParts.add("SELECT s");
 
 	jpqlParts.add("FROM Student s WHERE 1=1");

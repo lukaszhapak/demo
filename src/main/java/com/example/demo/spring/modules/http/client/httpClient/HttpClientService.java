@@ -12,10 +12,9 @@ class HttpClientService {
   private final FeignHttpClient feignHttpClient;
 
   HttpResponseDTO getResponse() {
-	HttpResponseDTO httpResponseDTO = new HttpResponseDTO();
-	httpResponseDTO.setValueFromRestAssured(restAssuredHttpClient.getValue());
-	httpResponseDTO.setValueFromRestTemplate(restTemplateHttpClient.getValue());
-	httpResponseDTO.setValueFromFeign(feignHttpClient.getValue().getValue());
-	return httpResponseDTO;
+	return new HttpResponseDTO()
+		.setValueFromRestAssured(restAssuredHttpClient.getValue())
+		.setValueFromRestTemplate(restTemplateHttpClient.getValue())
+		.setValueFromFeign(feignHttpClient.getValue().getValue());
   }
 }
